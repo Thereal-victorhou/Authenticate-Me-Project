@@ -1,54 +1,51 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from './csrf';
+/*---------------TYPES----------------------*/
+const SET_USER = 'session/setUser';
+const REMOVE_USER = 'session/removeUser';
 
-/*----------TYPES----------*/
-const ADD = 'session/ADD';
-const REMOVE = 'session/REMOVE'
-
-/*----------ACTIONS----------*/
-const addSessionUser = (user) => ({
-    type: ADD,
+const setUser = (user) => {
+  return {
+    type: SET_USER,
     user,
-});
-
-const removeSessionUser = (user) => ({
-    type: REMOVE,
-    user
-});
-
-
-/*----------THUNK CREATORS----------*/
-export const login = () => async (dispatch) => {
-    const res = await csrfFetch('/api/session', {
-        method: 'POST',
-        body: JSON.stringify({
-            credential: "Demo-lition",
-            password: 'password'
-        })
-    });
-    const user = await res.json();
-
-    if (!user) {
-        const user = null;
-        dispatch(addSessionUser(user));
-    }
-    dispatch(addSessionUser(user));
-
-}
-
-/*----------REDUCER----------*/
-const initialState = {
-    user: {}
+  };
 };
 
-const userReducer = (state = initialState, action) => {
-    switch (action.type){
-        case ADD: return {
-            ...state,
-            ...action.user
-        }
-        default:
-            return state;
-    }
-}
+const removeUser = () => {
+  return {
+    type: REMOVE_USER,
+  };
+};
 
-export default userReducer;
+export const login = (user) => async (dispatch) => {
+  const { credential, password } = user;
+  const res = await csrfFetch('/api/session', {
+    method: 'POST',
+    body: JSON.stringify({
+      credential,
+      password,
+    }),
+  });
+  const data = await res.json();
+  dispatch(setUser(data.user));
+  return res;
+};
+
+const initialState = { user: null };
+
+const sessionReducer = (state = initialState, action) => {
+  let newState;
+  switch (action.type) {
+    case SET_USER:
+      newState = Object.assign({}, state);
+      newState.user = action.user;
+      return newState;
+    case REMOVE_USER:
+      newState = Object.assign({}, state);
+      newState.user = null;
+      return newState;
+    default:
+      return state;
+  }
+};
+
+export default sessionReducer;
