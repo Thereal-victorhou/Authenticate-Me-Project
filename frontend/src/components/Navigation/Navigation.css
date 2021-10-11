@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    background-color: grey;
+    justify-content: center;
+
+}
+
+
+.nav_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: orange;
+    max-width: 75rem;
+    min-width: 60rem;
+    height: 3em;
+}
+
+.session_links {
+    background-color:black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 12em;
+}
