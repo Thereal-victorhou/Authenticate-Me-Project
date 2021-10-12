@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
+import restaurantReducer from './restaurant';
 
 
 const rootReducer = combineReducers({
     session: sessionReducer,
+    restaurant: restaurantReducer,
 });
 
 let enhancer;

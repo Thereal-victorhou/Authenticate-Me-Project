@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Photos = sequelize.define('Photos', {
+  const Photo = sequelize.define('Photo', {
     url: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {});
-  Photos.associate = function(models) {
+  Photo.associate = function(models) {
     // associations can be defined here
-    Photos.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
+    Photo.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
   };
-  return Photos;
+  return Photo;
 };

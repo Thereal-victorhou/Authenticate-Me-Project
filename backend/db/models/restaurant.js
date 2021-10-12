@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Restaurants = sequelize.define('Restaurants', {
+  const Restaurant = sequelize.define('Restaurant', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,17 +14,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {});
-  Restaurants.associate = function(models) {
+  Restaurant.associate = function(models) {
     // associations can be defined here
     const columnMapping = {
       through: 'Restaurant_Categories',
       foreignKey: 'restaurantId',
       otherKey: 'categoryId'
     }
-    Restaurants.hasMany(models.Photo, { foreignKey: 'restaurantId' });
-    Restaurants.hasMany(models.Review, { foreignKey: 'restaurantId' });
-    Restaurants.hasMany(models.Rating, { foreignKey: 'restaurantId' });
-    Restaurants.belongsToMany(models.Category, columnMapping);
+    Restaurant.hasMany(models.Photo, { foreignKey: 'restaurantId' });
+    Restaurant.hasMany(models.Review, { foreignKey: 'restaurantId' });
+    Restaurant.hasMany(models.Rating, { foreignKey: 'restaurantId' });
+    Restaurant.belongsToMany(models.Category, columnMapping);
   };
-  return Restaurants;
+  return Restaurant;
 };

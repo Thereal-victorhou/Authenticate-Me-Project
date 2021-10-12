@@ -5,12 +5,14 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from './components/Navigation'
+import { allRestaurants } from "./store/restaurant";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(allRestaurants());
   }, [dispatch]);
 
   return isLoaded && (
@@ -20,6 +22,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginFormPage />
+          </Route>
+          <Route path="/">
+            <h1>hello world</h1>
           </Route>
           <Route path="/signup">
             <SignupFormPage />

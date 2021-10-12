@@ -81,3 +81,15 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 export default sessionReducer;
+
+
+
+
+
+// 0:
+// createdAt: "2021-10-12T17:24:19.472Z"
+// id: 1
+// location: "39 Pier Ste A-202 San Francisco, CA"
+// name: "Fog Harbor Fish House"
+// phoneNumber: "4154212442"
+// updatedAt: "2021-10-12T17:24:19.472Z"
