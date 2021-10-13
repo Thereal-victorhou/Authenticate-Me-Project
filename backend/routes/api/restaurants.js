@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 const { Restaurant } = require('../../db/models');
 const { Review } = require('../../db/models');
+const { User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -14,15 +15,20 @@ router.get('/', asyncHandler(async(req, res)=> {
 
 router.get('/:id', asyncHandler(async(req, res)=> {
     const id = parseInt(req.params.id, 10);
-    const restaurant = await Restaurant.findByPk(id, {
-        include: [{
-            model: Review,
-            required: true,
-            where: { restaurantId: id },
-        }],
+    let restaurant = await Restaurant.findByPk(id, {
+        include: [
+            {
+                model: Review,
+                required: true,
+                where: { restaurantId: id },
+            }
+        ],
     });
-    const data = res.json(restaurant);
-    console.log(data);
+    const user = await User.findByPk(restaurant.Reviews[0].userId)
+    // console.log(user.dataValues);
+    const data = {restaurant, ...user.dataValues}
+    return res.json(restaurant);
+
 }));
 
 module.exports = router;
