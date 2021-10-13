@@ -1,6 +1,8 @@
 import { csrfFetch } from './csrf';
 // Type
-const GET_RESTAURANTS = 'restaurants/getRestaurants'
+const GET_RESTAURANTS = 'restaurants/getRestaurants';
+
+const GET_ONE_RESTAURANT = 'restaurants/';
 
 // Actions
 const getRestaurants = (restaurants) => {
@@ -10,12 +12,25 @@ const getRestaurants = (restaurants) => {
     }
 }
 
+const getOneRestaurant = (restaurant) => {
+    return {
+        type: GET_ONE_RESTAURANT,
+        restaurant
+    }
+}
+
 // Thunk Action
 export const allRestaurants = () => async (dispatch) =>{
     const res = await fetch('/api/restaurants');
     const data = await res.json();
     console.log(data);
     dispatch(getRestaurants(data))
+}
+
+export const oneRestaurant = (restaurant) => async (dispatch) => {
+    const res = await fetch(`/api/restaurants/${restaurant.id}`)
+    const oneRes = await res.json()
+    dispatch(getOneRestaurant(oneRes));
 }
 
 // Reducer
@@ -28,6 +43,11 @@ const restaurantReducer = (state = {}, action) => {
                 newState[restaurant.id] = restaurant;
             })
             return newState;
+        case GET_ONE_RESTAURANT:
+            return {
+                ...state,
+                [action.restaurant.id]: action.restaurant
+            }
         default:
             return state;
     }
