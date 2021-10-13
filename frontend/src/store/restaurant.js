@@ -23,17 +23,17 @@ const getOneRestaurant = (restaurant) => {
 export const allRestaurants = () => async (dispatch) =>{
     const res = await fetch('/api/restaurants');
     const data = await res.json();
-    console.log(data);
     dispatch(getRestaurants(data))
 }
 
 export const oneRestaurant = (restaurant) => async (dispatch) => {
-    const res = await fetch(`/api/restaurants/${restaurant.id}`)
+    const res = await fetch(`/api/restaurants/${restaurant}`)
     const oneRes = await res.json()
     dispatch(getOneRestaurant(oneRes));
 }
 
 // Reducer
+
 const restaurantReducer = (state = {}, action) => {
     let newState;
     switch(action.type) {

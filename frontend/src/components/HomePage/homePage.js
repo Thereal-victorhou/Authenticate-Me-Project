@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import * as sessionActions from '../../store/restaurant';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import {allRestaurants} from '../../store/restaurant';
 
 function HomePage() {
+    const dispatch = useDispatch();
     const sessionRestaurant = useSelector(state => Object.values(state.restaurant))
+
+    useEffect(() =>{
+        dispatch(allRestaurants());
+    }, [dispatch])
 
     return (
 

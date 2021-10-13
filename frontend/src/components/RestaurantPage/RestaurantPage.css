@@ -1,0 +1,24 @@
+.restaurant_page_container {
+    background-color: orange;
+    height: 50em;
+    width: auto;
+}
+.restaurant_picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 30em;
+    width: auto;
+}
+
+.restaurant_name {
+    background-color: linen;
+    height: 5em;
+    width: 15em;
+}
+
+.restaurant_location {
+    background-color: linen;
+    height: 5em;
+    width: 15em;
+}

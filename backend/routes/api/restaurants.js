@@ -14,6 +14,6 @@ router.get('/:id', asyncHandler(async(req, res)=> {
     const id = parseInt(req.params.id, 10);
     const restaurant = await Restaurant.findByPk(id);
     return res.json(restaurant);
-}))
+}));
 
 module.exports = router;
