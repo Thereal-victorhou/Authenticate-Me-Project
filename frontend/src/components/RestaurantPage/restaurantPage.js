@@ -13,10 +13,11 @@ function RestaurantPage() {
     }, [dispatch]);
 
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
+    // console.log(sessionRestaurants[0].restaurant.location);
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
-    // console.log(currentRestaurant)
-        return (
-            <div className="restaurant_page_container">
+
+    return (
+        <div className="restaurant_page_container">
                 <div className="restaurant_picture" style={{ backgroundImage: `url('https://s3-media0.fl.yelpcdn.com/bphoto/2eAtP1SJy21JTvQWxaQSng/l.jpg')`}}>
                     <div className='restaurant_name'>
                         {currentRestaurant ? currentRestaurant.name : "title"}
@@ -24,6 +25,11 @@ function RestaurantPage() {
                     <div className='restaurant_location'>
                         {currentRestaurant ? currentRestaurant.location : "location"}
                     </div>
+                </div>
+                <div className="reviews_container">
+                    <ul>
+                        {sessionRestaurants ? sessionRestaurants[0]?.Reviews.map(review => ( <li key={review.id}>{review.body}</li> )) : "Reviews"}
+                    </ul>
                 </div>
             </div>
         )
