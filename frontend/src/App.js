@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
@@ -8,11 +8,14 @@ import Navigation from './components/Navigation'
 import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/RestaurantPage";
 import AddReviewForm from './components/ReviewPage';
+import EditReviewForm from "./components/EditPage";
 
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const user = useSelector(state => state.session.user)
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -32,10 +35,13 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/restaurants/:id">
-            <RestaurantPage />
+            <RestaurantPage user={user}/>
           </Route>
           <Route path="/review/restaurant/:id">
             <AddReviewForm />
+          </Route>
+          <Route path="/edit/restaurant/:id">
+            <EditReviewForm />
           </Route>
           <Route>
             <h2>Page Not Found</h2>

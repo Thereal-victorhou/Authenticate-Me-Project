@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant'
 
-function RestaurantPage() {
+function RestaurantPage({ user }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
 
@@ -13,8 +14,39 @@ function RestaurantPage() {
     }, [dispatch]);
 
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
-    // console.log(sessionRestaurants[0].restaurant.location);
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
+
+    // const handleButton = (e) => {
+    //     e.preventDefault();
+
+    //     if (user) {
+    //         switch(e.target.value) {
+    //             case 'reviewButton':
+    //                 console.log('inside Review case')
+    //                 history.push(`/review/restaurant/${id}`);
+
+    //             case 'editButton':
+    //                 console.log('inside Edit case')
+    //                 history.push(`/edit/restaurant/${id}`);
+    //         }
+    //     } else {
+    //         history.push(`/login`);
+    //     }
+    // }
+
+    const handleReviewButton = (e) => {
+        e.preventDefault();
+        if (user) {
+            history.push(`/review/restaurant/${id}`);
+        } else {
+            history.push(`/login`);
+        }
+    }
+
+    const handleEditButton = (e) => {
+        e.preventDefault();
+        history.push(`/edit/restaurant/${id}`);
+    }
 
     return (
         <div className="restaurant_page_container">
@@ -26,9 +58,18 @@ function RestaurantPage() {
                         {currentRestaurant ? currentRestaurant.location : "location"}
                     </div>
                 </div>
+                <button type='button' value='reviewButton' onClick={handleReviewButton}>Write a Review</button>
                 <div className="reviews_container">
                     <ul>
-                        {sessionRestaurants ? sessionRestaurants[0]?.Reviews.map(review => ( <li key={review.id}>{review.body}</li> )) : "Reviews"}
+                        {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
+                            <li key={review.id}>
+                                <span>
+                                    {review.body}
+                                    {user.id === review.userId ? ( <button type='button'
+                                        onClick={handleEditButton}>Edit</button> ) : ""}
+                                </span>
+                            </li>
+                        )) : "Reviews"}
                     </ul>
                 </div>
             </div>
