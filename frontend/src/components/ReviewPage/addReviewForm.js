@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { newReview } from '../../store/reviews'
 
-
 function AddReviewForm() {
     const dispatch = useDispatch();
     const history = useHistory();

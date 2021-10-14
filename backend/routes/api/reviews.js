@@ -10,11 +10,8 @@ router.get('/restaurant/:id', asyncHandler( async(req, res) => {
     const reviews = await Review.findAll({
         where: { restaurantId: id }
     })
-    return res.json(reviews);
+    res.json(reviews);
 }));
-
-
-
 
 // get add reviews page
 router.post(
@@ -26,7 +23,10 @@ router.post(
             userId,
             restaurantId
         });
-        return res.json(newPost);
+        res.json(newPost);
     }))
 
 module.exports = router;
+
+// edit review
+// router.patch('/restaurant/:id')
