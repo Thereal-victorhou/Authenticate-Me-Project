@@ -6,7 +6,7 @@ const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
 router.get('/restaurant/:id', asyncHandler( async(req, res) => {
-    const { id }
+    const { id } = req.params.id;
     const reviews = await Review.findAll({
         where: { restaurantId: id }
     })
