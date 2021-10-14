@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from './components/Navigation'
 import HomePage from "./components/HomePage";
 import RestaurantPage from "./components/RestaurantPage";
+import AddReviewForm from './components/ReviewPage';
 
 
 function App() {
@@ -32,6 +33,12 @@ function App() {
           </Route>
           <Route path="/restaurants/:id">
             <RestaurantPage />
+          </Route>
+          <Route path="/review/restaurant/:id">
+            <AddReviewForm />
+          </Route>
+          <Route>
+            <h2>Page Not Found</h2>
           </Route>
         </Switch>
       )}
