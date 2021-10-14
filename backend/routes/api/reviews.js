@@ -5,10 +5,16 @@ const { requireAuth } = require('../../utils/auth')
 
 const router = express.Router();
 
-router.get('/', asyncHandler( async(req, res) => {
-    const reviews = await Review.findAll()
+router.get('/restaurant/:id', asyncHandler( async(req, res) => {
+    const { id }
+    const reviews = await Review.findAll({
+        where: { restaurantId: id }
+    })
     return res.json(reviews);
 }));
+
+
+
 
 // get add reviews page
 router.post(
@@ -22,12 +28,5 @@ router.post(
         });
         return res.json(newPost);
     }))
-
-
-
-// router.post('/', asyncHandler(async (req, res) => {
-//     const { body } = req.body;
-
-// }))
 
 module.exports = router;
