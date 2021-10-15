@@ -13,6 +13,7 @@ function RestaurantPage({ user }) {
         dispatch(oneRestaurant(id))
     }, [dispatch]);
 
+    // sessionRestaurants is an array
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
 
@@ -50,31 +51,31 @@ function RestaurantPage({ user }) {
 
     return (
         <div className="restaurant_page_container">
-                <div className="restaurant_picture" style={{ backgroundImage: `url('https://s3-media0.fl.yelpcdn.com/bphoto/2eAtP1SJy21JTvQWxaQSng/l.jpg')`}}>
-                    <div className='restaurant_name'>
+            <div className="restaurant_picture"
+            style={{ backgroundImage: `url('https://s3-media0.fl.yelpcdn.com/bphoto/2eAtP1SJy21JTvQWxaQSng/l.jpg')`}}>
+                <div className='restaurant_name'>
                         {currentRestaurant ? currentRestaurant.name : "title"}
-                    </div>
-                    <div className='restaurant_location'>
-                        {currentRestaurant ? currentRestaurant.location : "location"}
-                    </div>
                 </div>
-                <button type='button' value='reviewButton' onClick={handleReviewButton}>Write a Review</button>
-                <div className="reviews_container">
-                    <ul>
-                        {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
-                            <li key={review.id}>
-                                <span>
-                                    {review.body}
-                                    {user.id === review.userId ? ( <button type='button'
-                                        onClick={handleEditButton}>Edit</button> ) : ""}
-                                </span>
-                            </li>
-                        )) : "Reviews"}
-                    </ul>
+                <div className='restaurant_location'>
+                    {currentRestaurant ? currentRestaurant.location : "location"}
                 </div>
             </div>
-        )
-
+            <button type='button' value='reviewButton' onClick={handleReviewButton}>Write a Review</button>
+            <div className="reviews_container">
+                <ul>
+                    {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
+                        <li key={review.id}>
+                            <span>
+                                {review.body}
+                                {user && user.id === review.userId ? ( <button type='button'
+                                    onClick={handleEditButton}>Edit</button> ) : ""}
+                            </span>
+                        </li>
+                    )) : "Reviews"}
+                </ul>
+            </div>
+        </div>
+    )
 }
 
 export default RestaurantPage;

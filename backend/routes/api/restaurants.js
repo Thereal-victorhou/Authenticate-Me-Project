@@ -24,9 +24,9 @@ router.get('/:id', asyncHandler(async(req, res)=> {
             }
         ],
     });
-    const user = await User.findByPk(restaurant.Reviews[0].userId)
+    // const user = await User.findByPk(restaurant.Reviews[0].userId)
     // console.log(user.dataValues);
-    const data = {restaurant, ...user.dataValues}
+    // const data = {restaurant, ...user.dataValues}
     return res.json(restaurant);
 
 }));
