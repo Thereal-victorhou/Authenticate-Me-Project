@@ -3,6 +3,7 @@ import * as sessionActions from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant'
+import { oneReview } from '../../store/reviews';
 
 function RestaurantPage({ user }) {
     const history = useHistory();
@@ -46,7 +47,10 @@ function RestaurantPage({ user }) {
 
     const handleEditButton = (e) => {
         e.preventDefault();
-        history.push(`/edit/restaurant/${id}`);
+        const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
+        // console.log(singleReview)
+        dispatch(oneReview(singleReview));
+        history.push(`/edit/review/${singleReview.id}`);
     }
 
     return (
@@ -68,6 +72,7 @@ function RestaurantPage({ user }) {
                             <span>
                                 {review.body}
                                 {user && user.id === review.userId ? ( <button type='button'
+                                    value={review.id}
                                     onClick={handleEditButton}>Edit</button> ) : ""}
                             </span>
                         </li>

@@ -38,10 +38,10 @@ function App() {
             <RestaurantPage user={user}/>
           </Route>
           <Route path="/review/restaurant/:id">
-            <AddReviewForm />
+            <AddReviewForm user={user}/>
           </Route>
-          <Route path="/edit/restaurant/:id">
-            <EditReviewForm />
+          <Route path="/edit/review/:id">
+            <EditReviewForm user={user}/>
           </Route>
           <Route>
             <h2>Page Not Found</h2>
