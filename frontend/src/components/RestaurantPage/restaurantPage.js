@@ -13,7 +13,7 @@ function RestaurantPage({ user }) {
 
     useEffect(() =>{
         dispatch(oneRestaurant(id))
-    }, [dispatch]);
+    }, [dispatch, id]);
 
     // sessionRestaurants is an array
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
@@ -50,6 +50,7 @@ function RestaurantPage({ user }) {
         e.preventDefault();
         const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
         console.log(singleReview);
+
         switch(e.target.innerHTML) {
             case 'Write a Review':
                 if (user) {
@@ -61,13 +62,13 @@ function RestaurantPage({ user }) {
                 }
             case 'Edit':
                 await dispatch(oneReview(singleReview));
-                history.push(`/edit/review/${singleReview.id}`);
+                history.push(`/edit/review/${singleReview?.id}`);
                 break;
-            case 'Delete':
-                if (singleReview) {
-                    await dispatch(deleteOneReview(singleReview.id));
-                    break;
-                }
+        //     case 'Delete':
+        //         if (singleReview) {
+        //             await dispatch(deleteOneReview(singleReview.id));
+        //             break;
+        //         }
         }
     }
 

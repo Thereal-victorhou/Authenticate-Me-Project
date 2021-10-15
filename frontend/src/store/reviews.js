@@ -40,6 +40,7 @@ const deleteReview = (id) => {
 
 // Thunk
 export const oneReview = (reviewObj) => async (dispatch) => {
+    console.log(reviewObj)
     const { id } = reviewObj;
     const res = await fetch(`/api/reviews/${id}`)
     const review = await res.json();
@@ -62,9 +63,10 @@ export const newReview = (reviewPayload, userId) => async (dispatch) => {
 
 }
 
-export const editOldReview = (editReviewPayload, userId) => async (dispatch) => {
-    const { body, restaurantId} = editReviewPayload;
-    const res = await csrfFetch(`/api/reviews/restaurant/${restaurantId}`, {
+export const editOldReview = (editReviewPayload) => async (dispatch) => {
+    const { body, restaurantId, userId, reviewId} = editReviewPayload;
+    console.log('inside EditOldReview==============')
+    const res = await csrfFetch(`/api/reviews/review/${reviewId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -74,6 +76,7 @@ export const editOldReview = (editReviewPayload, userId) => async (dispatch) => 
         })
     });
     const review = await res.json();
+    console.log(review)
     dispatch(editReview(review));
     return res;
 }
@@ -100,10 +103,7 @@ const reviewReducer = (state = {}, action) => {
                 [action.reviewPayload.id]: action.reviewPayload
             }
         case EDIT_REVIEW:
-            return {
-                ...state,
-                [action.editReviewPayload.id]: action.editReviewPayload
-            }
+            return action.editReviewPayload
         case DELETE_REVIEW:
             const newState = { ...state };
             delete newState[action.id]

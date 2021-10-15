@@ -9,20 +9,20 @@ function EditReviewForm({ user }) {
     const history = useHistory();
     const { id } = useParams();
     const userId = user.id;
-    const restaurantId = id;
-
 
     const singleReview = useSelector(state => state?.review[`${id}`])
-    console.log(singleReview)
-    // useEffect(() =>{
-        //     dispatch(oneReview(singleReview))
-        // }, [dispatch, id]);
+    const restaurantId = singleReview?.restaurantId;
+    // console.log(singleReview)
+    useEffect(() =>{
+            dispatch(oneReview(singleReview))
+        }, [dispatch, id]);
 
         // finding review body
-        // const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
+        const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
         // const currentRestaurant = sessionRestaurants?.find(restaurant => restaurant.id === parseInt(id, 10));
         // const currentReview = currentRestaurant?.Reviews?.find(review => review?.id === singleReview?.id?.id);
         // console.log(currentReview);
+
 
     const [body, setBody] = useState(`${singleReview?.body}`);
     const updateBody = (e) => setBody(e.target.value)
@@ -31,13 +31,19 @@ function EditReviewForm({ user }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const reviewPayload = {
-            body,
-            userId,
-            restaurantId
-        };
-        await dispatch(editOldReview(reviewPayload, userId));
-        history.push(`/restaurants/${id}`);
+        if (singleReview) {
+
+            const reviewPayload = {
+                body,
+                userId,
+                restaurantId,
+                reviewId: singleReview?.id
+            };
+            // console.log(singleReview.id);
+            // console.log(restaurantId);
+            await dispatch(editOldReview(reviewPayload));
+            history.push(`/restaurants/${singleReview?.restaurantId}`);
+        }
     }
 
     return(

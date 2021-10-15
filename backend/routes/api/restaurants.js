@@ -15,7 +15,7 @@ router.get('/', asyncHandler(async(req, res)=> {
 
 router.get('/:id', asyncHandler(async(req, res)=> {
     const id = parseInt(req.params.id, 10);
-    let restaurant = await Restaurant.findByPk(id, {
+    const restaurant = await Restaurant.findByPk(id, {
         include: [
             {
                 model: Review,
@@ -27,6 +27,7 @@ router.get('/:id', asyncHandler(async(req, res)=> {
     // const user = await User.findByPk(restaurant.Reviews[0].userId)
     // console.log(user.dataValues);
     // const data = {restaurant, ...user.dataValues}
+    console.log(restaurant);
     return res.json(restaurant);
 
 }));
