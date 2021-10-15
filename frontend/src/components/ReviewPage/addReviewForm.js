@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { newReview } from '../../store/reviews'
 
-function AddReviewForm() {
+function AddReviewForm({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { id } = useParams();
@@ -11,7 +11,8 @@ function AddReviewForm() {
     const [body, setBody] = useState("");
     const updateBody = (e) => setBody(e.target.value)
 
-    const userId = useSelector((state) => state.session?.user?.id)
+    const userId = user.id;
+
     // useEffect(()=> {
     //     setBody(body)
     // }, [dispatch, body]);
@@ -24,10 +25,8 @@ function AddReviewForm() {
             restaurantId
         };
 
-        let newPost = await dispatch(newReview(reviewPayload, userId));
-        if (newPost) {
-            history.push(`/restaurants/${id}`);
-        }
+        await dispatch(newReview(reviewPayload, userId));
+        history.push(`/restaurants/${id}`);
     }
 
     return(

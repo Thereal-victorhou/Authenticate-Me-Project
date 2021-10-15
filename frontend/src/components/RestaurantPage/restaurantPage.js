@@ -3,6 +3,8 @@ import * as sessionActions from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant'
+import { oneReview } from '../../store/reviews';
+import { deleteOneReview } from '../../store/reviews'
 
 function RestaurantPage({ user }) {
     const history = useHistory();
@@ -35,18 +37,38 @@ function RestaurantPage({ user }) {
     //     }
     // }
 
-    const handleReviewButton = (e) => {
-        e.preventDefault();
-        if (user) {
-            history.push(`/review/restaurant/${id}`);
-        } else {
-            history.push(`/login`);
-        }
-    }
+    // const handleReviewButton = (e) => {
+    //     e.preventDefault();
+    //     if (user) {
+    //         history.push(`/review/restaurant/${id}`);
+    //     } else {
+    //         history.push(`/login`);
+    //     }
+    // }
 
-    const handleEditButton = (e) => {
+    const handleButton = async (e) => {
         e.preventDefault();
-        history.push(`/edit/restaurant/${id}`);
+        const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
+        console.log(singleReview);
+        switch(e.target.innerHTML) {
+            case 'Write a Review':
+                if (user) {
+                    history.push(`/review/restaurant/${id}`);
+                    break;
+                } else {
+                    history.push(`/login`);
+                    break
+                }
+            case 'Edit':
+                await dispatch(oneReview(singleReview));
+                history.push(`/edit/review/${singleReview.id}`);
+                break;
+            case 'Delete':
+                if (singleReview) {
+                    await dispatch(deleteOneReview(singleReview.id));
+                    break;
+                }
+        }
     }
 
     return (
@@ -60,7 +82,7 @@ function RestaurantPage({ user }) {
                     {currentRestaurant ? currentRestaurant.location : "location"}
                 </div>
             </div>
-            <button type='button' value='reviewButton' onClick={handleReviewButton}>Write a Review</button>
+            <button type='button' value='reviewButton' onClick={handleButton}>Write a Review</button>
             <div className="reviews_container">
                 <ul>
                     {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
@@ -68,7 +90,11 @@ function RestaurantPage({ user }) {
                             <span>
                                 {review.body}
                                 {user && user.id === review.userId ? ( <button type='button'
-                                    onClick={handleEditButton}>Edit</button> ) : ""}
+                                    value={review.id}
+                                    onClick={handleButton}>Edit</button> ) : ""}
+                                {user && user.id === review.userId ? ( <button type='button'
+                                    value={review.id}
+                                    onClick={handleButton}>Delete</button> ) : ""}
                             </span>
                         </li>
                     )) : "Reviews"}
