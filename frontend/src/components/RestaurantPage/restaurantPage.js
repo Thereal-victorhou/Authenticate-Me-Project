@@ -10,10 +10,11 @@ function RestaurantPage({ user }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
+    const [counter, setCounter] = useState(0);
 
     useEffect(() =>{
         dispatch(oneRestaurant(id))
-    }, [dispatch, id]);
+    }, [dispatch, id, counter]);
 
     // sessionRestaurants is an array
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
@@ -39,7 +40,8 @@ function RestaurantPage({ user }) {
                 break;
             case 'Delete':
                 if (singleReview) {
-                    await dispatch(deleteOneReview(singleReview.id));
+                    setCounter(prev => prev + 1)
+                    dispatch(deleteOneReview(singleReview.id));
                     break;
                 }
         }
