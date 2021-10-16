@@ -19,33 +19,6 @@ function RestaurantPage({ user }) {
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
 
-    // const handleButton = (e) => {
-    //     e.preventDefault();
-
-    //     if (user) {
-    //         switch(e.target.value) {
-    //             case 'reviewButton':
-    //                 console.log('inside Review case')
-    //                 history.push(`/review/restaurant/${id}`);
-
-    //             case 'editButton':
-    //                 console.log('inside Edit case')
-    //                 history.push(`/edit/restaurant/${id}`);
-    //         }
-    //     } else {
-    //         history.push(`/login`);
-    //     }
-    // }
-
-    // const handleReviewButton = (e) => {
-    //     e.preventDefault();
-    //     if (user) {
-    //         history.push(`/review/restaurant/${id}`);
-    //     } else {
-    //         history.push(`/login`);
-    //     }
-    // }
-
     const handleButton = async (e) => {
         e.preventDefault();
         const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
