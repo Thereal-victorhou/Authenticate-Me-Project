@@ -36,7 +36,6 @@ router.post(
 router.put(
     '/review/:id',
     asyncHandler( async(req, res) => {
-        console.log("in the router put", req.params.id);
         const { body, userId, restaurantId } = req.body;
         const updatedReview = await Review.update({
             body,
@@ -51,7 +50,9 @@ router.delete(
     '/review/:id',
     asyncHandler( async(req, res) => {
         const id = req.params.id;
-        await Review.destroy({where: {id}})
+        const resDelete = await Review.destroy({where: {id}})
+        // console.log("inside the delete router ===================>", resDelete);
+        res.json(resDelete)
     }));
 
 module.exports = router;
