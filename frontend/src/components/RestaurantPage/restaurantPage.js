@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant'
 import { oneReview } from '../../store/reviews';
 import { deleteOneReview } from '../../store/reviews'
+import { allRatings } from '../../store/ratings';
 
 function RestaurantPage({ user }) {
     const history = useHistory();
@@ -14,12 +15,14 @@ function RestaurantPage({ user }) {
 
     useEffect(() =>{
         dispatch(oneRestaurant(id))
+        dispatch(allRatings())
     }, [dispatch, id, counter]);
 
     // sessionRestaurants is an array
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
 
+    // Handle Button
     const handleButton = async (e) => {
         e.preventDefault();
         const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));

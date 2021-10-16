@@ -1,4 +1,4 @@
-import { csrfFetch } from './crsf';
+import { csrfFetch } from './csrf'
 
 // Type definitions
 const GET_RATINGS = '/ratings/getRatings'
@@ -15,7 +15,8 @@ const getRating = (ratings) => {
 export const allRatings = () => async (dispatch) => {
     const res = await fetch('/api/ratings');
     const ratingsData = await res.json();
-    dispatch(getRating(ratingsData));
+    console.log(ratingsData)
+    // dispatch(getRating(ratingsData));
 }
 
 // Reducer
@@ -27,5 +28,10 @@ const ratingReducer = (state = {}, action) => {
             action.ratings.forEach(rating => {
                 newState[rating.id] = rating;
             })
+            return newState;
+        default:
+            return state;
     }
 }
+
+export default ratingReducer;

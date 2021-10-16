@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler');
 const { Restaurant } = require('../../db/models');
 const { Review } = require('../../db/models');
 const { User } = require('../../db/models');
+const { Rating } = require('../../db/models');
 
 const router = express.Router();
 
@@ -21,6 +22,11 @@ router.get('/:id', asyncHandler(async(req, res)=> {
                 model: Review,
                 required: true,
                 where: { restaurantId: id },
+            },
+            {
+                model: Rating,
+                require: true,
+                where: { restaurantId: id}
             }
         ],
     });
