@@ -64,11 +64,11 @@ function RestaurantPage({ user }) {
                 await dispatch(oneReview(singleReview));
                 history.push(`/edit/review/${singleReview?.id}`);
                 break;
-        //     case 'Delete':
-        //         if (singleReview) {
-        //             await dispatch(deleteOneReview(singleReview.id));
-        //             break;
-        //         }
+            case 'Delete':
+                if (singleReview) {
+                    await dispatch(deleteOneReview(singleReview.id));
+                    break;
+                }
         }
     }
 

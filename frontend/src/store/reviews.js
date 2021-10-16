@@ -65,7 +65,6 @@ export const newReview = (reviewPayload, userId) => async (dispatch) => {
 
 export const editOldReview = (editReviewPayload) => async (dispatch) => {
     const { body, restaurantId, userId, reviewId} = editReviewPayload;
-    console.log('inside EditOldReview==============')
     const res = await csrfFetch(`/api/reviews/review/${reviewId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -85,8 +84,8 @@ export const deleteOneReview = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/review/${id}`, {
         method: 'DELETE',
     });
-    await res.json();
-    dispatch(deleteReview(id));
+    const deletedId = await res.json();
+    dispatch(deleteReview(deletedId));
     return res;
 }
 
@@ -107,7 +106,7 @@ const reviewReducer = (state = {}, action) => {
         case DELETE_REVIEW:
             const newState = { ...state };
             delete newState[action.id]
-            return state;
+            return newState;
         default:
             return state;
     }
