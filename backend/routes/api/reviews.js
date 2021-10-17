@@ -23,11 +23,12 @@ router.get('/restaurant/:id', asyncHandler( async(req, res) => {
 router.post(
     '/restaurant/:id',
     asyncHandler( async(req, res) => {
-        const { body, userId, restaurantId } = req.body;
+        const { body, userId, restaurantId, rating} = req.body;
         const newPost = await Review.create({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         });
         res.json(newPost);
     }));
