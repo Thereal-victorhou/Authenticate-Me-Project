@@ -52,7 +52,6 @@ function AddReviewForm({ user }) {
             <section>
                 <form onSubmit={handleSubmit}>
                     <div className='stars_container_review_page' onChange={handleStars}></div>
-
                         <button type='button' className='star' id='one' value={rating} onClick={handleStars}>★</button>
                         <button type='button' className='star' id='two' value={rating} onClick={handleStars}>★</button>
                         <button type='button' className='star' id='three' value={rating} onClick={handleStars}>★</button>

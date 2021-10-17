@@ -12,16 +12,13 @@ function EditReviewForm({ user }) {
 
     const singleReview = useSelector(state => state?.review[`${id}`])
     const restaurantId = singleReview?.restaurantId;
-    // console.log(singleReview)
+
+
+    const [rating, setRating] = useState(singleReview?.rating);
+
     useEffect(() =>{
             dispatch(oneReview(singleReview))
         }, [dispatch, id]);
-
-        // finding review body
-        const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
-        // const currentRestaurant = sessionRestaurants?.find(restaurant => restaurant.id === parseInt(id, 10));
-        // const currentReview = currentRestaurant?.Reviews?.find(review => review?.id === singleReview?.id?.id);
-        // console.log(currentReview);
 
 
     const [body, setBody] = useState(`${singleReview?.body}`);
@@ -37,6 +34,7 @@ function EditReviewForm({ user }) {
                 body,
                 userId,
                 restaurantId,
+                rating,
                 reviewId: singleReview?.id
             };
             // console.log(singleReview.id);
@@ -46,11 +44,34 @@ function EditReviewForm({ user }) {
         }
     }
 
+    const handleStars = async(e) => {
+        e.preventDefault();
+
+        switch(e.target.id) {
+            case 'one':
+                return setRating(1);
+            case 'two':
+                return setRating(2);
+            case 'three':
+                return setRating(3);
+            case 'four':
+                return setRating(4);
+            case 'five':
+                return setRating(5);
+        }
+    }
+
     return(
         <>
             <h1>Hello from Edit Review Page</h1>
             <section>
                 <form onSubmit={handleSubmit}>
+                    <div className='stars_container_review_page' onChange={handleStars}></div>
+                        <button type='button' className='star' id='one' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='two' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='three' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='four' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='five' value={rating} onClick={handleStars}>★</button>
                     <textarea
                         className='review_body'
                         value={body}
