@@ -4,9 +4,13 @@ const { Rating } = require('../../db/models')
 
 const router = express.Router();
 
-router.get('/', asyncHandler( async(req, res) => {
-    const ratingsArr = await Rating.findAll();
+// Get all ratings based on restaurantId
+router.get('/restaurant/:id', asyncHandler( async(req, res) => {
+    const id = req.params.id;
+    const ratingsArr = await Rating.findAll({
+        where: { restaurantId: id }
+    });
     res.json(ratingsArr);
-}))
+}));
 
 module.exports = router;

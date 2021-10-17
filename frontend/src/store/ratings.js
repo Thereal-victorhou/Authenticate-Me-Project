@@ -1,4 +1,4 @@
-import { csrfFetch } from './crsf';
+import { csrfFetch } from './csrf'
 
 // Type definitions
 const GET_RATINGS = '/ratings/getRatings'
@@ -12,9 +12,10 @@ const getRating = (ratings) => {
 }
 
 // Thunk
-export const allRatings = () => async (dispatch) => {
-    const res = await fetch('/api/ratings');
+export const allRatings = (id) => async (dispatch) => {
+    const res = await fetch(`/api/ratings/restaurant/${id}`);
     const ratingsData = await res.json();
+    console.log(ratingsData)
     dispatch(getRating(ratingsData));
 }
 
@@ -27,5 +28,10 @@ const ratingReducer = (state = {}, action) => {
             action.ratings.forEach(rating => {
                 newState[rating.id] = rating;
             })
+            return newState;
+        default:
+            return state;
     }
 }
+
+export default ratingReducer;
