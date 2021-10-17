@@ -36,11 +36,12 @@ router.post(
 router.put(
     '/review/:id',
     asyncHandler( async(req, res) => {
-        const { body, userId, restaurantId } = req.body;
+        const { body, userId, restaurantId, rating } = req.body;
         const updatedReview = await Review.update({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         }, { where: { id: req.params.id }});
         res.json(updatedReview);
     }));

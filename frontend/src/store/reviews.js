@@ -48,14 +48,15 @@ export const oneReview = (reviewObj) => async (dispatch) => {
 }
 
 export const newReview = (reviewPayload, userId) => async (dispatch) => {
-    const { body, restaurantId} = reviewPayload;
+    const { body, restaurantId, rating} = reviewPayload;
     const res = await csrfFetch(`/api/reviews/restaurant/${restaurantId}`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         })
     });
     const reviews = await res.json();
