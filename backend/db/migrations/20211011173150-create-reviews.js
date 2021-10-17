@@ -26,6 +26,9 @@ module.exports = {
           model: 'Restaurants'
         }
       },
+      rating: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -12,11 +12,11 @@ const getRating = (ratings) => {
 }
 
 // Thunk
-export const allRatings = () => async (dispatch) => {
-    const res = await fetch('/api/ratings');
+export const allRatings = (id) => async (dispatch) => {
+    const res = await fetch(`/api/ratings/restaurant/${id}`);
     const ratingsData = await res.json();
     console.log(ratingsData)
-    // dispatch(getRating(ratingsData));
+    dispatch(getRating(ratingsData));
 }
 
 // Reducer

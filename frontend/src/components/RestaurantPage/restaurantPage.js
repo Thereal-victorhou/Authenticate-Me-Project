@@ -15,7 +15,7 @@ function RestaurantPage({ user }) {
 
     useEffect(() =>{
         dispatch(oneRestaurant(id))
-        dispatch(allRatings())
+        dispatch(allRatings(id))
     }, [dispatch, id, counter]);
 
     // sessionRestaurants is an array
@@ -26,7 +26,6 @@ function RestaurantPage({ user }) {
     const handleButton = async (e) => {
         e.preventDefault();
         const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
-        console.log(singleReview);
 
         switch(e.target.innerHTML) {
             case 'Write a Review':
@@ -50,6 +49,22 @@ function RestaurantPage({ user }) {
         }
     }
 
+    // translate ratings from number to star
+    const starRating = (num) => {
+        switch(num) {
+            case 1:
+                return (<p className='star' id='one'>★</p>)
+            case 2:
+                return (<p className='star' id='two'>★★</p>)
+            case 3:
+                return (<p className='star' id='three'>★★★</p>)
+            case 4:
+                return (<p className='star' id='four'>★★★★</p>)
+            case 5:
+                return (<p className='star' id='five'>★★★★★</p>)
+        }
+    }
+
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_picture"
@@ -68,6 +83,7 @@ function RestaurantPage({ user }) {
                         <li key={review.id}>
                             <span>
                                 {review.body}
+                                {starRating(review.rating)}
                                 {user && user.id === review.userId ? ( <button type='button'
                                     value={review.id}
                                     onClick={handleButton}>Edit</button> ) : ""}

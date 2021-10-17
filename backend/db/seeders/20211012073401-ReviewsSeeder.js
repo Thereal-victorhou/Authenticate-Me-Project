@@ -1,5 +1,40 @@
 'use strict';
 
+const reviewBody = [
+  null,
+  "God awful!",
+  "It was alright",
+  "Great Service!",
+  "Lovely atmosphere!",
+  "Amazing food!!!",
+];
+
+function getRandomNum(min, max) {
+  const raw = Math.random() * (max - min) + min;
+  return Math.floor(raw);
+}
+
+function makeReviews(target) {
+  const reviews = [];
+  for (let i = 2; i <= target; i++) {
+    const randomNum = getRandomNum(1, 6);
+    const newReview = {
+        body: reviewBody[randomNum],
+      userId: getRandomNum(1, 10),
+      restaurantId: getRandomNum(1, 20),
+      rating: randomNum,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    reviews.push(newReview);
+  }
+  return reviews;
+}
+
+const seedReviews = [
+  ...makeReviews(100),
+];
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     /*
@@ -8,59 +43,7 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkInsert('Reviews', [
-        {body: "Amazing food!!", userId: 1, restaurantId: 1, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 1, restaurantId: 2, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 1, restaurantId: 3, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 1, restaurantId: 4, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 1, restaurantId: 5, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 2, restaurantId: 6, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 2, restaurantId: 7, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 2, restaurantId: 8, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 2, restaurantId: 9, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 2, restaurantId: 10, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 3, restaurantId: 11, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 3, restaurantId: 12, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 3, restaurantId: 13, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 3, restaurantId: 14, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 3, restaurantId: 15, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 4, restaurantId: 16, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 4, restaurantId: 17, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 4, restaurantId: 18, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 4, restaurantId: 20, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 4, restaurantId: 1, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 5, restaurantId: 2, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 5, restaurantId: 3, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 5, restaurantId: 4, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 5, restaurantId: 5, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 5, restaurantId: 6, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 6, restaurantId: 7, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 6, restaurantId: 8, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 6, restaurantId: 9, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 6, restaurantId: 10, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 6, restaurantId: 11, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 7, restaurantId: 12, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 7, restaurantId: 13, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 7, restaurantId: 14, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 7, restaurantId: 15, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 7, restaurantId: 16, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 8, restaurantId: 17, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 8, restaurantId: 18, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 8, restaurantId: 19, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 8, restaurantId: 20, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 8, restaurantId: 1, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 9, restaurantId: 2, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 9, restaurantId: 3, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 9, restaurantId: 4, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 9, restaurantId: 5, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 9, restaurantId: 6, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Amazing food!!", userId: 10, restaurantId: 7, createdAt: new Date(), updatedAt: new Date()},
-        {body: "God awful!", userId: 10, restaurantId: 8, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Great Service!", userId: 10, restaurantId: 9, createdAt: new Date(), updatedAt: new Date()},
-        {body: "Lovely atmosphere!", userId: 10, restaurantId: 10, createdAt: new Date(), updatedAt: new Date()},
-        {body: "It was alright", userId: 10, restaurantId: 11, createdAt: new Date(), updatedAt: new Date()},
-
-      ], {});
+      return queryInterface.bulkInsert('Reviews', seedReviews, {});
   },
 
   down: (queryInterface, Sequelize) => {
