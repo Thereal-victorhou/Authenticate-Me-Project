@@ -40,7 +40,6 @@ const deleteReview = (id) => {
 
 // Thunk
 export const oneReview = (reviewObj) => async (dispatch) => {
-    console.log(reviewObj)
     const { id } = reviewObj;
     const res = await fetch(`/api/reviews/${id}`)
     const review = await res.json();
@@ -77,7 +76,6 @@ export const editOldReview = (editReviewPayload) => async (dispatch) => {
         })
     });
     const review = await res.json();
-    console.log(review)
     dispatch(editReview(review));
     return res;
 }

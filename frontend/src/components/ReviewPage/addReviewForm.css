@@ -1,0 +1,13 @@
+
+
+.textarea-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.review_body{
+    width: 40em;
+    height: 10em;
+}

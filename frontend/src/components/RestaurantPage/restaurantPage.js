@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import * as sessionActions from '../../store/restaurant';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant'
@@ -88,14 +87,16 @@ function RestaurantPage({ user }) {
             <div className="reviews_container">
                 <ul>
                     {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
-                        <li class='review-list' key={review.id}>
+                        <li className='review-list' key={review.id}>
                             <span>
-                                {review.body}
+                                <h3>
+                                    {review.body}
+                                </h3>
                                 {starRating(review.rating)}
-                                {user && user.id === review.userId ? ( <button type='button'
+                                {user && user.id === review.userId ? ( <button className='function-button' type='button'
                                     value={review.id}
                                     onClick={handleButton}>Edit</button> ) : ""}
-                                {user && user.id === review.userId ? ( <button type='button'
+                                {user && user.id === review.userId ? ( <button className='function-button' type='button'
                                     value={review.id}
                                     onClick={handleButton}>Delete</button> ) : ""}
                             </span>
