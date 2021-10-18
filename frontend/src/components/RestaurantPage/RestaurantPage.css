@@ -1,5 +1,4 @@
 .restaurant_page_container {
-    background-color: orange;
     height: 50em;
     width: auto;
 }
@@ -7,18 +6,52 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
     height: 30em;
     width: auto;
 }
 
-.restaurant_name {
-    background-color: linen;
-    height: 5em;
-    width: 15em;
+.restaurant-name-and-location-container{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.728);
 }
 
-.restaurant_location {
-    background-color: linen;
-    height: 5em;
-    width: 15em;
+.restaurant-name-container {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    height: 7em;
+    width: 45em;
+}
+
+.restaurant-title{
+    font-size: 36px;
+    text-align: left;
+    padding-left: 1.25em;
+    width: 100%;
+}
+
+.restaurant-location-container {
+    height: 2em;
+    width: 100%;
+    margin-bottom: 2em;
+    margin-left: 2em;
+}
+
+.restaurant-location{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.review-button{
+color: white;
+  background-color: rgb(244,57,57,1);
+  margin-left: 1em;
+  width: 9em;
+  height: 2.75em;
+  font-size: 12px;
+}
+
+.review-list{
+    list-style: none;
 }

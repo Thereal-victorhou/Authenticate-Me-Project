@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    imgSrc: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {});
   Restaurant.associate = function(models) {
     // associations can be defined here

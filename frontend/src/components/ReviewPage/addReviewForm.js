@@ -31,34 +31,32 @@ function AddReviewForm({ user }) {
 
     const handleStars = async(e) => {
         e.preventDefault();
-        switch(e.target.value) {
-            case 1:
-                setRating(1);
-                console.log(rating)
-            case 2:
-                return setRating(e.target.value + 2);
-            case 3:
-                return setRating(e.target.value + 3);
-            case 4:
-                return setRating(e.target.value + 4);
-            case 5:
-                return setRating(e.target.value + 5);
+
+        switch(e.target.id) {
+            case 'one':
+                return setRating(1);
+            case 'two':
+                return setRating(2);
+            case 'three':
+                return setRating(3);
+            case 'four':
+                return setRating(4);
+            case 'five':
+                return setRating(5);
         }
     }
-
-  console.log(rating)
 
     return(
         <>
             <h1>Hello from Add Review Page</h1>
             <section>
                 <form onSubmit={handleSubmit}>
-                    <div className='stars_container_review_page'></div>
+                    <div className='stars_container_review_page' onChange={handleStars}></div>
                         <button type='button' className='star' id='one' value={rating} onClick={handleStars}>★</button>
-                        <button className='star' id='two' value={rating} onClick={handleStars}>★</button>
-                        <button className='star' id='three' value={rating} onClick={handleStars}>★</button>
-                        <button className='star' id='four' value={rating} onClick={handleStars}>★</button>
-                        <button className='star' id='five' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='two' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='three' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='four' value={rating} onClick={handleStars}>★</button>
+                        <button type='button' className='star' id='five' value={rating} onClick={handleStars}>★</button>
                     <textarea
                         className='review_body'
                         value={body}

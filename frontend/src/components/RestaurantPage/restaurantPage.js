@@ -68,19 +68,27 @@ function RestaurantPage({ user }) {
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_picture"
-            style={{ backgroundImage: `url('https://s3-media0.fl.yelpcdn.com/bphoto/2eAtP1SJy21JTvQWxaQSng/l.jpg')`}}>
-                <div className='restaurant_name'>
-                        {currentRestaurant ? currentRestaurant.name : "title"}
-                </div>
-                <div className='restaurant_location'>
-                    {currentRestaurant ? currentRestaurant.location : "location"}
+            style={currentRestaurant ? { backgroundImage: `url(${currentRestaurant.imgSrc})`} : { backgroundImage: 'null' }}>
+                <div className='restaurant-name-and-location-container'>
+                    <div className='restaurant-name-container'>
+                        <h2 className='restaurant-title'>
+                            {currentRestaurant ? currentRestaurant.name : "title"}
+                        </h2>
+                    </div>
+                    <div className='restaurant-location-container'>
+                        <h3 className='restaurant-location'>
+                            {currentRestaurant ? currentRestaurant.location : "location"}
+                        </h3>
+                    </div>
                 </div>
             </div>
-            <button type='button' value='reviewButton' onClick={handleButton}>Write a Review</button>
+            <div className='review-button-container'>
+                <button className='review-button' type='button' value='reviewButton' onClick={handleButton}>Write a Review</button>
+            </div>
             <div className="reviews_container">
                 <ul>
                     {sessionRestaurants ? sessionRestaurants[0]?.Reviews?.map(review => (
-                        <li key={review.id}>
+                        <li class='review-list' key={review.id}>
                             <span>
                                 {review.body}
                                 {starRating(review.rating)}
