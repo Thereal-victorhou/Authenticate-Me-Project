@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      imgSrc: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

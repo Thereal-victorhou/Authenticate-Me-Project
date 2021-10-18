@@ -68,7 +68,7 @@ function RestaurantPage({ user }) {
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_picture"
-            style={{ backgroundImage: `url('https://s3-media0.fl.yelpcdn.com/bphoto/2eAtP1SJy21JTvQWxaQSng/l.jpg')`}}>
+            style={currentRestaurant ? { backgroundImage: `url(${currentRestaurant.imgSrc})`} : { backgroundImage: 'null' }}>
                 <div className='restaurant_name'>
                         {currentRestaurant ? currentRestaurant.name : "title"}
                 </div>
