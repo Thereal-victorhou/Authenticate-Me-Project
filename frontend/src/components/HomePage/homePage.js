@@ -22,10 +22,8 @@ function HomePage() {
                                 <div className={'restaurant_container'}>
                                     <img className={'restaurant-photo'} src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
                                     <div className={'restaurant-info'}>
-                                        <NavLink to={`/restaurants/${restaurant.id}`}>
-                                            <div className="restaurant-name-container">
-                                                {restaurant.name}
-                                            </div>
+                                        <NavLink className='name-and-location-container' to={`/restaurants/${restaurant.id}`}>
+                                                <h2 className='restaurant-name'>{restaurant.name}</h2>
                                             <div className="restaurant-location-container">
                                                 {restaurant.location}
                                             </div>
