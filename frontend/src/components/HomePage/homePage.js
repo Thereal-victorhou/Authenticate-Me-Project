@@ -13,24 +13,31 @@ function HomePage() {
     }, [dispatch])
 
     return (
-
-        <div className="restaurants_container">
-            <ul>
-                {sessionRestaurant.map((restaurant) => {
-                    return (
-                        <li key={restaurant.id}>
-                            <div className={`${restaurant.name}_container`}>
-                                <img src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
-                                <NavLink to={`/restaurants/${restaurant.id}`}>
-                                    {restaurant.name}
-                                    {restaurant.location}
-                                </NavLink>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            <div className="all-restaurants-container">
+                <ul id='card-list'>
+                    {sessionRestaurant.map((restaurant) => {
+                        return (
+                            <li className="restaurant-container" key={restaurant.id}>
+                                <div className={'restaurant_container'}>
+                                    <img className={'restaurant-photo'} src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
+                                    <div className={'restaurant-info'}>
+                                        <NavLink to={`/restaurants/${restaurant.id}`}>
+                                            <div className="restaurant-name-container">
+                                                {restaurant.name}
+                                            </div>
+                                            <div className="restaurant-location-container">
+                                                {restaurant.location}
+                                            </div>
+                                        </NavLink>
+                                    </div>
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        </>
     )
 }
 

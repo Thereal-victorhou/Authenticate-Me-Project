@@ -1,26 +1,101 @@
-body {
-    display: flex;
-    background-color: grey;
-    justify-content: center;
+
+.nav_container {
+    padding: 0;
+    margin: 0, auto;
+    height: 570px;
+    background-color: #333;
+    background-size: cover;
+    background-position: 50%;
+
 
 }
 
-
-.nav_container {
+.li-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    background-color: orange;
-    max-width: 75rem;
-    min-width: 60rem;
-    height: 3em;
+    height: 100%;
+}
+
+.nav_container_homelink {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 5em;
+    width: 33%;
+
+}
+
+.homelink_containter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 4em;
+    margin-right: 5em;
+}
+
+.navLinks {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.middle-container {
+
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-container {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.app-title {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    width: 4em;
+
 }
 
 .session_links {
-    background-color: grey;
+    display: flex;
+    flex-direction: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+    height: 5em;
+}
+
+.login-signup-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    height: 100%;
+    width: 13em;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: 12em;
+    width: 50%;
+
+
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
 }
