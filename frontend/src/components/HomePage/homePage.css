@@ -38,3 +38,19 @@
     list-style: none;
 
 }
+
+.name-and-location-container {
+    width: 25em;
+}
+
+.restaurant-name-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: orange;
+    width: 10em;
+}
+
+.restaurant-name{
+    margin-left: 1.25em;
+}
