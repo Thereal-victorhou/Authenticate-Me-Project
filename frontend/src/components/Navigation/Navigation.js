@@ -30,14 +30,14 @@ function Navigation({ isLoaded }){
 
   useEffect(() => {
 
-    if (isSelected) {
+    if (isSelected && searchInputLength > 1) {
       document.querySelector(".search-bar")?.classList.add("live");
 
     } else {
       document.querySelector(".search-bar")?.classList.remove("live");
 
     }
-  },[isSelected])
+  },[isSelected && searchInputLength])
 
   const updateSearch= (e) => {
 
@@ -102,7 +102,8 @@ function Navigation({ isLoaded }){
         <div className='li-container'>
           <div className="nav_container_homelink">
             <div className="homelink_containter">
-              <NavLink exact to="/" className="navLinks">Home</NavLink>
+              <NavLink exact to="/" className="navLinks" id="home-link">Home</NavLink>
+              <NavLink exact to="/add/restaurant" className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink>
             </div>
           </div>
           <div className="middle-container">
