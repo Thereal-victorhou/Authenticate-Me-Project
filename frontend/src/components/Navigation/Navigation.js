@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { liveSearch } from '../../store/search'
+import { liveSearch, clearSearch } from '../../store/search'
 import { oneRestaurant } from '../../store/restaurant';
 import './Navigation.css';
 
@@ -14,11 +14,12 @@ function Navigation({ isLoaded }){
   const dispatch = useDispatch();
 
   const [searchInput, setSearchInput] = useState('');
-  const searchInputLength = document.querySelector("#search-bar")?.getAttribute('value')?.length;
+  const [isSelected, setIsSelected] = useState(false);
+  const searchInputLength = document.querySelector(".search-bar")?.getAttribute('value')?.length;
 
 
   useEffect(() => {
-    if (searchInput) {
+    if (searchInput.length > 1) {
       dispatch(liveSearch({
         searchInput: searchInput,
         userId: sessionUser?.id
@@ -27,14 +28,31 @@ function Navigation({ isLoaded }){
 
   }, [dispatch, searchInput]);
 
-  // useEffect(() => {
-  //   if (!searchInputLength) {
-  //     setSearchInput("")
-  //   }
-  // },[searchInputLength])
+  useEffect(() => {
+
+    if (isSelected) {
+      document.querySelector(".search-bar")?.classList.add("live");
+
+    } else {
+      document.querySelector(".search-bar")?.classList.remove("live");
+
+    }
+  },[isSelected])
 
   const updateSearch= (e) => {
+
     setSearchInput(e.target.value);
+    if (e.target.value.length === 1) {
+      dispatch(clearSearch());
+    }
+
+    // if (searchInputLength === 1) {
+    //   document.querySelector(".search-results-container")?.classList.add("hidden");
+    //   console.log(document.querySelector(".search-results-container"))
+    // }
+    // document.querySelector(".search-results-container")?.classList.remove("hidden");
+    // document.querySelector(".search-results-container")
+
   }
 
   let sessionLinks;
@@ -57,9 +75,15 @@ function Navigation({ isLoaded }){
     );
   }
 
+  const handleRes = (e) => {
+    e.preventDefault();
+    setIsSelected(true)
+  }
+
   const handleClick = async (e, res) => {
     e.preventDefault();
     await dispatch(oneRestaurant(res.id))
+    setSearchInput('')
     history.push(`/restaurants/${res.id}`)
   }
 
@@ -82,20 +106,25 @@ function Navigation({ isLoaded }){
             </div>
           </div>
           <div className="middle-container">
-            <div className='title-container'>
-              <h1 className="app-title" >Kelp</h1>
+            <div id="upper-middle"></div>
+            <div id="lower-middle">
+              <div className='title-container'>
+                <h1 className="app-title" >Kelp</h1>
+              </div>
+              <div className="search-bar-container">
+                <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+                <button id="search-btn">
+                  <p>⌕</p>
+                </button>
+              </div>
+              <div className="search-results-container">
+                {searchResult &&
+                  Object.values(searchResult).map((res, i) => (
+                    searchRender(res, i)
+                  ))}
+              </div>
             </div>
-            <div className="search-bar-container">
-              <input id="search-bar" placeholder="Find Pescatarian, Vegetarian or Vegan..." value={searchInput} onChange={updateSearch}></input>
-              <button id="search-btn">
-                <p>⌕</p>
-              </button>
-            </div>
-            <div className="search-results-container">
-              {searchResult && Object.values(searchResult).map((res, i) => (
-                searchRender(res, i)
-              ))}
-            </div>
+
           </div>
           <div className="session_links">
             {isLoaded && sessionLinks}
