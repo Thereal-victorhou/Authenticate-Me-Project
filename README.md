@@ -1,10 +1,11 @@
 # Kelp-Project
+### Kelp, a yelp clone, is the 'go-to' food review site for pescatarians, vegetarians, and vegans.
 
 
 #Live Server
 https://kelpmeplease.herokuapp.com/
 
-# Development
+# Deployment
 * To start the development enviroment:
   1. Clone the repository
   2. Run npm install from the backend folder.
