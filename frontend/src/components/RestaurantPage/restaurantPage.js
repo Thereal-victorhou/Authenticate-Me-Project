@@ -170,6 +170,18 @@ function RestaurantPage({ user }) {
         }
     }
 
+    const checkBusiness = (restaurant) => {
+        // console.log("userId ", currentRestaurant.userId)
+        if (currentRestaurant && currentRestaurant.userId === user?.id) {
+            return (
+                <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant?.id}`}>
+                    <span id="pencil">✏️</span>
+                    <p>Edit business info</p>
+                </NavLink>
+            )
+        }
+    }
+
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_picture"
@@ -245,10 +257,7 @@ function RestaurantPage({ user }) {
                                 </div>
                             </div>
                             <div className="edit-info-container">
-                                <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant?.id}`}>
-                                    <span id="pencil">✏️</span>
-                                    <p>Edit business info</p>
-                                </NavLink>
+                                {currentRestaurant && checkBusiness()}
                             </div>
                         </div>
                     </div>

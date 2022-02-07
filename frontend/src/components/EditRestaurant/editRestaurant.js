@@ -1,18 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import { newRestaurant } from '../../store/restaurant';
+import { oneRestaurant } from '../../store/restaurant';
 
 const EditRestaurantPage = ({ user }) => {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const currentRestaurant = useSelector(state => state.restaurant);
+
+
     const [errors, setErrors] = useState([]);
     const [restaurantName, setRestaurantName] = useState("");
     const [location, setLocation] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [imgSrc, setImgSrc] = useState("")
+    const [restaurantId, setRestaurantId] = useState(0)
+
+    // useEffect(()=>{
+    //     dispatch(oneRestaurant(restaurantId))
+    // }, [dispatch])
+
+    useEffect(() => {
+        if (currentRestaurant) {
+            setRestaurantName(currentRestaurant[1]?.name)
+            setLocation(currentRestaurant[1]?.location)
+            setPhoneNumber(currentRestaurant[1]?.phoneNumber)
+            setImgSrc(currentRestaurant[1]?.imgSrc)
+            setRestaurantId(currentRestaurant[1]?.id)
+        }
+        console.log(currentRestaurant && currentRestaurant[1])
+    }, [currentRestaurant])
+
 
     const updateRestaurantName = (e) => {
         setRestaurantName(e.target.value)
@@ -33,7 +53,7 @@ const EditRestaurantPage = ({ user }) => {
         e.preventDefault()
 
         if (restaurantName, location, phoneNumber, imgSrc) {
-            setErrors([])
+            
 
             // return dispatch(newRestaurant({
             //     name: restaurantName,
@@ -117,7 +137,7 @@ const EditRestaurantPage = ({ user }) => {
                         <button className="edit-restaurant-submit-btn" type="submit" onClick={(e)=>editRestaurant(e)}>
                             <h4 id="edit-restaurant-btn">Submit Changes</h4>
                         </button>
-                        <NavLink exact to="/" id="home-link">Cancel</NavLink>
+                        <NavLink exact to={`/restaurants/${restaurantId}`} id="home-link">Cancel</NavLink>
                     </div>
                 </form>
             </div>
