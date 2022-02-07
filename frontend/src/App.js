@@ -10,6 +10,7 @@ import RestaurantPage from "./components/RestaurantPage";
 import AddReviewForm from './components/ReviewPage';
 import EditReviewForm from "./components/EditPage";
 import AddRestaurantPage from "./components/AddRestaurant";
+import EditRestaurantPage from './components/EditRestaurant'
 
 
 function App() {
@@ -38,14 +39,17 @@ function App() {
           <Route path="/restaurants/:id">
             <RestaurantPage user={user}/>
           </Route>
+          <Route path='/add/restaurant'>
+            <AddRestaurantPage user={user}/>
+          </Route>
+          <Route path='/edit/restaurant/:id'>
+            <EditRestaurantPage user={user}/>
+          </Route>
           <Route path="/review/restaurant/:id">
             <AddReviewForm user={user}/>
           </Route>
           <Route path="/edit/review/:id">
             <EditReviewForm user={user}/>
-          </Route>
-          <Route path='/add/restaurant'>
-            <AddRestaurantPage user={user}/>
           </Route>
           <Route>
             <h2>Page Not Found</h2>

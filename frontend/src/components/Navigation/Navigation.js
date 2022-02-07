@@ -96,6 +96,15 @@ function Navigation({ isLoaded }){
     )
   }
 
+  const noResult = () => {
+    console.log("no result")
+    return (
+      <div id="search-result">
+        <p>No Results.</p>
+      </div>
+    )
+  }
+
   return (
 
       <div className="nav_container" style={{backgroundImage: `url(https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_large_assets/fa8d73b85ad8/assets/img/home/hero_photos/J4bBEXXBIHmYLl50X1l72g.jpg)`}}>

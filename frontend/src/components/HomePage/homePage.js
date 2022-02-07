@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {allRestaurants} from '../../store/restaurant';
+import {allRestaurants, oneRestaurant} from '../../store/restaurant';
+
 
 function HomePage() {
-    const dispatch = useDispatch();
     const sessionRestaurant = useSelector(state => Object.values(state.restaurant))
+    const dispatch = useDispatch();
 
     useEffect(() =>{
         dispatch(allRestaurants());
@@ -22,7 +23,7 @@ function HomePage() {
                                 <div className={'restaurant_container'}>
                                     <img className={'restaurant-photo'} src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
                                     <div className={'restaurant-info'}>
-                                        <NavLink className='name-and-location-container' to={`/restaurants/${restaurant.id}`}>
+                                        <NavLink className='name-and-location-container' onClick={(e) => dispatch(oneRestaurant(restaurant.id))} to={`/restaurants/${restaurant.id}`}>
                                                 <h2 className='restaurant-name'>{restaurant.name}</h2>
                                             <div className="restaurant-location-container">
                                                 {restaurant.location}
