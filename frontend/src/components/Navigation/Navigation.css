@@ -30,18 +30,38 @@
 .homelink_containter {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     height: 100%;
-    width: 4em;
+    width: 100%;
     margin-right: 5em;
 }
 
 .navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 2rem;
 }
+
+    .navLinks:hover {
+        color: white;
+        border-bottom: 3px solid white;
+    }
+
+    #add-restaurant-link {
+        margin-left: 2rem;
+        width: 8.5rem;
+    }
+
+    #home-link {
+        width: 3.5rem;
+    }
+
 
 .middle-container {
     display: flex;
@@ -125,7 +145,7 @@
 
     .search-bar-container #search-btn:hover {
         background-color: rgb(182, 21, 21);
-        transition: all .8s ease;
+        transition: all .6s ease;
     }
 
     #search-btn p {

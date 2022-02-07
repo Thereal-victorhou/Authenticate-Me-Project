@@ -11,7 +11,7 @@ router.put('/', asyncHandler(async (req, res) => {
     const restaurants = await Restaurant.findAll({
         where: { name: {[Op.iLike]: `%${searchInput}%`} }
     })
-    console.log("\n\n\n\n", restaurants, "\n\n\n\n")
+    // console.log("\n\n\n\n", restaurants, "\n\n\n\n")
     res.json(restaurants)
 }))
 
