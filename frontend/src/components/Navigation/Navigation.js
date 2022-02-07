@@ -103,7 +103,7 @@ function Navigation({ isLoaded }){
           <div className="nav_container_homelink">
             <div className="homelink_containter">
               <NavLink exact to="/" className="navLinks" id="home-link">Home</NavLink>
-              <NavLink exact to="/add/restaurant" className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink>
+              <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink>
             </div>
           </div>
           <div className="middle-container">
