@@ -67,18 +67,23 @@ router.get('/:id', asyncHandler(async(req, res)=> {
     const restaurant = await Restaurant.findByPk(id)
     const reviews =  await Restaurant.findByPk(id, {
         include: [
-        {
-            model: Review,
-            required: true,
-            where: { restaurantId: id },
-        },
-        {
-            model: Rating,
-            require: true,
-            where: { restaurantId: id}
-        }
+            {
+                model: Review,
+                required: true,
+                where: { restaurantId: id },
+            },
+            {
+                model: Rating,
+                require: true,
+                where: { restaurantId: id}
+            },
         ],
     });
+    //
+    // console.log(`\n\n\n\n`, reviews.Reviews[0].dataValues.userId, `\n\n\n\n`)
+
+    const userArr = reviews.Reviews.map(each => User.findAll({ where: {id: each?.dataValues?.userId}}))
+    console.log("\n\n\n\n\n", userArr, `\n\n\n\n`)
     if (reviews) {
         return res.json(reviews)
     } else {

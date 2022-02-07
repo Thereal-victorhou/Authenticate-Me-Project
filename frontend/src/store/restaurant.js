@@ -66,7 +66,6 @@ const restaurantReducer = (state = {}, action) => {
             return newState;
         case GET_ONE_RESTAURANT:
             return {
-                ...state,
                 [action.restaurant.id]: action.restaurant
             }
 
