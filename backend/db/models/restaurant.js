@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     imgSrc: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   }, {});
   Restaurant.associate = function(models) {
@@ -26,17 +30,13 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'categoryId'
     }
 
-    // const columnMapping2 = {
-    //   through: 'Reviews',
-    //   foreignKey: 'restaurantId',
-    //   otherKey: 'userId'
-    // }
 
+
+    Restaurant.belongsTo(models.User, { foreignKey: 'userId' });
     Restaurant.hasMany(models.Photo, { foreignKey: 'restaurantId' });
     Restaurant.hasMany(models.Review, { foreignKey: 'restaurantId' });
     Restaurant.hasMany(models.Rating, { foreignKey: 'restaurantId' });
     Restaurant.belongsToMany(models.Category, columnMapping);
-    // Restaurant.belongsToMany(models.User, columnMapping2);
   };
   return Restaurant;
 };
