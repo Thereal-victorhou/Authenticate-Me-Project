@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import { oneRestaurant } from '../../store/restaurant';
+import { oneRestaurant, editRestaurant } from '../../store/restaurant';
 
 const EditRestaurantPage = ({ user }) => {
 
@@ -12,26 +12,28 @@ const EditRestaurantPage = ({ user }) => {
 
 
     const [errors, setErrors] = useState([]);
+    const { id } = useParams();
     const [restaurantName, setRestaurantName] = useState("");
     const [location, setLocation] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [imgSrc, setImgSrc] = useState("")
     const [restaurantId, setRestaurantId] = useState(0)
 
-    // useEffect(()=>{
-    //     dispatch(oneRestaurant(restaurantId))
-    // }, [dispatch])
+    useEffect(()=>{
+        dispatch(oneRestaurant(id))
+    }, [dispatch, id])
 
     useEffect(() => {
+
         if (currentRestaurant) {
             setRestaurantName(currentRestaurant[1]?.name)
             setLocation(currentRestaurant[1]?.location)
             setPhoneNumber(currentRestaurant[1]?.phoneNumber)
             setImgSrc(currentRestaurant[1]?.imgSrc)
-            setRestaurantId(currentRestaurant[1]?.id)
+            setRestaurantId(id)
         }
-        console.log(currentRestaurant && currentRestaurant[1])
-    }, [currentRestaurant])
+        // console.log(id, "   ", location, "   ", phoneNumber, "     ", imgSrc)
+    }, [])
 
 
     const updateRestaurantName = (e) => {
@@ -49,26 +51,30 @@ const EditRestaurantPage = ({ user }) => {
         setImgSrc(e.target.value)
     }
 
-    const editRestaurant = (e) => {
+    const editOneRestaurant = (e) => {
         e.preventDefault()
+        setErrors([])
 
         if (restaurantName, location, phoneNumber, imgSrc) {
-            
 
-            // return dispatch(newRestaurant({
-            //     name: restaurantName,
-            //     location: location,
-            //     phoneNumber: phoneNumber,
-            //     imgSrc: imgSrc,
-            //     userId: user.id
-            // }))?.catch(async (res) => {
-            //     if (res.status === 400) {
-            //         const data = await res.json();
-            //         if (data && data.errors) setErrors(data.errors);
-            //         return
-            //     }
-            //     history.push(`/`);
-            // })
+            return dispatch(editRestaurant({
+                name: restaurantName,
+                location: location,
+                phoneNumber: phoneNumber,
+                imgSrc: imgSrc,
+                restaurantId: restaurantId,
+                // userId: user.id
+            }))?.catch(async (res) => {
+                if (res.status === 400) {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                    return
+                }
+
+            })
+            .then(()=> alert('Restaurant information has been updated.'))
+            .then(() => history.push(`/restaurants/${id}`))
+
         }
         return setErrors(['Please complete form before submitting.'])
     };
@@ -134,7 +140,7 @@ const EditRestaurantPage = ({ user }) => {
                         />
                     </div>
                     <div className="edit-restaurant-lower">
-                        <button className="edit-restaurant-submit-btn" type="submit" onClick={(e)=>editRestaurant(e)}>
+                        <button className="edit-restaurant-submit-btn" type="submit" onClick={(e)=>editOneRestaurant(e)}>
                             <h4 id="edit-restaurant-btn">Submit Changes</h4>
                         </button>
                         <NavLink exact to={`/restaurants/${restaurantId}`} id="home-link">Cancel</NavLink>

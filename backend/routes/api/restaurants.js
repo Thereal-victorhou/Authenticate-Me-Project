@@ -11,12 +11,13 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-const validateRestaurantInfo = [
+const validateCreateInfo = [
     check('name')
         .exists({ checkFalsy: true })
         .custom(value => {
             return Restaurant.findOne({ where: { name:value }}).then(rest => {
                 if (rest) {
+
                     return Promise.reject('Restaurant Name is already in use');
                 }
                 return false
@@ -28,6 +29,7 @@ const validateRestaurantInfo = [
         .custom(value => {
             return Restaurant.findOne({ where: { location: value }}).then(rest => {
                 if (rest) {
+
                     // console.log("\n\n\n\n\n", rest, "\n\n\n\n\n")
                     // // return rest
                     return Promise.reject('Restaurant Location is already in use');
@@ -41,19 +43,56 @@ const validateRestaurantInfo = [
         .custom(value => {
             return Restaurant.findOne({ where: { phoneNumber:value }}).then(rest => {
                 if (rest) {
+
                     return Promise.reject('Restaurant PhoneNumber is already in use');
                 }
                 return false
             })
         }),
-    // check('imgSrc')
-    //     .custom(value => {
-    //         if (!value.length) {
-    //             return Promise.reject('Please provide a restaurant image')
-    //         }
-    //     }),
     handleValidationErrors
 ];
+
+const validateEditInfo = [
+    check('name')
+        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            return Restaurant.findOne({ where: { name:value }}).then(rest => {
+                if (rest) {
+                    if (!rest.id === req.body.restaurantId) {
+                        return Promise.reject('Restaurant Name is already in use');
+                    }
+                }
+                return false
+            });
+        }),
+
+    check('location')
+        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            return Restaurant.findOne({ where: { location: value }}).then(rest => {
+                if (rest) {
+                    if (!rest.id === req.body.restaurantId) {
+                        return Promise.reject('Restaurant Location is already in use');
+                    }
+                }
+                return false
+            });
+        }),
+
+    check('phoneNumber')
+        .exists({ checkFalsy: true })
+        .custom((value, { req }) => {
+            return Restaurant.findOne({ where: { phoneNumber:value }}).then(rest => {
+                if (rest) {
+                    if (!rest.id === req.body.restaurantId) {
+                        return Promise.reject('Restaurant PhoneNumber is already in use');
+                    }
+                }
+                return false
+            })
+        }),
+    handleValidationErrors
+]
 
 // GET all restaurants
 router.get('/', asyncHandler(async(req, res)=> {
@@ -83,7 +122,7 @@ router.get('/:id', asyncHandler(async(req, res)=> {
     // console.log(`\n\n\n\n`, reviews.Reviews[0].dataValues.userId, `\n\n\n\n`)
 
     const userArr = reviews.Reviews.map(each => User.findAll({ where: {id: each?.dataValues?.userId}}))
-    console.log("\n\n\n\n\n", userArr, `\n\n\n\n`)
+    // console.log("\n\n\n\n\n", userArr, `\n\n\n\n`)
     if (reviews) {
         return res.json(reviews)
     } else {
@@ -94,7 +133,7 @@ router.get('/:id', asyncHandler(async(req, res)=> {
 }));
 
 // CREATE a new restaurant
-router.post('/new', validateRestaurantInfo, asyncHandler( async(req, res) => {
+router.post('/', validateCreateInfo, asyncHandler( async(req, res) => {
     const { name, location, phoneNumber, imgSrc, userId } = req.body;
     // console.log("\n\n\n\n\n", name, "\n\n\n\n\n")
 
@@ -104,5 +143,18 @@ router.post('/new', validateRestaurantInfo, asyncHandler( async(req, res) => {
     return res.json(newRestaurant);
 
 }));
+
+// Edit an existing restaurant
+router.put('/:id', validateEditInfo, asyncHandler( async(req, res) => {
+    const { name, location, phoneNumber, img, restaurantId} = req.body;
+
+
+    const updateRestaurantId = await Restaurant.update({
+        name, location, phoneNumber, img
+    }, {where: { id: restaurantId}})
+
+    const restaurant = await Restaurant.findByPk(...updateRestaurantId)
+    res.json(restaurant);
+}))
 
 module.exports = router;
