@@ -103,6 +103,7 @@ router.get('/', asyncHandler(async(req, res)=> {
 // GET one restaurant
 router.get('/:id', asyncHandler(async(req, res)=> {
     const id = parseInt(req.params.id, 10);
+    // console.log(`\n\n\n\n`,  id, `\n\n\n\n`)
     const restaurant = await Restaurant.findByPk(id)
     const reviews =  await Restaurant.findByPk(id, {
         include: [
@@ -120,8 +121,9 @@ router.get('/:id', asyncHandler(async(req, res)=> {
     });
     //
     // console.log(`\n\n\n\n`, reviews.Reviews[0].dataValues.userId, `\n\n\n\n`)
+    // console.log(`\n\n\n\n`, reviews, `\n\n\n\n`)
 
-    const userArr = reviews.Reviews.map(each => User.findAll({ where: {id: each?.dataValues?.userId}}))
+    // const userArr = reviews.Reviews.map(each => User.findAll({ where: {id: each?.dataValues?.userId}}))
     // console.log("\n\n\n\n\n", userArr, `\n\n\n\n`)
     if (reviews) {
         return res.json(reviews)
@@ -154,7 +156,17 @@ router.put('/:id', validateEditInfo, asyncHandler( async(req, res) => {
     }, {where: { id: restaurantId}})
 
     const restaurant = await Restaurant.findByPk(...updateRestaurantId)
-    res.json(restaurant);
-}))
+    return res.json(restaurant);
+}));
+
+// Delete a restaurant
+router.delete('/:id', asyncHandler( async(req, res) => {
+    const id = req.params.id;
+    // console.log(`\n\n\n\n`, 'brefore delete', `\n\n\n\n`)
+    await Restaurant.destroy({where: {id}})
+    // console.log(`\n\n\n\n deleted Id === `, deletedRestaurantId, `\n\n\n\n`)
+
+    return res.json(id);
+}));
 
 module.exports = router;

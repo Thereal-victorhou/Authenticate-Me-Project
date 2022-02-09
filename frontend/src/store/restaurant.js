@@ -8,6 +8,8 @@ const ADD_NEW_RESTAURANT = 'addrestaurant/ADD_NEW_RESTAURANT';
 
 const EDIT_EXISTING_RESTAURANT = 'editrestaurant/EDIT_EXISTING';
 
+const DELETE_RESTAURANT = 'deleterestaurant/DELETE_RESTAURANT';
+
 // Actions
 const getRestaurants = (restaurants) => {
     return {
@@ -31,6 +33,11 @@ const addRestaurant = (restaurants) => ({
 const editExistingRestaurant = (restaurant) => ({
     type: EDIT_EXISTING_RESTAURANT,
     restaurant
+})
+
+const deleteOneRestaurant = (restaurantId) => ({
+    type: DELETE_RESTAURANT,
+    restaurantId
 })
 
 // Thunk Action
@@ -74,6 +81,16 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
     dispatch(editExistingRestaurant(restaurant));
 }
 
+export const deleteRestaurant = (restaurantId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/restaurants/${restaurantId}`, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+    });
+    const restId = await res.json();
+    console.log("res after delete ===",restId)
+    dispatch(deleteOneRestaurant(restId))
+}
+
 // Reducer
 const restaurantReducer = (state = {}, action) => {
     let newState;
@@ -98,6 +115,10 @@ const restaurantReducer = (state = {}, action) => {
             return {
                 [action.restaurant.id]: action.restaurant
             }
+        case DELETE_RESTAURANT:
+            newState = {...state}
+            delete newState[action.restaurantId]
+            return newState;
         default:
             return state;
     }

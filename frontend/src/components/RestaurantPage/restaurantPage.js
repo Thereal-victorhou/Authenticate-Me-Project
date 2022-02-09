@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
-import { oneRestaurant } from '../../store/restaurant'
-import { oneReview } from '../../store/reviews';
-import { deleteOneReview } from '../../store/reviews'
+import { oneRestaurant, deleteRestaurant } from '../../store/restaurant'
+import { oneReview, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
 
 function RestaurantPage({ user }) {
@@ -170,17 +169,28 @@ function RestaurantPage({ user }) {
         }
     }
 
-    const checkBusiness = (restaurant) => {
+    const handleDeleteRestaurant = async (e) => {
+        e.preventDefault();
+
+        await dispatch(deleteRestaurant(currentRestaurant?.id))
+        history.push('/')
+    }
+
+    const checkEdit = () => {
         // console.log("userId ", currentRestaurant.userId)
         if (currentRestaurant && currentRestaurant.userId === user?.id) {
             return (
-                <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant?.id}`}>
-                    <span id="pencil">✏️</span>
-                    <p>Edit business info</p>
-                </NavLink>
+                <>
+                    <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant?.id}`}>
+                        <span id="pencil">✏️</span>
+                        <p>Edit business info</p>
+                    </NavLink>
+                    <button onClick={(e)=> handleDeleteRestaurant(e)}>Remove Restaurant</button>
+                </>
             )
         }
     }
+
 
     return (
         <div className="restaurant_page_container">
@@ -257,7 +267,7 @@ function RestaurantPage({ user }) {
                                 </div>
                             </div>
                             <div className="edit-info-container">
-                                {currentRestaurant && checkBusiness()}
+                                {currentRestaurant && checkEdit()}
                             </div>
                         </div>
                     </div>

@@ -81,7 +81,7 @@
         .review-button:hover {
             background: #d32323c9;
             border: 1px solid #d32323c9;
-            transition: all .6s ease;
+            transition: all .8s ease;
         }
 
         .phone-number-container {
@@ -125,7 +125,7 @@
 
     .lh-title {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         height: 18%;
         width: 100%;
@@ -252,9 +252,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         width: 100%;
-        /* background-color: brown; */
         margin-bottom: 2rem;
     }
         .edit-link {
@@ -274,6 +273,24 @@
             color: #027A97;
             text-decoration-line: underline;
         }
+
+    .edit-info-container button {
+        background-color: transparent;
+        height: 60%;
+        width: 10rem;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid rgb(235,235,235);
+    }
+
+    .edit-info-container button:hover{
+        color: white;
+        background: #d32323c9;
+        border: 1px solid #d32323c9;
+        font-weight: 700;
+        transition: all .8s ease;
+    }
 
 
 .reviews_container {
