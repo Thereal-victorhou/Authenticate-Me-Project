@@ -8,7 +8,7 @@ const EditRestaurantPage = ({ user }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const currentRestaurant = useSelector(state => state.restaurant);
+    const currentRestaurant = useSelector(state => Object.values(state.restaurant));
 
 
     const [errors, setErrors] = useState([]);
@@ -26,10 +26,10 @@ const EditRestaurantPage = ({ user }) => {
     useEffect(() => {
 
         if (currentRestaurant) {
-            setRestaurantName(currentRestaurant[1]?.name)
-            setLocation(currentRestaurant[1]?.location)
-            setPhoneNumber(currentRestaurant[1]?.phoneNumber)
-            setImgSrc(currentRestaurant[1]?.imgSrc)
+            setRestaurantName(currentRestaurant[0]?.name)
+            setLocation(currentRestaurant[0]?.location)
+            setPhoneNumber(currentRestaurant[0]?.phoneNumber)
+            setImgSrc(currentRestaurant[0]?.imgSrc)
             setRestaurantId(id)
         }
         // console.log(id, "   ", location, "   ", phoneNumber, "     ", imgSrc)
