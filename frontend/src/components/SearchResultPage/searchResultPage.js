@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant';
 import { liveSearch, clearSearch } from '../../store/search';
-const queryString = require('query-string');
+
 
 
 const SearchResultPage = () => {
@@ -20,30 +20,40 @@ const SearchResultPage = () => {
     const search = useLocation().search;
     const find = new URLSearchParams(search).get('find');
 
-    const rerouting = async (e) => {
+    const [searchArr, setSearchArr] = useState([])
 
+    useEffect(()=>{
+        if (searchRes) setSearchArr(searchRes)
+    },[])
+
+    const getOneRestaurant = async (e, resId) => {
+        e.preventDefault();
+
+        await dispatch(oneRestaurant(resId))
+        await dispatch(clearSearch())
+        history.push(`/restaurants/${resId}`)
     }
 
     const isResults = () => {
-        if (searchRes.length) {
+        if (searchArr.length) {
             return (
                 <>
                     <div>
-                        <h2>{`Results for ${find}`}</h2>
+                        <h2>{`Results for '${find}'`}:</h2>
                     </div>
                     <ul id='card-list'>
-                        {searchRes.map((res) => {
+                        {searchArr.map((res) => {
                             return (
-                                <li className="restaurant-container" key={searchRes.indexOf(res)}>
+                                <li className="restaurant-container" key={searchArr.indexOf(res)}>
                                     <div className={'restaurant_container'}>
                                         <img className={'restaurant-photo'} src={res.imgSrc} alt={"Restaurant Image"}></img>
                                         <div className={'restaurant-info'}>
-                                            <NavLink className='name-and-location-container' onClick={(e) => dispatch(oneRestaurant(res.id)).then(() => dispatch(clearSearch()))} to={`/restaurants/${res.id}`}>
+                                            <div className='name-and-location-container' onClick={(e)=>getOneRestaurant(e, res.id)} >
                                                     <h2 className='restaurant-name'>{res.name}</h2>
                                                 <div className="restaurant-location-container">
                                                     {res.location}
                                                 </div>
-                                            </NavLink>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
@@ -53,9 +63,11 @@ const SearchResultPage = () => {
                 </>
             )
         } else {
-            <div>
-                <h2>{`Could not find results for ${find}`}</h2>
-            </div>
+            return (
+                <div>
+                    <h2>{`Could not find results for ${find}`}</h2>
+                </div>
+            )
         }
     }
 

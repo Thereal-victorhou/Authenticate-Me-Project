@@ -164,6 +164,7 @@
     max-height: 300px;
     overflow-x: hidden;
     overflow-y: auto;
+    z-index: -2;
 
     background-color: white;
     border-bottom-left-radius: 4px;
