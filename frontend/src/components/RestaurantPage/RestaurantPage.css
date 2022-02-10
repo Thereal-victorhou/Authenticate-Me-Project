@@ -1,5 +1,4 @@
 .restaurant_page_container {
-    background-color: orange;
     height: 50em;
     width: auto;
 }
@@ -7,18 +6,536 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
     height: 30em;
     width: auto;
 }
 
-.restaurant_name {
-    background-color: linen;
-    height: 5em;
-    width: 15em;
+.restaurant-name-and-location-container{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.728);
 }
 
-.restaurant_location {
-    background-color: linen;
-    height: 5em;
-    width: 15em;
+.restaurant-name-container {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    height: 7em;
+    width: 45em;
+}
+
+.restaurant-title{
+    font-size: 36px;
+    text-align: left;
+    padding-left: 2.1rem;
+    width: 100%;
+}
+
+.restaurant-location-container {
+    height: 2em;
+    width: 100%;
+    margin-bottom: 2em;
+    margin-left: 2em;
+}
+
+.restaurant-location{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.restaurant-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 7.5rem;
+    width: 100%;
+
+}
+    .restaurant-upper-mid {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        border-bottom: 1px solid rgb(235,235,235);
+        width: max(800px);
+    }
+
+        .review-button{
+            color: white;
+            background-color: #d32323;
+            border: 1px solid #d32323;
+            border-radius: 3px;
+            border-left-style: hidden;
+            border-right-style: hidden;
+            border-bottom-style: hidden;
+            border-top-style: hidden;
+            /* margin-top: 2em; */
+            /* margin-left: 1em; */
+            width: 12em;
+            height: 3.5em;
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .review-button:hover {
+            background: #d32323c9;
+            border: 1px solid #d32323c9;
+            transition: all .8s ease;
+        }
+
+        .phone-number-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            width: 400px;
+        }
+
+        .phone-number-container span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+            width: 82%;
+            border-top: 1px solid rgb(235,235,235);
+            border-bottom: 1px solid rgb(235,235,235);
+        }
+
+        .phone-number-container p {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(45,46,47,1);
+        }
+
+.restaurant-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.location-and-hours {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 30rem;
+    width: max(800px);
+    border-bottom: 1px solid rgb(235,235,235);
+}
+
+    .lh-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 18%;
+        width: 100%;
+    }
+
+    .lh-title h4 {
+        color: #2D2E2F;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .lh-container {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+    }
+
+    .lh-location-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 82%;
+        width: 45%;
+    }
+        .lh-container #map {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50%;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .lh-container #address {
+            display: flex;
+            flex-direction: row;
+            height: 40%;
+            width: 100%;
+        }
+
+        #address-left {
+            width: 50%;
+            height: 100%;
+        }
+
+        #address-right {
+            display: flex;
+            justify-content: flex-end;
+            width: 50%;
+            height: 100%;
+
+        }
+            #address-right #direction-button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 30%;
+                width: 97%;
+                font-size: 16px;
+                font-weight: 500;
+                border: 1px solid rgb(235,235,235);
+                color: rgba(45,46,47,1);
+                background-color: transparent;
+                border-radius: 4px;
+                margin-top: 1rem;
+            }
+
+            #address-right #direction-button:hover {
+                background-color: rgb(230, 230, 230);
+                transition: all 0.8s;
+            }
+
+
+    .lh-right {
+        display: flex;
+        flex-direction: column;
+        /* background-color: green; */
+        width: 55%;
+        height: 100%;
+
+    }
+
+    .lh-hours-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        height: 100%;
+        width: 100%;
+    }
+        .lh-hours-container #day-column{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 90%;
+            width: 12%;
+            margin-bottom: .25rem;
+            margin-left: 2rem;
+        }
+
+        #day-column h5 {
+            margin-top: 0;
+            font-size: 16px;
+            margin-bottom: 1.59rem;
+        }
+        .lh-hours-container #hour-column {
+            display: flex;
+            /* background-color: orange; */
+            flex-direction: column;
+            height: 90%;
+            width: 70%;
+            margin-bottom: .25rem;
+            padding-top: 0;
+        }
+
+            #hour-column p {
+                margin-top: 0.1rem;
+                font-size: 16px;
+                margin-bottom: 1.56rem;
+                width: 50%;
+            }
+
+    .edit-info-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+        .edit-link {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 2rem;
+        }
+        .edit-link #pencil {
+            margin-right: 1rem;
+        }
+        .edit-link p {
+            color: #027A97;
+            font-weight: 700;
+        }
+        .edit-link p:hover {
+            color: #027A97;
+            text-decoration-line: underline;
+        }
+
+    .edit-info-container button {
+        background-color: transparent;
+        height: 60%;
+        width: 10rem;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid rgb(235,235,235);
+    }
+
+    .edit-info-container button:hover{
+        color: white;
+        background: #d32323c9;
+        border: 1px solid #d32323c9;
+        font-weight: 700;
+        transition: all .8s ease;
+    }
+
+
+.reviews_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+    width: max(800px);
+    /* background-color: orange; */
+
+}
+
+    .reviews-title {
+        width: 100%;
+    }
+
+    .reviews-title h4 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+.review-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+
+    .review-card{
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        height: min(9rem);
+        width: 60%;
+        font-size: 16px;
+        margin-bottom: 8rem;
+        /* background-color: green; */
+    }
+
+    .review-card-upper {
+        display: flex;
+        flex-direction: row;
+        /* background-color: orange; */
+        height: 100%;
+        width: 55%;
+    }
+
+        .review-card-upper #user-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 80%;
+        }
+
+        .review-card-upper p {
+            font-size: 14rem;
+            color: rgb(194, 194, 194);
+            margin-bottom: 16.5rem;
+        }
+
+        .review-card-upper #user-name {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            /* background-color: orange; */
+            padding-top: 0rem;
+            padding-bottom: 0;
+            margin-left: 1rem;
+            width: 8rem;
+        }
+
+    .review-card-lower {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        /* background-color: blue; */
+    }
+
+
+/* div.star {
+    /* background-color: green; */
+    /* width: 20%; */
+
+/* Small Stars */
+.star #zero {
+    background-color: #EBEBEC;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+}
+
+.star#one #one{
+    background-color: #FFCB4B;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+}
+.star#two #two{
+    background-color: #FFA448;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+}
+.star#three #three{
+    background-color: #FF7E42;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+}
+.star#four #four{
+    background-color: #FF523D;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    width: 2rem;
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+    /* background: url('https://s3-media0.fl.yelpcdn.com/assets/public/stars_v2.yji-52d3d7a328db670d4402843cbddeed89.png') no-repeat;
+    background-position: 0, -480px;
+    background-size: 176px 680px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    border-collapse: collapse;
+  border-spacing: 0;
+    height: 20px;
+    width: 108px; */
+    border-color: #ebebeb;
+}
+.star#five #five{
+    background-color: #F43939;
+    border-radius: 6px;
+    color: white;
+    font-size: 20px;
+    width: 2rem;
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+}
+
+
+/* Large Stars */
+
+.big-star-rating {
+    width: 200px;
+    margin-left: 2.1rem;
+}
+.big-star #zero {
+    background-color: #EBEBEC;
+    border-radius: 6px;
+    color: white;
+    font-size: 27px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
+}
+
+.big-star#one #one{
+    background-color: #FFCB4B;
+    border-radius: 6px;
+    color: white;
+    font-size: 27px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 24px;
+    width: 108px;
+}
+.big-star#two #two{
+    background-color: #FFA448;
+    border-radius: 6px;
+    color: white;
+    font-size: 27px;
+    /* width: 2rem; */
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 27px;
+    width: 108px;
+}
+.big-star#three #three{
+    background-color: #FF7E42;
+    border-radius: 6px;
+    color: white;
+    font-size: 28px;
+    /* width: 24px; */
+    margin-right: .2rem;
+}
+.big-star#four #four{
+    background-color: #FF523D;
+    border-radius: 6px;
+    color: white;
+    font-size: 27px;
+    width: 2rem;
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 24px;
+    width: 108px;
+    /* background: url('https://s3-media0.fl.yelpcdn.com/assets/public/stars_v2.yji-52d3d7a328db670d4402843cbddeed89.png') no-repeat;
+    background-position: 0, -480px;
+    background-size: 176px 680px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    border-collapse: collapse;
+  border-spacing: 0;
+    height: 20px;
+    width: 108px; */
+    border-color: #ebebeb;
+}
+.big-star#five #five{
+    background-color: #F43939;
+    border-radius: 6px;
+    color: white;
+    font-size: 27px;
+    width: 2rem;
+    margin-right: .2rem;
+    background-position: 0, -500px;
+    height: 20px;
+    width: 108px;
 }

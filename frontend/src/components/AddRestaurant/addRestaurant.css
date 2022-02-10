@@ -1,0 +1,120 @@
+.add-restaurant-main {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.add-restaurant-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 3rem;
+    width: 700px;
+    margin-top: 2rem;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+    .add-restaurant-title h1 {
+        font-size: 30px;
+        color: rgb(211,35,35);
+        margin-left: 6rem;
+        /* text-shadow: 0px 0px 0rem #ffffff; */
+    }
+
+.add-restaurant-mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    width: 32rem;
+}
+
+.add-restaurant-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.add-restaurant-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    width: 99%;
+}
+    .each-error {
+        color: rgb(206, 17, 17);
+    }
+
+    .add-restaurant-container label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333333;
+        margin-top: .7rem;
+        width: 100%;
+
+    }
+
+    .add-restaurant-container p {
+        font-size: 12px;
+        color: rgb(166,166,166);
+        line-height: 1.5em;
+        font-weight: normal;
+    }
+
+    .add-restaurant-container input {
+        height: 1.4rem;
+        line-height: 1.29em;
+        font-size: 14px;
+        border: 1px solid #999;
+        border-radius: 3px;
+        width: 98%;
+    }
+
+    .add-restaurant-container .img-label {
+        margin-bottom: 1rem;
+    }
+
+.add-restaurant-lower {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 31.6rem;
+}
+
+    .add-restaurant-submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: #d32323;
+        border: 1px solid #d32323;
+        margin-right: 1rem;
+        border-radius: 3px;
+        height: 2.4rem;
+        width: 8rem;
+    }
+
+    .add-restaurant-submit-btn:hover {
+        background: #d32323c9;
+        border: 1px solid #d32323;
+        transition: all .6s ease;
+    }
+
+    .add-restaurant-lower a {
+        color: #0073bb;
+    }
+    .add-restaurant-lower a:hover {
+        text-decoration-line: underline;
+    }

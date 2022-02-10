@@ -1,36 +1,42 @@
-import React, { useEffect } from 'react';
-import * as sessionActions from '../../store/restaurant';
+import React, { useEffect, useState } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import {allRestaurants} from '../../store/restaurant';
+import {allRestaurants, oneRestaurant} from '../../store/restaurant';
+
 
 function HomePage() {
-    const dispatch = useDispatch();
     const sessionRestaurant = useSelector(state => Object.values(state.restaurant))
+    const dispatch = useDispatch();
 
     useEffect(() =>{
         dispatch(allRestaurants());
     }, [dispatch])
 
     return (
-
-        <div className="restaurants_container">
-            <ul>
-                {sessionRestaurant.map((restaurant) => {
-                    return (
-                        <li key={restaurant.id}>
-                            <div className={`${restaurant.name}_container`}>
-                                <img src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.hcTbtNnqX7wLKR6LOFBXRwHaE8%26pid%3DApi&f=1'></img>
-                                <NavLink to={`/restaurants/${restaurant.id}`}>
-                                    {restaurant.name}
-                                    {restaurant.location}
-                                </NavLink>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
+        <>
+            <div className="all-restaurants-container">
+                <ul id='card-list'>
+                    {sessionRestaurant.map((restaurant) => {
+                        return (
+                            <li className="restaurant-container" key={restaurant.id}>
+                                <div className={'restaurant_container'}>
+                                    <img className={'restaurant-photo'} src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
+                                    <div className={'restaurant-info'}>
+                                        <NavLink className='name-and-location-container' onClick={(e) => dispatch(oneRestaurant(restaurant.id))} to={`/restaurants/${restaurant.id}`}>
+                                                <h2 className='restaurant-name'>{restaurant.name}</h2>
+                                            <div className="restaurant-location-container">
+                                                {restaurant.location}
+                                            </div>
+                                        </NavLink>
+                                    </div>
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        </>
     )
 }
 

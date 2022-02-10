@@ -12,7 +12,7 @@ router.get('/:id', asyncHandler( async(req, res) => {
 }))
 
 router.get('/restaurant/:id', asyncHandler( async(req, res) => {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const reviews = await Review.findAll({
         where: { restaurantId: id }
     })
@@ -23,25 +23,27 @@ router.get('/restaurant/:id', asyncHandler( async(req, res) => {
 router.post(
     '/restaurant/:id',
     asyncHandler( async(req, res) => {
-        const { body, userId, restaurantId } = req.body;
+        const { body, userId, restaurantId, rating} = req.body;
         const newPost = await Review.create({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         });
         res.json(newPost);
     }));
 
 // edit review
 router.put(
-    '/restaurant/:id',
+    '/review/:id',
     asyncHandler( async(req, res) => {
-        const { body, userId, restaurantId } = req.body;
+        const { body, userId, restaurantId, rating } = req.body;
         const updatedReview = await Review.update({
             body,
             userId,
-            restaurantId
-        }, { where: { restaurantId: req.params.id}});
+            restaurantId,
+            rating
+        }, { where: { id: req.params.id }});
         res.json(updatedReview);
     }));
 
@@ -50,7 +52,9 @@ router.delete(
     '/review/:id',
     asyncHandler( async(req, res) => {
         const id = req.params.id;
-        await Review.destroy({where: {id}})
+        const resDelete = await Review.destroy({where: {id}})
+        // console.log("inside the delete router ===================>", resDelete);
+        res.json(resDelete)
     }));
 
 module.exports = router;

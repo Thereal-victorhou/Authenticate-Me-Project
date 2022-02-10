@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    imgSrc: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {});
   Restaurant.associate = function(models) {
     // associations can be defined here
@@ -28,9 +32,9 @@ module.exports = (sequelize, DataTypes) => {
     //   otherKey: 'userId'
     // }
 
-    Restaurant.hasMany(models.Photo, { foreignKey: 'restaurantId' });
-    Restaurant.hasMany(models.Review, { foreignKey: 'restaurantId' });
-    Restaurant.hasMany(models.Rating, { foreignKey: 'restaurantId' });
+    Restaurant.hasMany(models.Review, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
+    Restaurant.hasMany(models.Photo, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
+    Restaurant.hasMany(models.Rating, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
     Restaurant.belongsToMany(models.Category, columnMapping);
     // Restaurant.belongsToMany(models.User, columnMapping2);
   };

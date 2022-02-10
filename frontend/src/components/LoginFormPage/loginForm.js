@@ -23,8 +23,17 @@ function LoginFormPage() {
         if (data && data.errors) setErrors(data.errors);
       });
   }
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const userName = 'Demo User';
+    const password = 'password';
+    return dispatch(sessionActions.login({ credential: userName, password: password }))
+  }
+
   return (
     <div className="login_form_container">
+      <button onClick={demoLogin}>Demo User</button>
         <form onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}

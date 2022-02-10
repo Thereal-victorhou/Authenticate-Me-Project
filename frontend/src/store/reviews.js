@@ -47,14 +47,15 @@ export const oneReview = (reviewObj) => async (dispatch) => {
 }
 
 export const newReview = (reviewPayload, userId) => async (dispatch) => {
-    const { body, restaurantId} = reviewPayload;
+    const { body, restaurantId, rating} = reviewPayload;
     const res = await csrfFetch(`/api/reviews/restaurant/${restaurantId}`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         })
     });
     const reviews = await res.json();
@@ -62,15 +63,16 @@ export const newReview = (reviewPayload, userId) => async (dispatch) => {
 
 }
 
-export const editOldReview = (editReviewPayload, userId) => async (dispatch) => {
-    const { body, restaurantId} = editReviewPayload;
-    const res = await csrfFetch(`/api/reviews/restaurant/${restaurantId}`, {
+export const editOldReview = (editReviewPayload) => async (dispatch) => {
+    const { body, restaurantId, userId, rating, reviewId} = editReviewPayload;
+    const res = await csrfFetch(`/api/reviews/review/${reviewId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             body,
             userId,
-            restaurantId
+            restaurantId,
+            rating
         })
     });
     const review = await res.json();
@@ -82,8 +84,8 @@ export const deleteOneReview = (id) => async (dispatch) => {
     const res = await csrfFetch(`/api/reviews/review/${id}`, {
         method: 'DELETE',
     });
-    await res.json();
-    dispatch(deleteReview(id));
+    const deletedId = await res.json();
+    dispatch(deleteReview(deletedId));
     return res;
 }
 
@@ -100,14 +102,11 @@ const reviewReducer = (state = {}, action) => {
                 [action.reviewPayload.id]: action.reviewPayload
             }
         case EDIT_REVIEW:
-            return {
-                ...state,
-                [action.editReviewPayload.id]: action.editReviewPayload
-            }
+            return action.editReviewPayload
         case DELETE_REVIEW:
             const newState = { ...state };
             delete newState[action.id]
-            return state;
+            return newState;
         default:
             return state;
     }

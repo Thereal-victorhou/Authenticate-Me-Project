@@ -1,0 +1,55 @@
+
+.all-restaurants-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.restaurant_container {
+    display: flex;
+    height: fit-content;
+    width: 620px;
+    border: 2px solid #a1a1a1;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.restaurant-photo {
+    width: 10em;
+    height: 10em;
+}
+
+.restaurant-info{
+    display: flex;
+    align-items: center;
+}
+
+#card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+
+}
+
+.name-and-location-container {
+    width: 25em;
+}
+
+.restaurant-name-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 10em;
+}
+
+.restaurant-name{
+    margin-left: 1.25em;
+}

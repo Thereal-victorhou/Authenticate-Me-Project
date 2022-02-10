@@ -1,1 +1,85 @@
-/* TODO Add site wide styles */
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+input:focus {outline:none;}
+
+h1, h2, h3, h4, h5, p, label {
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.function-button {
+    background-color: white;
+    border-top-style: hidden;
+    border-bottom-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+}
+
+.post-button {
+    color: white;
+    background-color: rgb(244,57,57,1);
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-left: 1em;
+    width: 8em;
+    height: 2.5em;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.stars_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.star-button {
+    margin-left: .25em;
+    margin-right: .25em;
+    width: 3em;
+    height: 3em;
+    border-radius: 5px;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    border-top-style: hidden;
+    background-color: rgb(244,57,57,1);
+}
+
+.white-star{
+    color: white;
+}
+
+.textarea-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.review_body{
+    width: 40em;
+    height: 10em;
+}
+
+.post-button-container {
+    display: flex;
+    justify-content: center;
+    margin-right: 27em;
+}

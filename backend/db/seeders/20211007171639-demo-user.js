@@ -13,48 +13,49 @@ module.exports = {
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
       {
         email: faker.internet.email(),
         username: faker.name.findName(),
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        hashedPassword: bcrypt.hashSync('password'),
       },
+
     ], {});
   },
 
