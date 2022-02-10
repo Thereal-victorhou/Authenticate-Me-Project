@@ -82,16 +82,22 @@ function Navigation({ isLoaded }){
 
   const handleClick = async (e, res) => {
     e.preventDefault();
-    await dispatch(oneRestaurant(res.id))
+    await dispatch(oneRestaurant(res.id));
+    await dispatch(clearSearch());
     setSearchInput('')
     history.push(`/restaurants/${res.id}`)
   }
 
 
   const searchRender = (res, i) => {
+    console.log(res)
     return (
       <div id="search-result" key={i} onClick={(e) => handleClick(e, res)}>
-        <p>{res.name}</p>
+        <div id="search-img" style={{backgroundImage: `url(${res?.imgSrc})`}}></div>
+        <div className="search-info-container">
+          <p id="name">{res.name}</p>
+          <p id="address">{res.location}</p>
+        </div>
       </div>
     )
   }
@@ -103,6 +109,17 @@ function Navigation({ isLoaded }){
         <p>No Results.</p>
       </div>
     )
+  }
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    await dispatch(liveSearch({
+      searchInput: searchInput,
+      userId: sessionUser?.id
+    }))
+    setSearchInput('');
+    history.push(`/search?find=${searchInput}`)
   }
 
   return (
@@ -123,7 +140,7 @@ function Navigation({ isLoaded }){
               </div>
               <div className="search-bar-container">
                 <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
-                <button id="search-btn">
+                <button id="search-btn" onClick={(e) => handleSearch(e)}>
                   <p>⌕</p>
                 </button>
               </div>
