@@ -385,49 +385,53 @@
     background-color: #EBEBEC;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 20px;
     width: 108px;
+    padding: 3px;
 }
 
 .star#one #one{
     background-color: #FFCB4B;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 20px;
     width: 108px;
+    padding: 3px;
 }
 .star#two #two{
     background-color: #FFA448;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 20px;
     width: 108px;
+    padding: 3px;
 }
 .star#three #three{
     background-color: #FF7E42;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     /* width: 2rem; */
     margin-right: .2rem;
+    padding: 3px;
 }
 .star#four #four{
     background-color: #FF523D;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     width: 2rem;
     margin-right: .2rem;
     background-position: 0, -500px;
@@ -444,17 +448,19 @@
     height: 20px;
     width: 108px; */
     border-color: #ebebeb;
+    padding: 3px;
 }
 .star#five #five{
     background-color: #F43939;
     border-radius: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     width: 2rem;
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 20px;
     width: 108px;
+    padding: 3px;
 }
 
 
@@ -468,54 +474,61 @@
     background-color: #EBEBEC;
     border-radius: 6px;
     color: white;
-    font-size: 27px;
+    font-size: 25px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
-    height: 20px;
+    height: 24px;
     width: 108px;
+    padding: 3px;
+
 }
 
 .big-star#one #one{
     background-color: #FFCB4B;
     border-radius: 6px;
     color: white;
-    font-size: 27px;
+    font-size: 25px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 24px;
     width: 108px;
+    padding: 3px;
 }
 .big-star#two #two{
     background-color: #FFA448;
     border-radius: 6px;
     color: white;
-    font-size: 27px;
+    font-size: 25px;
     /* width: 2rem; */
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 27px;
     width: 108px;
+    padding: 3px;
+
 }
 .big-star#three #three{
     background-color: #FF7E42;
     border-radius: 6px;
     color: white;
-    font-size: 28px;
+    font-size: 25px;
     /* width: 24px; */
     margin-right: .2rem;
+    padding: 3px;
 }
 .big-star#four #four{
     background-color: #FF523D;
     border-radius: 6px;
     color: white;
-    font-size: 27px;
+    font-size: 25px;
     width: 2rem;
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 24px;
     width: 108px;
+    padding: 3px;
     /* background: url('https://s3-media0.fl.yelpcdn.com/assets/public/stars_v2.yji-52d3d7a328db670d4402843cbddeed89.png') no-repeat;
     background-position: 0, -480px;
     background-size: 176px 680px;
@@ -532,10 +545,12 @@
     background-color: #F43939;
     border-radius: 6px;
     color: white;
-    font-size: 27px;
+    font-size: 25px;
     width: 2rem;
     margin-right: .2rem;
     background-position: 0, -500px;
     height: 20px;
     width: 108px;
+    padding: 3px;
+
 }
