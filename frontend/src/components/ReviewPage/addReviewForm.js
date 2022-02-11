@@ -16,7 +16,6 @@ function AddReviewForm({ user }) {
     const [tempRating, setTempRating] = useState(0);
     const [ratingPhrase, setRatingPhrase] = useState("Select your rating")
 
-    const updateBody = (e) => setBody(e.target.value)
 
     const userId = user.id;
 
@@ -41,12 +40,6 @@ function AddReviewForm({ user }) {
         dispatch(oneRestaurant(id))
     }, [dispatch]);
 
-    useEffect(()=> {
-        console.log(rating)
-
-
-    },[rating])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,12 +50,23 @@ function AddReviewForm({ user }) {
             rating
         };
 
-        await dispatch(newReview(reviewPayload, userId));
-        history.push(`/restaurants/${id}`);
+        console.log("body====", body)
+
+        if (rating > 0 && body) {
+            await dispatch(newReview(reviewPayload, userId));
+            history.push(`/restaurants/${id}`);
+        } else {
+            if (!rating>0 && !body) return alert('Please complete the form before submitting.')
+            if (!rating>0) return alert('Please leave a rating before posting your review.')
+            if (!body) return alert('Review requires a body.')
+        }
     }
 
+    // live update for textbody
+    const updateBody = (e) => setBody(e.target.value);
 
-    // Remove Stars After mouse hover
+
+    // Conditionally remove stars
     const removeStars = () => {
 
         let star1;
