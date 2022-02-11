@@ -46,7 +46,7 @@ function RestaurantPage({ user }) {
             const body2 = phoneNumber?.split('').slice(6, 10).join('');
             setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
         }
-    }, [restaurantCurrent])
+    }, [restaurantCurrent, restaurantReviews])
 
     // useEffect(() => {
         //     if (currentRestaurant) {
@@ -100,6 +100,7 @@ function RestaurantPage({ user }) {
             case 'delete':
                     // setCounter(prev => prev + 1)
                     dispatch(deleteOneReview(reviewId));
+                    window.scrollTo(0, 0)
                     break;
 
         }
