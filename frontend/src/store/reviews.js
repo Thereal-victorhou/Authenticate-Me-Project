@@ -57,7 +57,7 @@ export const oneReview = (reviewId) => async (dispatch) => {
 export const getAllRevs = (restaurantId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/restaurant/${restaurantId}`)
     const reviews = await res.json();
-    console.log("\n\n\n\n\n", reviews, "\n\n\n\n\n")
+    // console.log("\n\n\n\n\n", reviews, "\n\n\n\n\n")
     dispatch(getAllReviews(reviews));
 }
 
@@ -100,8 +100,10 @@ export const deleteOneReview = (id) => async (dispatch) => {
         method: 'DELETE',
     });
     const deletedId = await res.json();
-    dispatch(deleteReview(deletedId));
-    return res;
+    if (res.ok) {
+        dispatch(deleteReview(id));
+        return res;
+    }
 }
 
 // Reducer
@@ -114,7 +116,7 @@ const reviewReducer = (state = {}, action) => {
                 [action.review.id]: action.review
             }
             case GET_ALL_REVIEWS:
-            newState = {...state, ...action.reviews}
+            newState = {...action.reviews}
             // action.reviews.forEach(review => {
             //     newState[review.id] = review;
             // })
@@ -128,8 +130,12 @@ const reviewReducer = (state = {}, action) => {
         case EDIT_REVIEW:
             return action.editReviewPayload
         case DELETE_REVIEW:
+            let newNew;
             newState = { ...state };
-            delete newState[action.id]
+            newNew = Object.values(newState);
+            const loca = newNew.indexOf(newNew.find(review => review.id === action.id))
+            delete newNew[loca]
+            newState = { ...newNew }
             return newState;
         default:
             return state;

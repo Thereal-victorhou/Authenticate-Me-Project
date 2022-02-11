@@ -56,7 +56,7 @@ router.delete(
     asyncHandler( async(req, res) => {
         const id = req.params.id;
         const resDelete = await Review.destroy({where: {id}})
-        // console.log("inside the delete router ===================>", resDelete);
+        // console.log(===================>", resDelete);
         res.json(resDelete)
     }));
 

@@ -8,14 +8,15 @@
 
 .review-upper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    height: 6.5rem;
+    height: 8.5rem;
     /* width: 100%; */
-    padding-top: 24px;
-    padding-bottom: 36px;
-    max-width: 630px;
-    margin-right: 17rem;
+    /* padding-top: 24px; */
+    /* padding-bottom: 36px; */
+    width: 630px;
+    /* max-width: 630px; */
+    padding-left: 0;
     padding-bottom: 0;
 }
 

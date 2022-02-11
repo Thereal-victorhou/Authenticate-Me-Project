@@ -264,7 +264,7 @@ function EditReviewForm({ user }) {
     return(
         <div className="review-container-main">
             <div className="review-upper">
-                <h1>{currentRestaurant && currentRestaurant['1']?.name}</h1>
+                <h1>{currentRestaurant && Object.values(currentRestaurant)[0]?.name}</h1>
             </div>
             <form className="review-form" onSubmit={handleSubmit}>
                 <div className='stars_container'>

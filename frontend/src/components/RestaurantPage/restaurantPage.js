@@ -15,52 +15,75 @@ function RestaurantPage({ user }) {
     let avgNum;
 
     // sessionRestaurants is an array
-    const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
-    const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
-    // console.log(currentRestaurant)
+    const currentRestaurant = useSelector(state => Object.values(state.restaurant));
+    const restaurantCurrent = currentRestaurant.find(restaurant => restaurant.id === parseInt(id, 10));
     const restaurantReviews = useSelector(state => Object.values(state.review))
 
 
     useEffect(() =>{
-        dispatch(oneRestaurant(id))
-        dispatch(getAllRevs(id))
+        dispatch(oneRestaurant(parseInt(id, 10)))
+        dispatch(getAllRevs((parseInt(id, 10))))
         // dispatch(allRatings(id))
-    }, [dispatch, id, counter]);
+    }, [dispatch, id]);
 
     useEffect(() => {
-        let totalRatings = []
-        const ratingsArr = currentRestaurant?.Reviews
-        ratingsArr?.map(each => totalRatings.push(each.rating))
-        const avg = totalRatings.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / totalRatings.length
-        console.log("avg ",avg)
-        // console.log("avgRating   ", ratingsArr)
-        // console.log("avgRating   ", avgRating)
-         avgNum = parseInt(Math.round(avg), 10)
-         if (typeof avgNum === 'number') {
-             console.log(avgNum)
-             setAvgRating(avgNum)
-         }
+        if (currentRestaurant && restaurantReviews) {
+            let totalRatings = []
+            restaurantReviews.map(each => totalRatings.push(parseInt(each.rating, 10)))
+            const avg = totalRatings.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / totalRatings.length
+            // console.log("avg ",avg)
+            // console.log("avgRating   ", ratingsArr)
+            // console.log("avgRating   ", avgRating)
+             avgNum = parseInt(Math.round(avg), 10)
+             if (typeof avgNum === 'number') {
+                //  console.log(avgNum)
+                 setAvgRating(avgNum)
+             }
 
+            const phoneNumber = currentRestaurant[0]?.phoneNumber;
+            const areaCode = phoneNumber?.split('').slice(0, 3).join('');
+            const body1 = phoneNumber?.split('').slice(3, 6).join('');
+            const body2 = phoneNumber?.split('').slice(6, 10).join('');
+            setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
+        }
+    }, [restaurantCurrent])
 
-    }, [currentRestaurant])
+    // useEffect(() => {
+        //     if (currentRestaurant) {
 
-    useEffect(() => {
-        const phoneNumber = currentRestaurant?.phoneNumber;
-        const areaCode = phoneNumber?.split('').slice(0, 3).join('');
-        const body1 = phoneNumber?.split('').slice(3, 6).join('');
-        const body2 = phoneNumber?.split('').slice(6, 10).join('');
-        setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
-    }, currentRestaurant);
+            //     }
+            // }, currentRestaurant);
 
+    //  const numbers = () => {
+    //     if (currentRestaurant) {
+    //         let totalRatings = []
+    //         const ratingsArr = currentRestaurant[0]?.Reviews
+    //         ratingsArr?.map(each => totalRatings.push(each.rating))
+    //         const avg = totalRatings.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / totalRatings.length
+    //         // console.log("avg ",avg)
+    //         // console.log("avgRating   ", ratingsArr)
+    //         // console.log("avgRating   ", avgRating)
+    //          avgNum = parseInt(Math.round(avg), 10)
+    //          if (typeof avgNum === 'number') {
+    //              console.log(avgNum)
+    //              setAvgRating(avgNum)
+    //          }
 
+    //         const phoneNumber = currentRestaurant[0]?.phoneNumber;
+    //         const areaCode = phoneNumber?.split('').slice(0, 3).join('');
+    //         const body1 = phoneNumber?.split('').slice(3, 6).join('');
+    //         const body2 = phoneNumber?.split('').slice(6, 10).join('');
+    //         setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
+    //     }
+
+    // }
 
     // Handle Button
     const handleButton = async (e, reviewId) => {
         e.preventDefault();
-        const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(reviewId, 10));
-        console.log("Inside handle button")
-        switch(e.target.innerHTML) {
-            case 'Write a Review':
+
+        switch(e.target.getAttribute('id')) {
+            case 'add-review':
                 if (user) {
                     await dispatch(oneRestaurant(id))
                     history.push(`/review/restaurant/${id}`);
@@ -69,63 +92,74 @@ function RestaurantPage({ user }) {
                     history.push(`/login`);
                     break
                 }
-            case 'Edit':
-                if (singleReview) {
-                    await dispatch(oneReview(singleReview?.id));
-                    history.push(`/edit/review/${singleReview?.id}`);
-                }
+            case 'edit':
+                    await dispatch(oneReview(reviewId));
+                    history.push(`/edit/review/${reviewId}`);
+
                 break;
-            case 'Delete':
-                if (singleReview) {
-                    setCounter(prev => prev + 1)
-                    dispatch(deleteOneReview(singleReview.id));
+            case 'delete':
+                    // setCounter(prev => prev + 1)
+                    dispatch(deleteOneReview(reviewId));
                     break;
-                }
+
         }
+
     }
      // translate ratings from number to star *LARGE stars*
     const starRatingBig = (num) => {
-        switch(num) {
-            case 1:
-                return (<div className='big-star' id='one'>
-                            <span id='one'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                        </div>)
-            case 2:
-                return (<div className='big-star' id='two'>
-                            <span id='two'>★</span>
-                            <span id='two'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                        </div>)
-            case 3:
-                return (<div className='big-star' id='three'>
-                            <span id='three'>★</span>
-                            <span id='three'>★</span>
-                            <span id='three'>★</span>
-                            <span id='zero'>★</span>
-                            <span id='zero'>★</span>
-                        </div>)
-            case 4:
-                return (<div className='big-star' id='four'>
-                            <span id='four' >★</span>
-                            <span id='four'>★</span>
-                            <span id='four'>★</span>
-                            <span id='four'>★</span>
-                            <span id='zero'>★</span>
-                        </div>)
-            case 5:
-                return (<div className='big-star' id='five'>
-                            <span id='five'>★</span>
-                            <span id='five'>★</span>
-                            <span id='five'>★</span>
-                            <span id='five'>★</span>
-                            <span id='five'>★</span>
-                        </div>)
+
+        if (restaurantReviews) {
+
+            switch(num) {
+                case 1:
+                    return (<div className='big-star' id='one'>
+                                <span id='one'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                            </div>)
+                case 2:
+                    return (<div className='big-star' id='two'>
+                                <span id='two'>★</span>
+                                <span id='two'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                            </div>)
+                case 3:
+                    return (<div className='big-star' id='three'>
+                                <span id='three'>★</span>
+                                <span id='three'>★</span>
+                                <span id='three'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                            </div>)
+                case 4:
+                    return (<div className='big-star' id='four'>
+                                <span id='four' >★</span>
+                                <span id='four'>★</span>
+                                <span id='four'>★</span>
+                                <span id='four'>★</span>
+                                <span id='zero'>★</span>
+                            </div>)
+                case 5:
+                    return (<div className='big-star' id='five'>
+                                <span id='five'>★</span>
+                                <span id='five'>★</span>
+                                <span id='five'>★</span>
+                                <span id='five'>★</span>
+                                <span id='five'>★</span>
+                            </div>)
+                default:
+                    return (<div className='big-star' id='zero'>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                                <span id='zero'>★</span>
+                            </div>)
+            }
         }
     }
 
@@ -200,27 +234,27 @@ function RestaurantPage({ user }) {
 
     return (
         <div className="restaurant_page_container">
-            <div className="restaurant_picture"
-            style={currentRestaurant ? { backgroundImage: `url(${currentRestaurant.imgSrc})`} : { backgroundImage: 'null' }}>
+            <div className="restaurant_ picture"
+            style={currentRestaurant ? { backgroundImage: `url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
                 <div className='restaurant-name-and-location-container'>
                     <div className='restaurant-name-container'>
                         <h2 className='restaurant-title'>
-                            {currentRestaurant ? currentRestaurant.name : "title"}
+                            {currentRestaurant ? currentRestaurant[0]?.name : "title"}
                         </h2>
                     </div>
                     <div className="big-star-rating">
-                        {starRatingBig(avgRating)}
+                        {currentRestaurant && starRatingBig(avgRating)}
                     </div>
                     <div className='restaurant-location-container'>
                         <h3 className='restaurant-location'>
-                            {currentRestaurant ? currentRestaurant.location : "location"}
+                            {currentRestaurant ? currentRestaurant[0]?.location : "location"}
                         </h3>
                     </div>
                 </div>
             </div>
             <div className='restaurant-info-container'>
                 <div className='restaurant-upper-mid'>
-                    <button className='review-button' type='button' value='reviewButton' onClick={handleButton}>Write a Review</button>
+                    <button className='review-button' type='button' id="add-review" value='reviewButton' onClick={handleButton}>Write a Review</button>
                     <div className='phone-number-container'>
                         <span className='phone-number'>
                             <p>{phoneNumber} 📞</p>
