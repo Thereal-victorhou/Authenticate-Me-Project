@@ -33,7 +33,9 @@ function AddReviewForm({ user }) {
     star4 = document.querySelector(".star-four")
     star5 = document.querySelector(".star-five")
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     useEffect(()=> {
         dispatch(oneRestaurant(id))

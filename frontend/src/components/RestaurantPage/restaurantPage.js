@@ -239,7 +239,7 @@ function RestaurantPage({ user }) {
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_ picture"
-            style={currentRestaurant ? { backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.72) 30%, rgba(0, 0, 0, 0)), url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
+            style={currentRestaurant ? { backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.72) 30%, rgba(0, 0, 0, 0) 70%), url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
                 <div className="picture-holder">
 
                     <div className='restaurant-name-and-location-container'>
