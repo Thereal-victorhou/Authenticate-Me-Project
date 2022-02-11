@@ -131,6 +131,7 @@ function AddReviewForm({ user }) {
         })
         star5.classList.add('zero-star')
 
+        setRatingPhrase('Select your rating')
     }
 
     // Render Stars upon mouse hover
@@ -220,6 +221,7 @@ function AddReviewForm({ user }) {
                 break;
         }
     }
+
 
     return(
         <div className="review-container-main">
