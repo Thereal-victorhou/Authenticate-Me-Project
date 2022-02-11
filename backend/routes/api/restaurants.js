@@ -96,7 +96,7 @@ const validateEditInfo = [
 
 // GET all restaurants
 router.get('/', asyncHandler(async(req, res)=> {
-    const restaurants = await Restaurant.findAll();
+    const restaurants = await Restaurant.findAll({order: [['id', 'DESC']]});
     return res.json(restaurants);
 }));
 
