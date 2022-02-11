@@ -19,6 +19,9 @@ function RestaurantPage({ user }) {
     const restaurantCurrent = currentRestaurant.find(restaurant => restaurant.id === parseInt(id, 10));
     const restaurantReviews = useSelector(state => Object.values(state.review))
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     useEffect(() =>{
         dispatch(oneRestaurant(parseInt(id, 10)))
@@ -236,20 +239,23 @@ function RestaurantPage({ user }) {
     return (
         <div className="restaurant_page_container">
             <div className="restaurant_ picture"
-            style={currentRestaurant ? { backgroundImage: `url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
-                <div className='restaurant-name-and-location-container'>
-                    <div className='restaurant-name-container'>
-                        <h2 className='restaurant-title'>
-                            {currentRestaurant ? currentRestaurant[0]?.name : "title"}
-                        </h2>
-                    </div>
-                    <div className="big-star-rating">
-                        {currentRestaurant && starRatingBig(avgRating)}
-                    </div>
-                    <div className='restaurant-location-container'>
-                        <h3 className='restaurant-location'>
-                            {currentRestaurant ? currentRestaurant[0]?.location : "location"}
-                        </h3>
+            style={currentRestaurant ? { backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.72) 30%, rgba(0, 0, 0, 0)), url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
+                <div className="picture-holder">
+
+                    <div className='restaurant-name-and-location-container'>
+                        <div className='restaurant-name-container'>
+                            <h2 className='restaurant-title'>
+                                {currentRestaurant ? currentRestaurant[0]?.name : "title"}
+                            </h2>
+                        </div>
+                        <div className="big-star-rating">
+                            {currentRestaurant && starRatingBig(avgRating)}
+                        </div>
+                        <div className='restaurant-location-container'>
+                            <h3 className='restaurant-location'>
+                                {currentRestaurant ? currentRestaurant[0]?.location : "location"}
+                            </h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -319,7 +325,7 @@ function RestaurantPage({ user }) {
                         <h4>Recommended Reviews</h4>
                     </div>
                     <ul className="review-card-container">
-                        {restaurantReviews && restaurantReviews.map(review => (
+                        {restaurantReviews.length ? restaurantReviews.map(review => (
                             <li className="review-card" key={review.body}>
                                 <div className="review-card-upper">
                                     <span id="user-avatar">
@@ -359,7 +365,8 @@ function RestaurantPage({ user }) {
                                 </div>
 
                             </li>
-                        ))}
+                        )):
+                        (<h2>Be the first to review!</h2>)}
                     </ul>
                 </div>
             </div>

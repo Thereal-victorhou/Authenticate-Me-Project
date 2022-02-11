@@ -1,19 +1,32 @@
 .restaurant_page_container {
-    height: 50em;
+    height: 100vh;
     width: auto;
 }
 .restaurant_picture {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-    height: 30em;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: auto;
 }
 
+.picture-holder {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 28rem;
+    width: 100vw;
+}
+
 .restaurant-name-and-location-container{
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.728);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 54rem;
+    height: 95%;
+    padding-bottom: 1rem;
+
 }
 
 .restaurant-name-container {
@@ -33,7 +46,7 @@
 
 .restaurant-location-container {
     height: 2em;
-    width: 100%;
+    width: 50%;
     margin-bottom: 2em;
     margin-left: 2em;
 }
