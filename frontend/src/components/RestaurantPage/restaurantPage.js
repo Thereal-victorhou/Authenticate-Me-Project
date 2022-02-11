@@ -59,6 +59,7 @@ function RestaurantPage({ user }) {
         switch(e.target.innerHTML) {
             case 'Write a Review':
                 if (user) {
+                    await dispatch(oneRestaurant(id))
                     history.push(`/review/restaurant/${id}`);
                     break;
                 } else {
