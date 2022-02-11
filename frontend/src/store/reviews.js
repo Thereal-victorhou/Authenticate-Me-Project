@@ -3,6 +3,8 @@ import { csrfFetch } from "./csrf";
 // Type
 const GET_REVIEW = '/review/getReview';
 
+const GET_ALL_REVIEWS = '/reviews/GET_ALL_REVIEWS'
+
 const ADD_REVIEW = 'review/addReview';
 
 const EDIT_REVIEW = 'review/editReview';
@@ -16,6 +18,11 @@ const getReview = (review) => {
         review
     }
 }
+
+const getAllReviews = (reviews) => ({
+    type: GET_ALL_REVIEWS,
+    reviews
+})
 
 const addReview = (reviewPayload) => {
     return {
@@ -45,6 +52,13 @@ export const oneReview = (reviewId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/${reviewId}`)
     const review = await res.json();
     dispatch(getReview(review));
+}
+
+export const getAllRevs = (restaurantId) => async (dispatch) => {
+    const res = await fetch(`/api/reviews/restaurant/${restaurantId}`)
+    const reviews = await res.json();
+    console.log("\n\n\n\n\n", reviews, "\n\n\n\n\n")
+    dispatch(getAllReviews(reviews));
 }
 
 export const newReview = (reviewPayload, userId) => async (dispatch) => {
@@ -92,11 +106,20 @@ export const deleteOneReview = (id) => async (dispatch) => {
 
 // Reducer
 const reviewReducer = (state = {}, action) => {
+    let newState;
+
     switch(action.type) {
         case GET_REVIEW:
             return {
                 [action.review.id]: action.review
             }
+            case GET_ALL_REVIEWS:
+            newState = {...state, ...action.reviews}
+            // action.reviews.forEach(review => {
+            //     newState[review.id] = review;
+            // })
+
+            return newState;
         case ADD_REVIEW:
             return {
                 ...state,
@@ -105,7 +128,7 @@ const reviewReducer = (state = {}, action) => {
         case EDIT_REVIEW:
             return action.editReviewPayload
         case DELETE_REVIEW:
-            const newState = { ...state };
+            newState = { ...state };
             delete newState[action.id]
             return newState;
         default:

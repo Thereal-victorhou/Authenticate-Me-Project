@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant'
-import { oneReview, deleteOneReview } from '../../store/reviews';
+import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
 
 function RestaurantPage({ user }) {
@@ -18,10 +18,12 @@ function RestaurantPage({ user }) {
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
     // console.log(currentRestaurant)
+    const restaurantReviews = useSelector(state => Object.values(state.review))
 
 
     useEffect(() =>{
         dispatch(oneRestaurant(id))
+        dispatch(getAllRevs(id))
         // dispatch(allRatings(id))
     }, [dispatch, id, counter]);
 
@@ -56,7 +58,7 @@ function RestaurantPage({ user }) {
     const handleButton = async (e, reviewId) => {
         e.preventDefault();
         const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(reviewId, 10));
-        console.log(singleReview)
+        console.log("Inside handle button")
         switch(e.target.innerHTML) {
             case 'Write a Review':
                 if (user) {
@@ -282,7 +284,7 @@ function RestaurantPage({ user }) {
                         <h4>Recommended Reviews</h4>
                     </div>
                     <ul className="review-card-container">
-                        {currentRestaurant && currentRestaurant?.Reviews?.map(review => (
+                        {restaurantReviews && restaurantReviews.map(review => (
                             <li className="review-card" key={review.body}>
                                 <div className="review-card-upper">
                                     <span id="user-avatar">
@@ -297,16 +299,29 @@ function RestaurantPage({ user }) {
                                 </div>
                                 <div className='review-card-lower'>
                                     {starRatingSmall(review.rating)}
-                                    <div className="">
+                                    <div className="review-card-container">
                                         <h3>
                                             {review.body}
                                         </h3>
-                                        {user && user.id === review.userId ? ( <button className='function-button' type='button'
-                                            value={review.id}
-                                            onClick={(e)=>handleButton(e, review.id)}>Edit</button> ) : ""}
-                                        {user && user.id === review.userId ? ( <button className='function-button' type='button'
-                                            value={review.id}
-                                            onClick={(e)=>handleButton(e, review.id)}>Delete</button> ) : ""}
+                                        <div className="optional-buttons">
+                                            {user && user.id === review.userId ? (
+                                                <button className='function-button'
+                                                    id="edit"
+                                                    type='button'
+                                                    value={review.id}
+                                                    onClick={(e)=>handleButton(e, review.id)}>
+                                                    Edit
+                                                </button> ) :
+                                                ""}
+                                            {user && user.id === review.userId ? (
+                                            <button className='function-button'
+                                                    id="delete"
+                                                    type='button'
+                                                    value={review.id}
+                                                    onClick={(e)=>handleButton(e, review.id)}>
+                                                        Delete
+                                            </button> ) : ""}
+                                        </div>
                                     </div>
                                 </div>
 

@@ -8,16 +8,17 @@ const router = express.Router();
 router.get('/:id', asyncHandler( async(req, res) => {
     const id = req.params.id;
     console.log("\n\n\n\n\n", id, "\n\n\n\n\n\n")
-    const reviews = await Review.findByPk(id);
+    const reviews = await Review.findByPk(id, { order: [['updatedAt', 'DESC']]});
     console.log("\n\n\n\n\n\n", reviews, "\n\n\n\n")
     res.json(reviews);
 }))
 
 router.get('/restaurant/:id', asyncHandler( async(req, res) => {
     const id = req.params.id;
-    const reviews = await Review.findAll({
-        where: { restaurantId: id }
-    })
+    const reviews = await Review.findAll(
+        {where: { restaurantId: id },
+        order: [['id', 'DESC']]})
+    // console.log("\n\n\n\n\n", reviews, "\n\n\n\n\n")
     res.json(reviews);
 }));
 

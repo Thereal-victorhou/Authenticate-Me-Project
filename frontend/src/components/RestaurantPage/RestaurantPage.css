@@ -372,8 +372,26 @@
         justify-content: center;
         align-items: flex-start;
         width: 100%;
+        position: static;
+        /* position: fixed; */
         /* background-color: blue; */
     }
+
+    .review-card-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .optional-buttons {
+        display: flex;
+        flex-direction: row;
+        background-color: brown;
+    }
+
+    .function-button {
+        position: relative;
+    }
+
 
 
 /* div.star {

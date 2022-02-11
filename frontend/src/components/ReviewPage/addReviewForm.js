@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { newReview } from '../../store/reviews'
+import { newReview, getAllRevs } from '../../store/reviews'
 import { oneRestaurant } from '../../store/restaurant'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -52,6 +52,7 @@ function AddReviewForm({ user }) {
 
         if (rating > 0 && body) {
             await dispatch(newReview(reviewPayload, userId));
+            await dispatch(getAllRevs(restaurantId))
             history.push(`/restaurants/${id}`);
         } else {
             if (!rating>0 && !body) return alert('Please complete the form before submitting.')
