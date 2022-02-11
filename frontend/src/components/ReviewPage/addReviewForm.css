@@ -15,7 +15,7 @@
     padding-top: 24px;
     padding-bottom: 36px;
     max-width: 630px;
-    margin-right: 14rem;
+    margin-right: 17rem;
     padding-bottom: 0;
 }
 
@@ -23,12 +23,37 @@
     color: rgb(45,46,47);
 }
 
+.review-form{
+    display: flex;
+    flex-direction: column;
+    min-height: 230px;
+}
+
 .textarea-container {
     display: flex;
     justify-content: center;
     max-width: 100%;
-
+    outline: none;
 }
+
+    .textarea-container textarea {
+        overflow: hidden;
+        width: 100%;
+        text-size-adjust: 100%;
+        font-size: 16px;
+        color: rgb(50, 50, 50);
+        padding-left: 1.3rem;
+        padding-right: 1.3rem;
+        padding-bottom: 1.3rem;
+        text-decoration: none;
+        resize: none;
+    }
+
+    .textarea-container textarea:focus {
+        outline: none;
+    }
+
+
 
 .review_body{
     width: 100%;

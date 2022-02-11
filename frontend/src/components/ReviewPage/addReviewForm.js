@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { newReview } from '../../store/reviews'
 import { oneRestaurant } from '../../store/restaurant'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 function AddReviewForm({ user }) {
     const dispatch = useDispatch();
@@ -11,15 +13,40 @@ function AddReviewForm({ user }) {
     const restaurantId = id;
     const [body, setBody] = useState("");
     const [rating, setRating] = useState(0);
+    const [tempRating, setTempRating] = useState(0);
+    const [ratingPhrase, setRatingPhrase] = useState("Select your rating")
+
     const updateBody = (e) => setBody(e.target.value)
 
     const userId = user.id;
 
     const currentRestaurant = useSelector(state => state.restaurant)
 
+    let star1;
+    let star2;
+    let star3;
+    let star4;
+    let star5;
+
+    // Select stars from DOM
+    star1 = document.querySelector(".star-one")
+    star2 = document.querySelector(".star-two")
+    star3 = document.querySelector(".star-three")
+    star4 = document.querySelector(".star-four")
+    star5 = document.querySelector(".star-five")
+
+
+
     useEffect(()=> {
         dispatch(oneRestaurant(id))
     }, [dispatch]);
+
+    useEffect(()=> {
+        console.log(rating)
+
+
+    },[rating])
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,85 +61,10 @@ function AddReviewForm({ user }) {
         history.push(`/restaurants/${id}`);
     }
 
-    // const handleStars = async(e) => {
-    //     e.preventDefault();
-
-    //     switch(e.target.id) {
-    //         case 'one':
-    //             return setRating(1);
-    //         case 'two':
-    //             return setRating(2);
-    //         case 'three':
-    //             return setRating(3);
-    //         case 'four':
-    //             return setRating(4);
-    //         case 'five':
-    //             return setRating(5);
-    //     }
-    // }
-
-    // Render Stars upon mouse hover
-    const addStars= (num) => {
-        let star1;
-        let star2;
-        let star3;
-        let star4;
-        let star5;
-
-        // Select stars from DOM
-        star1 = document.querySelector(".star-one")
-        star2 = document.querySelector(".star-two")
-        star3 = document.querySelector(".star-three")
-        star4 = document.querySelector(".star-four")
-        star5 = document.querySelector(".star-five")
-
-        switch(num) {
-            case 1:
-                star1.classList.remove("zero-star")
-                star1.classList.add("starz-one")
-                break;
-            case 2:
-                star1.classList.remove("zero-star")
-                star2.classList.remove("zero-star")
-                star1.classList.add("starz-two")
-                star2.classList.add("starz-two")
-                break;
-            case 3:
-                star1.classList.remove("zero-star")
-                star2.classList.remove("zero-star")
-                star3.classList.remove("zero-star")
-                star1.classList.add("starz-three")
-                star2.classList.add("starz-three")
-                star3.classList.add("starz-three")
-                break;
-            case 4:
-                star1.classList.remove("zero-star")
-                star2.classList.remove("zero-star")
-                star3.classList.remove("zero-star")
-                star4.classList.remove("zero-star")
-                star1.classList.add("starz-four")
-                star2.classList.add("starz-four")
-                star3.classList.add("starz-four")
-                star4.classList.add("starz-four")
-                break;
-            case 5:
-                star1.classList.remove("zero-star")
-                star2.classList.remove("zero-star")
-                star3.classList.remove("zero-star")
-                star4.classList.remove("zero-star")
-                star5.classList.remove("zero-star")
-                star1.classList.add("starz-five")
-                star2.classList.add("starz-five")
-                star3.classList.add("starz-five")
-                star4.classList.add("starz-five")
-                star5.classList.add("starz-five")
-                break;
-        }
-    }
-
 
     // Remove Stars After mouse hover
     const removeStars = () => {
+
         let star1;
         let star2;
         let star3;
@@ -179,31 +131,120 @@ function AddReviewForm({ user }) {
 
     }
 
+    // Render Stars upon mouse hover
+    const addStars= (num) => {
+
+        removeStars();
+
+        switch(num) {
+            case 1:
+                star1.classList.remove("zero-star")
+                star1.classList.add("starz-one")
+                setRatingPhrase("Not good")
+                break;
+            case 2:
+                star1.classList.remove("zero-star")
+                star2.classList.remove("zero-star")
+                star1.classList.add("starz-two")
+                star2.classList.add("starz-two")
+                setRatingPhrase("Could've been better")
+                break;
+            case 3:
+                star1.classList.remove("zero-star")
+                star2.classList.remove("zero-star")
+                star3.classList.remove("zero-star")
+                star1.classList.add("starz-three")
+                star2.classList.add("starz-three")
+                star3.classList.add("starz-three")
+                setRatingPhrase("OK")
+                break;
+            case 4:
+                star1.classList.remove("zero-star")
+                star2.classList.remove("zero-star")
+                star3.classList.remove("zero-star")
+                star4.classList.remove("zero-star")
+                star1.classList.add("starz-four")
+                star2.classList.add("starz-four")
+                star3.classList.add("starz-four")
+                star4.classList.add("starz-four")
+                setRatingPhrase("Good")
+                break;
+            case 5:
+                star1.classList.remove("zero-star")
+                star2.classList.remove("zero-star")
+                star3.classList.remove("zero-star")
+                star4.classList.remove("zero-star")
+                star5.classList.remove("zero-star")
+                star1.classList.add("starz-five")
+                star2.classList.add("starz-five")
+                star3.classList.add("starz-five")
+                star4.classList.add("starz-five")
+                star5.classList.add("starz-five")
+                setRatingPhrase("Great")
+                break;
+        }
+    }
+
+
+
+    const handleStars = (e, num) => {
+        e.preventDefault();
+
+        switch(num) {
+            case 1:
+                setRating(1);
+                addStars(1);
+                // addStars(1);
+                break;
+            case 2:
+                setRating(2);
+                addStars(2);
+                // addStars(2);
+                break;
+            case 3:
+                setRating(3);
+                addStars(3);
+                // addStars(3);
+                break;
+            case 4:
+                setRating(4);
+                addStars(4);
+                // addStars(4);
+                break;
+            case 5:
+                setRating(5);
+                addStars(5);
+                // addStars(5);
+                break;
+        }
+    }
+
     return(
         <div className="review-container-main">
             <div className="review-upper">
                 <h1>{currentRestaurant && currentRestaurant['1']?.name}</h1>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form className="review-form" onSubmit={handleSubmit}>
                 <div className='stars_container'>
-                    {/* <button type='button' className='star-button' id='one' value={rating} onClick={handleStars}>★</button>
-                    <button type='button' className='star-button' id='two' value={rating} onClick={handleStars}>★</button>
-                    <button type='button' className='star-button' id='three' value={rating} onClick={handleStars}>★</button>
-                    <button type='button' className='star-button' id='four' value={rating} onClick={handleStars}>★</button>
-                    <button type='button' className='star-button' id='five' value={rating} onClick={handleStars}>★</button> */}
-                <div className="star-rating">
-                    <span class="star-one zero-star" onMouseEnter={()=> addStars(1)} onMouseOut={()=> removeStars()}>★</span>
-                    <span class="star-two zero-star" onMouseEnter={()=> addStars(2)} onMouseOut={()=> removeStars()}>★</span>
-                    <span class="star-three zero-star" onMouseEnter={()=> addStars(3)} onMouseOut={()=> removeStars()}>★</span>
-                    <span class="star-four zero-star" onMouseEnter={()=> addStars(4)} onMouseOut={()=> removeStars()}>★</span>
-                    <span class="star-five zero-star"onMouseEnter={()=> addStars(5)} onMouseOut={()=> removeStars()}>★</span>
-                </div>
+                    <div className="star-rating">
+                        <span className="star-one zero-star" onClick={(e)=> handleStars(e, 1)} onMouseEnter={()=> addStars(1)} onMouseOut={()=> addStars(rating)}>★
+                            {/* <FontAwesomeIcon icon="faSquareStar" /> */}
+                        </span>
+                        <span className="star-two zero-star" onClick={(e)=> handleStars(e, 2)} onMouseEnter={()=> addStars(2)} onMouseOut={()=> addStars(rating)}>★</span>
+                        <span className="star-three zero-star" onClick={(e)=> handleStars(e, 3)} onMouseEnter={()=> addStars(3)} onMouseOut={()=> addStars(rating)}>★</span>
+                        <span className="star-four zero-star" onClick={(e)=> handleStars(e, 4)} onMouseEnter={()=> addStars(4)} onMouseOut={()=> addStars(rating)}>★</span>
+                        <span className="star-five zero-star"onClick={(e)=> handleStars(e, 5)} onMouseEnter={()=> addStars(5)} onMouseOut={()=> addStars(rating)}>★</span>
+                    </div>
+                    <div className="rating-phrase-container">
+                        <p>{ratingPhrase}</p>
+                    </div>
                 </div>
                 <div className='textarea-container'>
                     <textarea
                         className='review_body'
                         value={body}
                         onChange={updateBody}
+                        placeholder="Doesn't look like much when you walk past, but I was practically dying of hunger so I popped in. The definition of a hole-in-the-wall. I got the impossible hamburger and wow…  there are no words. A vegetarian burger done right. Crisp bun, juicy patty, stuffed with all the essentials (ketchup, shredded lettuce, tomato, and pickles). There's about a million options available between the menu board and wall full of specials, so it can get a little overwhelming, but you really can't go wrong. Not much else to say besides go see for yourself! You won't be disappointed."
                     ></textarea>
                 </div>
                 <div className='post-button-container'>
