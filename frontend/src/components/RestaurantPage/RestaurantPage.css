@@ -318,40 +318,50 @@
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
+    padding: 0;
+    z-index: 1;
 }
 
 
     .review-card{
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         list-style: none;
-        height: min(9rem);
+        height: 20rem;
         width: 60%;
         font-size: 16px;
-        margin-bottom: 8rem;
+        /* margin-right: 2rem; */
         /* background-color: green; */
+        /* border-bottom: 1px solid black; */
+        z-index: 1;
+
     }
 
     .review-card-upper {
         display: flex;
         flex-direction: row;
+        /* justify-content: flex-start; */
+        align-items: center;
+        justify-content: space-between;
         /* background-color: orange; */
-        height: 100%;
+        height: 50%;
         width: 55%;
+        z-index: 1;
     }
 
         .review-card-upper #user-avatar {
             display: flex;
-            justify-content: center;
             align-items: center;
-            width: 50%;
-            height: 80%;
-        }
-
-        .review-card-upper p {
+            /* /* width: 50%; */
+            height: 8.5rem;
+            padding-left: 0;
             font-size: 14rem;
             color: rgb(194, 194, 194);
-            margin-bottom: 16.5rem;
+            padding: 0;
+            /* width: 4rem; */
+            z-index: 1;
         }
 
         .review-card-upper #user-name {
@@ -364,6 +374,7 @@
             padding-bottom: 0;
             margin-left: 1rem;
             width: 8rem;
+            z-index: 1;
         }
 
     .review-card-lower {
@@ -372,24 +383,44 @@
         justify-content: center;
         align-items: flex-start;
         width: 100%;
-        position: static;
+        /* position: static; */
         /* position: fixed; */
         /* background-color: blue; */
+        z-index: 1;
     }
 
     .review-card-container{
         display: flex;
         flex-direction: column;
+        z-index: 1;
     }
 
     .optional-buttons {
         display: flex;
         flex-direction: row;
-        background-color: brown;
+        justify-content: space-between;
+        width: 8rem;
+        z-index: 1;
     }
 
     .function-button {
-        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: 1px solid gray;
+        border-radius: 4px;
+        height: 2rem;
+        width: 3rem;
+        z-index: -1
+
+    }
+
+    .function-button:hover {
+        transition: all 0.8 ease;
+        background-color: #d32323;
+        border: 1px solid #d32323;
+        color: white;
     }
 
 

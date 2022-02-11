@@ -41,6 +41,7 @@ function AddReviewForm({ user }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
 
         const reviewPayload = {
             body,

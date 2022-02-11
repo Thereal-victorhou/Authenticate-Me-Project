@@ -44,6 +44,7 @@ const deleteOneRestaurant = (restaurantId) => ({
 export const allRestaurants = () => async (dispatch) =>{
     const res = await fetch('/api/restaurants');
     const data = await res.json();
+    console.log(data);
     dispatch(getRestaurants(data))
 }
 
@@ -96,10 +97,10 @@ const restaurantReducer = (state = {}, action) => {
     let newState;
     switch(action.type) {
         case GET_RESTAURANTS:
-            newState = {...state}
-            action.restaurants.forEach(restaurant => {
-                newState[restaurant.id] = restaurant;
-            })
+            newState = {...state, ...action.restaurants}
+            // action.restaurants.forEach(restaurant => {
+            //     newState[restaurant.id] = restaurant;
+            // })
             return newState;
         case GET_ONE_RESTAURANT:
             return {

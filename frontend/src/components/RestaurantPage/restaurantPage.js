@@ -288,7 +288,7 @@ function RestaurantPage({ user }) {
                             <li className="review-card" key={review.body}>
                                 <div className="review-card-upper">
                                     <span id="user-avatar">
-                                        <p>●</p>
+                                        ●
                                     </span>
                                     <div id="user-name">
                                         <h4>*Username{review.userId}</h4>
@@ -307,7 +307,6 @@ function RestaurantPage({ user }) {
                                             {user && user.id === review.userId ? (
                                                 <button className='function-button'
                                                     id="edit"
-                                                    type='button'
                                                     value={review.id}
                                                     onClick={(e)=>handleButton(e, review.id)}>
                                                     Edit
@@ -316,7 +315,6 @@ function RestaurantPage({ user }) {
                                             {user && user.id === review.userId ? (
                                             <button className='function-button'
                                                     id="delete"
-                                                    type='button'
                                                     value={review.id}
                                                     onClick={(e)=>handleButton(e, review.id)}>
                                                         Delete
