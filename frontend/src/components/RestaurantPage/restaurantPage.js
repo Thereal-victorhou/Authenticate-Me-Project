@@ -17,6 +17,7 @@ function RestaurantPage({ user }) {
     // sessionRestaurants is an array
     const sessionRestaurants = useSelector(state => Object.values(state.restaurant));
     const currentRestaurant = sessionRestaurants.find(restaurant => restaurant.id === parseInt(id, 10));
+    // console.log(currentRestaurant)
 
 
     useEffect(() =>{
@@ -52,10 +53,10 @@ function RestaurantPage({ user }) {
 
 
     // Handle Button
-    const handleButton = async (e) => {
+    const handleButton = async (e, reviewId) => {
         e.preventDefault();
-        const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(e.target.value, 10));
-
+        const singleReview = sessionRestaurants[0]?.Reviews?.find(review => review.id === parseInt(reviewId, 10));
+        console.log(singleReview)
         switch(e.target.innerHTML) {
             case 'Write a Review':
                 if (user) {
@@ -67,8 +68,10 @@ function RestaurantPage({ user }) {
                     break
                 }
             case 'Edit':
-                await dispatch(oneReview(singleReview));
-                history.push(`/edit/review/${singleReview?.id}`);
+                if (singleReview) {
+                    await dispatch(oneReview(singleReview?.id));
+                    history.push(`/edit/review/${singleReview?.id}`);
+                }
                 break;
             case 'Delete':
                 if (singleReview) {
@@ -300,10 +303,10 @@ function RestaurantPage({ user }) {
                                         </h3>
                                         {user && user.id === review.userId ? ( <button className='function-button' type='button'
                                             value={review.id}
-                                            onClick={handleButton}>Edit</button> ) : ""}
+                                            onClick={(e)=>handleButton(e, review.id)}>Edit</button> ) : ""}
                                         {user && user.id === review.userId ? ( <button className='function-button' type='button'
                                             value={review.id}
-                                            onClick={handleButton}>Delete</button> ) : ""}
+                                            onClick={(e)=>handleButton(e, review.id)}>Delete</button> ) : ""}
                                     </div>
                                 </div>
 

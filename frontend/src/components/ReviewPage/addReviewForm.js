@@ -5,7 +5,6 @@ import { newReview } from '../../store/reviews'
 import { oneRestaurant } from '../../store/restaurant'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
 function AddReviewForm({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -13,7 +12,6 @@ function AddReviewForm({ user }) {
     const restaurantId = id;
     const [body, setBody] = useState("");
     const [rating, setRating] = useState(0);
-    const [tempRating, setTempRating] = useState(0);
     const [ratingPhrase, setRatingPhrase] = useState("Select your rating")
 
 

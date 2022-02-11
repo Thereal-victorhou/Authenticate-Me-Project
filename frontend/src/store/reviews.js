@@ -39,9 +39,10 @@ const deleteReview = (id) => {
 }
 
 // Thunk
-export const oneReview = (reviewObj) => async (dispatch) => {
-    const { id } = reviewObj;
-    const res = await fetch(`/api/reviews/${id}`)
+export const oneReview = (reviewId) => async (dispatch) => {
+    // const { id } = reviewObj;
+    console.log(reviewId);
+    const res = await fetch(`/api/reviews/${reviewId}`)
     const review = await res.json();
     dispatch(getReview(review));
 }
