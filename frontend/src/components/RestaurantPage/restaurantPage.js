@@ -216,16 +216,16 @@ function RestaurantPage({ user }) {
     const handleDeleteRestaurant = async (e) => {
         e.preventDefault();
 
-        await dispatch(deleteRestaurant(currentRestaurant?.id))
+        await dispatch(deleteRestaurant(currentRestaurant[0]?.id))
         history.push('/')
     }
 
     const checkEdit = () => {
         // console.log("userId ", currentRestaurant.userId)
-        if (currentRestaurant && currentRestaurant.userId === user?.id) {
+        if (currentRestaurant && currentRestaurant[0]?.userId === user?.id) {
             return (
                 <>
-                    <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant?.id}`}>
+                    <NavLink className="edit-link"exact to={`/edit/restaurant/${currentRestaurant[0]?.id}`}>
                         <span id="pencil">✏️</span>
                         <p>Edit business info</p>
                     </NavLink>
