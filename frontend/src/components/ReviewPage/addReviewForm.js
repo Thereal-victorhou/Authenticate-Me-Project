@@ -12,13 +12,14 @@ function AddReviewForm({ user }) {
     const restaurantId = id;
     const [body, setBody] = useState("");
     const [rating, setRating] = useState(0);
+    const [currentVal, setCurrentVal] = useState(0);
     const [ratingPhrase, setRatingPhrase] = useState("Select your rating")
 
 
     const userId = user.id;
 
     const currentRestaurant = useSelector(state => state.restaurant)
-    console.log(currentRestaurant)
+    // console.log(currentRestaurant)
 
     let star1;
     let star2;
@@ -52,7 +53,7 @@ function AddReviewForm({ user }) {
             rating
         };
 
-        console.log("body====", body)
+        // console.log("body====", body)
 
         if (rating > 0 && body) {
             await dispatch(newReview(reviewPayload, userId));
@@ -141,13 +142,13 @@ function AddReviewForm({ user }) {
 
     // Render Stars upon mouse hover
     const addStars= (num) => {
-
-        removeStars();
+        removeStars()
 
         switch(num) {
             case 1:
                 star1.classList.remove("zero-star")
                 star1.classList.add("starz-one")
+                setCurrentVal(1)
                 setRatingPhrase("Not good")
                 break;
             case 2:
@@ -155,6 +156,7 @@ function AddReviewForm({ user }) {
                 star2.classList.remove("zero-star")
                 star1.classList.add("starz-two")
                 star2.classList.add("starz-two")
+                setCurrentVal(2)
                 setRatingPhrase("Could've been better")
                 break;
             case 3:
@@ -164,6 +166,7 @@ function AddReviewForm({ user }) {
                 star1.classList.add("starz-three")
                 star2.classList.add("starz-three")
                 star3.classList.add("starz-three")
+                setCurrentVal(3)
                 setRatingPhrase("OK")
                 break;
             case 4:
@@ -175,6 +178,7 @@ function AddReviewForm({ user }) {
                 star2.classList.add("starz-four")
                 star3.classList.add("starz-four")
                 star4.classList.add("starz-four")
+                setCurrentVal(4)
                 setRatingPhrase("Good")
                 break;
             case 5:
@@ -188,6 +192,7 @@ function AddReviewForm({ user }) {
                 star3.classList.add("starz-five")
                 star4.classList.add("starz-five")
                 star5.classList.add("starz-five")
+                setCurrentVal(5)
                 setRatingPhrase("Great")
                 break;
         }
@@ -235,14 +240,22 @@ function AddReviewForm({ user }) {
             </div>
             <form className="review-form" onSubmit={handleSubmit}>
                 <div className='stars_container'>
-                    <div className="star-rating">
-                        <span className="star-one zero-star" onClick={(e)=> handleStars(e, 1)} onMouseEnter={()=> addStars(1)} onMouseOut={()=> addStars(rating)}>★
-                            {/* <FontAwesomeIcon icon="faSquareStar" /> */}
-                        </span>
-                        <span className="star-two zero-star" onClick={(e)=> handleStars(e, 2)} onMouseEnter={()=> addStars(2)} onMouseOut={()=> addStars(rating)}>★</span>
-                        <span className="star-three zero-star" onClick={(e)=> handleStars(e, 3)} onMouseEnter={()=> addStars(3)} onMouseOut={()=> addStars(rating)}>★</span>
-                        <span className="star-four zero-star" onClick={(e)=> handleStars(e, 4)} onMouseEnter={()=> addStars(4)} onMouseOut={()=> addStars(rating)}>★</span>
-                        <span className="star-five zero-star"onClick={(e)=> handleStars(e, 5)} onMouseEnter={()=> addStars(5)} onMouseOut={()=> addStars(rating)}>★</span>
+                    <div className="star-rating" onMouseOut={()=> addStars(rating)}>
+                        <div className="star-container" id="s1" onMouseEnter={()=> addStars(1)}>
+                            <span className="star-one zero-star" onClick={(e)=> handleStars(e, 1)} onMouseEnter={()=> addStars(1)}>★</span>
+                        </div>
+                        <div className="star-container" id="s2" onMouseEnter={()=> addStars(2)}>
+                            <span className="star-two zero-star" onClick={(e)=> handleStars(e, 2)} onMouseEnter={()=> addStars(2)}>★</span>
+                        </div>
+                        <div className="star-container" id="s3" onMouseEnter={()=> addStars(3)}>
+                            <span className="star-three zero-star" onClick={(e)=> handleStars(e, 3)} onMouseEnter={()=> addStars(3)}>★</span>
+                        </div>
+                        <div className="star-container" id="s4" onMouseEnter={()=> addStars(4)}>
+                            <span className="star-four zero-star" onClick={(e)=> handleStars(e, 4)} onMouseEnter={()=> addStars(4)}>★</span>
+                        </div>
+                        <div className="star-container" id="s5" onMouseEnter={()=> addStars(5)}>
+                            <span className="star-five zero-star" onClick={(e)=> handleStars(e, 5)} onMouseEnter={()=> addStars(5)}>★</span>
+                        </div>
                     </div>
                     <div className="rating-phrase-container">
                         <p>{ratingPhrase}</p>
