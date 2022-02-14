@@ -241,20 +241,20 @@ function AddReviewForm({ user }) {
             <form className="review-form" onSubmit={handleSubmit}>
                 <div className='stars_container'>
                     <div className="star-rating" onMouseOut={()=> addStars(rating)}>
-                        <div className="star-container" id="s1" onMouseEnter={()=> addStars(1)}>
-                            <span className="star-one zero-star" onClick={(e)=> handleStars(e, 1)} onMouseEnter={()=> addStars(1)}>★</span>
+                    <div type="radio" name="star-container" className="star-container" id="s1" onClick={(e)=> handleStars(e, 1)} onMouseEnter={()=> addStars(1)}>
+                            <span className="star-one zero-star">★</span>
                         </div>
-                        <div className="star-container" id="s2" onMouseEnter={()=> addStars(2)}>
-                            <span className="star-two zero-star" onClick={(e)=> handleStars(e, 2)} onMouseEnter={()=> addStars(2)}>★</span>
+                        <div type="radio" name="star-container" className="star-container" id="s2" onClick={(e)=> handleStars(e, 2)}onMouseEnter={()=> addStars(2)}>
+                            <span className="star-two zero-star">★</span>
                         </div>
-                        <div className="star-container" id="s3" onMouseEnter={()=> addStars(3)}>
-                            <span className="star-three zero-star" onClick={(e)=> handleStars(e, 3)} onMouseEnter={()=> addStars(3)}>★</span>
+                        <div type="radio" name="star-container" className="star-container" id="s3" onClick={(e)=> handleStars(e, 3)} onMouseEnter={()=> addStars(3)}>
+                            <span className="star-three zero-star">★</span>
                         </div>
-                        <div className="star-container" id="s4" onMouseEnter={()=> addStars(4)}>
-                            <span className="star-four zero-star" onClick={(e)=> handleStars(e, 4)} onMouseEnter={()=> addStars(4)}>★</span>
+                        <div type="radio" name="star-container"className="star-container" id="s4" onClick={(e)=> handleStars(e, 4)} onMouseEnter={()=> addStars(4)} >
+                            <span className="star-four zero-star">★</span>
                         </div>
-                        <div className="star-container" id="s5" onMouseEnter={()=> addStars(5)}>
-                            <span className="star-five zero-star" onClick={(e)=> handleStars(e, 5)} onMouseEnter={()=> addStars(5)}>★</span>
+                        <div type="radio" name="star-container" className="star-container" id="s5" onClick={(e)=> handleStars(e, 5)}onMouseEnter={()=> addStars(5)}>
+                            <span className="star-five zero-star">★</span>
                         </div>
                     </div>
                     <div className="rating-phrase-container">

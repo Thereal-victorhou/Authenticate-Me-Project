@@ -91,7 +91,7 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 35%;
+    width: 37%;
     /* background-color: purple; */
     padding: 0;
 }
@@ -112,7 +112,7 @@ body {
     align-items: center;
     height: 36px;
     width: 45px;
-    margin-right: .32rem;
+    /* margin-right: .32rem; */
     padding:0;
 }
 /* .star-container {
@@ -139,6 +139,7 @@ body {
     height: 27px;
     width: 30px;
     padding: 3px;
+    z-index: -1;
     /* border-right: 6px solid rgb(255, 255, 255); */
 }
 
@@ -148,7 +149,6 @@ body {
 
 /* .star-container#s1 {
     background-color: #FFCB4B;
-
 }
 .star-container#s2 {
     background-color: #FFA448;
