@@ -67,7 +67,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     max-width: 630px;
-    height: 10rem;
+    height: 5rem;
     border-top:  2px solid #c8c9ca;
     border-left:  2px solid #c8c9ca;
     border-right:  2px solid #c8c9ca;
@@ -91,7 +91,7 @@ body {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    width: 37%;
+    width: 35%;
     /* background-color: purple; */
     padding: 0;
 }
