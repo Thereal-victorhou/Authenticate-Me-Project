@@ -1,7 +1,28 @@
 .login_form_container {
-
-    width: 100%;
-    height: 600px;
-    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
     align-items: center;
+    justify-content: center;
+
+}
+
+.login_left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: orange;
+    height: 700px;
+    width: 400px;
+}
+    .login_left form {
+        display: flex;
+        flex-direction: column;
+    }
+
+.login_right {
+    background-color: purple;
+    height: 700px;
+    width: 400px;
 }

@@ -33,32 +33,46 @@ function LoginFormPage() {
 
   return (
     <div className="login_form_container">
-      <button onClick={demoLogin}>Demo User</button>
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <label>
-                Username or Email
-                <input
-                type="text"
-                value={credential}
-                onChange={(e) => setCredential(e.target.value)}
-                required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                />
-            </label>
-            <button type="submit">Log In</button>
-        </form>
-    </div>
+        <div className="login_left">
+          <form onSubmit={handleSubmit}>
+            <div className="login_text">
+              <h1>Log in to Kelp</h1>
+              <div className="login_signup">
+                <h4>New to Kelp? <a href="/signup"> Sign up</a></h4>
+
+              </div>
+              <div className="login_disclaimer">
+                <p>By logging in, you agree to Kelp's
+                  <a href="https://terms.yelp.com/tos/en_us/20200101_en_us/"> Terms of Service </a>
+                  and
+                  <a href="https://terms.yelp.com/privacy/en_us/20200101_en_us/"> Privacy Policy</a>.
+                </p>
+
+              </div>
+            </div>
+            <button onClick={demoLogin}>Demo User</button>
+              <ul>
+                  {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+              </ul>
+                  <input
+                  type="text"
+                  value={credential}
+                  onChange={(e) => setCredential(e.target.value)}
+                  required
+                  />
+                  <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  />
+              <button type="submit">Log In</button>
+          </form>
+        </div>
+        <div className="login_right">
+
+        </div>
+      </div>
   );
 }
 
