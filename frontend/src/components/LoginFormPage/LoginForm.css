@@ -21,6 +21,14 @@
         flex-direction: column;
     }
 
+    .login_left .login_text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: blue;
+    }
+
 .login_right {
     background-color: purple;
     height: 700px;
