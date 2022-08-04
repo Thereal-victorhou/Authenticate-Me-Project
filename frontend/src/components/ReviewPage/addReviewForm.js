@@ -80,65 +80,65 @@ function AddReviewForm({ user }) {
         let star5;
 
         // Find what the classList of each star is
-        star1 = document.querySelector(".star-one");
-        let star1CL = document.querySelector(".star-one").getAttribute('class');
-        let star1Arr = star1CL.split(" ");
+    //     star1 = document.querySelector(".star-one");
+    //     let star1CL = document.querySelector(".star-one").getAttribute('class');
+    //     let star1Arr = star1CL.split(" ");
 
-        star2 = document.querySelector(".star-two");
-        let star2CL = document.querySelector(".star-two").getAttribute('class');
-        let star2Arr = star2CL.split(" ");
+    //     star2 = document.querySelector(".star-two");
+    //     let star2CL = document.querySelector(".star-two").getAttribute('class');
+    //     let star2Arr = star2CL.split(" ");
 
-        star3 = document.querySelector(".star-three");
-        let star3CL = document.querySelector(".star-three").getAttribute('class');
-        let star3Arr = star3CL.split(" ");
+    //     star3 = document.querySelector(".star-three");
+    //     let star3CL = document.querySelector(".star-three").getAttribute('class');
+    //     let star3Arr = star3CL.split(" ");
 
-        star4 = document.querySelector(".star-four");
-        let star4CL = document.querySelector(".star-four").getAttribute('class');
-        let star4Arr = star4CL.split(" ");
+    //     star4 = document.querySelector(".star-four");
+    //     let star4CL = document.querySelector(".star-four").getAttribute('class');
+    //     let star4Arr = star4CL.split(" ");
 
-        star5 = document.querySelector(".star-five");
-        let star5CL = document.querySelector(".star-five").getAttribute('class');
-        let star5Arr = star5CL.split(" ");
+    //     star5 = document.querySelector(".star-five");
+    //     let star5CL = document.querySelector(".star-five").getAttribute('class');
+    //     let star5Arr = star5CL.split(" ");
 
 
-        // Remove class if it's not equal to base
-        star1Arr.forEach(each => {
-            if (!(each === 'star-one')) {
-                star1.classList.remove(`${each}`)
-            }
-        })
-        star1.classList.add('zero-star');
+    //     // Remove class if it's not equal to base
+    //     star1Arr.forEach(each => {
+    //         if (!(each === 'star-one')) {
+    //             star1.classList.remove(`${each}`)
+    //         }
+    //     })
+    //     star1.classList.add('zero-star');
 
-        star2Arr.forEach(each => {
-            if (!(each === 'star-two')) {
-                star2.classList.remove(`${each}`)
-            }
-        })
-        star2.classList.add('zero-star');
+    //     star2Arr.forEach(each => {
+    //         if (!(each === 'star-two')) {
+    //             star2.classList.remove(`${each}`)
+    //         }
+    //     })
+    //     star2.classList.add('zero-star');
 
-        star3Arr.forEach(each => {
-            if (!(each === 'star-three')) {
-                star3.classList.remove(`${each}`)
-            }
-        })
-        star3.classList.add('zero-star');
+    //     star3Arr.forEach(each => {
+    //         if (!(each === 'star-three')) {
+    //             star3.classList.remove(`${each}`)
+    //         }
+    //     })
+    //     star3.classList.add('zero-star');
 
-        star4Arr.forEach(each => {
-            if (!(each === 'star-four')) {
-                star4.classList.remove(`${each}`)
-            }
-        })
-        star4.classList.add('zero-star')
+    //     star4Arr.forEach(each => {
+    //         if (!(each === 'star-four')) {
+    //             star4.classList.remove(`${each}`)
+    //         }
+    //     })
+    //     star4.classList.add('zero-star')
 
-        star5Arr.forEach(each => {
-            if (!(each === 'star-five')) {
-                star5.classList.remove(`${each}`)
-            }
-        })
-        star5.classList.add('zero-star')
+    //     star5Arr.forEach(each => {
+    //         if (!(each === 'star-five')) {
+    //             star5.classList.remove(`${each}`)
+    //         }
+    //     })
+    //     star5.classList.add('zero-star')
 
-        setRatingPhrase('Select your rating')
-    }
+    //     setRatingPhrase('Select your rating')
+    // }
 
     // Render Stars upon mouse hover
     const addStars= (num) => {
