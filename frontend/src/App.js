@@ -30,7 +30,7 @@ function App() {
 
   return isLoaded && (
     <>
-      {/* <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path="/">
@@ -64,7 +64,7 @@ function App() {
             <h2>Page Not Found</h2>
           </Route>
         </Switch>
-      )} */}
+      )}
     </>
   );
 }
