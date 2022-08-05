@@ -29,6 +29,12 @@
         background-color: blue;
     }
 
+    .login_left .demo_login {
+        height: 50px;
+        border-radius: 3px;
+
+    }
+
 .login_right {
     background-color: purple;
     height: 700px;
