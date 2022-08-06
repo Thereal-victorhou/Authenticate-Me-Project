@@ -14,7 +14,7 @@
     justify-content: flex-start;
     background-color: orange;
     height: 700px;
-    width: 400px;
+    width: 500px;
 }
     .login_left form {
         display: flex;
@@ -38,5 +38,5 @@
 .login_right {
     background-color: purple;
     height: 700px;
-    width: 400px;
+    width: 500px;
 }

@@ -242,21 +242,7 @@ function RestaurantPage({ user }) {
             style={currentRestaurant ? { backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.72) 30%, rgba(0, 0, 0, 0) 70%), url(${currentRestaurant[0]?.imgSrc})`} : { backgroundImage: 'null' }}>
                 <div className="picture-holder">
 
-                    <div className='restaurant-name-and-location-container'>
-                        <div className='restaurant-name-container'>
-                            <h2 className='restaurant-title'>
-                                {currentRestaurant ? currentRestaurant[0]?.name : "title"}
-                            </h2>
-                        </div>
-                        <div className="big-star-rating">
-                            {currentRestaurant && starRatingBig(avgRating)}
-                        </div>
-                        <div className='restaurant-location-container'>
-                            <h3 className='restaurant-location'>
-                                {currentRestaurant ? currentRestaurant[0]?.location : "location"}
-                            </h3>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div className='restaurant-info-container'>
