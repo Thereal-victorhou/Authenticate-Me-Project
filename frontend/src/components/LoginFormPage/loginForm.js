@@ -36,7 +36,9 @@ function LoginFormPage() {
         <div className="login_left">
           <form onSubmit={handleSubmit}>
             <div className="login_text">
-              <h1>Log in to Kelp</h1>
+              <div className="login_header">
+                <h2>Log in to Kelp</h2>
+              </div>
               <div className="login_signup">
                 <h4>New to Kelp? <a href="/signup"> Sign up</a></h4>
 
@@ -54,7 +56,7 @@ function LoginFormPage() {
               <ul>
                   {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>
-                  <input
+                <input
                   type="text"
                   value={credential}
                   onChange={(e) => setCredential(e.target.value)}
@@ -65,8 +67,8 @@ function LoginFormPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  />
-              <button type="submit">Log In</button>
+                />
+            <button type="submit">Log In</button>
           </form>
         </div>
         <div className="login_right">
