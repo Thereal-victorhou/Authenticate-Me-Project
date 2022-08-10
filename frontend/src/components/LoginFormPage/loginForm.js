@@ -52,7 +52,7 @@ function LoginFormPage() {
 
               </div>
             </div>
-            
+            <button className="demo_login" onClick={demoLogin}>Demo User</button>
               <ul>
                   {errors.map((error, idx) => <li key={idx}>{error}</li>)}
               </ul>
