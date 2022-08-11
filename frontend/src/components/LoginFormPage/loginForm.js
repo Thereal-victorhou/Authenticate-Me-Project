@@ -55,11 +55,6 @@ function LoginFormPage() {
             <button className="demo_login" onClick={demoLogin}>
               <h4>Continue with Demo User</h4>
             </button>
-            {/* <div className="login_divider">
-              <hr></hr>
-              <p>OR</p>
-              <p>______________</p>
-            </div> */}
             <fieldset className="login_divider">
               <legend align="center">OR</legend>
             </fieldset>
@@ -67,18 +62,27 @@ function LoginFormPage() {
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <input
+              className="login_email"
               type="text"
+              placeholder="Email"
               value={credential}
               onChange={(e) => setCredential(e.target.value)}
               required
-              />
-              <input
+            />
+            <input
+              className="login_password"
               type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit">Log In</button>
+            <button className="login_button" type="submit">Log In</button>
+            <div className="signup_redirect">
+              <p>New to Yelp?
+                <a href="/signup"> Sign up</a>
+              </p>
+            </div>
           </form>
         </div>
         <div className="login_right">

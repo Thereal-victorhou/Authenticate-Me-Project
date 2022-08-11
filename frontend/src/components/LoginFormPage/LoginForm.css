@@ -86,10 +86,17 @@
         margin-top: 40px;
         height: 50px;
         border-radius: 3px;
-        border-style: none;
+        border: 1px solid rgb(24,119,242);
         background-color: rgb(24,119,242);
         width: 60%;
     }
+
+        .demo_login:hover {
+            cursor: pointer;
+            border: 1px solid rgb(81, 151, 243);;
+            background-color: rgb(81, 151, 243);
+            transition: all .5s ease;
+        }
 
         .demo_login h4 {
             color: white;
@@ -100,11 +107,6 @@
         display: block;
         margin-inline-start: 2px;
         margin-inline-end: 2px;
-        /* padding-block-start: 0.35em;
-        padding-inline-start: 0.75em;
-        padding-inline-end: 0.75em;
-        padding-block-end: 0.625em; */
-        /* min-inline-size: min-content; */
         height: 0%;
         width: 55%;
         border-top: 1px solid #ccc;
@@ -118,6 +120,61 @@
         .login_divider legend {
             padding-left: 15px;
             padding-right: 15px;
+        }
+
+    .login_left .login_email {
+        width: 57%;
+        height: 28px;
+        padding-left: 10px;
+        border: 1px solid rgb(153,153,153);
+        border-radius: 3px;
+    }
+
+    .login_left .login_password {
+        margin-top: 12px;
+        width: 57%;
+        height: 28px;
+        padding-left: 10px;
+        border: 1px solid rgb(153,153,153);
+        border-radius: 3px;
+    }
+
+    .login_left .login_button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #d32323;
+        border: 1px solid #d32323;
+        border-style: none;
+        border-radius: 3px;
+        width: 60%;
+        height: 40px;
+        margin-top: 30px;
+    }
+
+        .login_button:hover {
+            background: #d32323c9;
+            border: 1px solid #d32323c9;
+            transition: all .5s ease;
+            cursor: pointer;
+        }
+
+    .login_left .signup_redirect {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        justify-content: flex-end;
+        font-size: 12px;
+    }
+        .signup_redirect p {
+            color: rgb(158,158,158);
+        }
+
+        .signup_redirect a {
+            color: rgb(13,122,190);
         }
 
 .login_right {
