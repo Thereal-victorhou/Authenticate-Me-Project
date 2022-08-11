@@ -12,13 +12,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: orange;
     height: 700px;
     width: 500px;
 }
     .login_left form {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     .login_left .login_text {
@@ -26,7 +26,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: rgb(117, 89, 89);
     }
         .login_left .login_header{
             display: flex;
@@ -44,7 +43,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color:purple;
         height: 30px;
     }
         .login_signup h4 {
@@ -61,8 +59,7 @@
 
     .login_left .login_disclaimer {
         display: flex;
-        background-color: rgb(125, 151, 125);
-        width: 60%;
+        width: 80%;
         height: 45px;
         align-items: center;
         text-align: center;
@@ -83,10 +80,45 @@
         }
 
     .login_left .demo_login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
         height: 50px;
         border-radius: 3px;
-
+        border-style: none;
+        background-color: rgb(24,119,242);
+        width: 60%;
     }
+
+        .demo_login h4 {
+            color: white;
+            font-size: 18px;
+        }
+
+    .login_left .login_divider {
+        display: block;
+        margin-inline-start: 2px;
+        margin-inline-end: 2px;
+        /* padding-block-start: 0.35em;
+        padding-inline-start: 0.75em;
+        padding-inline-end: 0.75em;
+        padding-block-end: 0.625em; */
+        /* min-inline-size: min-content; */
+        height: 0%;
+        width: 55%;
+        border-top: 1px solid #ccc;
+        border-bottom-style: none;
+        border-left-style: none;
+        border-right-style: none;
+        margin-top: 28px;
+        color: rgb(102, 102, 102);
+    }
+
+        .login_divider legend {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
 
 .login_right {
     background-color: purple;

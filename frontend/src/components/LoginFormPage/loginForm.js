@@ -52,22 +52,32 @@ function LoginFormPage() {
 
               </div>
             </div>
-            <button className="demo_login" onClick={demoLogin}>Demo User</button>
-              <ul>
-                  {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-              </ul>
-                <input
-                  type="text"
-                  value={credential}
-                  onChange={(e) => setCredential(e.target.value)}
-                  required
-                  />
-                  <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+            <button className="demo_login" onClick={demoLogin}>
+              <h4>Continue with Demo User</h4>
+            </button>
+            {/* <div className="login_divider">
+              <hr></hr>
+              <p>OR</p>
+              <p>______________</p>
+            </div> */}
+            <fieldset className="login_divider">
+              <legend align="center">OR</legend>
+            </fieldset>
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <input
+              type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
+              required
+              />
+              <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             <button type="submit">Log In</button>
           </form>
         </div>
