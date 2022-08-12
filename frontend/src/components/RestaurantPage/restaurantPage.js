@@ -82,33 +82,33 @@ function RestaurantPage({ user }) {
     // }
 
     // Handle Button
-    // const handleButton = async (e, reviewId) => {
-    //     e.preventDefault();
+    const handleButton = async (e, reviewId) => {
+        e.preventDefault();
 
-    //     switch(e.target.getAttribute('id')) {
-    //         case 'add-review':
-    //             if (user) {
-    //                 await dispatch(oneRestaurant(id))
-    //                 history.push(`/review/restaurant/${id}`);
-    //                 break;
-    //             } else {
-    //                 history.push(`/login`);
-    //                 break
-    //             }
-    //         case 'edit':
-    //                 await dispatch(oneReview(reviewId));
-    //                 history.push(`/edit/review/${reviewId}`);
+        switch(e.target.getAttribute('id')) {
+            case 'add-review':
+                if (user) {
+                    await dispatch(oneRestaurant(id))
+                    history.push(`/review/restaurant/${id}`);
+                    break;
+                } else {
+                    history.push(`/login`);
+                    break
+                }
+            case 'edit':
+                    await dispatch(oneReview(reviewId));
+                    history.push(`/edit/review/${reviewId}`);
 
-    //             break;
-    //         case 'delete':
-    //                 // setCounter(prev => prev + 1)
-    //                 dispatch(deleteOneReview(reviewId));
-    //                 window.scrollTo(0, 0)
-    //                 break;
+                break;
+            case 'delete':
+                    // setCounter(prev => prev + 1)
+                    dispatch(deleteOneReview(reviewId));
+                    window.scrollTo(0, 0)
+                    break;
 
-    //     }
+        }
 
-    // }
+    }
      // translate ratings from number to star *LARGE stars*
     const starRatingBig = (num) => {
 
