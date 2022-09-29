@@ -30,6 +30,25 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  const renderDate = (e, type) => {
+    e.preventDefault();
+
+    switch (type) {
+      case "day":
+
+        break;
+      case "year":
+        const today = new Date();
+        let yyyy = today.getFullYear();
+
+        for (let i = 0; i <= 100; i++) {
+
+        }
+        break;
+    }
+
+  }
+
   return (
     <div className="signup_form_container">
         <div className="signup_left">
@@ -104,7 +123,36 @@ function SignupFormPage() {
                 <h5>Birthday</h5>
                 <p>Optional</p>
               </div>
-              <div></div>
+              <div className="date_container">
+                <select name="month" id="month-select">
+                  <option value="">Month</option>
+                  <option value="january"> January </option>
+                  <option value="febuary"> Febuary </option>
+                  <option value="march"> March </option>
+                  <option value="april"> April </option>
+                  <option value="may"> May </option>
+                  <option value="june"> June </option>
+                  <option value="july"> July </option>
+                  <option value="august"> August </option>
+                  <option value="september"> September </option>
+                  <option value="october"> October </option>
+                  <option value="november"> November </option>
+                  <option value="december"> December </option>
+                </select>
+                <select className="day" id="day-select">
+                  <option value="" onClick={(e)=>renderDate(e, "day")}>Day</option>
+                  {/* <option value="monday"> Monday </option>
+                  <option value="tuesday"> Tuesday </option>
+                  <option value="wednesday"> Wednesday </option>
+                  <option value="thursday"> Thursday </option>
+                  <option value="friday"> Friday </option>
+                  <option value="saturday"> Saturday </option>
+                  <option value="sunday"> Sunday </option> */}
+                </select>
+                <select className="year" id="year-select">
+                  <option value="" onClick={(e)=>renderDate(e, "year")}>Year</option>
+                </select>
+              </div>
             </div>
             <button className="signup_button" type="submit">Sign Up</button>
             <div className="signup_redirect">
