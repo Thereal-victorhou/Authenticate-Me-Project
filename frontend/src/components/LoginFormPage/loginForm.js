@@ -85,10 +85,10 @@ function LoginFormPage() {
             </div>
           </form>
         </div>
-        <div className="login_right">
+      <div className="login_right">
 
-        </div>
       </div>
+    </div>
   );
 }
 

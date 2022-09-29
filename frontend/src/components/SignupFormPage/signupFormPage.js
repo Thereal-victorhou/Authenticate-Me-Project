@@ -6,9 +6,12 @@ import * as sessionActions from "../../store/session";
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -28,48 +31,94 @@ function SignupFormPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+    <div className="signup_form_container">
+        <div className="signup_left">
+          <form onSubmit={handleSubmit}>
+            <div className="signup_text">
+              <div className="signup_header">
+                <h2>Sign up for Kelp</h2>
+              </div>
+              <div className="signup_slogan">
+                <h5>Connect with great local businesses</h5>
+              </div>
+              <div className="signup_disclaimer">
+                <p>By logging in, you agree to Kelp's
+                  <a href="https://terms.yelp.com/tos/en_us/20200101_en_us/"> Terms of Service </a>
+                  and
+                  <a href="https://terms.yelp.com/privacy/en_us/20200101_en_us/"> Privacy Policy</a>.
+                </p>
+
+              </div>
+            </div>
+            {/* <button className="demo_login" onClick={demoLogin}>
+              <h4>Continue with Demo User</h4>
+            </button>
+            <fieldset className="login_divider">
+              <legend align="center">OR</legend>
+            </fieldset> */}
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <input
+              className="signup_firstname"
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <input
+              className="signup_lastname"
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+            <input
+              className="signup_email"
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              className="signup_password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <input
+              className="signup_zipcode"
+              type="text"
+              placeholder="ZIP Code"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              required
+            />
+            <div className="signUp_birthday_container">
+              <div className="header_container">
+                <h5>Birthday</h5>
+                <p>Optional</p>
+              </div>
+              <div></div>
+            </div>
+            <button className="signup_button" type="submit">Sign Up</button>
+            <div className="signup_redirect">
+              <p>New to Yelp?
+                <a href="/signup"> Sign up</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      <div className="signup_right">
+
+      </div>
+    </div>
+
   );
 }
 
