@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: flex-start;
     height: 700px;
-    width: 500px;
+    min-width: 500px;
 }
     .signup_left form {
         display: flex;
@@ -114,22 +114,60 @@
             padding-right: 15px;
         }
 
-    .signup_left .signup_email {
-        width: 57%;
-        height: 28px;
-        padding-left: 10px;
-        border: 1px solid rgb(153,153,153);
-        border-radius: 3px;
+    .signup_left .signup_name {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+        height: 30px;
+        margin-bottom: 10px;
+
     }
 
-    .signup_left .signup_password {
-        margin-top: 12px;
+        .signup_left .firstname, .lastname {
+            width: 132px;
+            height: 28px;
+            padding-left: 10px;
+            border: 1px solid rgb(153,153,153);
+            border-radius: 3px;
+        }
+
+    .signup_left .signup_input {
         width: 57%;
         height: 28px;
         padding-left: 10px;
         border: 1px solid rgb(153,153,153);
         border-radius: 3px;
+        margin-bottom: 10px;
     }
+
+    .signup_left .birthday_container {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        background-color: orange;
+    }
+
+        .birthday_container .header_container {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            background-color: purple;
+
+            height: 50px;
+        }
+
+            .header_container h5 {
+                font-size: 14px;
+                margin-right: 4px;
+                background-color: orange;
+            }
+
+            .header_container p {
+                font-size: 12px;
+                color: rgb(158,158,158);
+            }
 
     .signup_left .signup_button {
         display: flex;

@@ -30,8 +30,7 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  const renderDate = (e, type) => {
-    e.preventDefault();
+  const renderDate = (type) => {
 
     switch (type) {
       case "day":
@@ -42,7 +41,8 @@ function SignupFormPage() {
         let yyyy = today.getFullYear();
 
         for (let i = 0; i <= 100; i++) {
-
+          const priorYear = yyyy - i;
+          return `<option value="${priorYear}">${priorYear}</option>`
         }
         break;
     }
@@ -78,24 +78,26 @@ function SignupFormPage() {
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
+            <div className="signup_name">
+              <input
+                className="firstname"
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+              <input
+                className="lastname"
+                type="text"
+                placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
             <input
-              className="signup_firstname"
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-            <input
-              className="signup_lastname"
-              type="text"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-            <input
-              className="signup_email"
+              className="signup_input"
               type="text"
               placeholder="Email"
               value={email}
@@ -103,7 +105,7 @@ function SignupFormPage() {
               required
             />
             <input
-              className="signup_password"
+              className="signup_input"
               type="password"
               placeholder="Password"
               value={password}
@@ -111,14 +113,14 @@ function SignupFormPage() {
               required
             />
             <input
-              className="signup_zipcode"
+              className="signup_input"
               type="text"
               placeholder="ZIP Code"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
               required
             />
-            <div className="signUp_birthday_container">
+            <div className="birthday_container">
               <div className="header_container">
                 <h5>Birthday</h5>
                 <p>Optional</p>
@@ -140,24 +142,20 @@ function SignupFormPage() {
                   <option value="december"> December </option>
                 </select>
                 <select className="day" id="day-select">
-                  <option value="" onClick={(e)=>renderDate(e, "day")}>Day</option>
-                  {/* <option value="monday"> Monday </option>
-                  <option value="tuesday"> Tuesday </option>
-                  <option value="wednesday"> Wednesday </option>
-                  <option value="thursday"> Thursday </option>
-                  <option value="friday"> Friday </option>
-                  <option value="saturday"> Saturday </option>
-                  <option value="sunday"> Sunday </option> */}
+                  <option value="">Day</option>
+                  {renderDate("day")}
+
                 </select>
                 <select className="year" id="year-select">
-                  <option value="" onClick={(e)=>renderDate(e, "year")}>Year</option>
+                  <option value="">Year</option>
+                  {renderDate("year")}
                 </select>
               </div>
             </div>
             <button className="signup_button" type="submit">Sign Up</button>
             <div className="signup_redirect">
-              <p>New to Yelp?
-                <a href="/signup"> Sign up</a>
+              <p>Already on Yelp?
+                <a href="/login"> Log in</a>
               </p>
             </div>
           </form>
