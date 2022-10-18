@@ -146,28 +146,43 @@
         display: flex;
         flex-direction: column;
         width: 60%;
-        background-color: orange;
+        height: 80px;
+        padding-bottom: 0px;
     }
 
         .birthday_container .header_container {
             display: flex;
             flex-direction: row;
-            align-items: baseline;
-            background-color: purple;
-
-            height: 50px;
+            align-items: center;
+            height: 30px;
         }
 
             .header_container h5 {
                 font-size: 14px;
                 margin-right: 4px;
-                background-color: orange;
             }
 
             .header_container p {
                 font-size: 12px;
                 color: rgb(158,158,158);
             }
+
+        .date_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            height: 50px;
+
+        }
+
+        .date_container #month-select, #day-select, #year-select  {
+            height: 60%;
+            width: 32%;
+            padding-left: 8px;
+            border-radius: 4px;
+            color: rgb(158,158,158);
+
+        }
 
     .signup_left .signup_button {
         display: flex;
@@ -182,7 +197,7 @@
         border-radius: 3px;
         width: 60%;
         height: 40px;
-        margin-top: 30px;
+        /* margin-top: 10px; */
     }
 
         .signup_button:hover {
