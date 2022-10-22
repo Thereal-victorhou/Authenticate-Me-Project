@@ -14,6 +14,10 @@ function SignupFormPage() {
   const [zipCode, setZipCode] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [monthNum, setMonthNum] = useState(0)
+  const [month, setMonth] = useState("");
+  const [dayTracker, setDayTracker] = useState(0);
+  const [yearTracker, setYearTracker] = useState(0);
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -33,18 +37,61 @@ function SignupFormPage() {
   const renderDate = (type) => {
 
     switch (type) {
-      case "day":
+      case "month":
+        return (
+          <>
+            <option value="january" onClick={()=>setMonthNum(31).setMonth("January")}> January </option>
+            <option value="febuary" onClick={()=>setMonthNum(28).setMonth("Febuary")}> Febuary </option>
+            <option value="march" onClick={()=>setMonthNum(31).setMonth("March")}> March </option>
+            <option value="april" onClick={()=>setMonthNum(30).setMonth("April")}> April </option>
+            <option value="may" onClick={()=>setMonthNum(31).setMonth("May")}> May </option>
+            <option value="june"onClick={()=>setMonthNum(30).setMonth("June")}> June </option>
+            <option value="july" onClick={()=>setMonthNum(31).setMonth("July")}> July </option>
+            <option value="august" onClick={()=>setMonthNum(31).setMonth("August")}> August </option>
+            <option value="september" onClick={()=>setMonthNum(30).setMonth("September")}> September </option>
+            <option value="october" onClick={()=>setMonthNum(31).setMonth("October")}> October </option>
+            <option value="november" onClick={()=>setMonthNum(30).setMonth("November")}> November </option>
+            <option value="december" onClick={()=>setMonthNum(31).setMonth("December")}> December </option>
+          </>
 
-        break;
+        );
+
+      case "day":
+        const dayNums = [];
+        for (let i = 1; i <= 31; i++) {
+          dayNums.push(i);
+        }
+        return (
+            <>
+              {dayNums.map(dayNum => (
+                <option
+                  value={`${dayNum}`}
+                  key={`${dayNum}`}
+                  onClick={()=>setDayTracker(dayNum)}>{dayNum}
+                </option>
+              ))}
+            </>
+          );
+
       case "year":
         const today = new Date();
         let yyyy = today.getFullYear();
-
+        const years = [];
         for (let i = 0; i <= 100; i++) {
           const priorYear = yyyy - i;
-          return `<option value="${priorYear}">${priorYear}</option>`
+          years.push(priorYear);
         }
-        break;
+        return (
+          <>
+            {years.map(year => (
+              <option
+                value={year}
+                key={year}
+                onClick={()=>setYearTracker(year)}>{year}
+              </option>
+            ))}
+          </>
+        );
     }
 
   }
@@ -128,18 +175,7 @@ function SignupFormPage() {
               <div className="date_container">
                 <select name="month" id="month-select">
                   <option value="">Month</option>
-                  <option value="january"> January </option>
-                  <option value="febuary"> Febuary </option>
-                  <option value="march"> March </option>
-                  <option value="april"> April </option>
-                  <option value="may"> May </option>
-                  <option value="june"> June </option>
-                  <option value="july"> July </option>
-                  <option value="august"> August </option>
-                  <option value="september"> September </option>
-                  <option value="october"> October </option>
-                  <option value="november"> November </option>
-                  <option value="december"> December </option>
+                  {renderDate("month")}
                 </select>
                 <select className="day" id="day-select">
                   <option value="">Day</option>
