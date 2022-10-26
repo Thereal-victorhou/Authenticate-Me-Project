@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -9,10 +9,10 @@ function SignupFormPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [monthNum, setMonthNum] = useState(0)
   const [month, setMonth] = useState("");
@@ -23,15 +23,20 @@ function SignupFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    if (password) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+      return dispatch(sessionActions.signup({ email, firstName, lastName, password, zipCode, month, monthNum, dayTracker, yearTracker }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
+  };
+
+  const handleTest = (e) => {
+    e.preventDefault();
+    console.log(zipCode, " ", month, " ", monthNum, " ", dayTracker, " ", yearTracker)
   };
 
   const renderDate = (type) => {
@@ -99,7 +104,7 @@ function SignupFormPage() {
   return (
     <div className="signup_form_container">
         <div className="signup_left">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleTest}>
             <div className="signup_text">
               <div className="signup_header">
                 <h2>Sign up for Kelp</h2>

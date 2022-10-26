@@ -32,7 +32,8 @@ export const login = (user) => async (dispatch) => {
 };
 
 export const signup = (user) => async (dispatch) => {
-  const { username, email, password } = user;
+  const { username, email, password, zipCode, month, monthNum, dayTracker, yearTracker } = user;
+  console.log(zipCode, " ", month, " ", monthNum, " ", dayTracker, " ", yearTracker)
   const res = await csrfFetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
@@ -81,5 +82,3 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 export default sessionReducer;
-
-
