@@ -25,7 +25,7 @@ function SignupFormPage() {
     e.preventDefault();
     if (password) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, firstName, lastName, password, zipCode, month, monthNum, dayTracker, yearTracker }))
+      return dispatch(sessionActions.signup({ email, firstName, lastName, password, zipCode, month, dayTracker, yearTracker }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -34,29 +34,23 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  const handleTest = (e) => {
-    e.preventDefault();
-    console.log(zipCode, " ", month, " ", monthNum, " ", dayTracker, " ", yearTracker)
-  };
-
   const renderDate = (type) => {
-
     switch (type) {
       case "month":
         return (
           <>
-            <option value="january" onClick={()=>setMonthNum(31).setMonth("January")}> January </option>
-            <option value="febuary" onClick={()=>setMonthNum(28).setMonth("Febuary")}> Febuary </option>
-            <option value="march" onClick={()=>setMonthNum(31).setMonth("March")}> March </option>
-            <option value="april" onClick={()=>setMonthNum(30).setMonth("April")}> April </option>
-            <option value="may" onClick={()=>setMonthNum(31).setMonth("May")}> May </option>
-            <option value="june"onClick={()=>setMonthNum(30).setMonth("June")}> June </option>
-            <option value="july" onClick={()=>setMonthNum(31).setMonth("July")}> July </option>
-            <option value="august" onClick={()=>setMonthNum(31).setMonth("August")}> August </option>
-            <option value="september" onClick={()=>setMonthNum(30).setMonth("September")}> September </option>
-            <option value="october" onClick={()=>setMonthNum(31).setMonth("October")}> October </option>
-            <option value="november" onClick={()=>setMonthNum(30).setMonth("November")}> November </option>
-            <option value="december" onClick={()=>setMonthNum(31).setMonth("December")}> December </option>
+            <option value="january"> January </option>
+            <option value="febuary"> Febuary </option>
+            <option value="march"> March </option>
+            <option value="april"> April </option>
+            <option value="may"> May </option>
+            <option value="june"> June </option>
+            <option value="july"> July </option>
+            <option value="august"> August </option>
+            <option value="september"> September </option>
+            <option value="october"> October </option>
+            <option value="november"> November </option>
+            <option value="december"> December </option>
           </>
 
         );
@@ -98,13 +92,12 @@ function SignupFormPage() {
           </>
         );
     }
-
   }
 
   return (
     <div className="signup_form_container">
         <div className="signup_left">
-          <form onSubmit={handleTest}>
+          <form onSubmit={handleSubmit}>
             <div className="signup_text">
               <div className="signup_header">
                 <h2>Sign up for Kelp</h2>
@@ -178,16 +171,16 @@ function SignupFormPage() {
                 <p>Optional</p>
               </div>
               <div className="date_container">
-                <select name="month" id="month-select">
+                <select name="month" id="month-select" onChange={(e)=> setMonth(e.target.value)}>
                   <option value="">Month</option>
                   {renderDate("month")}
                 </select>
-                <select className="day" id="day-select">
+                <select className="day" id="day-select" onChange={(e)=> setDayTracker(e.target.value)}>
                   <option value="">Day</option>
                   {renderDate("day")}
 
                 </select>
-                <select className="year" id="year-select">
+                <select className="year" id="year-select" onChange={(e)=> setYearTracker(e.target.value)}>
                   <option value="">Year</option>
                   {renderDate("year")}
                 </select>
