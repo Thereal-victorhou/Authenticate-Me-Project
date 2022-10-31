@@ -1,3 +1,4 @@
+import { user } from "pg/lib/defaults";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -16,8 +17,8 @@ function SignupFormPage() {
   const [errors, setErrors] = useState([]);
   const [monthNum, setMonthNum] = useState(0)
   const [month, setMonth] = useState("");
-  const [dayTracker, setDayTracker] = useState(0);
-  const [yearTracker, setYearTracker] = useState(0);
+  const [dayTracker, setDayTracker] = useState("");
+  const [yearTracker, setYearTracker] = useState("");
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -25,7 +26,8 @@ function SignupFormPage() {
     e.preventDefault();
     if (password) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, firstName, lastName, password, zipCode, month, dayTracker, yearTracker }))
+      const userBirthday = `${month}-${dayTracker}-${yearTracker}`;
+      return dispatch(sessionActions.signup({ email, firstName, lastName, password, zipCode, userBirthday }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
@@ -34,23 +36,29 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  // const handleTest = (e) => {
+  //   e.preventDefault();
+  //   const userBirthday = `${month}-${dayTracker}-${yearTracker}`;
+  //   console.log(userBirthday);
+  // }
+
   const renderDate = (type) => {
     switch (type) {
       case "month":
         return (
           <>
-            <option value="january"> January </option>
-            <option value="febuary"> Febuary </option>
-            <option value="march"> March </option>
-            <option value="april"> April </option>
-            <option value="may"> May </option>
-            <option value="june"> June </option>
-            <option value="july"> July </option>
-            <option value="august"> August </option>
-            <option value="september"> September </option>
-            <option value="october"> October </option>
-            <option value="november"> November </option>
-            <option value="december"> December </option>
+            <option value="1"> January </option>
+            <option value="2"> Febuary </option>
+            <option value="3"> March </option>
+            <option value="4"> April </option>
+            <option value="5"> May </option>
+            <option value="6"> June </option>
+            <option value="7"> July </option>
+            <option value="8"> August </option>
+            <option value="9"> September </option>
+            <option value="10"> October </option>
+            <option value="11"> November </option>
+            <option value="12"> December </option>
           </>
 
         );
