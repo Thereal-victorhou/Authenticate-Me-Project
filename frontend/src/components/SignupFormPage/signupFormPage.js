@@ -122,12 +122,7 @@ function SignupFormPage() {
 
               </div>
             </div>
-            {/* <button className="demo_login" onClick={demoLogin}>
-              <h4>Continue with Demo User</h4>
-            </button>
-            <fieldset className="login_divider">
-              <legend align="center">OR</legend>
-            </fieldset> */}
+            
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
