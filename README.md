@@ -1,5 +1,5 @@
 # Kelp
-Kelp, a yelp clone, is the 'go-to' food review site for pescatarians, vegetarians, and vegans. 
+Kelp is a food review site for pescatarians, vegetarians, and vegans. Inspired by Yelp, users of Kelp are able to rate, write and edit reviews for their favorite pescatarians, vegetarians, and vegans.
 
 
 ### Live Server https://kelpmeplease.herokuapp.com/
