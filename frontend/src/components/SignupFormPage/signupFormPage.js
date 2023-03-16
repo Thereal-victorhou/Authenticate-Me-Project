@@ -122,7 +122,7 @@ function SignupFormPage() {
 
               </div>
             </div>
-            
+
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
@@ -198,7 +198,7 @@ function SignupFormPage() {
           </form>
         </div>
       <div className="signup_right">
-
+        <div className="image_container">  </div>
       </div>
     </div>
 

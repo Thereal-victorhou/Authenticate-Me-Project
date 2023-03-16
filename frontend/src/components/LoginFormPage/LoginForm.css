@@ -3,8 +3,9 @@
     flex-direction: row;
     height: 100vh;
     width: 100vw;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    margin-top: 60px;
 
 }
 
@@ -12,7 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 700px;
+    max-height: 700px;
     width: 500px;
 }
     .login_left form {
@@ -178,7 +179,17 @@
         }
 
 .login_right {
-    background-color: purple;
-    height: 700px;
-    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 3rem;
+    max-height: 700px;
+    width: 450px;
+
 }
+
+    .login_right img {
+        width: 340px;
+        height: 310px;
+    }
