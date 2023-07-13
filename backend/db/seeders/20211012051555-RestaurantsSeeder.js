@@ -1,14 +1,15 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 const faker = require('faker');
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
-      return queryInterface.bulkInsert('Restaurants', [
+    options.tableName = 'Restaurants';
+      return queryInterface.bulkInsert(options, [
         {name: "Fog Harbor Fish House", location: "39 Pier Ste A-202 San Francisco, CA", phoneNumber: 4154212442, imgSrc:'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.hcTbtNnqX7wLKR6LOFBXRwHaE8%26pid%3DApi&f=1', userId: 1, createdAt: new Date(), updatedAt: new Date()},
         {name: "Sotto Mare Oysteria & Seafood", location: "552 Green St San Francisco, CA", phoneNumber: 4153983181, imgSrc:'https://s3-media0.fl.yelpcdn.com/bphoto/o3hIcGLMxV_5ynxEjGWGrw/o.jpg', userId: 1, createdAt: new Date(), updatedAt: new Date()},
         {name: "Hog Island Oyster Co", location: "1 Ferry Bldg Shop 11 San Francisco, CA", phoneNumber: 4153917117, imgSrc:'https://s3-media0.fl.yelpcdn.com/bphoto/4avfA7HWOW_Bl0J_8J60rg/o.jpg', userId: 2, createdAt: new Date(), updatedAt: new Date()},
@@ -33,12 +34,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
-      return queryInterface.bulkDelete('Restaurants', null, {});
+    options.tableName = 'Restaurants';
+    return queryInterface.bulkDelete(options, null, {});
   }
 };
