@@ -19,7 +19,6 @@ function AddReviewForm({ user }) {
     const userId = user.id;
 
     const currentRestaurant = useSelector(state => state.restaurant)
-    // console.log(currentRestaurant)
 
     let star1;
     let star2;
@@ -52,8 +51,6 @@ function AddReviewForm({ user }) {
             restaurantId,
             rating
         };
-
-        // console.log("body====", body)
 
         if (rating > 0 && body) {
             await dispatch(newReview(reviewPayload, userId));

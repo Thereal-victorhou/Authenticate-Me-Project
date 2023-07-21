@@ -36,12 +36,6 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  // const handleTest = (e) => {
-  //   e.preventDefault();
-  //   const userBirthday = `${month}-${dayTracker}-${yearTracker}`;
-  //   console.log(userBirthday);
-  // }
-
   const renderDate = (type) => {
     switch (type) {
       case "month":

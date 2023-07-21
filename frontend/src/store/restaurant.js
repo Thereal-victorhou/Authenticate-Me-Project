@@ -44,14 +44,14 @@ const deleteOneRestaurant = (restaurantId) => ({
 export const allRestaurants = () => async (dispatch) =>{
     const res = await fetch('/api/restaurants');
     const data = await res.json();
-    console.log(data);
+
     dispatch(getRestaurants(data))
 }
 
 export const oneRestaurant = (restaurant) => async (dispatch) => {
     const res = await fetch(`/api/restaurants/${restaurant}`)
     const oneRes = await res.json()
-    // console.log(oneRes)
+
     dispatch(getOneRestaurant(oneRes));
 }
 
@@ -78,7 +78,7 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
         })
     });
     const restaurant = await res.json();
-    console.log(restaurant)
+
     dispatch(editExistingRestaurant(restaurant));
 }
 
@@ -88,7 +88,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
         headers: {'Content-Type': 'application/json'},
     });
     const restId = await res.json();
-    console.log("res after delete ===",restId)
+
     dispatch(deleteOneRestaurant(restId))
 }
 

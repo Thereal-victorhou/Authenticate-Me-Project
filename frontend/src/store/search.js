@@ -28,7 +28,7 @@ export const liveSearch = (searchObj) => async (dispatch) => {
         body: JSON.stringify({searchInput})
     });
     const result = await res.json();
-    console.log(result)
+
     dispatch(updateSearch(result));
 }
 

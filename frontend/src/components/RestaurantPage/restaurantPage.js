@@ -34,13 +34,10 @@ function RestaurantPage({ user }) {
             let totalRatings = []
             restaurantReviews.map(each => totalRatings.push(parseInt(each.rating, 10)))
             const avg = totalRatings.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / totalRatings.length
-            // console.log("avg ",avg)
-            // console.log("avgRating   ", ratingsArr)
-            // console.log("avgRating   ", avgRating)
+
              avgNum = parseInt(Math.round(avg), 10)
              if (typeof avgNum === 'number') {
-                //  console.log(avgNum)
-                 setAvgRating(avgNum)
+                setAvgRating(avgNum)
              }
 
             const phoneNumber = currentRestaurant[0]?.phoneNumber;
@@ -50,36 +47,6 @@ function RestaurantPage({ user }) {
             setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
         }
     }, [restaurantCurrent, restaurantReviews])
-
-    // useEffect(() => {
-        //     if (currentRestaurant) {
-
-            //     }
-            // }, currentRestaurant);
-
-    //  const numbers = () => {
-    //     if (currentRestaurant) {
-    //         let totalRatings = []
-    //         const ratingsArr = currentRestaurant[0]?.Reviews
-    //         ratingsArr?.map(each => totalRatings.push(each.rating))
-    //         const avg = totalRatings.reduce((previousValue, currentValue) => previousValue + currentValue, 0) / totalRatings.length
-    //         // console.log("avg ",avg)
-    //         // console.log("avgRating   ", ratingsArr)
-    //         // console.log("avgRating   ", avgRating)
-    //          avgNum = parseInt(Math.round(avg), 10)
-    //          if (typeof avgNum === 'number') {
-    //              console.log(avgNum)
-    //              setAvgRating(avgNum)
-    //          }
-
-    //         const phoneNumber = currentRestaurant[0]?.phoneNumber;
-    //         const areaCode = phoneNumber?.split('').slice(0, 3).join('');
-    //         const body1 = phoneNumber?.split('').slice(3, 6).join('');
-    //         const body2 = phoneNumber?.split('').slice(6, 10).join('');
-    //         setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
-    //     }
-
-    // }
 
     // Handle Button
     const handleButton = async (e, reviewId) => {
@@ -221,7 +188,7 @@ function RestaurantPage({ user }) {
     }
 
     const checkEdit = () => {
-        // console.log("userId ", currentRestaurant.userId)
+
         if (currentRestaurant && currentRestaurant[0]?.userId === user?.id) {
             return (
                 <>

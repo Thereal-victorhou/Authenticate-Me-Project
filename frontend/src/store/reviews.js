@@ -48,7 +48,7 @@ const deleteReview = (id) => {
 // Thunk
 export const oneReview = (reviewId) => async (dispatch) => {
     // const { id } = reviewObj;
-    console.log(reviewId);
+
     const res = await fetch(`/api/reviews/${reviewId}`)
     const review = await res.json();
     dispatch(getReview(review));
@@ -57,7 +57,7 @@ export const oneReview = (reviewId) => async (dispatch) => {
 export const getAllRevs = (restaurantId) => async (dispatch) => {
     const res = await fetch(`/api/reviews/restaurant/${restaurantId}`)
     const reviews = await res.json();
-    // console.log("\n\n\n\n\n", reviews, "\n\n\n\n\n")
+
     dispatch(getAllReviews(reviews));
 }
 

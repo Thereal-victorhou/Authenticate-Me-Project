@@ -20,31 +20,6 @@ function EditReviewForm({ user }) {
     const [rating, setRating] = useState(0);
     const [ratingPhrase, setRatingPhrase] = useState("Select your rating")
 
-
-
-    // const [rating, setRating] = useState(singleReview?.rating);
-    // const [body, setBody] = useState(`${singleReview?.body}`);
-
-
-    // const handleSubmit = async (e) => {
-        //     e.preventDefault();
-
-        //     if (singleReview) {
-
-            //         const reviewPayload = {
-                //             body,
-                //             userId,
-                //             restaurantId,
-                //             rating,
-                //             reviewId: singleReview?.id
-                //         };
-                //         // console.log(singleReview.id);
-                //         // console.log(restaurantId);
-                //         await dispatch(editOldReview(reviewPayload));
-                //         history.push(`/restaurants/${singleReview?.restaurantId}`);
-                //     }
-                // }
-
     let star1;
     let star2;
     let star3;
@@ -86,8 +61,6 @@ function EditReviewForm({ user }) {
             rating,
             reviewId: id
         };
-
-        console.log("body====", body)
 
         if (rating > 0 && body) {
             await dispatch(editOldReview(reviewPayload));
@@ -233,7 +206,7 @@ function EditReviewForm({ user }) {
 
     const handleStars = (e, num) => {
         e.preventDefault();
-        console.log('clicked')
+
         switch(num) {
             case 1:
                 setRating(1);

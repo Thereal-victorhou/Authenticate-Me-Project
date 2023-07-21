@@ -32,7 +32,6 @@ const EditRestaurantPage = ({ user }) => {
             setImgSrc(currentRestaurant[0]?.imgSrc)
             setRestaurantId(id)
         }
-        // console.log(id, "   ", location, "   ", phoneNumber, "     ", imgSrc)
     }, [])
 
 

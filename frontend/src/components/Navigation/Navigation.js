@@ -45,14 +45,6 @@ function Navigation({ isLoaded }){
     if (e.target.value.length === 1) {
       dispatch(clearSearch());
     }
-
-    // if (searchInputLength === 1) {
-    //   document.querySelector(".search-results-container")?.classList.add("hidden");
-    //   console.log(document.querySelector(".search-results-container"))
-    // }
-    // document.querySelector(".search-results-container")?.classList.remove("hidden");
-    // document.querySelector(".search-results-container")
-
   }
 
   let sessionLinks;
@@ -90,7 +82,6 @@ function Navigation({ isLoaded }){
 
 
   const searchRender = (res, i) => {
-    console.log(res)
     return (
       <div id="search-result" key={i} onClick={(e) => handleClick(e, res)}>
         <div id="search-img" style={{backgroundImage: `url(${res?.imgSrc})`}}></div>
@@ -103,7 +94,6 @@ function Navigation({ isLoaded }){
   }
 
   const noResult = () => {
-    console.log("no result")
     return (
       <div id="search-result">
         <p>No Results.</p>
