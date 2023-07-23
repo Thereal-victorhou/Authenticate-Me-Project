@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import Avatar from '@mui/material/Avatar';
+import './ProfileButton.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -30,18 +32,26 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      <div className="main-profile-container">
+        <div className="sub-profile-container-top">
+          <button className="avatar-button"onClick={openMenu}>
+            {/* <i className="fas fa-user-circle" /> */}
+            {/* Change Avatar to be dynamic based on user photos */}
+            <Avatar src="/broken-image.jpg" />
+          </button>
+        </div>
+        <div className="sub-profile-container-bottom">
+          {showMenu && (
+            <ul className="profile-dropdown">
+              <li>{user.username}</li>
+              <li>{user.email}</li>
+              <li>
+                <button onClick={logout}>Log Out</button>
+              </li>
+            </ul>
+          )}
+        </div>
+      </div>
     </>
   );
 }

@@ -16,7 +16,8 @@ function Navigation({ isLoaded }){
   const [searchInput, setSearchInput] = useState('');
   const [isSelected, setIsSelected] = useState(false);
   const searchInputLength = document.querySelector(".search-bar")?.getAttribute('value')?.length;
-
+  const currentWebPage = document.URL
+  console.log(currentWebPage)
 
   useEffect(() => {
     if (searchInput.length > 1) {
@@ -80,7 +81,7 @@ function Navigation({ isLoaded }){
     history.push(`/restaurants/${res.id}`)
   }
 
-
+  //Render search results
   const searchRender = (res, i) => {
     return (
       <div id="search-result" key={i} onClick={(e) => handleClick(e, res)}>
@@ -92,7 +93,7 @@ function Navigation({ isLoaded }){
       </div>
     )
   }
-
+  // No Results
   const noResult = () => {
     return (
       <div id="search-result">
@@ -101,6 +102,7 @@ function Navigation({ isLoaded }){
     )
   }
 
+  // Search for restaurants
   const handleSearch = async (e) => {
     e.preventDefault();
 
@@ -118,16 +120,14 @@ function Navigation({ isLoaded }){
         <div className='li-container'>
           <div className="nav_container_homelink">
             <div className="homelink_containter">
-              <NavLink exact to="/" className="navLinks" id="home-link">Home</NavLink>
-              <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink>
+              <NavLink exact to="/" className="navLinks" id="home-link">
+                Tabl
+              </NavLink>
+              {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
             </div>
           </div>
           <div className="middle-container">
-            <div id="upper-middle"></div>
             <div id="lower-middle">
-              <div className='title-container'>
-                <h1 className="app-title" >Kelp</h1>
-              </div>
               <div className="search-bar-container">
                 <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
                 <button id="search-btn" onClick={(e) => handleSearch(e)}>
