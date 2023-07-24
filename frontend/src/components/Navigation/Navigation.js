@@ -15,9 +15,19 @@ function Navigation({ isLoaded }){
 
   const [searchInput, setSearchInput] = useState('');
   const [isSelected, setIsSelected] = useState(false);
+  const [homePage, setHomePage] = useState('');
   const searchInputLength = document.querySelector(".search-bar")?.getAttribute('value')?.length;
-  const pageURL = document.URL
 
+  useEffect(() => {
+    const pageURL = document.URL;
+    if (pageURL === 'http://localhost:3000/') {
+      setHomePage('true')
+
+    } else {
+      setHomePage('false')
+
+    }
+  },[homePage])
 
   useEffect(() => {
     if (searchInput.length > 1) {
@@ -115,9 +125,8 @@ function Navigation({ isLoaded }){
   }
 
   // conditionally render background images based on page
-  const conditionalBackgroundImage = () => {
-
-    if (pageURL === "http://localhost:3000/") {
+  const homeNav = () => {
+    console.log("on home page")
       return (
         <div className="nav_container">
           <div className='li-container'>
@@ -152,79 +161,81 @@ function Navigation({ isLoaded }){
           </div>
         </div>
       )
-    } else {
-      return (
-        <>
-          <div className='li-container'>
-            <div className="nav_container_homelink">
-              <div className="homelink_containter">
-                <NavLink exact to="/" className="navLinks" id="home-link">
-                  Tabl
-                </NavLink>
-                {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
-              </div>
-            </div>
-            <div className="middle-container">
-              <div id="lower-middle">
-                <div className="search-bar-container">
-                  <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
-                  <button id="search-btn" onClick={(e) => handleSearch(e)}>
-                    <p>⌕</p>
-                  </button>
-                </div>
-                <div className="search-results-container">
-                  {searchResult &&
-                    Object.values(searchResult).map((res, i) => (
-                      searchRender(res, i)
-                    ))}
-                </div>
-              </div>
-
-            </div>
-            <div className="session_links">
-              {isLoaded && sessionLinks}
-            </div>
-          </div>
-        </>
-      )
-    }
   }
-  return (
-    // <>
-    //   {conditionalBackgroundImage()}
-    // </>
-    <div className="nav_container" style={{backgroundImage: `url(https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_large_assets/fa8d73b85ad8/assets/img/home/hero_photos/J4bBEXXBIHmYLl50X1l72g.jpg)`}}>
-      <div className='li-container'>
-        <div className="nav_container_homelink">
-          <div className="homelink_containter">
-            <NavLink exact to="/" className="navLinks" id="home-link">
-              Tabl
-            </NavLink>
-            {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
-          </div>
-        </div>
-        <div className="middle-container">
-          <div id="lower-middle">
-            <div className="search-bar-container">
-              <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
-              <button id="search-btn" onClick={(e) => handleSearch(e)}>
-                <p>⌕</p>
-              </button>
-            </div>
-            <div className="search-results-container">
-              {searchResult &&
-                Object.values(searchResult).map((res, i) => (
-                  searchRender(res, i)
-                ))}
-            </div>
-          </div>
 
+  const generalNav = () => {
+    return (
+      <>
+        <div className='li-container'>
+          <div className="nav_container_homelink">
+            <div className="homelink_containter">
+              <NavLink exact to="/" className="navLinks" id="home-link">
+                Tabl
+              </NavLink>
+              {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
+            </div>
+          </div>
+          <div className="middle-container">
+            <div id="lower-middle">
+              <div className="search-bar-container">
+                <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+                <button id="search-btn" onClick={(e) => handleSearch(e)}>
+                  <p>⌕</p>
+                </button>
+              </div>
+              <div className="search-results-container">
+                {searchResult &&
+                  Object.values(searchResult).map((res, i) => (
+                    searchRender(res, i)
+                  ))}
+              </div>
+            </div>
+
+          </div>
+          <div className="session_links">
+            {isLoaded && sessionLinks}
+          </div>
         </div>
-        <div className="session_links">
-          {isLoaded && sessionLinks}
-        </div>
-      </div>
-    </div>
+      </>
+    )
+  }
+
+  return (
+    <>
+      {homePage === 'true' ? homeNav() : generalNav()}
+    </>
+    // <div className="nav_container" style={{backgroundImage: `url(https://s3-media0.fl.yelpcdn.com/assets/srv0/yelp_large_assets/fa8d73b85ad8/assets/img/home/hero_photos/J4bBEXXBIHmYLl50X1l72g.jpg)`}}>
+    //   <div className='li-container'>
+    //     <div className="nav_container_homelink">
+    //       <div className="homelink_containter">
+    //         <NavLink exact to="/" className="navLinks" id="home-link">
+    //           Tabl
+    //         </NavLink>
+    //         {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
+    //       </div>
+    //     </div>
+    //     <div className="middle-container">
+    //       <div id="lower-middle">
+    //         <div className="search-bar-container">
+    //           <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+    //           <button id="search-btn" onClick={(e) => handleSearch(e)}>
+    //             <p>⌕</p>
+    //           </button>
+    //         </div>
+    //         <div className="search-results-container">
+    //           {searchResult &&
+    //             Object.values(searchResult).map((res, i) => (
+    //               searchRender(res, i)
+    //             ))}
+    //         </div>
+    //       </div>
+
+    //     </div>
+    //     <div className="session_links">
+    //       {isLoaded && sessionLinks}
+    //     </div>
+    //   </div>
+    // </div>
 
   );
 
