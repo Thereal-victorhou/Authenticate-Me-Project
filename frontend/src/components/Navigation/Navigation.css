@@ -6,8 +6,7 @@
     background-color: #333;
     background-size: cover;
     background-position: 50%;
-
-
+    /* position: fixed; */
 }
 
 .li-container {
@@ -40,17 +39,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 200;
     height: 2rem;
 }
-
-    .navLinks:hover {
-        color: white;
-        border-bottom: 3px solid white;
-    }
 
     /* #add-restaurant-link {
         margin-left: 2rem;
@@ -114,14 +107,14 @@
         align-items: center;
         width: 15%;
         height: 2.75rem;
-        background-color: rgb(211,35,35);
+        background-color: rgb(223,9,6);
         border: none;
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
     }
 
     .search-bar-container #search-btn:hover {
-        background-color: rgb(182, 21, 21);
+        background-color: rgb(236, 31, 31);
         transition: all .6s ease;
     }
 
@@ -214,6 +207,7 @@
     flex-direction: row;
     height: 100%;
     width: 13em;
+
 }
 
 .login-container {
@@ -222,9 +216,42 @@
     justify-content: flex-start;
     align-items: center;
     width: 50%;
-
-
 }
+
+#nav-login {
+    width: 90px;
+    height: 40px;
+    border: 1px solid rgb(200,201,202);
+    border-radius: 5px;
+}
+
+    #nav-login:hover {
+        width: 90px;
+        height: 40px;
+        border: 1px solid rgb(200,201,202);
+        background-color: rgb(232, 232, 232);
+        border-radius: 5px;
+        transition: all .6s ease;
+    }
+
+#nav-signup {
+    width: 90px;
+    height: 40px;
+    color: white;
+    background-color: rgb(223,9,6);
+    border: 1px solid rgb(223,9,6);
+    border-radius: 5px;
+}
+
+    #nav-signup:hover {
+        width: 90px;
+        height: 40px;
+        color: white;
+        background-color: rgb(236, 31, 31);
+        border: 1px solid rgb(236, 31, 31);
+        border-radius: 5px;
+        transition: all .6s ease;
+    }
 
 .signup-container {
     display: flex;
