@@ -27,8 +27,15 @@ function Navigation({ isLoaded }){
 
     if (pageType === 'home') {
       document.querySelector('.nav_container')?.classList.remove('other');
+      document.querySelector('.nav-links-home')?.classList.remove('other');
+      document.querySelector('.search-bar')?.classList.remove('other');
+      document.querySelector('.nav-links-login')?.classList.remove('other');
+
     } else {
       document.querySelector('.nav_container')?.classList.add('other');
+      document.querySelector('.nav-links-home')?.classList.add('other');
+      document.querySelector('.search-bar')?.classList.add('other');
+      document.querySelector('.nav-links-login')?.classList.add('other');
     }
   }, [pageType])
 
@@ -72,10 +79,10 @@ function Navigation({ isLoaded }){
       <>
         <div className="login-signup-container">
           <div className="login-container">
-            <NavLink className="navLinks" id="nav-login" to="/login">Log In</NavLink>
+            <NavLink className="nav-links-login" id="nav-login" to="/login">Log In</NavLink>
           </div>
           <div className="signup-container">
-            <NavLink className="navLinks" id="nav-signup" to="/signup">Sign Up</NavLink>
+            <NavLink className="nav-links-signup" id="nav-signup" to="/signup">Sign Up</NavLink>
           </div>
         </div>
       </>
@@ -140,7 +147,7 @@ function Navigation({ isLoaded }){
       <div className='li-container'>
         <div className="nav_container_homelink">
           <div className="homelink_containter" onClick={(e)=>{handleNav(e)}}>
-            <NavLink exact to="/" className="navLinks" id="home-link">
+            <NavLink exact to="/" className="nav-links-home" id="home-link">
               Tabl
             </NavLink>
             {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
@@ -150,7 +157,7 @@ function Navigation({ isLoaded }){
           <div id="lower-middle">
             <div className="search-bar-container">
               <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
-              <button id="search-btn" onClick={(e) => handleSearch(e)}>
+              <button className="search-btn" onClick={(e) => handleSearch(e)}>
                 <p>⌕</p>
               </button>
             </div>
