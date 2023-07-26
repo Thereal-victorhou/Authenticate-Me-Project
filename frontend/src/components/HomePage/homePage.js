@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import {allRestaurants, oneRestaurant} from '../../store/restaurant';
+import { saveCurrentPage } from '../../store/navigation';
 
 
 function HomePage() {
@@ -15,6 +16,12 @@ function HomePage() {
     useEffect(() =>{
         dispatch(allRestaurants());
     }, [dispatch])
+
+    const handleNav = (e) => {
+        e.preventDefault();
+        dispatch(saveCurrentPage('other'))
+        // dispatch(saveCurrentPage(currentPage))
+      }
 
     // const getRandomNum = () => {
     //     const x = Math.floor((Math.random() * 20) + 1);
@@ -44,7 +51,7 @@ function HomePage() {
                 {sessionRestaurant && sessionRestaurant.map((restaurant) => {
 
                     return (
-                        <li className="restaurant-container" key={restaurant.id}>
+                        <li className="restaurant-container" key={restaurant.id} onClick={(e)=>{handleNav(e)}}>
                             <div className={'restaurant_container'}>
                                 <img className={'restaurant-photo'} src={restaurant.imgSrc} alt={"Restaurant Image"}></img>
                                 <div className={'restaurant-info'}>

@@ -5,13 +5,15 @@ import restaurant from './restaurant';
 import review from './reviews';
 import ratings from './ratings';
 import search from './search';
+import navigation from './navigation';
 
 const rootReducer = combineReducers({
     session,
     restaurant,
     review,
     ratings,
-    search
+    search,
+    navigation
 });
 
 let enhancer;
