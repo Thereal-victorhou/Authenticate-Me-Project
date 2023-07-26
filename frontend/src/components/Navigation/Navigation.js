@@ -20,7 +20,6 @@ function Navigation({ isLoaded }){
   const pageType = useSelector(state => state.navigation?.action?.currentPage)
   const searchInputLength = document.querySelector(".search-bar")?.getAttribute('value')?.length;
 
-
   // Modifying style of NavBar based on current Page
   useEffect(() => {
     if (pageType === undefined) dispatch(saveCurrentPage('home'))
@@ -150,13 +149,16 @@ function Navigation({ isLoaded }){
             <NavLink exact to="/" className="nav-links-home" id="home-link">
               Tabl
             </NavLink>
-            {/* <NavLink exact to={sessionUser ? '/add/restaurant': '/login'} className="navLinks" id="add-restaurant-link">Add a Restaurant</NavLink> */}
           </div>
         </div>
         <div className="middle-container">
-          <div id="lower-middle">
+          <div id="upper-middle">
             <div className="search-bar-container">
-              <input className="search-bar" placeholder="Find Pescatarian, Vegetarian and Vegan..." value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+              <input className="search-bar-restaurants" placeholder="tacos, burgers, dinner" value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+              <div className="search-bar-divider">
+                <div id="divide"></div>
+              </div>
+              <input className="search-bar-location" placeholder="address, city, state"></input>
               <button className="search-btn" onClick={(e) => handleSearch(e)}>
                 <p>⌕</p>
               </button>
@@ -168,9 +170,14 @@ function Navigation({ isLoaded }){
                 ))}
             </div>
           </div>
-
         </div>
         <div className="session_links">
+            <NavLink exact to={sessionUser ?
+               '/add/restaurant': '/login'
+               } className="add-restaurant-link"
+               id="add-restaurant-link">
+                Add a Restaurant
+            </NavLink>
           {isLoaded && sessionLinks}
         </div>
       </div>
