@@ -29,6 +29,7 @@ function Navigation({ isLoaded }){
       document.querySelector('.nav-links-home')?.classList.remove('other');
       document.querySelector('.search-bar-restaurants')?.classList.remove('other');
       document.querySelector('.search-bar-location')?.classList.remove('other');
+      document.querySelector('.search-btn')?.classList.remove('other');
       document.querySelector('.search-bar-main')?.classList.remove('other');
       document.querySelector('.add-restaurant-link')?.classList.remove('other');
       document.querySelector('.nav-links-login')?.classList.remove('other');
@@ -38,6 +39,7 @@ function Navigation({ isLoaded }){
       document.querySelector('.nav-links-home')?.classList.add('other');
       document.querySelector('.search-bar-restaurants')?.classList.add('other');
       document.querySelector('.search-bar-location')?.classList.add('other');
+      document.querySelector('.search-btn')?.classList.add('other');
       document.querySelector('.search-bar-main')?.classList.add('other');
       document.querySelector('.add-restaurant-link')?.classList.add('other')
       document.querySelector('.nav-links-login')?.classList.add('other');
