@@ -30,6 +30,8 @@ function Navigation({ isLoaded }){
     if (pageType === undefined) dispatch(saveCurrentPage('home'))
     if (pageType === 'home') {
       await document.querySelector('.nav_container')?.classList.remove('other');
+      await document.querySelector('.nav-gradient')?.classList.remove('other');
+      await document.querySelector('.li-container')?.classList.remove('other');
       await document.querySelector('.nav-links-home')?.classList.remove('other');
       await document.querySelector('.search-bar-restaurants')?.classList.remove('other');
       await document.querySelector('.search-bar-location')?.classList.remove('other');
@@ -39,6 +41,8 @@ function Navigation({ isLoaded }){
       await document.querySelector('.nav-links-login')?.classList.remove('other');
     } else {
       await document.querySelector('.nav_container')?.classList.add('other');
+      await document.querySelector('.nav-gradient')?.classList.add('other');
+      await document.querySelector('.li-container')?.classList.add('other');
       await document.querySelector('.nav-links-home')?.classList.add('other');
       await document.querySelector('.search-bar-restaurants')?.classList.add('other');
       await document.querySelector('.search-bar-location')?.classList.add('other');
@@ -165,49 +169,51 @@ function Navigation({ isLoaded }){
 
   return (
     <div className="nav_container">
-      <div className='li-container'>
-        <div className="nav_container_homelink">
-          <div className="homelink_containter" onClick={(e)=>{handleNav(e)}}>
-            <NavLink exact to="/" className="nav-links-home" id="home-link">
-              Tabl
-            </NavLink>
+      <div className="nav-gradient">
+        <div className='li-container'>
+          <div className="nav_container_homelink">
+            <div className="homelink_containter" onClick={(e)=>{handleNav(e)}}>
+              <NavLink exact to="/" className="nav-links-home" id="home-link">
+                Tabl
+              </NavLink>
+            </div>
           </div>
-        </div>
-        <div className="middle-container">
-          <div id="upper-middle">
-            <div className="search-bar-container">
-              <div className="search-bar-main">
-                <input className="search-bar-restaurants" placeholder="tacos, burgers, dinner" value={restaurantSearchInput} onChange={updateRestaurantSearch} onClick={(e) => handleRes(e)}></input>
-                <div className="search-bar-divider">
-                  <div id="divide"></div>
+          <div className="middle-container">
+            <div id="upper-middle">
+              <div className="search-bar-container">
+                <div className="search-bar-main">
+                  <input className="search-bar-restaurants" placeholder="tacos, burgers, dinner" value={restaurantSearchInput} onChange={updateRestaurantSearch} onClick={(e) => handleRes(e)}></input>
+                  <div className="search-bar-divider">
+                    <div id="divide"></div>
+                  </div>
+                  <input className="search-bar-location" placeholder="address, city, state" value={locationSearchInput} onChange={updateLocationSearch} onClick={(e) => handleRes(e)}></input>
+                  <NavLink exact to="/search" className="search-btn" onClick={(e)=> handleSearch(e)}>
+                  <p>⌕</p>
+                  </NavLink>
                 </div>
-                <input className="search-bar-location" placeholder="address, city, state" value={locationSearchInput} onChange={updateLocationSearch} onClick={(e) => handleRes(e)}></input>
-                <NavLink exact to="/search" className="search-btn" onClick={(e)=> handleSearch(e)}>
-                <p>⌕</p>
-                </NavLink>
               </div>
-            </div>
-            <div className="search-results-container">
-              <div className="restaurant-search-results-container">
-                {searchResult &&
-                  Object.values(searchResult).map((res, i) => (
-                    searchRender(res, i)
-                  ))}
-              </div>
-              <div className="location-search-results-container">
+              <div className="search-results-container">
+                <div className="restaurant-search-results-container">
+                  {searchResult &&
+                    Object.values(searchResult).map((res, i) => (
+                      searchRender(res, i)
+                    ))}
+                </div>
+                <div className="location-search-results-container">
 
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="session_links">
-            <NavLink exact to={sessionUser ?
-               '/add/restaurant': '/login'
-               } className="add-restaurant-link"
-               id="add-restaurant-link">
-                Add a Restaurant
-            </NavLink>
-          {isLoaded && sessionLinks}
+          <div className="session_links">
+              <NavLink exact to={sessionUser ?
+                '/add/restaurant': '/login'
+                } className="add-restaurant-link"
+                id="add-restaurant-link">
+                  Add a Restaurant
+              </NavLink>
+            {isLoaded && sessionLinks}
+          </div>
         </div>
       </div>
     </div>
