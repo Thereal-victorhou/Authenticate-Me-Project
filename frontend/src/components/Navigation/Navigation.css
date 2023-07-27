@@ -35,7 +35,6 @@
     justify-content: flex-end;
     height: 5em;
     width: 7em;
-    background-color: green;
 }
 
     .homelink_containter {
@@ -45,7 +44,6 @@
         align-items: center;
         height: 100%;
         width: 60%;
-        background-color: orange;
     }
 
     .nav-links-home {
@@ -83,50 +81,66 @@
     align-items: center;
     width: 600px;
     height: 100%;
-    background: purple;
 }
 
     .middle-container #upper-middle {
         width: 100%;
-        height: 60%;
-        background: teal;
+        height: 100%;
     }
 
 .search-bar-container {
     display: flex;
     justify-content: center;
-    height: 2.95rem;
+    align-items: center;
+    height: 5.4rem;
     width: 100%;
-    margin-top: 1.2rem;
-    background: purple;
+    /* margin-top: 1.2rem; */
     padding: 0;
     /* position: fixed; */
 }
 
+.search-bar-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    width: 90%;
+    border-radius: 5px;
+}
+
+    .search-bar-main.other {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 54px;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.121);
+    }
+
 
 .search-bar-restaurants {
-    width: 35%;
-    height: 100%;
+    width: 42%;
+    height: 49px;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
-    border: none;
     font-size: 16px;
     padding-left: 1rem;
-
+    border: none;
 }
     .search-bar-restaurants.other {
-        width: 35%;
-        height: 100%;
+        width: 42%;
+        height: 49px;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        border: none;
         font-size: 16px;
         padding-left: 1rem;
-        box-shadow: -2px 0px 10px 2px rgb(237,237,237);
+        border: none;
+        /* box-shadow: 5px 1px 17px 1px rgba(0, 0, 0, 0.615); */
     }
 
     .search-bar-restaurants.live{
-        width: 35%;
+        width: 42%;
         height: 100%;
         border-bottom: 1px solid rgb(194, 194, 194);
         border-top-left-radius: 4px;
@@ -137,33 +151,44 @@
 
 .search-bar-divider {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     width: .15rem;
-    height: 49px;
+    height: 51px;
     background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 2px 0px rgb(255, 255, 255);
 }
 
     .search-bar-divider div {
         width: 50%;
         height: 60%;
-        border-right: 2px solid rgb(235, 235, 235);
+        border-right: 1px solid rgb(235, 235, 235);
+        border-left: 1px solid rgb(235, 235, 235);
     }
 
 .search-bar-location {
-    width: 35%;
-    height: 100%;
+    width: 42%;
+    height: 49px;
     border: none;
     font-size: 16px;
     padding-left: 1rem;
 }
 
+    .search-bar-location.other {
+        width: 42%;
+        height: 49px;
+        font-size: 16px;
+        padding-left: 1rem;
+        border: none;
+        /* box-shadow: 5px 0px 5px 2px rgba(0, 0, 0, 0.723); */
+    }
+
 .search-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 10%;
-    height: 49px;
+    width: 12%;
+    height: 54px;
     background-color: rgb(223,9,6);
     border: none;
     border-top-right-radius: 4px;
@@ -179,12 +204,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 15%;
+        width: 12%;
         height: 2.75rem;
         background-color: rgb(223,9,6);
         border: none;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
         box-shadow: 2px 0px 10px 2px rgb(229, 229, 229);
     }
 
@@ -269,24 +294,53 @@
             margin: 1px;
         }
 
-
 .session_links {
     display: flex;
-    flex-direction: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 33%;
-    height: 5em;
-    background: orange;
+    width: 31%;
+    height: 5.4rem;
+    padding-left: 0;
+    margin-left: 0;
 }
 
-    .add-restaurant-link {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        width: 90px;
-        height: 40px;
+
+.add-restaurant-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(250, 250, 250);
+    height: 2.3rem;
+    width: 8.3rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+    .add-restaurant-link:hover {
+        border: 1px solid transparent;
         color: rgb(250, 250, 250);
+        background-color: rgba(232, 232, 232, 0.349);
+        border-radius: 5px;
+    }
+
+    .add-restaurant-link.other {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: rgb(45,46,47);
+        height: 2.3rem;
+        width: 8.3rem;
+    }
+
+    .add-restaurant-link.other:hover {
+        border: 1px solid rgb(232, 232, 232);
+        color: rgb(45,46,47);
+        background-color: rgb(232, 232, 232);
+        border-radius: 5px;
     }
 
 .login-signup-container {
@@ -326,7 +380,7 @@
         height: 40px;
         border: 1px solid rgb(200,201,202);
         color: rgb(250, 250, 250);
-        background-color: rgba(232, 232, 232, 0.54);
+        background-color: rgba(232, 232, 232, 0.349);
         border-radius: 5px;
         transition: all .6s ease;
     }
@@ -381,20 +435,7 @@
         transition: all .6s ease;
     }
 
-    /* .nav-links-signup.other {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        width: 90px;
-        height: 40px;
-        color: white;
-        background-color: rgb(223,9,6);
-        border: 1px solid rgb(223,9,6);
-        border-radius: 5px;
-    } */
+
 
 .signup-container {
     display: flex;

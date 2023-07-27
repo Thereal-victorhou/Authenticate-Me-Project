@@ -27,13 +27,19 @@ function Navigation({ isLoaded }){
     if (pageType === 'home') {
       document.querySelector('.nav_container')?.classList.remove('other');
       document.querySelector('.nav-links-home')?.classList.remove('other');
-      document.querySelector('.search-bar')?.classList.remove('other');
+      document.querySelector('.search-bar-restaurants')?.classList.remove('other');
+      document.querySelector('.search-bar-location')?.classList.remove('other');
+      document.querySelector('.search-bar-main')?.classList.remove('other');
+      document.querySelector('.add-restaurant-link')?.classList.remove('other');
       document.querySelector('.nav-links-login')?.classList.remove('other');
 
     } else {
       document.querySelector('.nav_container')?.classList.add('other');
       document.querySelector('.nav-links-home')?.classList.add('other');
-      document.querySelector('.search-bar')?.classList.add('other');
+      document.querySelector('.search-bar-restaurants')?.classList.add('other');
+      document.querySelector('.search-bar-location')?.classList.add('other');
+      document.querySelector('.search-bar-main')?.classList.add('other');
+      document.querySelector('.add-restaurant-link')?.classList.add('other')
       document.querySelector('.nav-links-login')?.classList.add('other');
     }
   }, [pageType])
@@ -154,14 +160,16 @@ function Navigation({ isLoaded }){
         <div className="middle-container">
           <div id="upper-middle">
             <div className="search-bar-container">
-              <input className="search-bar-restaurants" placeholder="tacos, burgers, dinner" value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
-              <div className="search-bar-divider">
-                <div id="divide"></div>
+              <div className="search-bar-main">
+                <input className="search-bar-restaurants" placeholder="tacos, burgers, dinner" value={searchInput} onChange={updateSearch} onClick={(e) => handleRes(e)}></input>
+                <div className="search-bar-divider">
+                  <div id="divide"></div>
+                </div>
+                <input className="search-bar-location" placeholder="address, city, state"></input>
+                <button className="search-btn" onClick={(e) => handleSearch(e)}>
+                  <p>⌕</p>
+                </button>
               </div>
-              <input className="search-bar-location" placeholder="address, city, state"></input>
-              <button className="search-btn" onClick={(e) => handleSearch(e)}>
-                <p>⌕</p>
-              </button>
             </div>
             <div className="search-results-container">
               {searchResult &&
