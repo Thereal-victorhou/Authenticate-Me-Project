@@ -27,7 +27,7 @@
 .nav-gradient {
     width: 100%;
     height: 90px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.446), rgba(0, 0, 0, 0.208), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.446), rgba(0, 0, 0, 0.324), rgba(0, 0, 0, 0.167), rgba(0, 0, 0, 0));
 }
 
     .nav-gradient.other {

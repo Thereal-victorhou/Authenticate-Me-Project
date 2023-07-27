@@ -64,9 +64,9 @@ function App() {
           <Route path="/search">
             <SearchResultPage />
           </Route>
-          <Route>
+          {/* <Route>
             <h2>Page Not Found</h2>
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>
