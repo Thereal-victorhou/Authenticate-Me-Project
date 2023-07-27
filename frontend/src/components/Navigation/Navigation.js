@@ -168,9 +168,9 @@ function Navigation({ isLoaded }){
                   <div id="divide"></div>
                 </div>
                 <input className="search-bar-location" placeholder="address, city, state"></input>
-                <button className="search-btn" onClick={(e) => handleSearch(e)}>
-                  <p>⌕</p>
-                </button>
+                <NavLink exact to="/search" className="search-btn" onClick={(e)=> handleSearch(e)}>
+                <p>⌕</p>
+                </NavLink>
               </div>
             </div>
             <div className="search-results-container">
