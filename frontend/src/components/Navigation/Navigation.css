@@ -161,11 +161,11 @@
     width: .15rem;
     height: 51px;
     background-color: rgb(255, 255, 255);
-    box-shadow: 0 0 2px 0px rgb(255, 255, 255);
+    /* box-shadow: 0 0 2px 0px rgb(255, 255, 255); */
 }
 
     .search-bar-divider div {
-        width: 50%;
+        width: 0%;
         height: 60%;
         border-right: 1px solid rgb(235, 235, 235);
         border-left: 1px solid rgb(235, 235, 235);

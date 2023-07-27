@@ -24,6 +24,9 @@ const SearchResultPage = () => {
 
     useEffect(()=>{
         if (searchRes) setSearchArr(searchRes)
+        const searchResult = searchRes
+        dispatch(clearSearch());
+        // dispatch(liveSearch(searchResult));
     },[])
 
     const getOneRestaurant = async (e, resId) => {

@@ -154,7 +154,6 @@ function Navigation({ isLoaded }){
     }))
     setRestaurantSearchInput('');
     dispatch(saveCurrentPage('other'))
-
     history.push(`/search?find=${restaurantSearchInput}`)
   }
 
