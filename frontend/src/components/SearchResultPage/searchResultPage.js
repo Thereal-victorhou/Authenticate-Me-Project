@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant';
 import { liveSearch, clearSearch } from '../../store/search';
+import { saveCurrentPage } from '../../store/navigation';
 
 
 
@@ -12,10 +13,10 @@ const SearchResultPage = () => {
     // const search = props.location.search;
     // const params = new URLSearchParams(search);
     // const find = params.get('find');
-
-    const searchRes = useSelector(state => Object.values(state.search))
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const searchRes = useSelector(state => Object.values(state.search))
 
     const search = useLocation().search;
     const find = new URLSearchParams(search).get('find');
@@ -26,14 +27,16 @@ const SearchResultPage = () => {
         if (searchRes) setSearchArr(searchRes)
         const searchResult = searchRes
         dispatch(clearSearch());
-        // dispatch(liveSearch(searchResult));
-    },[])
+        dispatch(liveSearch(find));
+    },[find])
 
     const getOneRestaurant = async (e, resId) => {
         e.preventDefault();
 
         await dispatch(oneRestaurant(resId))
         await dispatch(clearSearch())
+        dispatch(saveCurrentPage("other"))
+
         history.push(`/restaurants/${resId}`)
     }
 

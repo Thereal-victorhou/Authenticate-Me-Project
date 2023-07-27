@@ -15,6 +15,8 @@ function Navigation({ isLoaded }){
   const [restaurantSearchInput, setRestaurantSearchInput] = useState('');
   const [locationSearchInput, setLocationSearchInput] = useState('');
   const [isSelected, setIsSelected] = useState(false);
+  // const [current, setCurrent] = useState(false);
+
 
   const sessionUser = useSelector(state => state.session.user);
   const searchResult = useSelector(state => state.search)
@@ -24,28 +26,26 @@ function Navigation({ isLoaded }){
   const locationSearchInputLength = document.querySelector(".search-bar-location")?.getAttribute('value')?.length;
 
   // Modifying style of NavBar based on current Page
-  useEffect(() => {
+  useEffect( async () => {
     if (pageType === undefined) dispatch(saveCurrentPage('home'))
-
     if (pageType === 'home') {
-      document.querySelector('.nav_container')?.classList.remove('other');
-      document.querySelector('.nav-links-home')?.classList.remove('other');
-      document.querySelector('.search-bar-restaurants')?.classList.remove('other');
-      document.querySelector('.search-bar-location')?.classList.remove('other');
-      document.querySelector('.search-btn')?.classList.remove('other');
-      document.querySelector('.search-bar-main')?.classList.remove('other');
-      document.querySelector('.add-restaurant-link')?.classList.remove('other');
-      document.querySelector('.nav-links-login')?.classList.remove('other');
-
+      await document.querySelector('.nav_container')?.classList.remove('other');
+      await document.querySelector('.nav-links-home')?.classList.remove('other');
+      await document.querySelector('.search-bar-restaurants')?.classList.remove('other');
+      await document.querySelector('.search-bar-location')?.classList.remove('other');
+      await document.querySelector('.search-btn')?.classList.remove('other');
+      await document.querySelector('.search-bar-main')?.classList.remove('other');
+      await document.querySelector('.add-restaurant-link')?.classList.remove('other');
+      await document.querySelector('.nav-links-login')?.classList.remove('other');
     } else {
-      document.querySelector('.nav_container')?.classList.add('other');
-      document.querySelector('.nav-links-home')?.classList.add('other');
-      document.querySelector('.search-bar-restaurants')?.classList.add('other');
-      document.querySelector('.search-bar-location')?.classList.add('other');
-      document.querySelector('.search-btn')?.classList.add('other');
-      document.querySelector('.search-bar-main')?.classList.add('other');
-      document.querySelector('.add-restaurant-link')?.classList.add('other')
-      document.querySelector('.nav-links-login')?.classList.add('other');
+      await document.querySelector('.nav_container')?.classList.add('other');
+      await document.querySelector('.nav-links-home')?.classList.add('other');
+      await document.querySelector('.search-bar-restaurants')?.classList.add('other');
+      await document.querySelector('.search-bar-location')?.classList.add('other');
+      await document.querySelector('.search-btn')?.classList.add('other');
+      await document.querySelector('.search-bar-main')?.classList.add('other');
+      await document.querySelector('.add-restaurant-link')?.classList.add('other')
+      await document.querySelector('.nav-links-login')?.classList.add('other');
     }
   }, [pageType])
 
@@ -63,10 +63,10 @@ function Navigation({ isLoaded }){
   // Modifying Live Search Box
   useEffect(() => {
     if (isSelected && restaurantSearchInputLength > 1) {
-      document.querySelector(".search-bar")?.classList.add("live");
+      document.querySelector(".search-bar-restaurant")?.classList.add("live");
 
     } else {
-      document.querySelector(".search-bar")?.classList.remove("live");
+      document.querySelector(".search-bar-restaurant")?.classList.remove("live");
 
     }
   },[isSelected && restaurantSearchInputLength])
@@ -153,7 +153,7 @@ function Navigation({ isLoaded }){
       userId: sessionUser?.id
     }))
     setRestaurantSearchInput('');
-    dispatch(saveCurrentPage('other'))
+    dispatch(saveCurrentPage('other'));
     history.push(`/search?find=${restaurantSearchInput}`)
   }
 
