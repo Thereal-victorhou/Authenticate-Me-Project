@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { liveSearch, clearSearch } from '../../store/search';
+import { liveRestaurantSearch, liveLocationSearch, clearSearch } from '../../store/search';
 import { oneRestaurant } from '../../store/restaurant';
 import { saveCurrentPage } from '../../store/navigation';
 import './Navigation.css';
@@ -14,6 +14,7 @@ function Navigation({ isLoaded }) {
 	const [restaurantSearchInput, setRestaurantSearchInput] = useState('');
 	const [locationSearchInput, setLocationSearchInput] = useState('');
 	const [isSelected, setIsSelected] = useState(false);
+	const [location, setLocation] = useState('');
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
@@ -28,7 +29,7 @@ function Navigation({ isLoaded }) {
 		.querySelector('.search-bar-location')
 		?.getAttribute('values')?.length;
 
-	// Updating restaurant search field
+	// Clearing restaurant search field
 	const updateRestaurantSearch = (e) => {
 		setRestaurantSearchInput(e.target.value);
 		if (e.target.value.length === 1) {
@@ -36,20 +37,13 @@ function Navigation({ isLoaded }) {
 		}
 	};
 
-	// Updating location search field
+	// Clearing location search field
 	const updateLocationSearch = (e) => {
 		setLocationSearchInput(e.target.value);
-		console.log(locationSearchInput)
-	};
+		if (e.target.value.length === 1) {
 
-	// Modifying Live Search Box
-	useEffect(() => {
-		if (isSelected && locationSearchInputLength > 1) {
-			document.querySelector('.search-bar-location')?.classList.add('live');
-		} else {
-			document.querySelector('.search-bar-location')?.classList.remove('live');
 		}
-	}, [isSelected && locationSearchInputLength]);
+	};
 
 	let sessionLinks;
 	if (sessionUser) {
@@ -122,7 +116,7 @@ function Navigation({ isLoaded }) {
 	const handleSearch = async (e) => {
 		e.preventDefault();
 		await dispatch(
-			liveSearch({
+			liveRestaurantSearch({
 				searchInput: restaurantSearchInput,
 				userId: sessionUser?.id,
 			})
@@ -136,6 +130,7 @@ function Navigation({ isLoaded }) {
 	const handleNav = (e) => {
 		e.preventDefault();
 		dispatch(saveCurrentPage('home'));
+		dispatch(clearSearch());
 	};
 
 	// Modifying style of NavBar based on current Page
@@ -188,13 +183,16 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		if (restaurantSearchInput.length > 1) {
 			dispatch(
-				liveSearch({
+				liveRestaurantSearch({
 					searchInput: restaurantSearchInput,
 					userId: sessionUser?.id,
 				})
 			);
 		}
-	}, [dispatch, restaurantSearchInput]);
+		if (locationSearchInput.length > 1) {
+			dispatch(liveLocationSearch(locationSearchInput));
+		}
+	}, [dispatch, restaurantSearchInput, locationSearchInput]);
 
 	// Styling Live Restaurant Search Box
 	useEffect(() => {
