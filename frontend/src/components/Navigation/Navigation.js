@@ -215,7 +215,7 @@ function Navigation({ isLoaded }) {
 	}, [isSelected && locationSearchInputLength]);
 
 	return (
-		<div className='nav_container'>
+		<div className='nav_container' >
 			<div className='nav-gradient'>
 				<div className='li-container'>
 					<div className='nav_container_homelink'>
