@@ -88,9 +88,9 @@ function Navigation({ isLoaded }) {
 	};
 
 	//Render restaurant search results
-	const searchRender = (res, i) => {
+	const restaurantSearchRender = (res, i) => {
 		return (
-			<div id='search-result' key={i} onClick={(e) => handleClick(e, res)}>
+			<NavLink exact to={`/restaurants/${i}`} id='search-result' key={i} onClick={(e) => handleClick(e, res)}>
 				<div
 					id='search-img'
 					style={{
@@ -100,7 +100,7 @@ function Navigation({ isLoaded }) {
 					<p id='name'>{res.name}</p>
 					<p id='address'>{res.location}</p>
 				</div>
-			</div>
+			</NavLink>
 		);
 	};
 
@@ -263,10 +263,12 @@ function Navigation({ isLoaded }) {
 								<div className='restaurant-search-results-container'>
 									{searchResult &&
 										Object.values(searchResult).map((res, i) =>
-											searchRender(res, i)
+											restaurantSearchRender(res, i)
 										)}
 								</div>
-								<div className='location-search-results-container'></div>
+								<div className='location-search-results-container'>
+
+								</div>
 							</div>
 						</div>
 					</div>
