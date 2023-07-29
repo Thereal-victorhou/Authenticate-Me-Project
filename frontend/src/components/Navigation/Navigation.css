@@ -5,7 +5,7 @@
 	margin: 0, auto;
 	height: 700px;
 	width: 100%;
-	background-color: grey;
+
 	background-size: cover;
 	background-position: 50%;
 	border-bottom: 1px solid rgb(235, 235, 235);
@@ -24,11 +24,20 @@
 	border-bottom: 1px solid rgb(235, 235, 235);
 }
 
+.background-slideshow {
+	position: absolute;
+	max-height: 700px;
+	overflow-y: hidden;
+	z-index: -2;
+}
+
 .nav-gradient {
 	width: 100%;
 	height: 120px;
 	background-image: linear-gradient(
-		rgba(0, 0, 0, 0.71),
+		rgba(0, 0, 0, 0.751),
+		rgba(0, 0, 0, 0.627),
+		rgba(0, 0, 0, 0.384),
 		rgba(0, 0, 0, 0)
 	);
 }
@@ -78,7 +87,7 @@
 	width: 60%;
 }
 
-.nav-links-home {
+.nav-links-home, .nav-links-home:visited {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -247,6 +256,9 @@
 	border-left: none;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+	padding-left: 10px;
+	padding-top: 5px;
+
 }
 
 .search-btn:hover {
@@ -267,6 +279,8 @@
 	border-left: none;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+	padding-left: 15px;
+	padding-right: -5px;
 }
 
 .search-btn.other:hover {
@@ -274,12 +288,10 @@
 	transition: all 0.6s ease;
 }
 
-.search-btn p {
-	font-size: 50px;
-	font-weight: 100;
+.search-btn .search-mag {
+	font-size: 38px;
 	color: white;
-	transform: rotate(260deg);
-	text-decoration: none;
+	/* transform: rotate(260deg); */
 }
 
 .search-results-container {
@@ -391,7 +403,7 @@
 	margin-left: 0;
 }
 
-.add-restaurant-link {
+.add-restaurant-link, .add-restaurant-link:visited {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -403,6 +415,7 @@
 	width: 8.3rem;
 	border: 1px solid transparent;
 	border-radius: 5px;
+	text-decoration: none;
 }
 
 .add-restaurant-link:hover {
@@ -443,7 +456,7 @@
 	width: 50%;
 }
 
-.nav-links-login {
+.nav-links-login, .nav-links-login:visited {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -469,7 +482,7 @@
 	transition: all 0.6s ease;
 }
 
-.nav-links-login.other {
+.nav-links-login.other, .nav-links-login.other:visited {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -493,7 +506,7 @@
 	transition: all 0.6s ease;
 }
 
-.nav-links-signup {
+.nav-links-signup, .nav-links-signup:visited {
 	display: flex;
 	align-items: center;
 	justify-content: center;
