@@ -146,11 +146,11 @@ function Navigation({ isLoaded }) {
 		dispatch(clearSearch());
 	};
 
-
 	// Modifying style of NavBar based on current Page
 	useEffect(async () => {
 		if (pageType === undefined) dispatch(saveCurrentPage('home'));
 		if (pageType === 'home') {
+			await document.querySelector('.background-slideshow')?.classList.remove('other');
 			await document.querySelector('.nav_container')?.classList.remove('other');
 			await document.querySelector('.nav-gradient')?.classList.remove('other');
 			await document.querySelector('.li-container')?.classList.remove('other');
@@ -174,6 +174,7 @@ function Navigation({ isLoaded }) {
 			.querySelector('.nav-links-login')
 			?.classList.remove('other');
 		} else {
+			await document.querySelector('.background-slideshow')?.classList.add('other');
 			await document.querySelector('.nav_container')?.classList.add('other');
 			await document.querySelector('.nav-gradient')?.classList.add('other');
 			await document.querySelector('.li-container')?.classList.add('other');

@@ -29,6 +29,11 @@
 	max-height: 700px;
 	overflow-y: hidden;
 	z-index: -2;
+	visibility: visible;
+}
+
+.background-slideshow.other {
+	visibility: hidden;
 }
 
 .nav-gradient {
