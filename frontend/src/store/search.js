@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import fetch from 'node-fetch'
 const axios = require('axios');
 
 // type
@@ -30,31 +31,37 @@ const removeSearch = () => {
 }
 
 // thunk
-export const liveLocationSearch = (search, token) => (dispatch) => {
-    let searchArr = search.split('');
-    let newArr = [];
+export const liveLocationSearch = (search, token) => async (dispatch) => {
+	let searchArr = search.split('');
+	let newArr = [];
 
-    for (let i = 0; i < searchArr.length; i++) {
-        if (searchArr[i] === ' ') newArr.push('%20')
-        else if (searchArr[i] === '+') newArr.push('%2B')
-        else newArr.push(searchArr[i])
-    }
-
+	for (let i = 0; i < searchArr.length; i++) {
+			if (searchArr[i] === ' ') newArr.push('%20')
+			else if (searchArr[i] === '+') newArr.push('%2B')
+			else newArr.push(searchArr[i])
+	}
   const formattedSearch = newArr.join('')
+
 	const config = {
 		method: 'get',
-		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`,
-    headers: { }
+		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&offset=2&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`,
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://maps.googleapis.com'}
 	};
 
-	axios(config)
-		.then(function (response) {
-			console.log((JSON.stringify(response.data)))
-		})
-		.catch(function (error) {
-			console.log(error);
-	})
+	// await axios(config)
+	// 	.then(function (response) {
+	// 		console.log((JSON.stringify(response.data)))
+	// 	})
+	// 	.catch(function (error) {
+	// 		console.log(error);
+	// })
 
+	const res = await fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&offset=2&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`, {
+		method: 'GET',
+		headers: {'Content-Type': 'application/json', 'Mode': 'no-cors'}
+	})
+	const results = await res.json()
+	console.log(results)
 	// dispatch(getLocation(location));
 };
 
