@@ -334,6 +334,11 @@ a {
 	box-shadow: -7px 20px 1.3em rgba(0, 0, 0, 0.187),
 		7px 20px 1.3em rgba(0, 0, 0, 0.187);
 	margin-top: 0;
+	visibility: visible;
+}
+
+.restaurant-search-results-container.hide {
+	visibility: hidden;
 }
 
 .location-search-results-container {
@@ -351,6 +356,11 @@ a {
 	border-bottom-right-radius: 4px;
 	box-shadow: -7px 20px 1.3em rgba(0, 0, 0, 0.187),
 		7px 20px 1.3em rgba(0, 0, 0, 0.187);
+		visibility: visible;
+}
+
+.location-search-results-container.hide {
+	visibility: hidden;
 }
 
 #search-result {

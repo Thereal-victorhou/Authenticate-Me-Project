@@ -9,6 +9,7 @@ import {
 } from '../../store/search';
 import { oneRestaurant } from '../../store/restaurant';
 import { saveCurrentPage } from '../../store/navigation';
+import { v4 as uuidv4 } from 'uuid';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 // import './Slideshow.scss';
@@ -22,10 +23,9 @@ function Navigation({ isLoaded }) {
 
 	const [restaurantSearchInput, setRestaurantSearchInput] = useState('');
 	const [locationSearchInput, setLocationSearchInput] = useState('');
-	const [isSelected, setIsSelected] = useState(false);
+	const [isSelected, setIsSelected] = useState('');
 	const [location, setLocation] = useState('');
-
-	const [currentImage, setCurrentImage] = useState(0);
+	const [sessionToken, setSessionToken] = useState('');
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
@@ -55,6 +55,11 @@ function Navigation({ isLoaded }) {
 		}
 	};
 
+	// Generate 1 session token
+	const generateSessionToken = () => {
+		return uuidv4();
+	}
+
 	let sessionLinks;
 	if (sessionUser) {
 		sessionLinks = <ProfileButton user={sessionUser} />;
@@ -77,9 +82,15 @@ function Navigation({ isLoaded }) {
 		);
 	}
 
-	const handleRes = (e) => {
+	// Set which input field was selected
+	const handleSelection = (e, field) => {
 		e.preventDefault();
-		setIsSelected(true);
+		if (field === 'restaurant') setIsSelected('restaurant');
+		if(field === 'location') {
+			setIsSelected('location')
+			setSessionToken(generateSessionToken())
+		}
+
 	};
 
 	const handleClick = async (e, res) => {
@@ -204,44 +215,48 @@ function Navigation({ isLoaded }) {
 				})
 				);
 			}
-			if (locationSearchInput.length > 1) {
-				dispatch(liveLocationSearch(locationSearchInput));
-			}
+		if (locationSearchInput.length > 1) {
+			dispatch(liveLocationSearch(locationSearchInput, sessionToken));
+		}
 		}, [dispatch, restaurantSearchInput, locationSearchInput]);
+
+		// Hide/Show Restaurant or Location Results
+		useEffect(async() => {
+			switch (isSelected) {
+				case 'restaurant':
+					setIsSelected('restaurant')
+					await document.querySelector('.restaurant-search-results-container')?.classList.remove('hide');
+					await document.querySelector('.location-search-results-container')?.classList.add('hide');
+					break;
+				case 'location':
+					setIsSelected('location')
+					await document.querySelector('.restaurant-search-results-container')?.classList.add('hide');
+					await document.querySelector('.location-search-results-container')?.classList.remove('hide');
+					break;
+			}
+		}, [isSelected])
 
 		// Styling Live Restaurant Search Box
 		useEffect(() => {
-			if (isSelected && restaurantSearchInputLength > 1) {
+			if (isSelected === 'restaurant' && restaurantSearchInputLength > 1) {
 				document.querySelector('.search-bar-restaurants')?.classList.add('live');
 			} else {
 				document
 				.querySelector('.search-bar-restaurants')
 				?.classList.remove('live');
 			}
-		}, [isSelected && restaurantSearchInputLength]);
+		}, [isSelected, restaurantSearchInputLength]);
 
 		// Styling Live location Search Box
 		useEffect(() => {
-			if (isSelected && locationSearchInputLength > 1) {
+			if (isSelected === 'location' && locationSearchInputLength > 1) {
 				document.querySelector('.search-bar-location')?.classList.add('live');
 			} else {
 				document.querySelector('.search-bar-location')?.classList.remove('live');
 			}
-		}, [isSelected && locationSearchInputLength]);
+		}, [isSelected, locationSearchInputLength]);
 
-		// const imageUrls = [
-		// 	'https://imgur.com/oz2FzNb.png',
-		// 	'https://imgur.com/a/wTnqDT2.png',
-		// 	'https://imgur.com/a/e9xykMv.png',
-		// 	'https://imgur.com/dT97Cun.png',
-		// 	'https://imgur.com/zaGCAN2.png',
-		// 	'https://imgur.com/CQqU3xT.png',
-		// 	'https://imgur.com/X93eM2r.png'
-		// ];
-	const changeBackground = () => {
 
-	}
-	// style={{ backgroundImage: `url('https://imgur.com/oz2FzNb.png')`}}
 	return (
 		<div className='nav_container'>
 			<CCarousel transition='crossfade' className='background-slideshow'>
@@ -287,18 +302,20 @@ function Navigation({ isLoaded }) {
 									<input
 										className='search-bar-restaurants'
 										placeholder='tacos, burgers, dinner'
+										name='restaurant'
 										value={restaurantSearchInput}
 										onChange={updateRestaurantSearch}
-										onClick={(e) => handleRes(e)}></input>
+										onClick={(e) => handleSelection(e, e.target.name)}></input>
 									<div className='search-bar-divider'>
 										<div id='divide'></div>
 									</div>
 									<input
 										className='search-bar-location'
 										placeholder='address, city, state'
+										name='location'
 										value={locationSearchInput}
 										onChange={updateLocationSearch}
-										onClick={(e) => handleRes(e)}></input>
+										onClick={(e) => handleSelection(e, e.target.name)}></input>
 									<NavLink
 										exact
 										to='/search'

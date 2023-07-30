@@ -30,13 +30,31 @@ const removeSearch = () => {
 }
 
 // thunk
-export const liveLocationSearch = (search) => (dispatch) => {
+export const liveLocationSearch = (search, token) => (dispatch) => {
+    let searchArr = search.split('');
+    let newArr = [];
 
-	let config = {
+    for (let i = 0; i < searchArr.length; i++) {
+        if (searchArr[i] === ' ') newArr.push('%20')
+        else if (searchArr[i] === '+') newArr.push('%2B')
+        else newArr.push(searchArr[i])
+    }
+
+  const formattedSearch = newArr.join('')
+	const config = {
 		method: 'get',
-		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${search}&types=establishment&key=AIzaSyAV_Av8kiFRXTUMoummUh8tOAbg4zJZ2tY`,
+		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAV_Av8kiFRXTUMoummUh8tOAbg4zJZ2tY`,
+    headers: { }
 	};
-	console.log(search)
+
+	axios(config)
+		.then(function (response) {
+			console.log((JSON.stringify(response.data)))
+		})
+		.catch(function (error) {
+			console.log(error);
+	})
+
 	// dispatch(getLocation(location));
 };
 
