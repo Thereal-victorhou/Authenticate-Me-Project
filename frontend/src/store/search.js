@@ -43,7 +43,7 @@ export const liveLocationSearch = (search, token) => (dispatch) => {
   const formattedSearch = newArr.join('')
 	const config = {
 		method: 'get',
-		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAV_Av8kiFRXTUMoummUh8tOAbg4zJZ2tY`,
+		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`,
     headers: { }
 	};
 
