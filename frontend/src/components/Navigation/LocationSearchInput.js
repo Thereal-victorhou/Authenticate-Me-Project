@@ -19,7 +19,7 @@ const theme = createTheme({
 	},
 });
 
-function LocationSearchInput() {
+function LocationSearchInput({ pageType }) {
 
   const inputRef = useRef();
   const suggestionRef = useRef();
@@ -31,6 +31,7 @@ function LocationSearchInput() {
   const [selectInput, setSelectInput] = useState('false');
   const [selectSuggestion, setSelectSuggestion] = useState();
 	const inputLength = document.getElementsByName('location-input')[0]?.value?.length;
+
 
   // Leave here to set up autocomplete input box
   let locationPlaceholder = document.getElementsByName('location-input')[0]?.placeholder;
@@ -91,20 +92,27 @@ function LocationSearchInput() {
     }
   }, [selectInput, inputLength]);
 
-
+  // Determine if location input box was selected
   useEffect(() => {
     window.onclick = (event) => {
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
         setSelectInput(false);
-        // setResult(`You clicked Outside the box at ${new Date().toLocaleString()}`);
       } else {
         setSelectInput(true);
-        // setResult(`You clicked Inside the box at ${new Date().toLocaleString()}`);
       }
     }
   },[])
 
+  // Switch styling for location input based on page
+  useEffect( async () => {
+    console.log(pageType)
+    if (pageType === 'home') {
+      await document.querySelector('.search-bar-location')?.classList.remove('other');
+    }else {
+      await document.querySelector('.search-bar-location')?.classList.add('other');
+    }
+  },[pageType])
 
 	return (
 		<>

@@ -13,7 +13,6 @@ import { saveCurrentPage } from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
-// import './Slideshow.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import './Navigation.css';
 
@@ -170,14 +169,11 @@ function Navigation({ isLoaded }) {
 			.querySelector('.nav-links-home')
 			?.classList.remove('other');
 			await document
-			.querySelector('.search-bar-restaurants')
-			?.classList.remove('other');
-			await document
-			.querySelector('.search-bar-location')
+			.querySelector('.search-bar-restaurants-input')
 			?.classList.remove('other');
 			await document.querySelector('.search-btn')?.classList.remove('other');
 			await document
-			.querySelector('.search-bar-main')
+			.querySelector('.search-bar-restaurant-main')
 			?.classList.remove('other');
 			await document
 			.querySelector('.add-restaurant-link')
@@ -192,13 +188,11 @@ function Navigation({ isLoaded }) {
 			await document.querySelector('.li-container')?.classList.add('other');
 			await document.querySelector('.nav-links-home')?.classList.add('other');
 			await document
-			.querySelector('.search-bar-restaurants')
+			.querySelector('.search-bar-restaurants-input')
 			?.classList.add('other');
-			await document
-			.querySelector('.search-bar-location')
-			?.classList.add('other');
+
 			await document.querySelector('.search-btn')?.classList.add('other');
-			await document.querySelector('.search-bar-main')?.classList.add('other');
+			await document.querySelector('.search-bar-restaurant-main')?.classList.add('other');
 			await document
 			.querySelector('.add-restaurant-link')
 			?.classList.add('other');
@@ -229,10 +223,7 @@ function Navigation({ isLoaded }) {
 					await document.querySelector('.restaurant-search-results-container')?.classList.remove('hide');
 					await document.querySelector('.location-search-results-container')?.classList.add('hide');
 					break;
-				case 'location':
-					setIsSelected('location')
-					await document.querySelector('.restaurant-search-results-container')?.classList.add('hide');
-					await document.querySelector('.location-search-results-container')?.classList.remove('hide');
+				default:
 					break;
 			}
 		}, [isSelected])
@@ -240,10 +231,10 @@ function Navigation({ isLoaded }) {
 		// Styling Live Restaurant Search Box
 		useEffect(() => {
 			if (isSelected === 'restaurant' && restaurantSearchInputLength > 1) {
-				document.querySelector('.search-bar-restaurants')?.classList.add('live');
+				document.querySelector('.search-bar-restaurants-input')?.classList.add('live');
 			} else {
 				document
-				.querySelector('.search-bar-restaurants')
+				.querySelector('.search-bar-restaurants-input')
 				?.classList.remove('live');
 			}
 		}, [isSelected, restaurantSearchInputLength]);
@@ -299,39 +290,37 @@ function Navigation({ isLoaded }) {
 					<div className='middle-container'>
 						<div id='upper-middle'>
 							<div className='search-bar-container'>
-								<input
-									className='search-bar-restaurants'
-									placeholder='tacos, burgers, dinner'
-									name='restaurant'
-									value={restaurantSearchInput}
-									onChange={updateRestaurantSearch}
-									onClick={(e) => handleSelection(e, e.target.name)}></input>
-								<div className='search-bar-divider'>
-									<div id='divide'></div>
-								</div>
-								{/* <input
-									className='search-bar-location'
-									placeholder='address, city, state'
-									name='location'
-									value={locationSearchInput}
-									onChange={updateLocationSearch}
-									onClick={(e) => handleSelection(e, e.target.name)}></input> */}
-								<LocationSearchInput />
-								<NavLink
-									exact
-									to='/search'
-									className='search-btn'
-									onClick={(e) => handleSearch(e)}>
-									<SearchIcon className="search-mag"/>
-								</NavLink>
-							</div>
-							<div className='search-results-container'>
-								<div className='restaurant-search-results-container'>
-									{searchResult &&
-										Object.values(searchResult).map((res, i) =>
-											restaurantSearchRender(res, i)
-										)}
-								</div>
+
+									<div className='search-bar-restaurant-main'>
+										<input
+											className='search-bar-restaurants-input'
+											placeholder='tacos, burgers, dinner'
+											name='restaurant'
+											value={restaurantSearchInput}
+											onChange={updateRestaurantSearch}
+											onClick={(e) => handleSelection(e, e.target.name)}></input>
+											<div className='search-results-container'>
+												<div className='restaurant-search-results-container'>
+													{searchResult &&
+														Object.values(searchResult).map((res, i) =>
+															restaurantSearchRender(res, i)
+														)}
+												</div>
+											</div>
+									</div>
+									<div className='search-bar-divider'>
+										<div id='divide'></div>
+									</div>
+									<LocationSearchInput pageType={pageType}/>
+									<NavLink
+										exact
+										to='/search'
+										className='search-btn'
+										onClick={(e) => handleSearch(e)}>
+										<SearchIcon className="search-mag"/>
+									</NavLink>
+
+
 							</div>
 						</div>
 					</div>
