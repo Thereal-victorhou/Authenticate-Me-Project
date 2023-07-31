@@ -42,6 +42,8 @@ function LocationSearchInput({ pageType }) {
 
 
 	const handleSelect = async (value) => {
+    setAddress(value);
+    setLocation(value);
     return;
 		const result = await geocodeByAddress(address);
 		const ll = await getLatLng(result[0]);
@@ -55,23 +57,6 @@ function LocationSearchInput({ pageType }) {
 	const handleCurrentLocation = (e) => {
     e.preventDefault()
 
-	};
-
-	const updateResults = () => {
-		return (
-			<>
-				{suggestedLocations.map((suggestion) => {
-					return (
-						<div
-							className='location-suggestions'
-							id={suggestion.placeId}
-							value={address}>
-							<span>{suggestion.description}</span>
-						</div>
-					);
-				})}
-			</>
-		);
 	};
 
   // Generate 1 session token
@@ -101,23 +86,28 @@ function LocationSearchInput({ pageType }) {
   useEffect(() => {
     window.onclick = (event) => {
       event.preventDefault();
+      event.stopPropagation();
 
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
         setSelectInput(false);
+        console.log('false')
       } else {
         setSelectInput(true);
+        console.log('true')
       }
 
-      if (event.target.contains(suggestionRef.current)
-        && event.target !== suggestionRef.current) {
-        setLocation('');
-      } else {
-        setLocation(event.target.innerText);
-        setAddress(event.target.innerText);
-        // document.querySelector('.location-search-results-container')?.classList.add('hide');
-        // setSelectInput(false)
-      }
+      // if (event.target.contains(suggestionRef.current)
+      //   && event.target !== suggestionRef.current) {
+      //   setLocation('');
+      //   console.log('nothing')
+      // } else {
+      //   setLocation(event.target.innerText);
+      //   setAddress(event.target.innerText);
+      //   console.log('everything')
+      //   // document.querySelector('.location-search-results-container')?.classList.add('hide');
+      //   // setSelectInput(false)
+      // }
     }
 
   },[])
