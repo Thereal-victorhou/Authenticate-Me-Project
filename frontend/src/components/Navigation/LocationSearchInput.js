@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByPlaceId,
 	getLatLng,
 } from 'react-places-autocomplete';
-import searchOptions from '../Utils/LocationValidation';
+import { searchOptions, abbreviateState } from '../Utils/LocationValidation';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -24,7 +24,6 @@ const theme = createTheme({
 function LocationSearchInput() {
 
   const inputRef = useRef();
-  const suggestionRef = useRef();
 
 	const [address, setAddress] = useState('');
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
@@ -61,23 +60,35 @@ function LocationSearchInput() {
 	// Get User Location -> Set User Location
 	const handleCurrentLocation = async (e) => {
     e.preventDefault()
-    // alert('Feature Coming Soon!')
-    const response = await fetch('https://api.ipify.org?format=json', {
+
+    const response = await fetch('http://ip-api.com/json', {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       }
     });
-    const result = await response.json();
-    console.log('ip-address ', result)
 
+    const result = await response.json();
+    if (result.status === 'success') {
+      console.log('result ', result)
+      setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
+      console.log(currentLocation)
+    } else{
+      console.log('failed: ',result)
+
+    }
 	};
 
   // Generate 1 session token
   const generateSessionToken = () => {
     return uuidv4();
   }
+
+  // Set location input to current location
+  useEffect(()=> {
+    setAddress(currentLocation)
+    setLocation(currentLocation)
+  },[currentLocation])
 
   // Render suggestions in input bar
 	useEffect(() => {
@@ -99,7 +110,6 @@ function LocationSearchInput() {
     else await document.querySelector('.search-bar-location.other')?.classList.remove('live')
 
 
-
   }, [selectInput, pageType]);
 
 
@@ -111,12 +121,11 @@ function LocationSearchInput() {
 
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
-        setSelectInput(false);
+          setSelectInput(false);
 
       } else {
-        if (event.target.name === 'restaurant') setSelectInput(false);
-        else setSelectInput(true);
-        console.log(pageType)
+        if (event.target.name === 'location-input') setSelectInput(true);
+        else setSelectInput(false);
 
       }
     }
@@ -163,7 +172,7 @@ function LocationSearchInput() {
 								/>
 								<p>Current Location</p>
 							</div>
-							{/* {updateResults()} */}
+							{loading && <div>Loading...</div>}
               {suggestions.map((suggestion) => {
                 const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
                 return (
