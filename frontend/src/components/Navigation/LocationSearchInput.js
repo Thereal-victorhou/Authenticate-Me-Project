@@ -21,7 +21,7 @@ const theme = createTheme({
 	},
 });
 
-function LocationSearchInput({ pageType }) {
+function LocationSearchInput() {
 
   const inputRef = useRef();
   const suggestionRef = useRef();
@@ -31,9 +31,14 @@ function LocationSearchInput({ pageType }) {
 	const [suggestedLocations, setSuggestedLocations] = useState([]);
   const [firstOption, setFirstOption] = useState('');
   const [selectInput, setSelectInput] = useState(false);
-  const [selectSuggestion, setSelectSuggestion] = useState();
+  const [field, setField] = useState('')
 	const [location, setLocation] = useState('');
+  const [currentLocation, setCurrentLocation] = useState('');
   const [sessionToken, setSessionToken] = useState({ sessionToken: null });
+
+  const pageType = useSelector(
+		(state) => state.navigation?.action?.currentPage
+	);
 
 	const inputValue = document.getElementsByName('location-input')[0]?.value;
 
@@ -54,8 +59,18 @@ function LocationSearchInput({ pageType }) {
 	};
 
 	// Get User Location -> Set User Location
-	const handleCurrentLocation = (e) => {
+	const handleCurrentLocation = async (e) => {
     e.preventDefault()
+    // alert('Feature Coming Soon!')
+    const response = await fetch('https://api.ipify.org?format=json', {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+    const result = await response.json();
+    console.log('ip-address ', result)
 
 	};
 
@@ -79,7 +94,13 @@ function LocationSearchInput({ pageType }) {
     else {
       await document.querySelector('.location-search-results-container')?.classList.add('hide');
     }
-  }, [selectInput]);
+
+    if ( selectInput === true && pageType === 'other') await document.querySelector('.search-bar-location.other')?.classList.add('live')
+    else await document.querySelector('.search-bar-location.other')?.classList.remove('live')
+
+
+
+  }, [selectInput, pageType]);
 
 
   // Determine if location input box and which location was selected
@@ -91,27 +112,16 @@ function LocationSearchInput({ pageType }) {
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
         setSelectInput(false);
-        console.log('false')
-      } else {
-        setSelectInput(true);
-        console.log('true')
-      }
 
-      // if (event.target.contains(suggestionRef.current)
-      //   && event.target !== suggestionRef.current) {
-      //   setLocation('');
-      //   console.log('nothing')
-      // } else {
-      //   setLocation(event.target.innerText);
-      //   setAddress(event.target.innerText);
-      //   console.log('everything')
-      //   // document.querySelector('.location-search-results-container')?.classList.add('hide');
-      //   // setSelectInput(false)
-      // }
+      } else {
+        if (event.target.name === 'restaurant') setSelectInput(false);
+        else setSelectInput(true);
+        console.log(pageType)
+
+      }
     }
 
   },[])
-
 
   // Switch styling for location input based on page
   useEffect( async () => {
@@ -143,7 +153,7 @@ function LocationSearchInput({ pageType }) {
 						<div className='location-search-results-container'>
 							<div
 								className='current-location-container'
-								onClick={() => handleCurrentLocation}
+								onClick={(e) => handleCurrentLocation(e)}
                 >
 								<PlaceOutlinedIcon
 									id='location-icon'

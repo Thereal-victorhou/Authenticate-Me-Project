@@ -46,6 +46,10 @@
 		0 -12px 15px -9px rgba(0, 0, 0, 0.127);
 }
 
+.search-bar-location.other.live {
+  box-shadow: none;
+}
+
 .location-search-results-container {
 	display: flex;
 	flex-direction: column;

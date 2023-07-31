@@ -81,7 +81,7 @@ function Navigation({ isLoaded }) {
 	const generateSessionToken = () => {
 		return uuidv4();
 	}
-	
+
 	// Set which input field was selected
 	const handleSelection = (e, field) => {
 		e.preventDefault();
@@ -302,7 +302,7 @@ function Navigation({ isLoaded }) {
 									<div className='search-bar-divider'>
 										<div id='divide'></div>
 									</div>
-									<LocationSearchInput pageType={pageType}/>
+									<LocationSearchInput />
 									<NavLink
 										exact
 										to='/search'
