@@ -1,5 +1,4 @@
 import { csrfFetch } from "./csrf";
-import fetch from 'node-fetch'
 import axios, * as others from 'axios';
 
 // type
