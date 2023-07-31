@@ -91,4 +91,3 @@ export const abbreviateState = (state) => {
   return states[state];
 }
 
-// export { searchOptions, abbreviateState }

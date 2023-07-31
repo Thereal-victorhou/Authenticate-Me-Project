@@ -72,10 +72,9 @@ function LocationSearchInput() {
     if (result.status === 'success') {
       console.log('result ', result)
       setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
-      console.log(currentLocation)
+      setAddress(currentLocation)
     } else{
-      console.log('failed: ',result)
-
+      alert('Failed to get current location. Please search for your preferred location.')
     }
 	};
 
@@ -84,9 +83,25 @@ function LocationSearchInput() {
     return uuidv4();
   }
 
+  // Handle current location as default on startup
+  useEffect( async () => {
+    // handleCurrentLocation()
+    const response = await fetch('http://ip-api.com/json', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const result = await response.json();
+    if (result.status === 'success') {
+      console.log('result ', result)
+      setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
+    }
+  })
+
   // Set location input to current location
   useEffect(()=> {
-    setAddress(currentLocation)
     setLocation(currentLocation)
   },[currentLocation])
 
@@ -124,7 +139,10 @@ function LocationSearchInput() {
           setSelectInput(false);
 
       } else {
-        if (event.target.name === 'location-input') setSelectInput(true);
+        if (event.target.name === 'location-input') {
+          setSelectInput(true);
+          console.log('selected')
+        }
         else setSelectInput(false);
 
       }
