@@ -67,6 +67,11 @@
 	box-shadow: -7px 20px 1.3em rgba(0, 0, 0, 0.187),
 		7px 20px 1.3em rgba(0, 0, 0, 0.187);
   cursor: pointer;
+  visibility: visible;
+}
+
+.location-search-results-container.hide {
+  visibility: hidden;
 }
 
 .current-location-container {

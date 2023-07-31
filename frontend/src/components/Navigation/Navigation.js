@@ -249,13 +249,13 @@ function Navigation({ isLoaded }) {
 		}, [isSelected, restaurantSearchInputLength]);
 
 		// Styling Live location Search Box
-		useEffect(() => {
-			if (isSelected === 'location' && locationSearchInputLength > 1) {
-				document.querySelector('.search-bar-location')?.classList.add('live');
-			} else {
-				document.querySelector('.search-bar-location')?.classList.remove('live');
-			}
-		}, [isSelected, locationSearchInputLength]);
+		// useEffect(() => {
+		// 	if (isSelected === 'location' && locationSearchInputLength > 1) {
+		// 		document.querySelector('.search-bar-location')?.classList.add('live');
+		// 	} else {
+		// 		document.querySelector('.search-bar-location')?.classList.remove('live');
+		// 	}
+		// }, [isSelected, locationSearchInputLength]);
 
 
 	return (
