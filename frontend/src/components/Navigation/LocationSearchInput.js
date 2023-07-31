@@ -6,10 +6,12 @@ import PlacesAutocomplete, {
 	geocodeByPlaceId,
 	getLatLng,
 } from 'react-places-autocomplete';
-import './LocationSearchInput.css';
+import searchOptions from '../Utils/LocationValidation';
+import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { blue } from '@mui/material/colors';
+import './LocationSearchInput.css';
 
 const theme = createTheme({
 	palette: {
@@ -28,20 +30,23 @@ function LocationSearchInput({ pageType }) {
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 	const [suggestedLocations, setSuggestedLocations] = useState([]);
   const [firstOption, setFirstOption] = useState('');
-  const [selectInput, setSelectInput] = useState('false');
+  const [selectInput, setSelectInput] = useState(false);
   const [selectSuggestion, setSelectSuggestion] = useState();
-	const inputLength = document.getElementsByName('location-input')[0]?.value?.length;
+	const [location, setLocation] = useState('');
+  const [sessionToken, setSessionToken] = useState({ sessionToken: null });
 
+	const inputValue = document.getElementsByName('location-input')[0]?.value;
 
-  // Leave here to set up autocomplete input box
+  // Leave here to set up autocomplete placeholder input box
   let locationPlaceholder = document.getElementsByName('location-input')[0]?.placeholder;
 
 
 	const handleSelect = async (value) => {
-
+    return;
 		const result = await geocodeByAddress(address);
 		const ll = await getLatLng(result[0]);
-		console.log(ll);
+
+		console.log('ll: ',ll);
 		setAddress(value);
 		setCoordinates(ll);
 	};
@@ -69,44 +74,57 @@ function LocationSearchInput({ pageType }) {
 		);
 	};
 
-	const searchOptions = {
-    language: 'en',
-		types: ['(cities)'],
-    country: ["us", "pr", "vi", "gu", "mp"],
-	};
+  // Generate 1 session token
+  const generateSessionToken = () => {
+    return uuidv4();
+  }
 
   // Render suggestions in input bar
 	useEffect(() => {
 		// updateResults();
     setFirstOption(suggestedLocations[0]?.description)
-    locationPlaceholder = `${firstOption ? `${firstOption}`: 'address, city, state'}`
+    locationPlaceholder = `${firstOption ? `${firstOption}`: 'address, city, state or zip'}`
 	}, [suggestedLocations]);
 
   // Close location results
   useEffect( async () => {
-    if ( selectInput === true && inputLength > 0) {
+    if ( selectInput === true ) {
       await document.querySelector('.location-search-results-container')?.classList.remove('hide');
     }
     else {
       await document.querySelector('.location-search-results-container')?.classList.add('hide');
     }
-  }, [selectInput, inputLength]);
+  }, [selectInput]);
 
-  // Determine if location input box was selected
+
+  // Determine if location input box and which location was selected
   useEffect(() => {
     window.onclick = (event) => {
+      event.preventDefault();
+
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
         setSelectInput(false);
       } else {
         setSelectInput(true);
       }
+
+      if (event.target.contains(suggestionRef.current)
+        && event.target !== suggestionRef.current) {
+        setLocation('');
+      } else {
+        setLocation(event.target.innerText);
+        setAddress(event.target.innerText);
+        // document.querySelector('.location-search-results-container')?.classList.add('hide');
+        // setSelectInput(false)
+      }
     }
+
   },[])
+
 
   // Switch styling for location input based on page
   useEffect( async () => {
-    console.log(pageType)
     if (pageType === 'home') {
       await document.querySelector('.search-bar-location')?.classList.remove('other');
     }else {
@@ -119,15 +137,15 @@ function LocationSearchInput({ pageType }) {
 			<PlacesAutocomplete
 				value={address}
 				onChange={setAddress}
-				onSelect={handleSelect}
-				searchOptions={searchOptions}>
+				onSelect={(e)=>handleSelect(e)}
+				searchOptions={searchOptions(address)}>
 				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 					<div className='location-search-container'>
 						<input
 							name='location-input'
               ref={inputRef}
 							{...getInputProps({
-								placeholder: 'address, city, state',
+								placeholder: 'address, city, state or zip',
 								className: 'search-bar-location',
 							})}
 						/>
@@ -147,11 +165,14 @@ function LocationSearchInput({ pageType }) {
 							</div>
 							{/* {updateResults()} */}
               {suggestions.map((suggestion) => {
+                const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
                 return (
                   <div
+                    {...getSuggestionItemProps(suggestion, { className })}
+                    name='location-suggestion'
                     className='location-suggestions'
                     id={suggestion.placeId}
-                    value={address}>
+                    value={suggestion.description}>
                     <span>{suggestion.description}</span>
                   </div>
                 );

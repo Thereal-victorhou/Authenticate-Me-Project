@@ -24,7 +24,6 @@ function Navigation({ isLoaded }) {
 	const [restaurantSearchInput, setRestaurantSearchInput] = useState('');
 	const [locationSearchInput, setLocationSearchInput] = useState('');
 	const [isSelected, setIsSelected] = useState('');
-	const [location, setLocation] = useState('');
 	const [sessionToken, setSessionToken] = useState('');
 
 	const sessionUser = useSelector((state) => state.session.user);
@@ -55,10 +54,6 @@ function Navigation({ isLoaded }) {
 		}
 	};
 
-	// Generate 1 session token
-	const generateSessionToken = () => {
-		return uuidv4();
-	}
 
 	let sessionLinks;
 	if (sessionUser) {
@@ -82,6 +77,11 @@ function Navigation({ isLoaded }) {
 		);
 	}
 
+	// Generate 1 session token
+	const generateSessionToken = () => {
+		return uuidv4();
+	}
+	
 	// Set which input field was selected
 	const handleSelection = (e, field) => {
 		e.preventDefault();
@@ -238,15 +238,6 @@ function Navigation({ isLoaded }) {
 				?.classList.remove('live');
 			}
 		}, [isSelected, restaurantSearchInputLength]);
-
-		// Styling Live location Search Box
-		// useEffect(() => {
-		// 	if (isSelected === 'location' && locationSearchInputLength > 1) {
-		// 		document.querySelector('.search-bar-location')?.classList.add('live');
-		// 	} else {
-		// 		document.querySelector('.search-bar-location')?.classList.remove('live');
-		// 	}
-		// }, [isSelected, locationSearchInputLength]);
 
 
 	return (
