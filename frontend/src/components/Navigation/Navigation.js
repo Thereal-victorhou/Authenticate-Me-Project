@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
+import LocationSearchInput from './LocationSearchInput';
 import {
 	liveRestaurantSearch,
 	liveLocationSearch,
@@ -298,32 +299,31 @@ function Navigation({ isLoaded }) {
 					<div className='middle-container'>
 						<div id='upper-middle'>
 							<div className='search-bar-container'>
-								<div className='search-bar-main'>
-									<input
-										className='search-bar-restaurants'
-										placeholder='tacos, burgers, dinner'
-										name='restaurant'
-										value={restaurantSearchInput}
-										onChange={updateRestaurantSearch}
-										onClick={(e) => handleSelection(e, e.target.name)}></input>
-									<div className='search-bar-divider'>
-										<div id='divide'></div>
-									</div>
-									<input
-										className='search-bar-location'
-										placeholder='address, city, state'
-										name='location'
-										value={locationSearchInput}
-										onChange={updateLocationSearch}
-										onClick={(e) => handleSelection(e, e.target.name)}></input>
-									<NavLink
-										exact
-										to='/search'
-										className='search-btn'
-										onClick={(e) => handleSearch(e)}>
-										<SearchIcon className="search-mag"/>
-									</NavLink>
+								<input
+									className='search-bar-restaurants'
+									placeholder='tacos, burgers, dinner'
+									name='restaurant'
+									value={restaurantSearchInput}
+									onChange={updateRestaurantSearch}
+									onClick={(e) => handleSelection(e, e.target.name)}></input>
+								<div className='search-bar-divider'>
+									<div id='divide'></div>
 								</div>
+								{/* <input
+									className='search-bar-location'
+									placeholder='address, city, state'
+									name='location'
+									value={locationSearchInput}
+									onChange={updateLocationSearch}
+									onClick={(e) => handleSelection(e, e.target.name)}></input> */}
+								<LocationSearchInput />
+								<NavLink
+									exact
+									to='/search'
+									className='search-btn'
+									onClick={(e) => handleSearch(e)}>
+									<SearchIcon className="search-mag"/>
+								</NavLink>
 							</div>
 							<div className='search-results-container'>
 								<div className='restaurant-search-results-container'>
@@ -332,7 +332,6 @@ function Navigation({ isLoaded }) {
 											restaurantSearchRender(res, i)
 										)}
 								</div>
-								<div className='location-search-results-container'></div>
 							</div>
 						</div>
 					</div>

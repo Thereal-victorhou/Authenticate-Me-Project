@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 import fetch from 'node-fetch'
-const axios = require('axios');
+import axios, * as others from 'axios';
 
 // type
 const GET_LOCATION = '/navigation/GET_LOCATION';
@@ -43,10 +43,14 @@ export const liveLocationSearch = (search, token) => async (dispatch) => {
   const formattedSearch = newArr.join('')
 
 	const config = {
+		mode: 'no-cors',
 		method: 'get',
 		url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&offset=2&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`,
-    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://maps.googleapis.com'}
+		headers: { 'Access-Control-Allow-Origin': 'Accept' }
 	};
+	// const config = {
+
+	// }
 
 	// await axios(config)
 	// 	.then(function (response) {
@@ -56,12 +60,12 @@ export const liveLocationSearch = (search, token) => async (dispatch) => {
 	// 		console.log(error);
 	// })
 
-	const res = await fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&offset=2&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`, {
-		method: 'GET',
-		headers: {'Content-Type': 'application/json', 'Mode': 'no-cors'}
-	})
-	const results = await res.json()
-	console.log(results)
+	// const res = await fetch(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${formattedSearch}&components=country:us|country:pr|country:vi|country:gu|country:mp&offset=2&sessiontoken=${token}&types=(cities)&language=us&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg`, {
+	// 	method: 'GET',
+	// 	headers: {'Content-Type': 'application/json', 'Mode': 'no-cors'}
+	// })
+	// const results = await res.json()
+	// console.log(results)
 	// dispatch(getLocation(location));
 };
 
