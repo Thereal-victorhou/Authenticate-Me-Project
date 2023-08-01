@@ -1,8 +1,8 @@
-# Kelp
-Kelp is a food review site for pescatarians, vegetarians, and vegans. Inspired by Yelp, users of Kelp are able to rate, write and edit reviews for their favorite pescatarians, vegetarians, and vegans.
+# Tabl
+Tabl is a food review site inpired by Yelp. Users of Tabl are able to rate, write and edit reviews for their favorite restaurants. Users are also able to create, edit and delete their own restaurants.  Directions to each restaurant are also be available. Users are also able to create, edit and delete their own profiles.
 
 
-### Live Server https://kelpmeplease.herokuapp.com/
+### Live Server https://tabl.onrender.com/
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -58,5 +58,5 @@ This is an example of how to list things you need to use the software and how to
 * Sequelize
 * React
 * Redux
-* Heroku
+* Render
 * Git/Github
