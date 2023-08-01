@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByPlaceId,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { searchOptions, abbreviateState, validateSuggestions, validateOneSuggestion } from '../Utils/LocationValidation';
+import { searchOptions, abbreviateState, validateSuggestions, handleSuggestionDescriptionBasedOnType } from '../Utils/LocationValidation';
 import saveLocation from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
@@ -213,7 +213,7 @@ function LocationSearchInput() {
                     name='location-suggestion'
                     className='location-suggestions'
                     value={suggestion.description}>
-                    <span>{suggestion.description}</span>
+                    <span>{handleSuggestionDescriptionBasedOnType(suggestion).description}</span>
                   </div>
                 );
               })}

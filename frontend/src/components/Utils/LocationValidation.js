@@ -149,7 +149,25 @@ export const abbreviateState = (state) => {
 	return states[state];
 };
 
-const handleSuggestionType = (suggestion) => {
+// Filter out 'USA' from suggested location
+export const handleSuggestionDescriptionBasedOnType = (suggestion) => {
   const type = suggestion.types;
 	const terms = suggestion.terms;
+  const lastTerm = terms[terms.length -1].value
+
+  if (lastTerm === 'USA') {
+    if (type.length === 3) {
+			if (
+				(type[a] === 'locality' ||
+					type[a] === 'administrative_area_level_1' ||
+					type[a] === 'administrative_area_level_2') &&
+				type[b] === 'political' &&
+				type[c] === 'geocode'
+			) {
+				return { description: `${terms[a].value}, ${terms[b].value}` };
+			}
+		}
+  }
+  return suggestion;
+
 }
