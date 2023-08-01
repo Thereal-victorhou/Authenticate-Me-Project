@@ -27,7 +27,8 @@ const theme = createTheme({
 	},
 });
 
-function LocationSearchInput({ inputSelection }) {
+function LocationSearchInput({ inputSelection, sessionToken }) {
+  console.log(sessionToken)
 	const dispatch = useDispatch();
 	const [address, setAddress] = useState(``);
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
@@ -36,7 +37,6 @@ function LocationSearchInput({ inputSelection }) {
 	const [field, setField] = useState('');
 	const [location, setLocation] = useState('');
 	const [currentLocation, setCurrentLocation] = useState('');
-	const [sessionToken, setSessionToken] = useState({ sessionToken: null });
 
 	const pageType = useSelector(
 		(state) => state.navigation?.action?.currentPage
@@ -177,7 +177,7 @@ function LocationSearchInput({ inputSelection }) {
 									? 'suggession-item--active'
 									: 'suggestion-item';
 								const key = suggestion.description;
-                console.log(suggestion)
+
 								return (
 									<div
 										{...getSuggestionItemProps(suggestion, { className, key })}

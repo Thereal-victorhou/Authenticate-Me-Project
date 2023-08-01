@@ -139,4 +139,6 @@
 	color: rgb(84, 84, 84);
   height: 100%;
   width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

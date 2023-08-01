@@ -32,12 +32,7 @@ function Navigation({ isLoaded }) {
 		(state) => state.navigation?.action?.currentPage
 	);
 
-	const restaurantSearchInputLength = document
-		.querySelector('.search-bar-restaurants')
-		?.getAttribute('value')?.length;
-	const locationSearchInputLength = document
-		.querySelector('.search-bar-location')
-		?.getAttribute('values')?.length;
+	const restaurantSearchInputLength = document.querySelector('.search-bar-restaurants-input')?.value?.length;
 
 	// Clearing restaurant search field
 	const updateRestaurantSearch = (e) => {
@@ -68,11 +63,6 @@ function Navigation({ isLoaded }) {
 				</div>
 			</>
 		);
-	}
-
-	// Generate 1 session token
-	const generateSessionToken = () => {
-		return uuidv4();
 	}
 
 	// Set which input field was selected
@@ -214,11 +204,19 @@ function Navigation({ isLoaded }) {
 			if (event.target.name === 'restaurant-input') setIsSelected(true)
 			else setIsSelected(false);
 
-			if (event.target.name === 'location-input') setSelectInput(true);
+			if (event.target.name === 'location-input') {
+				setSelectInput(true);
+			}
 			else setSelectInput(false);
 		}
 
   },[])
+
+	// Create session token if location input is selected
+	// useEffect(()=> {
+
+	// },[])
+
 
 
 		// Hide/Show Restaurant
@@ -294,19 +292,19 @@ function Navigation({ isLoaded }) {
 											value={restaurantSearchInput}
 											onChange={updateRestaurantSearch}
 											onClick={(e) => handleSelection(e, e.target.name)}></input>
-											<div className='search-results-container'>
-												<div className='restaurant-search-results-container'>
-													{searchResult &&
-														Object.values(searchResult).map((res, i) =>
-															restaurantSearchRender(res, i)
-														)}
-												</div>
+										<div className='search-results-container'>
+											<div className='restaurant-search-results-container'>
+												{searchResult &&
+													Object.values(searchResult).map((res, i) =>
+														restaurantSearchRender(res, i)
+													)}
 											</div>
+										</div>
 									</div>
 									<div className='search-bar-divider'>
 										<div id='divide'></div>
 									</div>
-									<LocationSearchInput inputSelection={selectInput}/>
+									<LocationSearchInput inputSelection={selectInput} sessionToken={sessionToken}/>
 									<NavLink
 										exact
 										to='/search'
