@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LocationSearchInput from './LocationSearchInput';
 import {
 	liveRestaurantSearch,
-	liveLocationSearch,
 	clearSearch,
 } from '../../store/search';
 import { oneRestaurant } from '../../store/restaurant';
@@ -23,8 +22,9 @@ function Navigation({ isLoaded }) {
 
 	const [restaurantSearchInput, setRestaurantSearchInput] = useState('');
 	const [locationSearchInput, setLocationSearchInput] = useState('');
-	const [isSelected, setIsSelected] = useState('');
+	const [isSelected, setIsSelected] = useState(false);
 	const [sessionToken, setSessionToken] = useState('');
+	const [selectInput, setSelectInput] = useState(false);
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
@@ -78,11 +78,10 @@ function Navigation({ isLoaded }) {
 	// Set which input field was selected
 	const handleSelection = (e, field) => {
 		e.preventDefault();
-		if (field === 'restaurant') setIsSelected('restaurant');
-		if(field === 'location') {
-			setIsSelected('location')
-			setSessionToken(generateSessionToken())
-		}
+		// if (field === 'restaurant') setIsSelected('restaurant');
+		// if(field === 'location') {
+		// 	setSessionToken(generateSessionToken())
+		// }
 
 	};
 
@@ -117,8 +116,6 @@ function Navigation({ isLoaded }) {
 		);
 	};
 
-	// Render location search results
-	const locationSearchRender = (res, i) => {};
 
 	// No Results
 	const noResult = () => {
@@ -206,22 +203,39 @@ function Navigation({ isLoaded }) {
 
 		}, [dispatch, restaurantSearchInput]);
 
+
+  // Determine if restaurant input box and which location was selected
+  useEffect(() => {
+
+		window.onclick = (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			console.log(event.target)
+
+			if (event.target.name === 'restaurant-input') setIsSelected(true)
+			else setIsSelected(false);
+
+			if (event.target.name === 'location-input') setSelectInput(true);
+			else setSelectInput(false);
+		}
+
+  },[])
+
+
 		// Hide/Show Restaurant
 		useEffect(async() => {
-			switch (isSelected) {
-				case 'restaurant':
-					setIsSelected('restaurant')
-					await document.querySelector('.restaurant-search-results-container')?.classList.remove('hide');
-					await document.querySelector('.location-search-results-container')?.classList.add('hide');
-					break;
-				default:
-					break;
+
+			if (isSelected) {
+				await document.querySelector('.restaurant-search-results-container')?.classList.remove('hide');
+			} else {
+				await document.querySelector('.restaurant-search-results-container')?.classList.add('hide');
 			}
+
 		}, [isSelected])
 
 		// Styling Live Restaurant Search Box
 		useEffect(() => {
-			if (isSelected === 'restaurant' && restaurantSearchInputLength > 1) {
+			if (isSelected && restaurantSearchInputLength > 1) {
 				document.querySelector('.search-bar-restaurants-input')?.classList.add('live');
 			} else {
 				document
@@ -277,7 +291,7 @@ function Navigation({ isLoaded }) {
 										<input
 											className='search-bar-restaurants-input'
 											placeholder='tacos, burgers, dinner'
-											name='restaurant'
+											name='restaurant-input'
 											value={restaurantSearchInput}
 											onChange={updateRestaurantSearch}
 											onClick={(e) => handleSelection(e, e.target.name)}></input>
@@ -293,7 +307,7 @@ function Navigation({ isLoaded }) {
 									<div className='search-bar-divider'>
 										<div id='divide'></div>
 									</div>
-									<LocationSearchInput />
+									<LocationSearchInput inputSelection={selectInput}/>
 									<NavLink
 										exact
 										to='/search'

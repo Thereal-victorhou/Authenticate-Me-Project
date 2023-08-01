@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import PlacesAutocomplete, {
@@ -6,7 +6,12 @@ import PlacesAutocomplete, {
 	geocodeByPlaceId,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { searchOptions, abbreviateState, validateSuggestions, handleSuggestionDescriptionBasedOnType } from '../Utils/LocationValidation';
+import {
+	searchOptions,
+	abbreviateState,
+	validateSuggestions,
+	handleSuggestionDescriptionBasedOnType,
+} from '../Utils/LocationValidation';
 import saveLocation from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
@@ -22,178 +27,142 @@ const theme = createTheme({
 	},
 });
 
-function LocationSearchInput() {
-  const dispatch = useDispatch();
-  const inputRef = useRef();
-
+function LocationSearchInput({ inputSelection }) {
+	const dispatch = useDispatch();
 	const [address, setAddress] = useState(``);
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 	const [suggestedLocations, setSuggestedLocations] = useState([]);
-  const [firstOption, setFirstOption] = useState('');
-  const [selectInput, setSelectInput] = useState(false);
-  const [field, setField] = useState('')
+	const [firstOption, setFirstOption] = useState('');
+	const [field, setField] = useState('');
 	const [location, setLocation] = useState('');
-  const [currentLocation, setCurrentLocation] = useState('');
-  const [sessionToken, setSessionToken] = useState({ sessionToken: null });
+	const [currentLocation, setCurrentLocation] = useState('');
+	const [sessionToken, setSessionToken] = useState({ sessionToken: null });
 
-  const pageType = useSelector(
+	const pageType = useSelector(
 		(state) => state.navigation?.action?.currentPage
 	);
 
-  // Leave here to set up autocomplete placeholder input box
-  let locationPlaceholder = document.getElementsByName('location-input')[0]?.placeholder;
+	// Leave here to set up autocomplete placeholder input box
+	let locationPlaceholder =
+		document.getElementsByName('location-input')[0]?.placeholder;
 
-  // Set and Save Location
+	// Set and Save Location
 	const handleSelect = async (value) => {
-    console.log(value)
-    setAddress(value);
-    setLocation(value);
-    // await dispatch(saveLocation(value));
-    return;
+		console.log(value);
+		setAddress(value);
+		setLocation(value);
+		// await dispatch(saveLocation(value));
+		return;
 		const result = await geocodeByAddress(address);
 		const ll = await getLatLng(result[0]);
 
-		console.log('ll: ',ll);
+		console.log('ll: ', ll);
 		setAddress(value);
 		setCoordinates(ll);
 	};
 
 	// Get User Location -> Set User Location
 	const handleCurrentLocation = async (e) => {
-    if (e) e.preventDefault()
+		if (e) e.preventDefault();
 
-    const response = await fetch('http://ip-api.com/json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+		const response = await fetch('http://ip-api.com/json', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
-    const result = await response.json();
-    if (result.status === 'success') {
-
-      setAddress(`${result.city}, ${abbreviateState(result.regionName)}`);
-      setCurrentLocation(address);
-      setLocation(address);
-      // await dispatch(saveLocation( { currentLocation: currentLocation } ));
-    } else{
-      alert('Failed to get current location. Please search for your preferred location.')
-    }
+		const result = await response.json();
+		if (result.status === 'success') {
+			setAddress(`${result.city}, ${abbreviateState(result.regionName)}`);
+			setCurrentLocation(address);
+			setLocation(address);
+			// await dispatch(saveLocation( { currentLocation: currentLocation } ));
+		} else {
+			alert(
+				'Failed to get current location. Please search for your preferred location.'
+			);
+		}
 	};
 
-  // Generate 1 session token
-  const generateSessionToken = () => {
-    return uuidv4();
-  }
+	// Generate 1 session token
+	const generateSessionToken = () => {
+		return uuidv4();
+	};
 
+	// Handle autocomplete error
+	const onError = (status, clearSuggestions) => {
+		console.log('Google Maps API returned error with status: ', status);
+		clearSuggestions();
+	};
 
-  // Filter Google Auto Complete to only render valid suggestions
-  const updateSuggestions = (suggestions) => {
-    const validSuggestions = validateSuggestions(suggestions);
-    console.log(validSuggestions)
-    if (validSuggestions.length > 0) {
-
-      validSuggestions.map((suggestion) => {
-        // const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
-        // const key = suggestion.placeId;
-        return (
-          <div
-            name='location-suggestion'
-            className='location-suggestions'
-            id={suggestion.placeId}
-            value={suggestion.description}
-            key={suggestion.placeId}>
-            <span>{`${suggestion.description}`}</span>
-          </div>
-        );
-      })
-    }
-  }
-
-  // Handle autocomplete error
-  const onError = (status, clearSuggestions) => {
-    console.log('Google Maps API returned error with status: ', status)
-    clearSuggestions()
-  }
-
-
-  // Render suggestions in input bar
+	// Render suggestions in input bar
 	useEffect(() => {
 		// updateResults();
-    setFirstOption(suggestedLocations[0]?.description)
-    locationPlaceholder = `${firstOption ? `${firstOption}`: 'address, city, state or zip'}`
+		setFirstOption(suggestedLocations[0]?.description);
+		locationPlaceholder = `${
+			firstOption ? `${firstOption}` : 'address, city, state or zip'
+		}`;
 	}, [suggestedLocations]);
 
-  // Close location results
-  useEffect( async () => {
-    if ( selectInput === true ) {
-      await document.querySelector('.location-search-results-container')?.classList.remove('hide');
-    }
-    else {
-      await document.querySelector('.location-search-results-container')?.classList.add('hide');
-    }
+	// hide/show location results
+	useEffect(async () => {
+		if (inputSelection === true) {
+			await document
+				.querySelector('.location-search-results-container')
+				?.classList.remove('hide');
+		} else {
+			await document
+				.querySelector('.location-search-results-container')
+				?.classList.add('hide');
+		}
 
-    if ( selectInput === true && pageType === 'other') await document.querySelector('.search-bar-location.other')?.classList.add('live')
-    else await document.querySelector('.search-bar-location.other')?.classList.remove('live')
-
-  }, [selectInput, pageType]);
-
-
-  // Determine if location input box and which location was selected
-  useEffect(() => {
-    window.onclick = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      // console.log(event.target)
-      if (event.target.contains(inputRef.current)
-        && event.target !== inputRef.current) {
-          setSelectInput(false);
-
-      } else {
-        if (event.target.name === 'location-input') {
-          setSelectInput(true);
-        }
-        else setSelectInput(false);
-      }
-
-    }
-
-  },[])
+		if (inputSelection === true && pageType === 'other')
+			await document
+				.querySelector('.search-bar-location.other')
+				?.classList.add('live');
+		else
+			await document
+				.querySelector('.search-bar-location.other')
+				?.classList.remove('live');
+	}, [pageType, inputSelection]);
 
 
-  // Switch styling for location input based on page
-  useEffect( async () => {
-    if (pageType === 'home') {
-      await document.querySelector('.search-bar-location')?.classList.remove('other');
-    }else {
-      await document.querySelector('.search-bar-location')?.classList.add('other');
-    }
-  },[pageType])
+	// Switch styling for location input based on page
+	useEffect(async () => {
+		if (pageType === 'home') {
+			await document
+				.querySelector('.search-bar-location')
+				?.classList.remove('other');
+		} else {
+			await document
+				.querySelector('.search-bar-location')
+				?.classList.add('other');
+		}
+	}, [pageType]);
 
 	return (
 		<>
 			<PlacesAutocomplete
 				value={address}
 				onChange={setAddress}
-				onSelect={(e)=>handleSelect(e)}
-        onError={onError}
+				onSelect={(e) => handleSelect(e)}
+				onError={onError}
 				searchOptions={searchOptions(address)}>
 				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 					<div className='location-search-container'>
 						<input
 							name='location-input'
-              ref={inputRef}
 							{...getInputProps({
 								placeholder: 'address, city, state or zip',
 								className: 'search-bar-location',
 							})}
 						/>
-            {/* <div className='search-bar-location-placeholder'>{firstOption}</div> */}
+						{/* <div className='search-bar-location-placeholder'>{firstOption}</div> */}
 						<div className='location-search-results-container'>
 							<div
 								className='current-location-container'
-								onClick={(e) => handleCurrentLocation(e)}
-                >
+								onClick={(e) => handleCurrentLocation(e)}>
 								<PlaceOutlinedIcon
 									id='location-icon'
 									sx={{
@@ -203,20 +172,26 @@ function LocationSearchInput() {
 								<p>Current Location</p>
 							</div>
 							{loading && <div>Loading...</div>}
-              {validateSuggestions(suggestions).map((suggestion) => {
-                const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
-                const key = suggestion.description;
-                console.log(suggestion)
-                return (
-                  <div
-                    {...getSuggestionItemProps(suggestion, { key })}
-                    name='location-suggestion'
-                    className='location-suggestions'
-                    value={suggestion.description}>
-                    <span>{handleSuggestionDescriptionBasedOnType(suggestion).description}</span>
-                  </div>
-                );
-              })}
+							{validateSuggestions(suggestions).map((suggestion) => {
+								const className = suggestion.active
+									? 'suggession-item--active'
+									: 'suggestion-item';
+								const key = suggestion.description;
+								return (
+									<div
+										{...getSuggestionItemProps(suggestion, { className, key })}
+										name='location-suggestion'
+										className='location-suggestions'
+										value={suggestion.description}>
+										<span>
+											{
+												handleSuggestionDescriptionBasedOnType(suggestion)
+													.description
+											}
+										</span>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 				)}
