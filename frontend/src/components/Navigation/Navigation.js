@@ -47,13 +47,6 @@ function Navigation({ isLoaded }) {
 		}
 	};
 
-	// Clearing location search field
-	const updateLocationSearch = (e) => {
-		setLocationSearchInput(e.target.value);
-		if (e.target.value.length === 1) {
-		}
-	};
-
 
 	let sessionLinks;
 	if (sessionUser) {
@@ -200,7 +193,7 @@ function Navigation({ isLoaded }) {
 		}
 	}, [pageType]);
 
-	// Live Search
+	// Live Restaurant Search
 	useEffect(() => {
 		if (restaurantSearchInput.length > 1) {
 			dispatch(
@@ -210,10 +203,8 @@ function Navigation({ isLoaded }) {
 				})
 				);
 			}
-		if (locationSearchInput.length > 1) {
-			dispatch(liveLocationSearch(locationSearchInput, sessionToken));
-		}
-		}, [dispatch, restaurantSearchInput, locationSearchInput]);
+
+		}, [dispatch, restaurantSearchInput]);
 
 		// Hide/Show Restaurant or Location Results
 		useEffect(async() => {

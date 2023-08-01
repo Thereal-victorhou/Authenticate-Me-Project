@@ -7,6 +7,7 @@ import PlacesAutocomplete, {
 	getLatLng,
 } from 'react-places-autocomplete';
 import { searchOptions, abbreviateState } from '../Utils/LocationValidation';
+import saveLocation from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -22,10 +23,10 @@ const theme = createTheme({
 });
 
 function LocationSearchInput() {
-
+  const dispatch = useDispatch();
   const inputRef = useRef();
 
-	const [address, setAddress] = useState('');
+	const [address, setAddress] = useState(``);
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 	const [suggestedLocations, setSuggestedLocations] = useState([]);
   const [firstOption, setFirstOption] = useState('');
@@ -46,8 +47,10 @@ function LocationSearchInput() {
 
 
 	const handleSelect = async (value) => {
+    console.log(value)
     setAddress(value);
     setLocation(value);
+
     return;
 		const result = await geocodeByAddress(address);
 		const ll = await getLatLng(result[0]);
@@ -59,7 +62,7 @@ function LocationSearchInput() {
 
 	// Get User Location -> Set User Location
 	const handleCurrentLocation = async (e) => {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     const response = await fetch('http://ip-api.com/json', {
       method: 'GET',
@@ -72,7 +75,9 @@ function LocationSearchInput() {
     if (result.status === 'success') {
       console.log('result ', result)
       setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
-      setAddress(currentLocation)
+      setAddress(currentLocation);
+      setLocation(currentLocation);
+      await dispatch(saveLocation(currentLocation))
     } else{
       alert('Failed to get current location. Please search for your preferred location.')
     }
@@ -84,26 +89,22 @@ function LocationSearchInput() {
   }
 
   // Handle current location as default on startup
-  useEffect( async () => {
-    // handleCurrentLocation()
-    const response = await fetch('http://ip-api.com/json', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
+  // useEffect( async () => {
+  //   // handleCurrentLocation()
+  //   const response = await fetch('http://ip-api.com/json', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     }
+  //   });
 
-    const result = await response.json();
-    if (result.status === 'success') {
-      console.log('result ', result)
-      setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
-    }
-  })
+  //   const result = await response.json();
+  //   if (result.status === 'success') {
+  //     console.log('result ', result)
+  //     setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
+  //   }
+  // })
 
-  // Set location input to current location
-  useEffect(()=> {
-    setLocation(currentLocation)
-  },[currentLocation])
 
   // Render suggestions in input bar
 	useEffect(() => {
@@ -141,7 +142,6 @@ function LocationSearchInput() {
       } else {
         if (event.target.name === 'location-input') {
           setSelectInput(true);
-          console.log('selected')
         }
         else setSelectInput(false);
 

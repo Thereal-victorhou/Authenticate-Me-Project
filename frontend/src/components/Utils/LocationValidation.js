@@ -1,18 +1,28 @@
 const searchOptionsCities = {
   language: 'en',
   types: ['(cities)'],
+  componentRestrictions: { country: 'us' },
   country: ["us", "pr", "vi", "gu", "mp"],
 };
 
 const searchOptionsAddress = {
   language: 'en',
   types: ['address'],
+  componentRestrictions: { country: 'us' },
   country: ["us", "pr", "vi", "gu", "mp"],
 }
 
 const searchOptionsRegion = {
   language: 'en',
   types: ['(regions)'],
+  componentRestrictions: { country: 'us' },
+  country: ["us", "pr", "vi", "gu", "mp"],
+}
+
+const searchOptionsZip = {
+  language: 'en',
+  types: ['postal_code', 'postal_code_prefix', 'postal_code_suffix'],
+  componentRestrictions: { country: 'us' },
   country: ["us", "pr", "vi", "gu", "mp"],
 }
 
@@ -25,7 +35,7 @@ const streetRegex = /\d+[ ](?:[A-Za-z0-9.-]+[ ]?)+(?:Avenue|Lane|Road|Boulevard|
 // Determine type of input
 export const searchOptions = (input) => {
 
-  if (zipRegex.test(input)) return searchOptionsRegion;
+  if (zipRegex.test(input)) return searchOptionsZip;
   else if (cityRegex.test(input)) return searchOptionsCities;
   else if (stateRegex.test(input) || stateAbvRegex.test(input)) return searchOptionsRegion;
   else if (streetRegex.test(input)) return searchOptionsAddress;
@@ -90,4 +100,3 @@ var states = {
 export const abbreviateState = (state) => {
   return states[state];
 }
-
