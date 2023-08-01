@@ -171,12 +171,13 @@ function LocationSearchInput({ inputSelection }) {
 								/>
 								<p>Current Location</p>
 							</div>
-							{loading && <div>Loading...</div>}
+							{/* {loading && <div>Loading...</div>} */}
 							{validateSuggestions(suggestions).map((suggestion) => {
 								const className = suggestion.active
 									? 'suggession-item--active'
 									: 'suggestion-item';
 								const key = suggestion.description;
+                console.log(suggestion)
 								return (
 									<div
 										{...getSuggestionItemProps(suggestion, { className, key })}

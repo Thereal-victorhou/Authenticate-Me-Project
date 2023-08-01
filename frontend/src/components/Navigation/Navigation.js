@@ -210,7 +210,6 @@ function Navigation({ isLoaded }) {
 		window.onclick = (event) => {
 			event.preventDefault();
 			event.stopPropagation();
-			console.log(event.target)
 
 			if (event.target.name === 'restaurant-input') setIsSelected(true)
 			else setIsSelected(false);

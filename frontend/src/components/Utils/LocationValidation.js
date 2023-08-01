@@ -54,15 +54,17 @@ const c = 2;
 export const validateOneSuggestion = (suggestion) => {
 	const type = suggestion.types;
 	const terms = suggestion.terms;
-	const term = terms[terms.length - 1].value;
+	const lastTerm = terms[terms.length - 1].value;
+  const firstValue = terms[0].value;
 
-	if (term === 'USA') {
+	if (lastTerm === 'USA') {
 		if (type.length === 2) {
 			if (
 				(type[a] === 'street_address' ||
 					type[a] === 'premise' ||
 					type[a] === 'postal_code') &&
-				type[b] === 'geocode'
+				type[b] === 'geocode' &&
+        firstValue !== 'Home Depot'
 			) {
 				return suggestion;
 			}
