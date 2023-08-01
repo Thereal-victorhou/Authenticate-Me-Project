@@ -203,18 +203,17 @@ function LocationSearchInput() {
 								<p>Current Location</p>
 							</div>
 							{loading && <div>Loading...</div>}
-              {suggestions.map((suggestion) => {
+              {validateSuggestions(suggestions).map((suggestion) => {
                 const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
-                const key = suggestion.placeId;
-                // const style = validateOneSuggestion(suggestion) ? 'visible' : 'hidden';
+                const key = suggestion.description;
+                console.log(suggestion)
                 return (
                   <div
-                    {...getSuggestionItemProps(suggestion, { className, key })}
+                    {...getSuggestionItemProps(suggestion, { key })}
                     name='location-suggestion'
                     className='location-suggestions'
-                    id={suggestion.placeId}
                     value={suggestion.description}>
-                    {validateOneSuggestion(suggestion) ? (<span value={suggestion} >{ suggestion.description }</span>) : ''}
+                    <span>{suggestion.description}</span>
                   </div>
                 );
               })}

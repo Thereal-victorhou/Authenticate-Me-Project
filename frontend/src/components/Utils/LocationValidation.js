@@ -50,58 +50,47 @@ const a = 0;
 const b = 1;
 const c = 2;
 
-// Return autocomplete suggestions if out is an Address, City, State or Zip
-export const validateSuggestions = (suggestions) => {
-  const valid = [];
-  suggestions.forEach(suggestion => {
-    const type = suggestion.types;
-
-    if (type.length === 2) {
-
-      if ((type[a] === 'street_address' || type[a] === 'premise' || type[a] === 'postal_code') && (type[b] === 'geocode')) {
-        valid.push(suggestion)
-      }
-
-    } else if (type.length === 3) {
-
-      if ((type[a] === 'locality' || type[a] === 'administrative_area_level_1' || type[a] === 'administrative_area_level_2') && (type[b] === 'political') && (type[c] === 'geocode')) {
-        valid.push(suggestion);
-      }
-
-    }
-  });
-
-  return valid;
-};
-
 // Return autocomplete suggestion if out is an Address, City, State or Zip
 export const validateOneSuggestion = (suggestion) => {
-  const type = suggestion.types;
-  const terms = suggestion.terms;
-  const term  = terms[terms.length -1].value;
+	const type = suggestion.types;
+	const terms = suggestion.terms;
+	const term = terms[terms.length - 1].value;
 
-  if (term === 'USA') {
+	if (term === 'USA') {
+		if (type.length === 2) {
+			if (
+				(type[a] === 'street_address' ||
+					type[a] === 'premise' ||
+					type[a] === 'postal_code') &&
+				type[b] === 'geocode'
+			) {
+				return suggestion;
+			}
+		} else if (type.length === 3) {
+			if (
+				(type[a] === 'locality' ||
+					type[a] === 'administrative_area_level_1' ||
+					type[a] === 'administrative_area_level_2') &&
+				type[b] === 'political' &&
+				type[c] === 'geocode'
+			) {
+				return suggestion;
+			}
+		}
+	}
+};
 
-    if (type.length === 2) {
+// Return autocomplete suggestions if out is an Address, City, State or Zip
+export const validateSuggestions = (suggestions) => {
+	const valid = [];
 
-      if ((type[a] === 'street_address' || type[a] === 'premise' || type[a] === 'postal_code') && (type[b] === 'geocode')) {
-        return suggestion;
-      }
+	suggestions.forEach((suggestion) => {
+    const ideal = validateOneSuggestion(suggestion)
+    if (ideal) valid.push(ideal)
+	});
 
-    } else if (type.length === 3) {
-
-      if ((type[a] === 'locality' || type[a] === 'administrative_area_level_1' || type[a] === 'administrative_area_level_2') && (type[b] === 'political') && (type[c] === 'geocode')) {
-        return suggestion;
-      }
-
-    }
-    
-  }
-
-}
-
-
-
+	return valid;
+};
 
 const states = {
 	Alabama: 'AL',
@@ -159,3 +148,8 @@ const states = {
 export const abbreviateState = (state) => {
 	return states[state];
 };
+
+const handleSuggestionType = (suggestion) => {
+  const type = suggestion.types;
+	const terms = suggestion.terms;
+}

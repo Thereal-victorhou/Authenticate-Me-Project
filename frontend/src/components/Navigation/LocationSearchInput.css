@@ -117,8 +117,8 @@
 	align-items: center;
 	cursor: pointer;
 	padding-left: 10px;
+  min-height: 40px;
 	width: 100%;
-	margin-top: 10px;
 }
 
 .location-suggestions-hidden {
@@ -137,4 +137,6 @@
 .location-suggestions span {
 	font-size: 14px;
 	color: rgb(84, 84, 84);
+  height: 100%;
+  width: 100%;
 }
