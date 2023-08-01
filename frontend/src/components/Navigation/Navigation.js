@@ -206,7 +206,7 @@ function Navigation({ isLoaded }) {
 
 		}, [dispatch, restaurantSearchInput]);
 
-		// Hide/Show Restaurant or Location Results
+		// Hide/Show Restaurant
 		useEffect(async() => {
 			switch (isSelected) {
 				case 'restaurant':
