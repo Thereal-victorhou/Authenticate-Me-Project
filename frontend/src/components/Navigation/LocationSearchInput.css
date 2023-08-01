@@ -86,7 +86,7 @@
 	align-items: center;
 	width: inherit;
 	height: 50px;
-	padding-left: 10px;
+	padding-left: 7px;
 	/* background-color: orange; */
 }
 
@@ -97,7 +97,7 @@
 
 #location-icon {
 	/* background-color: green; */
-	margin-right: 15px;
+	margin-right: 10px;
 }
 
 .current-location-container p {
@@ -119,6 +119,14 @@
 	padding-left: 10px;
 	width: 100%;
 	margin-top: 10px;
+}
+
+.location-suggestions-hidden {
+  /* visibility: hidden; */
+  cursor: hidden;
+  background: transparent;
+  color: transparent;
+  /* height: 0px; */
 }
 
 .location-suggestions:hover {

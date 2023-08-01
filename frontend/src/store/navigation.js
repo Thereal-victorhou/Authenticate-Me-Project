@@ -25,6 +25,7 @@ export const saveCurrentPage = (page) => (dispatch) => {
 };
 
 export const saveLocation = (location) => (dispatch) => {
+	console.log(location)
 	dispatch(setLo(location));
 }
 

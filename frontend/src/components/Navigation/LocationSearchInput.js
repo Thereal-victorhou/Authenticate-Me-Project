@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByPlaceId,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { searchOptions, abbreviateState } from '../Utils/LocationValidation';
+import { searchOptions, abbreviateState, validateSuggestions, validateOneSuggestion } from '../Utils/LocationValidation';
 import saveLocation from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
@@ -40,17 +40,15 @@ function LocationSearchInput() {
 		(state) => state.navigation?.action?.currentPage
 	);
 
-	const inputValue = document.getElementsByName('location-input')[0]?.value;
-
   // Leave here to set up autocomplete placeholder input box
   let locationPlaceholder = document.getElementsByName('location-input')[0]?.placeholder;
 
-
+  // Set and Save Location
 	const handleSelect = async (value) => {
     console.log(value)
     setAddress(value);
     setLocation(value);
-
+    // await dispatch(saveLocation(value));
     return;
 		const result = await geocodeByAddress(address);
 		const ll = await getLatLng(result[0]);
@@ -73,11 +71,11 @@ function LocationSearchInput() {
 
     const result = await response.json();
     if (result.status === 'success') {
-      console.log('result ', result)
-      setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
-      setAddress(currentLocation);
-      setLocation(currentLocation);
-      await dispatch(saveLocation(currentLocation))
+
+      setAddress(`${result.city}, ${abbreviateState(result.regionName)}`);
+      setCurrentLocation(address);
+      setLocation(address);
+      // await dispatch(saveLocation( { currentLocation: currentLocation } ));
     } else{
       alert('Failed to get current location. Please search for your preferred location.')
     }
@@ -88,22 +86,35 @@ function LocationSearchInput() {
     return uuidv4();
   }
 
-  // Handle current location as default on startup
-  // useEffect( async () => {
-  //   // handleCurrentLocation()
-  //   const response = await fetch('http://ip-api.com/json', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     }
-  //   });
 
-  //   const result = await response.json();
-  //   if (result.status === 'success') {
-  //     console.log('result ', result)
-  //     setCurrentLocation(`${result.city}, ${abbreviateState(result.regionName)}`)
-  //   }
-  // })
+  // Filter Google Auto Complete to only render valid suggestions
+  const updateSuggestions = (suggestions) => {
+    const validSuggestions = validateSuggestions(suggestions);
+    console.log(validSuggestions)
+    if (validSuggestions.length > 0) {
+
+      validSuggestions.map((suggestion) => {
+        // const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
+        // const key = suggestion.placeId;
+        return (
+          <div
+            name='location-suggestion'
+            className='location-suggestions'
+            id={suggestion.placeId}
+            value={suggestion.description}
+            key={suggestion.placeId}>
+            <span>{`${suggestion.description}`}</span>
+          </div>
+        );
+      })
+    }
+  }
+
+  // Handle autocomplete error
+  const onError = (status, clearSuggestions) => {
+    console.log('Google Maps API returned error with status: ', status)
+    clearSuggestions()
+  }
 
 
   // Render suggestions in input bar
@@ -125,7 +136,6 @@ function LocationSearchInput() {
     if ( selectInput === true && pageType === 'other') await document.querySelector('.search-bar-location.other')?.classList.add('live')
     else await document.querySelector('.search-bar-location.other')?.classList.remove('live')
 
-
   }, [selectInput, pageType]);
 
 
@@ -134,7 +144,7 @@ function LocationSearchInput() {
     window.onclick = (event) => {
       event.preventDefault();
       event.stopPropagation();
-
+      // console.log(event.target)
       if (event.target.contains(inputRef.current)
         && event.target !== inputRef.current) {
           setSelectInput(false);
@@ -144,11 +154,12 @@ function LocationSearchInput() {
           setSelectInput(true);
         }
         else setSelectInput(false);
-
       }
+
     }
 
   },[])
+
 
   // Switch styling for location input based on page
   useEffect( async () => {
@@ -165,6 +176,7 @@ function LocationSearchInput() {
 				value={address}
 				onChange={setAddress}
 				onSelect={(e)=>handleSelect(e)}
+        onError={onError}
 				searchOptions={searchOptions(address)}>
 				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 					<div className='location-search-container'>
@@ -193,14 +205,16 @@ function LocationSearchInput() {
 							{loading && <div>Loading...</div>}
               {suggestions.map((suggestion) => {
                 const className = suggestion.active ? 'suggession-item--active' : 'suggestion-item';
+                const key = suggestion.placeId;
+                // const style = validateOneSuggestion(suggestion) ? 'visible' : 'hidden';
                 return (
                   <div
-                    {...getSuggestionItemProps(suggestion, { className })}
+                    {...getSuggestionItemProps(suggestion, { className, key })}
                     name='location-suggestion'
                     className='location-suggestions'
                     id={suggestion.placeId}
                     value={suggestion.description}>
-                    <span>{suggestion.description}</span>
+                    {validateOneSuggestion(suggestion) ? (<span value={suggestion} >{ suggestion.description }</span>) : ''}
                   </div>
                 );
               })}
