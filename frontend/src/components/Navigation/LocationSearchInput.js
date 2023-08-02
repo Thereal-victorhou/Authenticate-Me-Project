@@ -12,7 +12,7 @@ import {
 	validateSuggestions,
 	handleSuggestionDescriptionBasedOnType,
 } from '../Utils/LocationValidation';
-import saveLocation from '../../store/navigation';
+import { saveLocation } from '../../store/search';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -54,19 +54,18 @@ function LocationSearchInput({ inputSelection, sessionToken }) {
     const locationObj = { location: value};
 
     try {
-      await dispatch(saveLocation(locationObj));
+      dispatch(saveLocation(locationObj));
     } catch(err) {
       console.log(err)
     }
 
-    try {
-      const result = await geocodeByAddress(value);
-      const ll = await getLatLng(result[0]);
-
-      console.log('ll: ', ll);
-    } catch(err) {
-      console.log(`Error: ${err.message}`)
-    }
+    // try {
+    //   const result = await geocodeByAddress(value);
+    //   const ll = await getLatLng(result[0]);
+    //   console.log('ll: ', ll);
+    // } catch(err) {
+    //   console.log(`Error: ${err.message}`)
+    // }
 		// setCoordinates(ll);
 	};
 

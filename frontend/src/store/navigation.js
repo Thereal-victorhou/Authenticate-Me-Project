@@ -1,8 +1,6 @@
 // Type Definitions
 const SET_PAGE = '/navigation/SET_PAGE';
 
-const SET_LOCATION = '/navigation/SET_LOCATION';
-
 // Actions
 const setPage = (currentPage) => {
 	return {
@@ -11,22 +9,10 @@ const setPage = (currentPage) => {
 	};
 };
 
-const setLo = (location) => {
-	return {
-		type: SET_LOCATION,
-		location
-	};
-};
-
 // Thunk
 export const saveCurrentPage = (page) => async (dispatch) => {
 	dispatch(setPage(page));
 };
-
-export const saveLocation = (selectedLocation) => (dispatch) => {
-	console.log(selectedLocation)
-	dispatch(setLo(selectedLocation));
-}
 
 // Reducer
 const currentPageReducer = (state = {}, action) => {
@@ -34,10 +20,6 @@ const currentPageReducer = (state = {}, action) => {
 	switch (action.type) {
 
 		case SET_PAGE:
-			newState = { action };
-			return newState;
-
-		case SET_LOCATION:
 			newState = { action };
 			return newState;
 
