@@ -205,6 +205,7 @@ function Navigation({ isLoaded }) {
 			else setIsSelected(false);
 
 			if (event.target.name === 'location-input') {
+				// setSelectInput(false)
 				setSelectInput(true);
 			}
 			else setSelectInput(false);

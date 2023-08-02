@@ -48,17 +48,26 @@ function LocationSearchInput({ inputSelection, sessionToken }) {
 
 	// Set and Save Location
 	const handleSelect = async (value) => {
-		console.log(value);
+		// console.log(value);
 		setAddress(value);
 		setLocation(value);
-		// await dispatch(saveLocation(value));
-		return;
-		const result = await geocodeByAddress(address);
-		const ll = await getLatLng(result[0]);
+    const locationObj = { location: value};
 
-		console.log('ll: ', ll);
-		setAddress(value);
-		setCoordinates(ll);
+    try {
+      await dispatch(saveLocation(locationObj));
+    } catch(err) {
+      console.log(err)
+    }
+
+    try {
+      const result = await geocodeByAddress(value);
+      const ll = await getLatLng(result[0]);
+
+      console.log('ll: ', ll);
+    } catch(err) {
+      console.log(`Error: ${err.message}`)
+    }
+		// setCoordinates(ll);
 	};
 
 	// Get User Location -> Set User Location
