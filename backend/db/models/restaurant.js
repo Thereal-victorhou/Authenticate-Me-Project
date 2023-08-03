@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     location: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     phoneNumber: {
@@ -16,6 +16,42 @@ module.exports = (sequelize, DataTypes) => {
     imgSrc: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    reviewCount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    categories: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: true,
+    },
+    rating: {
+      type: DataTypes.REAL,
+      allowNull: false,
+    },
+    coordinates: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
+    price: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    displayPhone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    distance: {
+      type: DataTypes.REAL,
+      allowNull: false,
+    },
+    region: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
+    yelpId: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   }, {});
   Restaurant.associate = function(models) {

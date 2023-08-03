@@ -24,6 +24,21 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      zipCode: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: false,
+      },
+      birthday: {
+        type: Sequelize.STRING(10),
+        allowNull: true,
+        unique: false,
+      },
+      imgSrc: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false,
+      },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false,
