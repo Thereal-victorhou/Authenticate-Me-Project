@@ -110,14 +110,13 @@ router.post(
 		const locationObj = req.body;
 		const { location, latitude, longitude } = locationObj;
 
+		// search database for restaurants based on location
 
 		// %2C == ' comma '
 		// %20 == ' space '
 		// escape spaces and commas from location
 		const newLocation = encodeURI(location).replace(/,/g, '%2C');
-		const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
-		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
-		sdk.v3_business_search({
+		const searchObj = {
 			location: `${newLocation}`,
 			term: 'restaurants',
 			radius: '10000',
@@ -129,10 +128,12 @@ router.post(
 			sort_by: 'rating',
 			limit: '50',
 			offset: '0'
-		})
+		}
+		const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
+		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+		sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
 			.then(({ data }) => console.log(data))
 			.catch(err => console.error(err));
-
 			})
 )
 
