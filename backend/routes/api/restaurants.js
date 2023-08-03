@@ -131,10 +131,14 @@ router.post(
 		}
 		const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
 		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
-		sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
-			.then(({ data }) => console.log(data))
-			.catch(err => console.error(err));
-			})
+		try {
+			const resu = await sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
+			console.log(resu.data.region)
+		} catch(err) {
+			console.log(err)
+		}
+
+	})
 )
 
 // GET one restaurant

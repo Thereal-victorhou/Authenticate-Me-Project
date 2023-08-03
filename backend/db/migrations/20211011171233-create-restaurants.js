@@ -20,7 +20,7 @@ module.exports = {
         unique: true,
       },
       location: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
         unique: true,
       },
@@ -36,11 +36,11 @@ module.exports = {
         allowNull: false,
       },
       categories: {
-        type: Sequelize.ARRAY(Sequelize.STRING(15)),
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: true,
       },
       rating: {
-        type: Sequelize.REAL,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       coordinates: {
@@ -49,18 +49,18 @@ module.exports = {
       },
       price: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       displayPhone: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       distance: {
-        type: Sequelize.REAL,
-        allowNull: false,
+        type: Sequelize.FLOAT,
+        allowNull: true,
       },
       region: {
-        type: Sequelize.ARRAY,
+        type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
       },
       yelpId: {
