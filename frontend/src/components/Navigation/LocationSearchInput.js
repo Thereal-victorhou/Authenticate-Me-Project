@@ -27,8 +27,8 @@ const theme = createTheme({
 	},
 });
 
-function LocationSearchInput({ inputSelection, sessionToken }) {
-  console.log(sessionToken)
+function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocation }) {
+
 	const dispatch = useDispatch();
 	const [address, setAddress] = useState(``);
 	const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
@@ -36,7 +36,6 @@ function LocationSearchInput({ inputSelection, sessionToken }) {
 	const [firstOption, setFirstOption] = useState('');
 	const [field, setField] = useState('');
 	const [location, setLocation] = useState('');
-	const [currentLocation, setCurrentLocation] = useState('');
 
 	const pageType = useSelector(
 		(state) => state.navigation?.action?.currentPage
@@ -48,25 +47,22 @@ function LocationSearchInput({ inputSelection, sessionToken }) {
 
 	// Set and Save Location
 	const handleSelect = async (value) => {
-		// console.log(value);
 		setAddress(value);
 		setLocation(value);
-    const locationObj = { location: value};
 
     try {
+      const result = await geocodeByAddress(value);
+      const ll = await getLatLng(result[0]);
+      /* TODO: Create error handling for before calling handleUpdateLocation */
+      const locationObj = { location: value, ...ll};
       dispatch(saveLocation(locationObj));
+      handleUpdateLocation(locationObj);
+      setCoordinates(ll);
+
     } catch(err) {
-      console.log(err)
+      console.log(`Error: ${err.message}`)
     }
 
-    // try {
-    //   const result = await geocodeByAddress(value);
-    //   const ll = await getLatLng(result[0]);
-    //   console.log('ll: ', ll);
-    // } catch(err) {
-    //   console.log(`Error: ${err.message}`)
-    // }
-		// setCoordinates(ll);
 	};
 
 	// Get User Location -> Set User Location
@@ -82,13 +78,11 @@ function LocationSearchInput({ inputSelection, sessionToken }) {
 
 		const result = await response.json();
 		if (result.status === 'success') {
-			setAddress(`${result.city}, ${abbreviateState(result.regionName)}`);
-			setCurrentLocation(address);
-			setLocation(address);
-			// await dispatch(saveLocation( { currentLocation: currentLocation } ));
+      const location = `${result.city}, ${abbreviateState(result.regionName)}`;
+      handleSelect(location)
 		} else {
 			alert(
-				'Failed to get current location. Please search for your preferred location.'
+				'Location Services Error. Please search for your preferred location.'
 			);
 		}
 	};

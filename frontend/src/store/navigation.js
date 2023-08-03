@@ -20,7 +20,7 @@ const currentPageReducer = (state = {}, action) => {
 	switch (action.type) {
 
 		case SET_PAGE:
-			newState = { action };
+			newState = { ...action };
 			return newState;
 
 		default:

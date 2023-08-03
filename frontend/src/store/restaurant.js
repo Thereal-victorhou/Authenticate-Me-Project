@@ -2,6 +2,8 @@ import { csrfFetch } from './csrf';
 // Type
 const GET_RESTAURANTS = 'restaurants/GET_RESTAURANTS';
 
+const GET_NEAR_BY_RESTAURANTS = 'restaurants/GET_NEAR_BY_RESTAURANTS'
+
 const GET_ONE_RESTAURANT = 'restaurant/GET_ONE_RESTAURANT';
 
 const ADD_NEW_RESTAURANT = 'addrestaurant/ADD_NEW_RESTAURANT';
@@ -14,6 +16,13 @@ const DELETE_RESTAURANT = 'deleterestaurant/DELETE_RESTAURANT';
 const getRestaurants = (restaurants) => {
     return {
         type: GET_RESTAURANTS,
+        restaurants
+    }
+}
+
+const getNearRestaurants = (restaurants) => {
+    return {
+        type: GET_NEAR_BY_RESTAURANTS,
         restaurants
     }
 }
@@ -42,10 +51,20 @@ const deleteOneRestaurant = (restaurantId) => ({
 
 // Thunk Action
 export const allRestaurants = () => async (dispatch) =>{
-    const res = await fetch('/api/restaurants');
+    const res = await csrfFetch('/api/restaurants');
     const data = await res.json();
 
     dispatch(getRestaurants(data))
+}
+
+export const getNearByRestaurants = (locationObj) => async (dispatch) => {
+
+	const res = await csrfFetch('/api/restaurants/nearby', {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({ ...locationObj })
+	});
+	const restaurants = await res.json();
 }
 
 export const oneRestaurant = (restaurant) => async (dispatch) => {
