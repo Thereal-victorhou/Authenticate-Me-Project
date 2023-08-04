@@ -70,7 +70,6 @@ module.exports = (sequelize, DataTypes) => {
 
     Restaurant.hasMany(models.Review, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
     Restaurant.hasMany(models.Photo, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
-    Restaurant.hasMany(models.Rating, { foreignKey: 'restaurantId', onDelete: 'CASCADE' });
     Restaurant.belongsToMany(models.Category, columnMapping);
     // Restaurant.belongsToMany(models.User, columnMapping2);
   };

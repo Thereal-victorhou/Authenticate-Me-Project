@@ -26,8 +26,8 @@ function makeReviews(target) {
 
     const newReview = {
       body: reviewBody[String(randomNum)],
-      userId: getRandomNum(1, 20),
-      restaurantId: getRandomNum(1, 20),
+      userId: getRandomNum(1, 5),
+      restaurantId: getRandomNum(1, 28),
       rating: randomNum,
       createdAt: new Date(),
       updatedAt: new Date()
