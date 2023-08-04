@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const Chance = require('chance');
+const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-const chance = new Chance()
 // const Op = Sequelize.Op
-
 
 const { Restaurant } = require('../../db/models');
 const { Review } = require('../../db/models');
@@ -102,7 +102,7 @@ const validateEditInfo = [
 router.get(
 	'/',
 	asyncHandler(async (req, res) => {
-		const restaurants = await Restaurant.findAll({ order: [['id', 'DESC']] });
+		const restaurants = await Restaurant.findAll({ order: [['id', 'ASC']], limit: 8 });
 		return res.json(restaurants);
 	})
 );
@@ -113,70 +113,90 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const locationObj = req.body;
 		const { location, latitude, longitude } = locationObj;
+		const locationArr = location.replace(',', ' ').split(' ');
+
+		const queryObjLocation = {
+			where: {
+				location: {
+					[Op.contains]: locationArr,
+				},
+			},
+			order: [['rating', 'DESC']],
+		}
 
 		// search database for restaurants based on location
+		const localRestaurants = await Restaurant.findAll(queryObjLocation);
 
-		// %2C == ' comma '
-		// %20 == ' space '
-		// escape spaces and commas from location
-		const newLocation = encodeURI(location).replace(/,/g, '%2C');
-		const searchObj = {
-			location: `${newLocation}`,
-			term: 'restaurants',
-			radius: '12000',
-			categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
-			locale: 'en_US',
-			price: '1%2C2%2C3%2C4',
-			open_now: 'false',
-			attributes: 'open_to_all',
-			sort_by: 'rating',
-			limit: '50',
-			offset: '0'
+		if (localRestaurants.length > 0) return res.json('Already In Database');
+		else {
+			const newLocation = encodeURI(location).replace(/,/g, '%2C');
+			const searchObj = {
+				location: `${newLocation}`,
+				term: 'restaurants',
+				radius: '12000',
+				categories:
+					'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
+				locale: 'en_US',
+				price: '1%2C2%2C3%2C4',
+				open_now: 'false',
+				attributes: 'open_to_all',
+				sort_by: 'rating',
+				limit: '50',
+				offset: '0',
+			};
+			sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+
+			try {
+				const resu = await sdk.v3_business_search(
+					latitude && longitude
+						? { ...searchObj, ...latitude, ...longitude }
+						: searchObj
+				);
+				const restaurantData = resu.data.businesses;
+				const restaurantArr = [];
+				await restaurantData.forEach( async (restaurant) => {
+					const restaurantObj = {
+						yelpId: restaurant.id,
+						name: restaurant.name,
+						imgSrc: `${restaurant.image_url}`,
+						categories: [...restaurant.categories?.map((each) => each.alias)],
+						rating: restaurant.rating,
+						coordinates: [
+							`${restaurant.coordinates.latitude}`,
+							`${restaurant.coordinates.longitude}`,
+						],
+						price: restaurant.price,
+						location: [
+							`${restaurant.location.address1}`,
+							`${restaurant.location.address2}`,
+							`${restaurant.location.address3}`,
+							`${restaurant.location.city}`,
+							`${restaurant.location.zip_code}`,
+							`${restaurant.location.country}`,
+							`${restaurant.location.state}`,
+							`${restaurant.location.display_address?.join('')}`,
+						],
+						phoneNumber: restaurant.phone,
+						displayPhone: restaurant.display_phone,
+						distance: restaurant.distance,
+						region: [
+							`${resu.data?.region?.center?.longitude}`,
+							`${resu.data?.region?.center?.latitude}`,
+						],
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					};
+					restaurantArr.push(restaurantObj);
+					// await Restaurant.create(restaurantObj);
+				});
+				console.log(restaurantArr)
+				return res.json('Sucessfully Added New Restaurants');
+			} catch (err) {
+				return res.json(err);
+			}
 		}
-		const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
-		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
-
-		try {
-			const resu = await sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
-			const restaurantData = resu.data.businesses;
-			const restaurantArr = []
-			restaurantData.forEach((restaurant) => {
-				const restaurantObj = {
-					yelpId: restaurant.id,
-					name: restaurant.name,
-					imageSrc: restaurant.image_url,
-					categories: [...restaurant.categories?.map(each => each.alias)],
-					rating: restaurant.rating,
-					coordinates: [`${restaurant.coordinates.latitude}`, `${restaurant.coordinates.longitude}`],
-					price: restaurant.price,
-					location: [
-						`${restaurant.location.address1}`,
-						`${restaurant.location.address2}`,
-						`${restaurant.location.address3}`,
-						`${restaurant.location.city}`,
-						`${restaurant.location.zip_code}`,
-						`${restaurant.location.country}`,
-						`${restaurant.location.state}`,
-						`${restaurant.location.display_address?.join('')}`,
-					],
-					phoneNumber: restaurant.phone,
-					displayPhone: restaurant.display_phone,
-					distance: restaurant.distance,
-					region: [`${resu.data?.region?.center?.longitude}`, `${resu.data?.region?.center?.latitude}`],
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				}
-				restaurantArr.push(restaurantObj);
-			})
-			console.log(restaurantArr);
-
-
-		} catch(err) {
-			console.log(err)
-		}
-
 	})
-)
+);
 
 // GET one restaurant
 router.get(

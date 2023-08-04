@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     imgSrc: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     categories: {
       type: DataTypes.ARRAY(DataTypes.STRING),

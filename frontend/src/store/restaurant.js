@@ -20,13 +20,6 @@ const getRestaurants = (restaurants) => {
     }
 }
 
-const getNearRestaurants = (restaurants) => {
-    return {
-        type: GET_NEAR_BY_RESTAURANTS,
-        restaurants
-    }
-}
-
 const getOneRestaurant = (restaurant) => {
     return {
         type: GET_ONE_RESTAURANT,
@@ -64,7 +57,14 @@ export const getNearByRestaurants = (locationObj) => async (dispatch) => {
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({ ...locationObj })
 	});
-	const restaurants = await res.json();
+
+	try {
+		const message = await res.json();
+		console.log(message)
+
+	} catch (err) {
+		console.log(err.message)
+	}
 }
 
 export const oneRestaurant = (restaurant) => async (dispatch) => {
@@ -121,6 +121,7 @@ const restaurantReducer = (state = {}, action) => {
             //     newState[restaurant.id] = restaurant;
             // })
             return newState;
+
         case GET_ONE_RESTAURANT:
             return {
                 [action.restaurant.id]: action.restaurant
