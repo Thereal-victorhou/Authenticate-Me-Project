@@ -56,10 +56,12 @@ const generateUsers = (amount) => {
   return userArr;
 }
 
+const populate = [...generateUsers(5)]
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     options.tableName = 'Users';
-    return queryInterface.bulkInsert(options, generateUsers(50), {});
+    return queryInterface.bulkInsert(options, populate, {});
   },
 
   down: (queryInterface, Sequelize) => {

@@ -17,59 +17,67 @@ module.exports = {
       name: {
         type: Sequelize.STRING(50),
         allowNull: false,
-        unique: true,
+        unique: false,
       },
       location: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
-        unique: true,
+        unique: false,
       },
       phoneNumber: {
         type: Sequelize.STRING(14),
-        unique: true,
+        allowNull: false,
+        unique: false,
       },
       imgSrc: {
         type: Sequelize.STRING,
         allowNull: false,
-      },reviewCount: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        unique: false,
       },
       categories: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: true,
+        unique: false,
       },
       rating: {
         type: Sequelize.FLOAT,
         allowNull: false,
+        unique: false,
       },
       coordinates: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
+        unique: false,
       },
       price: {
         type: Sequelize.STRING,
         allowNull: true,
+        unique: false,
       },
       displayPhone: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: false,
       },
       distance: {
         type: Sequelize.FLOAT,
         allowNull: true,
+        unique: false,
       },
       region: {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
+        unique: false,
       },
       yelpId: {
         type: Sequelize.STRING,
         allowNull: true,
+        unique: true,
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        unique: false,
       },
       createdAt: {
         allowNull: false,

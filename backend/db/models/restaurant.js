@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    reviewCount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     categories: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
@@ -51,6 +47,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     yelpId: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    userId: {
+      type: DataTypes.SMALLINT,
       allowNull: true,
     }
   }, {});

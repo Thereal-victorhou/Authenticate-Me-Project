@@ -30,7 +30,7 @@ module.exports = {
         unique: false,
       },
       birthday: {
-        type: Sequelize.STRING(10),
+        type: Sequelize.STRING,
         allowNull: true,
         unique: false,
       },

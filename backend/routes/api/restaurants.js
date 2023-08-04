@@ -135,9 +135,40 @@ router.post(
 		}
 		const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
 		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+
 		try {
 			const resu = await sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
-			// console.log(resu.data.businesses)
+			const restaurantData = resu.data.businesses;
+			const restaurantArr = []
+			restaurantData.forEach((restaurant) => {
+				const restaurantObj = {
+					yelpId: restaurant.id,
+					name: restaurant.name,
+					imageSrc: restaurant.image_url,
+					categories: [...restaurant.categories?.map(each => each.alias)],
+					rating: restaurant.rating,
+					coordinates: [`${restaurant.coordinates.latitude}`, `${restaurant.coordinates.longitude}`],
+					price: restaurant.price,
+					location: [
+						`${restaurant.location.address1}`,
+						`${restaurant.location.address2}`,
+						`${restaurant.location.address3}`,
+						`${restaurant.location.city}`,
+						`${restaurant.location.zip_code}`,
+						`${restaurant.location.country}`,
+						`${restaurant.location.state}`,
+						`${restaurant.location.display_address?.join('')}`,
+					],
+					phoneNumber: restaurant.phone,
+					displayPhone: restaurant.display_phone,
+					distance: restaurant.distance,
+					region: [`${resu.data?.region?.center?.longitude}`, `${resu.data?.region?.center?.latitude}`],
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				}
+				restaurantArr.push(restaurantObj);
+			})
+			console.log(restaurantArr);
 
 
 		} catch(err) {

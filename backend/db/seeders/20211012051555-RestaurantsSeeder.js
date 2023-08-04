@@ -5,79 +5,739 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-// Generate Restaurant Seeder Data
-const generateRestaurantData = async () => {
-  // Variables for further mods
-  const location = 'Stockton, CA';
-  const longitude = { longitude: '-121.30142211914062' };
-  const latitude = {latitude: '37.96242644994935' };
-  const rad = '10000';
-  const sort = 'rating';
-
-  const newLocation = encodeURI(location).replace(/,/g, '%2C');
-  const searchObj = {
-    location: `${newLocation}`,
-    term: 'restaurants',
-    radius: `${rad}`,
-    categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
-    locale: 'en_US',
-    price: '1%2C2%2C3%2C4',
-    open_now: 'false',
-    attributes: 'open_to_all',
-    sort_by: `${sort}`,
-    limit: '50',
-    offset: '0'
+const restaurantData = [
+  {
+    yelpId: 'PfR0MhfYFRM3Bpe_LCcfBg',
+    name: "Louie's Market",
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/OaH83xk0Rjg3W2NfVKjd0g/o.jpg',
+    categories: [ 'delis', 'meats', 'sandwiches' ],
+    rating: 4.5,
+    coordinates: [ '37.95406529998439', '-121.28127741529433' ],
+    price: '$',
+    location: [
+      '734 E Main St',
+      '',
+      '',
+      'Stockton',
+      '95202',
+      'US',
+      'CA',
+      '734 E Main StStockton, CA 95202'
+    ],
+    phoneNumber: '+12094647693',
+    displayPhone: '(209) 464-7693',
+    distance: 1995.899704150231,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: '_h6sAJZvY8kK24UsX54nKg',
+    name: 'California Donuts And Deli',
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/rndhRiWIN-YIeVmgZLUbwQ/o.jpg',
+    categories: [ 'donuts', 'delis', 'coffee' ],
+    rating: 4.5,
+    coordinates: [ '37.9868674256217', '-121.301725847336' ],
+    price: '$',
+    location: [
+      '4130 N El Dorado St',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '4130 N El Dorado StStockton, CA 95204'
+    ],
+    phoneNumber: '+12098513420',
+    displayPhone: '(209) 851-3420',
+    distance: 2717.8398775638107,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'O5_c_-qwxGlF-zqtCRbSfw',
+    name: 'Go Falafel Greek Food',
+    imgSrc: 'https://s3-media3.fl.yelpcdn.com/bphoto/KC5jDwcSzqCFD3_mJnru-A/o.jpg',
+    categories: [ 'mediterranean', 'greek', 'catering' ],
+    rating: 4.5,
+    coordinates: [ '37.9785552821357', '-121.305069739004' ],
+    price: '$$',
+    location: [
+      '236 W Alpine Ave',
+      'null',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '236 W Alpine AveStockton, CA 95204'
+    ],
+    phoneNumber: '+12095467555',
+    displayPhone: '(209) 546-7555',
+    distance: 1821.7219507534799,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'hRysCZJNJDvz8bIkFtLCQw',
+    name: 'Fat City Brew & Bbq',
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/wV5eDQB2q8lOyFLj3aH6-g/o.jpg',
+    categories: [ 'bbq', 'catering', 'burgers' ],
+    rating: 4.5,
+    coordinates: [ '37.9690393', '-121.2986025' ],
+    price: '$$',
+    location: [
+      '1740 Pacific Ave',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '1740 Pacific AveStockton, CA 95204'
+    ],
+    phoneNumber: '+12093234920',
+    displayPhone: '(209) 323-4920',
+    distance: 775.7476964759861,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'xkBmSrehICjYDq-a4V7nYw',
+    name: "Smitty's Wings & Things",
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/a2890fq5m9YYy4K6zCW21A/o.jpg',
+    categories: [ 'chicken_wings', 'pizza', 'sportsbars' ],
+    rating: 4,
+    coordinates: [ '37.999806', '-121.325526' ],
+    price: '$$',
+    location: [
+      '5654 N Pershing Ave',
+      '',
+      '',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '5654 N Pershing AveStockton, CA 95207'
+    ],
+    phoneNumber: '+12092277479',
+    displayPhone: '(209) 227-7479',
+    distance: 4662.488400829808,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'VA1VvxaacZpqIzcM1YnDTQ',
+    name: 'Empresso Coffeehouse',
+    imgSrc: 'https://s3-media3.fl.yelpcdn.com/bphoto/vxWAkJN-R9D53GuZfIgncA/o.jpg',
+    categories: [ 'coffee', 'bagels', 'sandwiches' ],
+    rating: 4,
+    coordinates: [ '37.9536385', '-121.2869528' ],
+    price: '$',
+    location: [
+      '22 N San Joaquin St',
+      '',
+      'null',
+      'Stockton',
+      '95202',
+      'US',
+      'CA',
+      '22 N San Joaquin StStockton, CA 95202'
+    ],
+    phoneNumber: '+12098518285',
+    displayPhone: '(209) 851-8285',
+    distance: 1601.2899476055975,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'nshJB8sJFe8dt5OAamYkIQ',
+    name: 'Tasty Pot',
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/dXNYvyP9cd-SPeIrK4f01Q/o.jpg',
+    categories: [ 'taiwanese', 'bubbletea', 'hotpot' ],
+    rating: 4,
+    coordinates: [ '38.0073512899715', '-121.318692803371' ],
+    price: '$$',
+    location: [
+      '6252 Pacific Ave',
+      '',
+      'null',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '6252 Pacific AveStockton, CA 95207'
+    ],
+    phoneNumber: '+12098885772',
+    displayPhone: '(209) 888-5772',
+    distance: 5219.687819996594,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'sR0Wy3LYGdYV9HLszRlMmw',
+    name: 'Tacos La Palmita',
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/3ptR0LUt-hzQvNmmveDBIg/o.jpg',
+    categories: [ 'mexican', 'foodtrucks' ],
+    rating: 4,
+    coordinates: [ '38.00833302370956', '-121.3185472149019' ],
+    price: '$',
+    location: [
+      '600 Douglas Rd',
+      'null',
+      'null',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '600 Douglas RdStockton, CA 95207'
+    ],
+    phoneNumber: '+12093026825',
+    displayPhone: '(209) 302-6825',
+    distance: 5320.638956058316,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'De0MGy5idmoLKC5ASxQJPQ',
+    name: 'Empresso Coffeehouse',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/NPLWWTIGwnn35fTGYgEWLg/o.jpg',
+    categories: [ 'coffee', 'sandwiches', 'beerbar' ],
+    rating: 4,
+    coordinates: [ '37.9543127844817', '-121.290116360708' ],
+    price: '$',
+    location: [
+      '222 N El Dorado St',
+      'Ste C',
+      'null',
+      'Stockton',
+      '95202',
+      'US',
+      'CA',
+      '222 N El Dorado StSte CStockton, CA 95202'
+    ],
+    phoneNumber: '+12094510788',
+    displayPhone: '(209) 451-0788',
+    distance: 1340.3148745958908,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'v4yeNZXKb_V-ixoDY0QWYw',
+    name: 'FED',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/farA3sUmPWYSx327YR_Rww/o.jpg',
+    categories: [ 'newamerican', 'bars', 'tradamerican' ],
+    rating: 4,
+    coordinates: [ '37.95438', '-121.28855' ],
+    price: '$$',
+    location: [
+      '116 N Hunter St',
+      'null',
+      '',
+      'Stockton',
+      '95202',
+      'US',
+      'CA',
+      '116 N Hunter StStockton, CA 95202'
+    ],
+    phoneNumber: '+12095940339',
+    displayPhone: '(209) 594-0339',
+    distance: 1441.7073644502104,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'g2GS-CZQIbiaYN1lsH6KXQ',
+    name: 'La Mesa- A Mexican Kitchen',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/JoOov4b-PTiaUHNOx4PBkA/o.jpg',
+    categories: [ 'mexican' ],
+    rating: 4,
+    coordinates: [ '38.012165', '-121.322413' ],
+    price: '$$',
+    location: [
+      '329 Lincoln Ctr',
+      'null',
+      '',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '329 Lincoln CtrStockton, CA 95207'
+    ],
+    phoneNumber: '+12093953818',
+    displayPhone: '(209) 395-3818',
+    distance: 5829.81828402889,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'ZUWr5w7K_J-4xGcNImo29A',
+    name: 'Sushi Hub',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/4ek1DkJIdA1LhXa1q1A03A/o.jpg',
+    categories: [ 'sushi' ],
+    rating: 4,
+    coordinates: [ '37.98696', '-121.32331' ],
+    price: '$$',
+    location: [
+      '4555 N Pershing Ave',
+      'Ste 5',
+      'null',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '4555 N Pershing AveSte 5Stockton, CA 95207'
+    ],
+    phoneNumber: '+12099520164',
+    displayPhone: '(209) 952-0164',
+    distance: 3335.084019652289,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'MLfN6xxzlJRuK7KRxtmLig',
+    name: 'Mezzo',
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/O-R7CeGH5cMYIurcWrhd0g/o.jpg',
+    categories: [ 'italian', 'wine_bars', 'cocktailbars' ],
+    rating: 4,
+    coordinates: [ '37.98593', '-121.35538' ],
+    price: '$$$',
+    location: [
+      '3499 Brookside Rd',
+      'Ste A',
+      '',
+      'Stockton',
+      '95219',
+      'US',
+      'CA',
+      '3499 Brookside RdSte AStockton, CA 95219'
+    ],
+    phoneNumber: '+12094737300',
+    displayPhone: '(209) 473-7300',
+    distance: 5396.527739527972,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'Lb__9_VBlkdF9TWlN4HNXQ',
+    name: 'Raw Sushi Bistro',
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/KnafLScNqttQdyy5a-4tLw/o.jpg',
+    categories: [ 'japanese', 'sushi' ],
+    rating: 4,
+    coordinates: [ '38.053991', '-121.372949' ],
+    price: '$$',
+    location: [
+      '10742 Trinity Pkwy',
+      'Ste D',
+      '',
+      'Stockton',
+      '95219',
+      'US',
+      'CA',
+      '10742 Trinity PkwySte DStockton, CA 95219'
+    ],
+    phoneNumber: '+12099549729',
+    displayPhone: '(209) 954-9729',
+    distance: 12387.726375195918,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'ulfmSvp47dJM0HD8ZpqkNA',
+    name: 'Thai Me Up',
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/Yj6Lzf3AapYGePNrM2onaw/o.jpg',
+    categories: [ 'thai', 'bars', 'breakfast_brunch' ],
+    rating: 4,
+    coordinates: [ '37.9712563', '-121.300354' ],
+    price: '$$',
+    location: [
+      '2125 Pacific Ave',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '2125 Pacific AveStockton, CA 95204'
+    ],
+    phoneNumber: '+12099819040',
+    displayPhone: '(209) 981-9040',
+    distance: 1000.6325111265617,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'GVJjhtlRW4Jp8oug59cijQ',
+    name: 'Nash + Tender - Stockton',
+    imgSrc: 'https://s3-media3.fl.yelpcdn.com/bphoto/QUHZ5U8yY2UJfv_xGrUO9g/o.jpg',
+    categories: [ 'chickenshop', 'tradamerican' ],
+    rating: 4,
+    coordinates: [ '37.955194', '-121.28981' ],
+    price: '$$',
+    location: [
+      '222 N El Dorado St',
+      'Ste B1',
+      '',
+      'Stockton',
+      '95202',
+      'US',
+      'CA',
+      '222 N El Dorado StSte B1Stockton, CA 95202'
+    ],
+    phoneNumber: '+12099100626',
+    displayPhone: '(209) 910-0626',
+    distance: 1299.1914925255794,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'b76ZuXbKKK5l1f6cmgzz8A',
+    name: 'Empresso Coffeehouse',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/quFxloi_81wW7Pj-TAO8aw/o.jpg',
+    categories: [ 'coffee', 'cafes', 'beerbar' ],
+    rating: 4,
+    coordinates: [ '37.9903716037561', '-121.321762959496' ],
+    price: '$',
+    location: [
+      '1231 W March Ln',
+      '',
+      'null',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '1231 W March LnStockton, CA 95207'
+    ],
+    phoneNumber: '+12098513903',
+    displayPhone: '(209) 851-3903',
+    distance: 3582.508499098286,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'o95QlCxV-a63RAF0anEwMg',
+    name: "Susy's Mexican Food",
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/CEE33Bq6d7v204xXc5T25g/o.jpg',
+    categories: [ 'mexican' ],
+    rating: 3.5,
+    coordinates: [ '37.9667816162109', '-121.29679107666' ],
+    price: '$$',
+    location: [
+      '120 W Harding Way',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '120 W Harding WayStockton, CA 95204'
+    ],
+    phoneNumber: '+12094630360',
+    displayPhone: '(209) 463-0360',
+    distance: 623.152806617933,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: '4grJVII5eWztLN_BYYH1Iw',
+    name: "Whirlow's Tossed And Grilled",
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/2eN8Zfp47hlUIc_URtbMhQ/o.jpg',
+    categories: [ 'sandwiches', 'jazzandblues', 'beerbar' ],
+    rating: 3.5,
+    coordinates: [ '37.970388', '-121.299255' ],
+    price: '$$',
+    location: [
+      '1926 N Pacific Ave',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '1926 N Pacific AveStockton, CA 95204'
+    ],
+    phoneNumber: '+12094662823',
+    displayPhone: '(209) 466-2823',
+    distance: 908.6588011769618,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'jNPOPcTtr9TWFf7hqiPjAg',
+    name: "Michael's New York Style Pizza",
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/0EgjKoSlVh5x-AoEp3Hl3w/o.jpg',
+    categories: [ 'pizza', 'bars', 'breakfast_brunch' ],
+    rating: 3.5,
+    coordinates: [ '37.97121', '-121.3332' ],
+    price: '$$',
+    location: [
+      '2300 W Alpine Ave',
+      '',
+      '',
+      'Stockton',
+      '95204',
+      'US',
+      'CA',
+      '2300 W Alpine AveStockton, CA 95204'
+    ],
+    phoneNumber: '+12094626668',
+    displayPhone: '(209) 462-6668',
+    distance: 2936.177173207102,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: '2mdyke-UtDn_XvfXvVJy1w',
+    name: 'Shirasoni Japanese Sushi & Steakhouse',
+    imgSrc: 'https://s3-media3.fl.yelpcdn.com/bphoto/xJ02Wh4PrZSTVRZ2i32LMw/o.jpg',
+    categories: [ 'japanese', 'sushi' ],
+    rating: 3.5,
+    coordinates: [ '38.02176', '-121.35792' ],
+    price: '$$',
+    location: [
+      '3249 W Hammer Ln',
+      '',
+      '',
+      'Stockton',
+      '95209',
+      'US',
+      'CA',
+      '3249 W Hammer LnStockton, CA 95209'
+    ],
+    phoneNumber: '+12094732525',
+    displayPhone: '(209) 473-2525',
+    distance: 8250.2038539398,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: '8EuZJY2oddbG-BGlZ1OEfg',
+    name: 'French Camp Sports Bar and Grill',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/RvxEuQy3aRO_mpXx_FslIA/o.jpg',
+    categories: [ 'sportsbars', 'tradamerican' ],
+    rating: 3.5,
+    coordinates: [ '37.861742', '-121.222105' ],
+    price: '$$',
+    location: [
+      '3919 French Camp Rd',
+      '',
+      '',
+      'Manteca',
+      '95336',
+      'US',
+      'CA',
+      '3919 French Camp RdManteca, CA 95336'
+    ],
+    phoneNumber: '+12092342415',
+    displayPhone: '(209) 234-2415',
+    distance: 13181.77284936073,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: '9X5gEzh4p7D_t-sKYe2Qag',
+    name: 'Garlic Brothers Restaurant',
+    imgSrc: 'https://s3-media3.fl.yelpcdn.com/bphoto/CXLYqGryi85G4dbxTeFxQw/o.jpg',
+    categories: [ 'seafood', 'tradamerican', 'italian' ],
+    rating: 3,
+    coordinates: [ '38.001753', '-121.368959' ],
+    price: '$$',
+    location: [
+      '6629 Embarcadero Dr',
+      '',
+      '',
+      'Stockton',
+      '95219',
+      'US',
+      'CA',
+      '6629 Embarcadero DrStockton, CA 95219'
+    ],
+    phoneNumber: '+12094746585',
+    displayPhone: '(209) 474-6585',
+    distance: 7359.303815826032,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'RV72lwXq3CNCuLhGGeGGbg',
+    name: "David's Pizza",
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/dnqcvx5z8i1WwXioVD7Plg/o.jpg',
+    categories: [ 'pizza', 'italian', 'bars' ],
+    rating: 3,
+    coordinates: [ '38.0209999447512', '-121.334802218148' ],
+    price: '$$',
+    location: [
+      '1744 W Hammer Ln',
+      '',
+      '',
+      'Stockton',
+      '95209',
+      'US',
+      'CA',
+      '1744 W Hammer LnStockton, CA 95209'
+    ],
+    phoneNumber: '+12094772677',
+    displayPhone: '(209) 477-2677',
+    distance: 7084.51441218435,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'OuwjIx9iHsnqyoXQL9aoTg',
+    name: 'China Palace',
+    imgSrc: 'https://s3-media1.fl.yelpcdn.com/bphoto/4HikIeoWTxFIsYrLnlMX5A/o.jpg',
+    categories: [ 'chinese', 'seafood', 'bars' ],
+    rating: 3,
+    coordinates: [ '38.0005987', '-121.288644' ],
+    price: '$$',
+    location: [
+      '5052 W Ln',
+      'Ste C',
+      '',
+      'Stockton',
+      '95210',
+      'US',
+      'CA',
+      '5052 W LnSte CStockton, CA 95210'
+    ],
+    phoneNumber: '+12099550888',
+    displayPhone: '(209) 955-0888',
+    distance: 4389.818864537511,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'jfq8BLGSa9d8yqXRqC7wkg',
+    name: "Nation's Giant Hamburgers",
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/0EnD6tt6I0cEP8WeO33ZNg/o.jpg',
+    categories: [ 'desserts', 'burgers', 'breakfast_brunch' ],
+    rating: 3,
+    coordinates: [ '38.0217812476687', '-121.360413953662' ],
+    price: '$$',
+    location: [
+      '3333 W Hammer Ln',
+      '',
+      '',
+      'Stockton',
+      '95219',
+      'US',
+      'CA',
+      '3333 W Hammer LnStockton, CA 95219'
+    ],
+    phoneNumber: '+12094775922',
+    displayPhone: '(209) 477-5922',
+    distance: 8383.545094567233,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'Pdb4g7flf1MP4usHNvITFQ',
+    name: "Noah's NY Bagels",
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/qgVhcJZwiVK0Xr1KokKqpQ/o.jpg',
+    categories: [ 'bagels', 'sandwiches', 'breakfast_brunch' ],
+    rating: 3,
+    coordinates: [ '38.011186265754304', '-121.32225600859827' ],
+    price: '$',
+    location: [
+      '123 Lincoln Ctr',
+      '',
+      '',
+      'Stockton',
+      '95207',
+      'US',
+      'CA',
+      '123 Lincoln CtrStockton, CA 95207'
+    ],
+    phoneNumber: '+12099512284',
+    displayPhone: '(209) 951-2284',
+    distance: 5721.018831934187,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'L65ZvZ-N85JODL_gBL70Mw',
+    name: "Nena's Mexican",
+    imgSrc: 'https://s3-media4.fl.yelpcdn.com/bphoto/-VREqLGLsxnjAspjgbNWIA/o.jpg',
+    categories: [ 'mexican', 'bars' ],
+    rating: 3,
+    coordinates: [ '37.952704', '-121.297621' ],
+    price: '$$',
+    location: [
+      '445 W Weber Ave',
+      'Ste 120',
+      '',
+      'Stockton',
+      '95203',
+      'US',
+      'CA',
+      '445 W Weber AveSte 120Stockton, CA 95203'
+    ],
+    phoneNumber: '+12095470217',
+    displayPhone: '(209) 547-0217',
+    distance: 1131.2855271915082,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    yelpId: 'Fz2B9lhWgwmsZl1yCtFRpA',
+    name: 'Las Islitas',
+    imgSrc: 'https://s3-media2.fl.yelpcdn.com/bphoto/g5UBd1D9Y3gj-dEtTnk9og/o.jpg',
+    categories: [ 'mexican', 'seafood' ],
+    rating: 2.5,
+    coordinates: [ '37.9426775756713', '-121.252559938106' ],
+    price: '$$',
+    location: [
+      '1675 E Mariposa Rd',
+      '',
+      '',
+      'Stockton',
+      '95205',
+      'US',
+      'CA',
+      '1675 E Mariposa RdStockton, CA 95205'
+    ],
+    phoneNumber: '+12099380939',
+    displayPhone: '(209) 938-0939',
+    distance: 4814.218990936012,
+    region: [ '-121.30142211914062', '37.96242644994935' ],
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }
-  const sdk = require('api')('@yelp-developers/v1.0#z7c5z2vlkqskzd6');
-  sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
-  try {
-    const result = await sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
-    const restaurantData = result.data.businesses;
-    const restaurantArr = [];
-
-    restaurantData.forEach((restaurant) => {
-      const restaurantObj = {
-        yelpId: restaurant.id,
-        name: restaurant.name,
-        imageSrc: restaurant.image_url,
-        categories: [...restaurant.categories.map(each => each.alias)],
-        rating: restaurant.rating,
-        coordinates: [`${restaurant.coordinates.latitude}`, `${restaurant.coordinates.longitude}`],
-        price: restaurant.price,
-        location: [
-          `${restaurant.location.address1}`,
-          `${restaurant.location.address2}`,
-          `${restaurant.location.address3}`,
-          `${restaurant.location.city}`,
-          `${restaurant.location.zip_code}`,
-          `${restaurant.location.country}`,
-          `${restaurant.location.state}`,
-          `${restaurant.location.display_address?.join('')}`,
-        ],
-        phoneNumber: restaurant.phone,
-        displayPhone: restaurant.display_phone,
-        distance: restaurant.distance,
-        region: [`${result.data.region.center.longitude}`, `${result.data.region.center.latitude}`],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
-
-      restaurantArr.push(restaurantObj);
-    })
-
-    return restaurantArr;
-
-  } catch(err) {
-    console.log(err)
-  }
-
-}
+]
 
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     options.tableName = 'Restaurants';
-      return queryInterface.bulkInsert(options, generateRestaurantData(), {});
+      return queryInterface.bulkInsert(options, restaurantData, {});
   },
 
   down: (queryInterface, Sequelize) => {
