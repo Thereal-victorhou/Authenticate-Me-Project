@@ -1,7 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const asyncHandler = require('express-async-handler');
+const Chance = require('chance');
+
+const chance = new Chance()
 // const Op = Sequelize.Op
+
 
 const { Restaurant } = require('../../db/models');
 const { Review } = require('../../db/models');
@@ -119,8 +123,8 @@ router.post(
 		const searchObj = {
 			location: `${newLocation}`,
 			term: 'restaurants',
-			radius: '10000',
-			categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner',
+			radius: '12000',
+			categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
 			locale: 'en_US',
 			price: '1%2C2%2C3%2C4',
 			open_now: 'false',
@@ -133,7 +137,9 @@ router.post(
 		sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
 		try {
 			const resu = await sdk.v3_business_search(latitude && longitude ? { ...searchObj, ...latitude, ...longitude } : searchObj)
-			console.log(resu.data.region)
+			// console.log(resu.data.businesses)
+
+
 		} catch(err) {
 			console.log(err)
 		}

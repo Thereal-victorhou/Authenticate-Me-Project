@@ -26,9 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     zipCode: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [5, 9]
-      }
     },
     birthday: {
       type: DataTypes.STRING,
@@ -49,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     defaultScope: {
       attributes: {
-        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+        exclude: ['hashedPassword', 'email', 'updatedAt'],
       },
     },
     scopes: {

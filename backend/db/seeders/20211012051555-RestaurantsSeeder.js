@@ -1,5 +1,4 @@
 'use strict';
-import { faker } from '@faker-js/faker';
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -20,7 +19,7 @@ const generateRestaurantData = async () => {
     location: `${newLocation}`,
     term: 'restaurants',
     radius: `${rad}`,
-    categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner',
+    categories: 'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
     locale: 'en_US',
     price: '1%2C2%2C3%2C4',
     open_now: 'false',
