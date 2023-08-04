@@ -47,14 +47,20 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 
 	// Set and Save Location
 	const handleSelect = async (value) => {
-		setAddress(value);
-		setLocation(value);
+		let removeCountry = value.replace(/USA/, '')
+		const lastIndex = removeCountry.lastIndexOf(',');
+		if (lastIndex > -1) {
+			removeCountry = removeCountry.substring(0, lastIndex)
+		}
+
+		setAddress(removeCountry);
+		setLocation(removeCountry);
 
     try {
       const result = await geocodeByAddress(value);
       const ll = await getLatLng(result[0]);
       /* TODO: Create error handling for before calling handleUpdateLocation */
-      const locationObj = { location: value, ...ll};
+      const locationObj = { location: removeCountry, ...ll};
       dispatch(saveLocation(locationObj));
       handleUpdateLocation(locationObj);
       setCoordinates(ll);

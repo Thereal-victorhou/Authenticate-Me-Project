@@ -2,21 +2,11 @@ import { csrfFetch } from "./csrf";
 import axios, * as others from 'axios';
 
 // type
-const GET_LOCATION = '/navigation/GET_LOCATION';
-
 const UPDATE_SEARCH = 'updatesearch/UPDATE_SEARCH';
-
-const UPDATE_LOCATION = 'udpdatelocation/UPDATE_LOCATION';
 
 const REMOVE_SEARCH = 'removesearch/REMOVE_SEARCH';
 
 // action
-const updateLocation = (selectedLocation) => {
-	return {
-		type: UPDATE_LOCATION,
-		selectedLocation,
-	};
-};
 
 const updateSearch = (res) => {
     return {
@@ -32,19 +22,15 @@ const removeSearch = () => {
 }
 
 // thunk
-export const saveLocation = (selectedLocation) => (dispatch) => {
-	dispatch(updateLocation(selectedLocation));
-}
-
-
 export const liveRestaurantSearch = (searchObj) => async (dispatch) => {
-    const { searchInput, location} = searchObj;
+    const { searchInput, locationObj} = searchObj;
     const res = await csrfFetch(`/api/search`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({searchInput, location})
+        body: JSON.stringify({searchInput, locationObj})
     });
     const result = await res.json();
+		console.log('restaurant results ============= ', result)
 
     dispatch(updateSearch(result));
 }
@@ -60,9 +46,7 @@ const searchReducer = (state = {}, action)=> {
         case UPDATE_SEARCH:
             newState = {...action.res}
             return newState;
-				case UPDATE_LOCATION:
-						newState = {...action.selectedLocation}
-						return newState;
+
         case REMOVE_SEARCH:
             return {};
         default:

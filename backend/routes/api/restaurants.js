@@ -113,7 +113,7 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const locationObj = req.body;
 		const { location, latitude, longitude } = locationObj;
-		const locationArr = location.replace(',', ' ').split(' ');
+		const locationArr = location.replace(',', '').split(' ');
 
 		const queryObjLocation = {
 			where: {

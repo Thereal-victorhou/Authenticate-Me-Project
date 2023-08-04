@@ -188,7 +188,7 @@ function Navigation({ isLoaded }) {
 			dispatch(
 				liveRestaurantSearch({
 					searchInput: restaurantSearchInput,
-					location: selectedLocation,
+					locationObj: selectedLocation,
 				})
 			);
 		}
