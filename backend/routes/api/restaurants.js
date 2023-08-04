@@ -186,10 +186,16 @@ router.post(
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					};
-					restaurantArr.push(restaurantObj);
-					// await Restaurant.create(restaurantObj);
+					// restaurantArr.push(restaurantObj);
+					// Check if restaurant already exists in database
+					const alreadyExist = await Restaurant.findOne({
+						where: {
+							name: { [Op.like]: restaurant.name },
+						}
+					});
+					if (!alreadyExist) await Restaurant.create(restaurantObj);
 				});
-				console.log(restaurantArr)
+
 				return res.json('Sucessfully Added New Restaurants');
 			} catch (err) {
 				return res.json(err);
