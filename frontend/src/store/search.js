@@ -38,11 +38,11 @@ export const saveLocation = (selectedLocation) => (dispatch) => {
 
 
 export const liveRestaurantSearch = (searchObj) => async (dispatch) => {
-    const { userId, searchInput} = searchObj;
+    const { searchInput, location} = searchObj;
     const res = await csrfFetch(`/api/search`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({searchInput})
+        body: JSON.stringify({searchInput, location})
     });
     const result = await res.json();
 

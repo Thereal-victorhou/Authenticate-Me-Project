@@ -6,6 +6,7 @@ import review from './reviews';
 import ratings from './ratings';
 import search from './search';
 import navigation from './navigation';
+import location from './location';
 
 const rootReducer = combineReducers({
     session,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     review,
     ratings,
     search,
-    navigation
+    navigation,
+    location
 });
 
 let enhancer;

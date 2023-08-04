@@ -12,7 +12,7 @@ import {
 	validateSuggestions,
 	handleSuggestionDescriptionBasedOnType,
 } from '../Utils/LocationValidation';
-import { saveLocation } from '../../store/search';
+import { saveLocation } from '../../store/location';
 import { v4 as uuidv4 } from 'uuid';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

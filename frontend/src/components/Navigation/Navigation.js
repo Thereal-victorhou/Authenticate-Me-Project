@@ -77,24 +77,30 @@ function Navigation({ isLoaded }) {
 
 	//Render restaurant search results
 	const restaurantSearchRender = (res, i) => {
-		return (
-			<NavLink
-				exact
-				to={`/restaurants/${i}`}
-				id='search-result'
-				key={i}
-				onClick={(e) => handleClick(e, res)}>
-				<div
-					id='search-img'
-					style={{
-						backgroundImage: `url(${res?.imgSrc})`,
-					}}></div>
-				<div className='search-info-container'>
-					<p id='name'>{res.name}</p>
-					<p id='address'>{res.location}</p>
-				</div>
-			</NavLink>
-		);
+		if (res.location) {
+			const resLocation = res.location;
+			const len = resLocation.length -1;
+			const addy = resLocation[len];
+
+			return (
+				<NavLink
+					exact
+					to={`/restaurants/${i}`}
+					id='search-result'
+					key={i}
+					onClick={(e) => handleClick(e, res)}>
+					<div
+						id='search-img'
+						style={{
+							backgroundImage: `url(${res?.imgSrc})`,
+						}}></div>
+					<div className='search-info-container'>
+						<p id='name'>{res.name}</p>
+						<p id='address'>{addy}</p>
+					</div>
+				</NavLink>
+			);
+		}
 	};
 
 	// No Results
@@ -182,11 +188,11 @@ function Navigation({ isLoaded }) {
 			dispatch(
 				liveRestaurantSearch({
 					searchInput: restaurantSearchInput,
-					userId: sessionUser?.id,
+					location: selectedLocation,
 				})
 			);
 		}
-	}, [dispatch, restaurantSearchInput]);
+	}, [restaurantSearchInput]);
 
 	// Determine if restaurant input box and which location was selected
 	useEffect(() => {
