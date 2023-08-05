@@ -11,6 +11,7 @@ router.put(
 	asyncHandler(async (req, res) => {
 		const { searchInput, locationObj } = req.body;
 		const location = locationObj.location
+		console.log(location)
 		if (location !== undefined) {
 			const localArr = location.replace(',', '').split(' ');
 
@@ -19,7 +20,7 @@ router.put(
 					name: { [Op.iLike]: `%${searchInput}%` },
 					location: { [Op.contains]: localArr },
 				},
-				limit: 4,
+				limit: 5,
 			};
 
 			try {

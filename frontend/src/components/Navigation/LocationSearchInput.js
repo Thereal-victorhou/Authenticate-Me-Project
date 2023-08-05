@@ -48,6 +48,7 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 	// Set and Save Location
 	const handleSelect = async (value) => {
 		let removeCountry = value.replace(/USA/, '')
+
 		const lastIndex = removeCountry.lastIndexOf(',');
 		if (lastIndex > -1) {
 			removeCountry = removeCountry.substring(0, lastIndex)
@@ -84,7 +85,7 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 
 		const result = await response.json();
 		if (result.status === 'success') {
-      const location = `${result.city}, ${abbreviateState(result.regionName)}`;
+      const location = `${result.city}, ${abbreviateState(result.regionName)}, USA`;
       handleSelect(location)
 		} else {
 			alert(
