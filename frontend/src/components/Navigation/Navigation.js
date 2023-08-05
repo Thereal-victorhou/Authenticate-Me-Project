@@ -198,8 +198,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		window.onclick = (event) => {
 			event.preventDefault();
-			event.stopPropagation();
-
+			
 			if (event.target.name === 'restaurant-input') setIsSelected(true);
 			else setIsSelected(false);
 

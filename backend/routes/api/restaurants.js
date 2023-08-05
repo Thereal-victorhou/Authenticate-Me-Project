@@ -125,10 +125,13 @@ router.post(
 		}
 
 		// search database for restaurants based on location
+		// otherwise, fetch restaurant data and save to db if it doesn't aready exist
+		// create random amount of reviews based on each restaurant rating and save to db
 		const localRestaurants = await Restaurant.findAll(queryObjLocation);
 
 		if (localRestaurants.length > 0) return res.json('Already In Database');
 		else {
+
 			const newLocation = encodeURI(location).replace(/,/g, '%2C');
 			const searchObj = {
 				location: `${newLocation}`,
@@ -210,26 +213,27 @@ router.get(
 	asyncHandler(async (req, res) => {
 		const id = parseInt(req.params.id, 10);
 		const restaurant = await Restaurant.findByPk(id);
-		const reviews = await Restaurant.findByPk(id, {
-			include: [
-				{
-					model: Review,
-					required: true,
-					where: { restaurantId: id },
-				},
-				{
-					model: Rating,
-					require: true,
-					where: { restaurantId: id },
-				},
-			],
-		});
+		// const reviews = await Restaurant.findByPk(id, {
+		// 	include: [
+		// 		{
+		// 			model: Review,
+		// 			required: true,
+		// 			where: { restaurantId: id },
+		// 		},
+		// 		{
+		// 			model: Rating,
+		// 			require: true,
+		// 			where: { restaurantId: id },
+		// 		},
+		// 	],
+		// });
 
-		if (reviews) {
-			return res.json(reviews);
-		} else {
+		// if (reviews) {
+		// 	console.log('=========Reviews ', reviews)
+		// 	return res.json(reviews);
+		// } else {
 			return res.json(restaurant);
-		}
+		// }
 	})
 );
 
