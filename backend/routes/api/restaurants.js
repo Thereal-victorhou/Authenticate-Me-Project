@@ -137,8 +137,7 @@ router.post(
 				location: `${newLocation}`,
 				term: 'restaurants',
 				radius: '12000',
-				categories:
-					'restaurants&categories=breakfast&categories=lunch&categories=dinner&categories=fastfood&categories=finedining&categories=casual',
+				categories: '%28food%2C%20All%29',
 				locale: 'en_US',
 				price: '1%2C2%2C3%2C4',
 				open_now: 'false',
