@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LocationSearchInput from './LocationSearchInput';
 import { liveRestaurantSearch, clearSearch } from '../../store/search';
-import { oneRestaurant, getNearByRestaurants } from '../../store/restaurant';
+import {
+	oneRestaurant,
+	getNearByRestaurants,
+	getRestaurantResults,
+} from '../../store/restaurant';
 import { saveCurrentPage } from '../../store/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
@@ -62,8 +66,9 @@ function Navigation({ isLoaded }) {
 
 	// Save location, dispatch a search for near restaurants
 	const handleUpdateLocation = (locationObj) => {
-		setSelectedLocation(locationObj);
 		dispatch(getNearByRestaurants(locationObj));
+		setSelectedLocation(locationObj);
+
 	};
 
 	const handleClick = async (e, res) => {
@@ -79,7 +84,7 @@ function Navigation({ isLoaded }) {
 	const restaurantSearchRender = (res, i) => {
 		if (res.location) {
 			const resLocation = res.location;
-			const len = resLocation.length -1;
+			const len = resLocation.length - 1;
 			const addy = resLocation[len];
 
 			return (
@@ -115,15 +120,19 @@ function Navigation({ isLoaded }) {
 	// Search for restaurants
 	const handleSearch = async (e) => {
 		e.preventDefault();
+		console.log(restaurantSearchInput)
 		await dispatch(
-			liveRestaurantSearch({
+			getRestaurantResults({
 				searchInput: restaurantSearchInput,
-				userId: sessionUser?.id,
+				locationObj: selectedLocation,
 			})
 		);
+		console.log('search button handle ', selectedLocation)
 		setRestaurantSearchInput('');
 		dispatch(saveCurrentPage('other'));
-		history.push(`/search?find=${restaurantSearchInput}`);
+		history.push(
+			`/search?find_desc=${restaurantSearchInput}`
+		);
 	};
 
 	// Set Nav to Home Version
@@ -198,7 +207,7 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {
 		window.onclick = (event) => {
 			event.preventDefault();
-			
+
 			if (event.target.name === 'restaurant-input') setIsSelected(true);
 			else setIsSelected(false);
 

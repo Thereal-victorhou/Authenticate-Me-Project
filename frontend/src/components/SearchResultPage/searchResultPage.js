@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
-import { oneRestaurant } from '../../store/restaurant';
+import { oneRestaurant, getRestaurantResults } from '../../store/restaurant';
 import { liveRestaurantSearch, clearSearch } from '../../store/search';
 import { saveCurrentPage } from '../../store/navigation';
 
@@ -27,7 +27,10 @@ const SearchResultPage = () => {
         if (searchRes) setSearchArr(searchRes)
         const searchResult = searchRes
         dispatch(clearSearch());
-        dispatch(liveRestaurantSearch(find));
+        dispatch(getRestaurantResults({
+            searchInput: find,
+			// locationObj: selectedLocation
+        }));
     },[find])
 
     const getOneRestaurant = async (e, resId) => {

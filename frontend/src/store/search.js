@@ -30,7 +30,7 @@ export const liveRestaurantSearch = (searchObj) => async (dispatch) => {
         body: JSON.stringify({searchInput, locationObj})
     });
     const result = await res.json();
-		console.log('restaurant results ============= ', result)
+		// console.log('restaurant results ============= ', result)
 
     dispatch(updateSearch(result));
 }

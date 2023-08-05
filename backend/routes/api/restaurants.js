@@ -107,6 +107,13 @@ router.get(
 	})
 );
 
+// Get all restaurants based on searchInput
+router.post('/restaurant/search/results', asyncHandler( async (req, res) => {
+	const { searchInput, locationObj } = req.body;
+	// console.log('SEARCH INPUT............. ', searchInput);
+	// console.log('LOCATIONOBJ............. ', locationObj);
+}))
+
 // GET all restaurants based on location
 router.post(
 	'/nearby',

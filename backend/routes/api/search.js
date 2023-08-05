@@ -10,6 +10,7 @@ router.put(
 	'/',
 	asyncHandler(async (req, res) => {
 		const { searchInput, locationObj } = req.body;
+		console.log(locationObj)
 		const location = locationObj.location
 		console.log(location)
 		if (location !== undefined) {
