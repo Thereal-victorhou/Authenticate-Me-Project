@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
+import RecommendedReviews from './recommendedReviews';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
+import { starRatingBig } from '../Utils/DisplayStarRating';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
@@ -12,7 +14,6 @@ function RestaurantPage({ user }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { id } = useParams();
-	const [counter, setCounter] = useState(0);
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [avgRating, setAvgRating] = useState(0);
 	let avgNum;
@@ -26,9 +27,9 @@ function RestaurantPage({ user }) {
 	);
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+	// useEffect(() => {
+	// 	window.scrollTo(0, 0);
+	// }, []);
 
 	useEffect(() => {
 		dispatch(oneRestaurant(parseInt(id, 10)));
@@ -52,12 +53,6 @@ function RestaurantPage({ user }) {
 			if (typeof avgNum === 'number') {
 				setAvgRating(avgNum);
 			}
-
-			const phoneNumber = currentRestaurant[0]?.phoneNumber;
-			const areaCode = phoneNumber?.split('').slice(0, 3).join('');
-			const body1 = phoneNumber?.split('').slice(3, 6).join('');
-			const body2 = phoneNumber?.split('').slice(6, 10).join('');
-			setPhoneNumber(`(${areaCode})-${body1}-${body2}`);
 		}
 	}, [restaurantCurrent, restaurantReviews]);
 
@@ -87,129 +82,7 @@ function RestaurantPage({ user }) {
 				break;
 		}
 	};
-	// translate ratings from number to star *LARGE stars*
-	const starRatingBig = (num) => {
-		if (restaurantReviews) {
-			switch (num) {
-				case 1:
-					return (
-						<div className='big-star' id='one'>
-							<span id='one'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-						</div>
-					);
-				case 2:
-					return (
-						<div className='big-star' id='two'>
-							<span id='two'>★</span>
-							<span id='two'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-						</div>
-					);
-				case 3:
-					return (
-						<div className='big-star' id='three'>
-							<span id='three'>★</span>
-							<span id='three'>★</span>
-							<span id='three'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-						</div>
-					);
-				case 4:
-					return (
-						<div className='big-star' id='four'>
-							<span id='four'>★</span>
-							<span id='four'>★</span>
-							<span id='four'>★</span>
-							<span id='four'>★</span>
-							<span id='zero'>★</span>
-						</div>
-					);
-				case 5:
-					return (
-						<div className='big-star' id='five'>
-							<span id='five'>★</span>
-							<span id='five'>★</span>
-							<span id='five'>★</span>
-							<span id='five'>★</span>
-							<span id='five'>★</span>
-						</div>
-					);
-				default:
-					return (
-						<div className='big-star' id='zero'>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-							<span id='zero'>★</span>
-						</div>
-					);
-			}
-		}
-	};
 
-	// translate ratings from number to star *little stars*
-	const starRatingSmall = (num) => {
-		switch (num) {
-			case 1:
-				return (
-					<div className='star' id='one'>
-						<span id='one'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-					</div>
-				);
-			case 2:
-				return (
-					<div className='star' id='two'>
-						<span id='two'>★</span>
-						<span id='two'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-					</div>
-				);
-			case 3:
-				return (
-					<div className='star' id='three'>
-						<span id='three'>★</span>
-						<span id='three'>★</span>
-						<span id='three'>★</span>
-						<span id='zero'>★</span>
-						<span id='zero'>★</span>
-					</div>
-				);
-			case 4:
-				return (
-					<div className='star' id='four'>
-						<span id='four'>★</span>
-						<span id='four'>★</span>
-						<span id='four'>★</span>
-						<span id='four'>★</span>
-						<span id='zero'>★</span>
-					</div>
-				);
-			case 5:
-				return (
-					<div className='star' id='five'>
-						<span id='five'>★</span>
-						<span id='five'>★</span>
-						<span id='five'>★</span>
-						<span id='five'>★</span>
-						<span id='five'>★</span>
-					</div>
-				);
-		}
-	};
 
 	const handleDeleteRestaurant = async (e) => {
 		e.preventDefault();
@@ -360,52 +233,7 @@ function RestaurantPage({ user }) {
 						<h3>Recommended Reviews</h3>
 					</div>
 					<ul className='review-card-container'>
-						{restaurantReviews.length ? (
-							restaurantReviews.map((review) => (
-								<li className='review-card' key={review.body}>
-									<div className='review-card-upper'>
-										<span id='user-avatar'>●</span>
-										<div id='user-name'>
-											<h4>*Username{review.userId}</h4>
-											<h4>city</h4>
-										</div>
-										<div></div>
-									</div>
-									<div className='review-card-lower'>
-										{starRatingSmall(review.rating)}
-										<div className='review-card-container'>
-											<h3>{review.body}</h3>
-											<div className='optional-buttons'>
-												{user && user.id === review.userId ? (
-													<button
-														className='function-button'
-														id='edit'
-														value={review.id}
-														onClick={(e) => handleButton(e, review.id)}>
-														Edit
-													</button>
-												) : (
-													''
-												)}
-												{user && user.id === review.userId ? (
-													<button
-														className='function-button'
-														id='delete'
-														value={review.id}
-														onClick={(e) => handleButton(e, review.id)}>
-														Delete
-													</button>
-												) : (
-													''
-												)}
-											</div>
-										</div>
-									</div>
-								</li>
-							))
-						) : (
-							<h2>Be the first to review!</h2>
-						)}
+						<RecommendedReviews user={user}/>
 					</ul>
 				</div>
 			</div>

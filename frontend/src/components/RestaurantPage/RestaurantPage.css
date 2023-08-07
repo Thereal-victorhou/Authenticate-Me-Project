@@ -629,7 +629,8 @@
 /* Large Stars */
 
 .big-star-rating {
-	width: 200px;
+	height: 50px;
+	width: 400px;
 }
 .big-star #zero {
 	background-color: #ebebec;
@@ -669,15 +670,18 @@
 	width: 108px;
 	padding: 3px;
 }
-.big-star#three #three {
+.big-star#two #threeStar {
 	background-color: #ff7e42;
 	border-radius: 6px;
-	color: white;
-	font-size: 25px;
-	/* width: 24px; */
+	/* color: white; */
+	/* font-size: 25px; */
+	width: 104px;
+	height: 40px;
 	margin-right: 0.2rem;
-	padding: 3px;
+	/* padding: 3px; */
 }
+
+
 .big-star#four #four {
 	background-color: #ff523d;
 	border-radius: 6px;
