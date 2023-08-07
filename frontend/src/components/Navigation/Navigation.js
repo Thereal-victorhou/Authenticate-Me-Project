@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import SearchIcon from '@mui/icons-material/Search';
+import { grey } from '@mui/material/colors';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -347,7 +348,7 @@ function Navigation({ isLoaded }) {
 									to='/search'
 									className='search-btn'
 									onClick={(e) => handleSearch(e)}>
-									<SearchIcon className='search-mag' />
+									<SearchIcon className='search-mag' sx={{ color: grey[50], fontSize: 36, fontWeight: 'bold' }}/>
 								</NavLink>
 							</div>
 						</div>
