@@ -4,6 +4,8 @@ import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { blue } from '@mui/material/colors';
 
 function RestaurantPage({ user }) {
 	const history = useHistory();
@@ -255,12 +257,26 @@ function RestaurantPage({ user }) {
 						<div className='big-star-rating'>
 							{currentRestaurant && starRatingBig(avgRating)}
 						</div>
-						<div className='restaurant-location-container'>
-							<h3 className='restaurant-location'>
-								{currentRestaurant
-									? currentRestaurant[0]?.location
-									: 'location'}
-							</h3>
+						<div className='restaurant-sub-rating-container'>
+							<div
+								className='restaurant-sub-rating-divider'
+								id='check-container'>
+								<CheckCircleIcon className='circle-check' />
+							</div>
+							<div className='restaurant-sub-rating-divider'>
+								<h3 className='claimed'>Claimed</h3>
+							</div>
+							<div className='restaurant-price-divider'>●</div>
+							<div className='restaurant-price-container'>
+								{restaurantCurrent ? restaurantCurrent.price : 'price'}
+							</div>
+							<div className='restaurant-price-divider'>●</div>
+							<div className='restaurant-sub-rating-divider'>
+								{currentRestaurant &&
+									currentRestaurant[0]?.categories.map((each) => (
+										<h3 className='restaurant-categories'>{each}</h3>
+									))}
+							</div>
 						</div>
 					</div>
 				</div>
