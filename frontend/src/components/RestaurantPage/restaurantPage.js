@@ -5,6 +5,7 @@ import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
 
 function RestaurantPage({ user }) {
@@ -261,7 +262,7 @@ function RestaurantPage({ user }) {
 							<div
 								className='restaurant-sub-rating-divider'
 								id='check-container'>
-								<CheckCircleIcon className='circle-check' />
+								<CheckCircleIcon className='circle-check' sx={{ fontSize: 18 }}/>
 							</div>
 							<div className='restaurant-sub-rating-divider'>
 								<h3 className='claimed'>Claimed</h3>
@@ -289,11 +290,12 @@ function RestaurantPage({ user }) {
 						id='add-review'
 						value='reviewButton'
 						onClick={handleButton}>
+						<StarOutlineIcon sx={{ fontSize: 30 }}/>
 						Write a Review
 					</button>
 					<div className='phone-number-container'>
 						<span className='phone-number'>
-							<p>{phoneNumber} 📞</p>
+							<p>{restaurantCurrent ? restaurantCurrent?.displayPhone : 'phone'}</p>
 						</span>
 					</div>
 				</div>
@@ -310,9 +312,14 @@ function RestaurantPage({ user }) {
 							</div>
 							<div id='address'>
 								<div id='address-left'>
-									<p>*address line 1*</p>
-									<h4>*address line 1*</h4>
-									<p>*city, state zip*</p>
+									<div id='address-street'>
+										<p>{restaurantCurrent ? restaurantCurrent?.location[0] : 'Address Line 1'}</p>
+									</div>
+									<div id='address-other'>
+										<p>{restaurantCurrent ? restaurantCurrent?.location[3] : 'City'},</p>
+										<p>{restaurantCurrent ? restaurantCurrent?.location[6] : 'State'}</p>
+										<p>{restaurantCurrent ? restaurantCurrent?.location[4] : 'Zipcode'}</p>
+									</div>
 								</div>
 								<div id='address-right'>
 									<button id='direction-button'>
@@ -350,7 +357,7 @@ function RestaurantPage({ user }) {
 				</div>
 				<div className='reviews_container'>
 					<div className='reviews-title'>
-						<h4>Recommended Reviews</h4>
+						<h3>Recommended Reviews</h3>
 					</div>
 					<ul className='review-card-container'>
 						{restaurantReviews.length ? (

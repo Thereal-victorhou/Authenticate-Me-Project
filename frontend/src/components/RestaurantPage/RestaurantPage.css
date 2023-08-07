@@ -27,15 +27,16 @@
 	width: 54rem;
 	height: 75%;
 	padding-bottom: 1.5rem;
+    padding-left: 1.5rem;
 
 }
 
 .restaurant-name-container {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	color: white;
-	height: 70px;
-	width: 45em;
+	min-height: 70px;
+	width: 100%;
 }
 
 .restaurant-title {
@@ -43,8 +44,8 @@
 	text-align: left;
 	font-weight: 700;
 	font-family: Poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
-	padding-left: 2.1rem;
 	width: 100%;
+
 }
 
 .restaurant-sub-rating-container {
@@ -52,10 +53,9 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	height: 3em;
+	min-height: 3em;
 	width: 80%;
 	gap: 10px;
-	margin-left: 2em;
 }
 
 .restaurant-sub-rating-divider {
@@ -129,20 +129,26 @@
 }
 
 .review-button {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
 	color: white;
 	background-color: #d32323;
 	border: 1px solid #d32323;
-	border-radius: 3px;
+	border-radius: 5px;
 	border-left-style: hidden;
 	border-right-style: hidden;
 	border-bottom-style: hidden;
 	border-top-style: hidden;
 	/* margin-top: 2em; */
 	/* margin-left: 1em; */
-	width: 12em;
-	height: 3.5em;
+	width: 10.5em;
+	height: 3em;
 	font-size: 16px;
-	font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif !important;
 }
 .review-button:hover {
 	background: #d32323c9;
@@ -156,6 +162,7 @@
 	align-items: center;
 	height: 100%;
 	width: 400px;
+
 }
 
 .phone-number-container span {
@@ -166,12 +173,15 @@
 	width: 82%;
 	border-top: 1px solid rgb(235, 235, 235);
 	border-bottom: 1px solid rgb(235, 235, 235);
+    padding-top: 15px;
 }
 
 .phone-number-container p {
 	font-size: 16px;
 	font-weight: 700;
 	color: rgba(45, 46, 47, 1);
+  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+
 }
 
 .restaurant-mid {
@@ -187,6 +197,7 @@
 	height: 30rem;
 	width: max(800px);
 	border-bottom: 1px solid rgb(235, 235, 235);
+
 }
 
 .lh-title {
@@ -199,8 +210,9 @@
 
 .lh-title h4 {
 	color: #2d2e2f;
-	font-size: 20px;
-	font-weight: 700;
+	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    font-weight: 700;
 }
 
 .lh-container {
@@ -229,34 +241,76 @@
 .lh-container #address {
 	display: flex;
 	flex-direction: row;
-	height: 40%;
+	justify-content: center;
+	align-items: center;
+	height: 150px;
 	width: 100%;
 }
 
 #address-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 3px;
 	width: 50%;
 	height: 100%;
+	padding-top: 30px;
 }
+
+#address-street {
+	display: flex;
+	flex-direction: flex-wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	height: 20px;
+	width: 100%;
+}
+
+#address-street > p {
+	color: rgba(2,122,151,1);
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+#address-other {
+	display: flex;
+	flex-direction: flex-wrap;
+	justify-content: center;
+	align-items: center;
+	/* height: 25px; */
+	gap: 3px;
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+
+#address-others p {
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;
+}
+
 
 #address-right {
 	display: flex;
 	justify-content: flex-end;
 	width: 50%;
 	height: 100%;
+	padding-top: 25px;
 }
 #address-right #direction-button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 30%;
+	height: 50px;
 	width: 97%;
 	font-size: 16px;
 	font-weight: 500;
 	border: 1px solid rgb(235, 235, 235);
 	color: rgba(45, 46, 47, 1);
 	background-color: transparent;
-	border-radius: 4px;
-	margin-top: 1rem;
+	border-radius: 5px;
+	padding-top: 12px;
 }
 
 #address-right #direction-button:hover {
@@ -359,18 +413,22 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 1em;
 	width: max(800px);
-	/* background-color: orange; */
+	background-color: orange;
+	padding-top: 25px;
 }
 
 .reviews-title {
 	width: 100%;
+	height: 150px;
+
 }
 
-.reviews-title h4 {
-	font-size: 20px;
-	font-weight: 700;
+.reviews-title h3 {
+	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+	color: rgba(45,46,47,1);
 }
 
 .review-card-container {
@@ -572,7 +630,6 @@
 
 .big-star-rating {
 	width: 200px;
-	margin-left: 2.1rem;
 }
 .big-star #zero {
 	background-color: #ebebec;
