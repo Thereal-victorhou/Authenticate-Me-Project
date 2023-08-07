@@ -7,11 +7,9 @@ a {
 	justify-content: center;
 	padding: 0;
 	margin: 0, auto;
-	height: 700px;
+	height: 605px;
 	width: 100%;
-	/* overflow-x: hidden; */
-	/* background-size: cover;
-	background-position: 50%; */
+	overflow-x: hidden;
 	border-bottom: 1px solid rgb(235, 235, 235);
 }
 
@@ -20,9 +18,10 @@ a {
 	justify-content: center;
 	padding: 0;
 	margin: 0, auto;
-	height: 85px;
+	height: 90px;
 	width: 100%;
-	background-color: #ffffff;
+	position: fixed;
+	z-index: 2;
 	/* background-size: cover; */
 	/* background-position: 50%; */
 	border-bottom: 1px solid rgb(235, 235, 235);
@@ -30,7 +29,7 @@ a {
 
 .background-slideshow {
 	position: absolute;
-	height: 700px;
+	height: 605px;
 	min-width: 1070px;
 	overflow-y: hidden;
 	z-index: -2;
