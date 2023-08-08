@@ -27,7 +27,7 @@ router.get(
 		const restaurantId = req.params.id;
 		const reviews = await Review.findAll({
 			where: { restaurantId: restaurantId},
-			order: [['id', 'DESC']],
+			order: [['rating', 'DESC']],
 			// include: [{
 			// 	model: User,
 			// 	require: true,

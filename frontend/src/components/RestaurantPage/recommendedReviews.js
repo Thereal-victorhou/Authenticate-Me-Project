@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { starRatingSmall } from '../Utils/DisplayStarRating';
+import FunctionalButtonModal from './FunctionalButtonModal';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 function RecommendedReviews({ user }) {
@@ -34,46 +36,27 @@ function RecommendedReviews({ user }) {
     <>
       {restaurantReviews.length ? (
         restaurantReviews.map((review) => (
-          <li className='review-card' key={review.body}>
-            <div className='review-card-upper'>
-              <span id='user-avatar'>
-                <img src={`${review.imgSrc}`} lazyLoading={true} alt='Profile Picture'/>
-              </span>
-              <div id={`${review.userId}-user-name`}>
-                <h4>{review.username}</h4>
-                <h4>city</h4>
+          <li className='review-card-main' key={review.body}>
+            <div className='review-card'>
+              <div className='review-card-upper'>
+                <span id='user-avatar'>
+                  <img src={`${review.imgSrc}`} lazyLoading={true} alt='Profile Picture'/>
+                </span>
+                <div id={`user-name`}>
+                  <h4>{review.username}</h4>
+                  <h4>zip: {review.zipCode}</h4>
+                </div>
+                <div></div>
               </div>
-              <div></div>
-            </div>
-            <div className='review-card-lower'>
-              {starRatingSmall(review.rating)}
-              <div className='review-card-container' id={`${review.id}-review-card-container`}>
-                <h3 id={`${review.id}-body`}>{review.body}</h3>
-                <div className='optional-buttons' id={`${review.id}-optional-button`}>
-                  {user && user.id === review.userId ? (
-                    <button
-                      className='function-button'
-                      id='edit'
-                      value={review.id}
-                      onClick={(e) => handleButton(e, review.id)}>
-                      Edit
-                    </button>
-                  ) : (
-                    ''
-                  )}
-                  {user && user.id === review.userId ? (
-                    <button
-                      className='function-button'
-                      id='delete'
-                      value={review.id}
-                      onClick={(e) => handleButton(e, review.id)}>
-                      Delete
-                    </button>
-                  ) : (
-                    ''
-                  )}
+              <div className='review-card-lower'>
+                {starRatingSmall(review.rating)}
+                <div className='review-card-container' id={`${review.id}-review-card-container`}>
+                  <h3 id={`${review.id}-body`}>{review.body}</h3>
                 </div>
               </div>
+            </div>
+            <div className='functional-buttons-modal-container'>
+              <FunctionalButtonModal user={user} review={review} />
             </div>
           </li>
         ))

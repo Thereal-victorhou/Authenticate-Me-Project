@@ -414,14 +414,13 @@
 	flex-direction: column;
 	align-items: center;
 	width: max(800px);
-	background-color: orange;
-	padding-top: 25px;
+	/* background-color: orange; */
 }
 
 .reviews-title {
 	width: 100%;
-	height: 150px;
-
+	height: 50px;
+	/* background: purple; */
 }
 
 .reviews-title h3 {
@@ -431,54 +430,67 @@
 	color: rgba(45,46,47,1);
 }
 
+.review-card-main {
+	display: flex;
+	flex-direction: row;
+}
+
 .review-card-container {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: flex-start;
+	justify-content: center;
 	width: 100%;
 	padding: 0;
-	z-index: 1;
+	/* z-index: 1; */
+	gap: 30px;
 }
 
 .review-card {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-start;
 	list-style: none;
-	height: 20rem;
+	min-height: 10rem;
 	width: 60%;
 	font-size: 16px;
+	gap: 10px;
 	/* margin-right: 2rem; */
-	/* background-color: green; */
 	/* border-bottom: 1px solid black; */
-	z-index: 1;
+	/* z-index: 1; */
 }
 
 .review-card-upper {
 	display: flex;
 	flex-direction: row;
 	/* justify-content: flex-start; */
-	align-items: center;
-	justify-content: space-between;
-	/* background-color: orange; */
-	height: 50%;
+	align-items: flex-start;
+	justify-content: flex-start;
+	height: 30%;
 	width: 55%;
-	z-index: 1;
+	gap: 15px;
+	/* z-index: 1; */
 }
 
 .review-card-upper #user-avatar {
 	display: flex;
 	align-items: center;
 	/* /* width: 50%; */
-	height: 8.5rem;
+
 	padding-left: 0;
 	font-size: 14rem;
-	color: rgb(194, 194, 194);
+	/* color: rgb(194, 194, 194); */
 	padding: 0;
 	/* width: 4rem; */
-	z-index: 1;
+	/* z-index: 1; */
+
+}
+
+#user-avatar > img {
+	border-radius: 50%;
+	width: 80px;
+	height: 80px;
 }
 
 .review-card-upper #user-name {
@@ -486,38 +498,76 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	/* background-color: orange; */
 	padding-top: 0rem;
 	padding-bottom: 0;
-	margin-left: 1rem;
-	width: 8rem;
-	z-index: 1;
+	/* margin-left: 1rem; */
+	/* width: 8rem; */
+	/* z-index: 1; */
+}
+
+#user-name > h4 {
+	font-size: 16px;
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: #2D2E2F;
+	font-weight: 600;
 }
 
 .review-card-lower {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	width: 100%;
+	gap: 10px;
+	padding-top: 10px;
+	min-height: 140px;
 	/* position: static; */
-	/* position: fixed; */
-	/* background-color: blue; */
-	z-index: 1;
+	/* position: relative; */
+	/* z-index: 1; */
 }
 
 .review-card-container {
 	display: flex;
 	flex-direction: column;
-	z-index: 1;
+	/* z-index: 1; */
 }
 
-.optional-buttons {
+.review-card-container > h3 {
+	font-size: 16px;
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: #2D2E2F;
+}
+
+.optional-buttons-container {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	width: 8rem;
-	z-index: 1;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 5px;
+	width: 9rem;
+	height: 100px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1em 1px rgba(0, 0, 0, 0.08),
+		0px 5px 1.3em 3px rgba(0, 0, 0, 0.08);
+}
+
+.three-dots-optional {
+	border: none;
+	background: transparent;
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+}
+
+.three-dots-optional:hover {
+	background: rgb(230, 230, 230);
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	transition: all 0.8s ease;
 }
 
 .function-button {
@@ -525,18 +575,16 @@
 	justify-content: center;
 	align-items: center;
 	background-color: transparent;
-	border: 1px solid gray;
+	border: none;
 	border-radius: 4px;
 	height: 2rem;
-	width: 3rem;
-	z-index: -1;
+	width: 100%;
+	/* z-index: -1; */
 }
 
 .function-button:hover {
 	transition: all 0.8 ease;
-	background-color: #d32323;
-	border: 1px solid #d32323;
-	color: white;
+	background: rgb(230, 230, 230);
 }
 
 /* div.star {
@@ -544,12 +592,11 @@
 /* width: 20%; */
 
 /* Small Stars */
-.star #zero {
+/* .star #zero {
 	background-color: #ebebec;
 	border-radius: 6px;
 	color: white;
 	font-size: 16px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 20px;
@@ -562,7 +609,6 @@
 	border-radius: 6px;
 	color: white;
 	font-size: 16px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 20px;
@@ -574,19 +620,17 @@
 	border-radius: 6px;
 	color: white;
 	font-size: 16px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 20px;
 	width: 108px;
 	padding: 3px;
 }
-.star#three #three {
+.star#three #three-star {
 	background-color: #ff7e42;
 	border-radius: 6px;
 	color: white;
 	font-size: 16px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	padding: 3px;
 }
@@ -600,7 +644,6 @@
 	background-position: 0, -500px;
 	height: 20px;
 	width: 108px;
-	/* background: url('https://s3-media0.fl.yelpcdn.com/assets/public/stars_v2.yji-52d3d7a328db670d4402843cbddeed89.png') no-repeat;
     background-position: 0, -480px;
     background-size: 176px 680px;
     display: inline-block;
@@ -609,7 +652,7 @@
     border-collapse: collapse;
   border-spacing: 0;
     height: 20px;
-    width: 108px; */
+    width: 108px;
 	border-color: #ebebeb;
 	padding: 3px;
 }
@@ -624,11 +667,11 @@
 	height: 20px;
 	width: 108px;
 	padding: 3px;
-}
+} */
 
 /* Large Stars */
 
-.big-star-rating {
+/* .big-star-rating {
 	height: 50px;
 	width: 400px;
 }
@@ -637,7 +680,6 @@
 	border-radius: 6px;
 	color: white;
 	font-size: 25px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 24px;
@@ -650,7 +692,6 @@
 	border-radius: 6px;
 	color: white;
 	font-size: 25px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 24px;
@@ -663,7 +704,6 @@
 	border-radius: 6px;
 	color: white;
 	font-size: 25px;
-	/* width: 2rem; */
 	margin-right: 0.2rem;
 	background-position: 0, -500px;
 	height: 27px;
@@ -673,12 +713,9 @@
 .big-star#two #threeStar {
 	background-color: #ff7e42;
 	border-radius: 6px;
-	/* color: white; */
-	/* font-size: 25px; */
 	width: 104px;
 	height: 40px;
 	margin-right: 0.2rem;
-	/* padding: 3px; */
 }
 
 
@@ -693,16 +730,6 @@
 	height: 24px;
 	width: 108px;
 	padding: 3px;
-	/* background: url('https://s3-media0.fl.yelpcdn.com/assets/public/stars_v2.yji-52d3d7a328db670d4402843cbddeed89.png') no-repeat;
-    background-position: 0, -480px;
-    background-size: 176px 680px;
-    display: inline-block;
-    vertical-align: middle;
-    overflow: hidden;
-    border-collapse: collapse;
-  border-spacing: 0;
-    height: 20px;
-    width: 108px; */
 	border-color: #ebebeb;
 }
 .big-star#five #five {
@@ -716,4 +743,4 @@
 	height: 20px;
 	width: 108px;
 	padding: 3px;
-}
+} */

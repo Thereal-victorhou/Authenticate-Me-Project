@@ -57,31 +57,31 @@ export const starRatingSmall = (num) => {
   switch (num) {
     case 1:
       return (
-        <div className='star' id='one'>
+        <div className='star-img-container' id='one'>
           <img src={smallOneStar} alt='one star'/>
         </div>
       );
     case 2:
       return (
-        <div className='star' id='two'>
+        <div className='star-img-container' id='two'>
           <img src={smallTwoStar} alt='two star'/>
         </div>
       );
     case 3:
       return (
-        <div className='star' id='three'>
-          <img src={smallThreeStar} alt='three star'/>
+        <div className='star-img-container' id='three'>
+          <img id='three-star'src={smallThreeStar} alt='three star'/>
         </div>
       );
     case 4:
       return (
-        <div className='star' id='four'>
+        <div className='star-img-container' id='four'>
           <img src={smallFourStar} alt='four star'/>
         </div>
       );
     case 5:
       return (
-        <div className='star' id='five'>
+        <div className='star-img-container' id='five'>
           <img src={smallFiveStar} alt='five star'/>
         </div>
       );
