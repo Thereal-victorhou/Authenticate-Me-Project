@@ -1,4 +1,3 @@
-
 // type
 const UPDATE_LOCATION = '/navigation/GET_LOCATION';
 

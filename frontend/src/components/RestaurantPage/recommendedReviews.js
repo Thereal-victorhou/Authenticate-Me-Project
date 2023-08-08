@@ -36,18 +36,20 @@ function RecommendedReviews({ user }) {
         restaurantReviews.map((review) => (
           <li className='review-card' key={review.body}>
             <div className='review-card-upper'>
-              <span id='user-avatar'>●</span>
-              <div id='user-name'>
-                <h4>*Username{review.userId}</h4>
+              <span id='user-avatar'>
+                <img src={`${review.imgSrc}`} lazyLoading={true} alt='Profile Picture'/>
+              </span>
+              <div id={`${review.userId}-user-name`}>
+                <h4>{review.username}</h4>
                 <h4>city</h4>
               </div>
               <div></div>
             </div>
             <div className='review-card-lower'>
               {starRatingSmall(review.rating)}
-              <div className='review-card-container'>
-                <h3>{review.body}</h3>
-                <div className='optional-buttons'>
+              <div className='review-card-container' id={`${review.id}-review-card-container`}>
+                <h3 id={`${review.id}-body`}>{review.body}</h3>
+                <div className='optional-buttons' id={`${review.id}-optional-button`}>
                   {user && user.id === review.userId ? (
                     <button
                       className='function-button'

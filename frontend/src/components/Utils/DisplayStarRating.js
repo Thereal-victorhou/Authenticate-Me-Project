@@ -1,9 +1,15 @@
-import bigZeroStar from '../../images/small_0@2x.png';
-import bigOneStar from '../../images/small_1@2x.png';
-import bigTwoStar from '../../images/small_2@2x.png';
-import bigThreeStar from '../../images/small_3@2x.png';
-import bigFourStar from '../../images/small_4@2x.png';
-import bigFiveStar from '../../images/small_5@2x.png';
+import bigZeroStar from '../../images/regular_0@2x.png';
+import smallZeroStar from '../../images/regular_0.png';
+import bigOneStar from '../../images/regular_1@2x.png';
+import smallOneStar from '../../images/regular_1.png';
+import bigTwoStar from '../../images/regular_2@2x.png';
+import smallTwoStar from '../../images/regular_2.png';
+import bigThreeStar from '../../images/regular_3@2x.png';
+import smallThreeStar from '../../images/regular_3.png';
+import bigFourStar from '../../images/regular_4@2x.png';
+import smallFourStar from '../../images/regular_4.png';
+import bigFiveStar from '../../images/regular_5@2x.png';
+import smallFiveStar from '../../images/regular_5.png';
 
 export const starRatingBig = (num) => {
     switch (num) {
@@ -52,51 +58,31 @@ export const starRatingSmall = (num) => {
     case 1:
       return (
         <div className='star' id='one'>
-          <span id='one'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
+          <img src={smallOneStar} alt='one star'/>
         </div>
       );
     case 2:
       return (
         <div className='star' id='two'>
-          <span id='two'>★</span>
-          <span id='two'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
+          <img src={smallTwoStar} alt='two star'/>
         </div>
       );
     case 3:
       return (
         <div className='star' id='three'>
-          <span id='three'>★</span>
-          <span id='three'>★</span>
-          <span id='three'>★</span>
-          <span id='zero'>★</span>
-          <span id='zero'>★</span>
+          <img src={smallThreeStar} alt='three star'/>
         </div>
       );
     case 4:
       return (
         <div className='star' id='four'>
-          <span id='four'>★</span>
-          <span id='four'>★</span>
-          <span id='four'>★</span>
-          <span id='four'>★</span>
-          <span id='zero'>★</span>
+          <img src={smallFourStar} alt='four star'/>
         </div>
       );
     case 5:
       return (
         <div className='star' id='five'>
-          <span id='five'>★</span>
-          <span id='five'>★</span>
-          <span id='five'>★</span>
-          <span id='five'>★</span>
-          <span id='five'>★</span>
+          <img src={smallFiveStar} alt='five star'/>
         </div>
       );
   }

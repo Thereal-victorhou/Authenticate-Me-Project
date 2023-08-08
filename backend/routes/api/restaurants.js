@@ -219,27 +219,22 @@ router.get(
 	asyncHandler(async (req, res) => {
 		const id = parseInt(req.params.id, 10);
 		const restaurant = await Restaurant.findByPk(id);
-		// const reviews = await Restaurant.findByPk(id, {
-		// 	include: [
-		// 		{
-		// 			model: Review,
-		// 			required: true,
-		// 			where: { restaurantId: id },
-		// 		},
-		// 		{
-		// 			model: Rating,
-		// 			require: true,
-		// 			where: { restaurantId: id },
-		// 		},
-		// 	],
-		// });
+		const reviews = await Restaurant.findByPk(id, {
+			include: [
+				{
+					model: Review,
+					required: true,
+					where: { restaurantId: id },
+				},
+			],
+		});
 
-		// if (reviews) {
-		// 	console.log('=========Reviews ', reviews)
-		// 	return res.json(reviews);
-		// } else {
+		if (reviews) {
+			// console.log('=========Reviews ', reviews)
+			return res.json(reviews);
+		} else {
 			return res.json(restaurant);
-		// }
+		}
 	})
 );
 

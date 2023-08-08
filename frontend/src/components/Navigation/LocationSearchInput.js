@@ -76,6 +76,7 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 	const handleCurrentLocation = async (e) => {
 		if (e) e.preventDefault();
 
+		// Find an alternate way of getting user location
 		const response = await fetch('http://ip-api.com/json', {
 			method: 'GET',
 			headers: {
@@ -84,6 +85,7 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 		});
 
 		const result = await response.json();
+		console.log(result)
 		if (result.status === 'success') {
       const location = `${result.city}, ${abbreviateState(result.regionName)}, USA`;
       handleSelect(location)
