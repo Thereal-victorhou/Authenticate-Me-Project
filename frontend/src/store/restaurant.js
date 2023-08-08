@@ -99,6 +99,7 @@ export const getNearByRestaurants = (locationObj) => async (dispatch) => {
 export const oneRestaurant = (restaurant) => async (dispatch) => {
 	const res = await fetch(`/api/restaurants/${restaurant}`);
 	const oneRes = await res.json();
+	console.log(oneRes)
 
 	dispatch(getOneRestaurant(oneRes));
 };

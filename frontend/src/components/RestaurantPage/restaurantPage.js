@@ -83,7 +83,6 @@ function RestaurantPage({ user }) {
 		}
 	};
 
-
 	const handleDeleteRestaurant = async (e) => {
 		e.preventDefault();
 
@@ -135,7 +134,10 @@ function RestaurantPage({ user }) {
 							<div
 								className='restaurant-sub-rating-divider'
 								id='check-container'>
-								<CheckCircleIcon className='circle-check' sx={{ fontSize: 18 }}/>
+								<CheckCircleIcon
+									className='circle-check'
+									sx={{ fontSize: 18 }}
+								/>
 							</div>
 							<div className='restaurant-sub-rating-divider'>
 								<h3 className='claimed'>Claimed</h3>
@@ -163,12 +165,14 @@ function RestaurantPage({ user }) {
 						id='add-review'
 						value='reviewButton'
 						onClick={handleButton}>
-						<StarOutlineIcon sx={{ fontSize: 30 }}/>
+						<StarOutlineIcon sx={{ fontSize: 30 }} />
 						Write a Review
 					</button>
 					<div className='phone-number-container'>
 						<span className='phone-number'>
-							<p>{restaurantCurrent ? restaurantCurrent?.displayPhone : 'phone'}</p>
+							<p>
+								{restaurantCurrent ? restaurantCurrent?.displayPhone : 'phone'}
+							</p>
 						</span>
 					</div>
 				</div>
@@ -186,12 +190,29 @@ function RestaurantPage({ user }) {
 							<div id='address'>
 								<div id='address-left'>
 									<div id='address-street'>
-										<p>{restaurantCurrent ? restaurantCurrent?.location[0] : 'Address Line 1'}</p>
+										<p>
+											{restaurantCurrent
+												? restaurantCurrent?.location[0]
+												: 'Address Line 1'}
+										</p>
 									</div>
 									<div id='address-other'>
-										<p>{restaurantCurrent ? restaurantCurrent?.location[3] : 'City'},</p>
-										<p>{restaurantCurrent ? restaurantCurrent?.location[6] : 'State'}</p>
-										<p>{restaurantCurrent ? restaurantCurrent?.location[4] : 'Zipcode'}</p>
+										<p>
+											{restaurantCurrent
+												? restaurantCurrent?.location[3]
+												: 'City'}
+											,
+										</p>
+										<p>
+											{restaurantCurrent
+												? restaurantCurrent?.location[6]
+												: 'State'}
+										</p>
+										<p>
+											{restaurantCurrent
+												? restaurantCurrent?.location[4]
+												: 'Zipcode'}
+										</p>
 									</div>
 								</div>
 								<div id='address-right'>
@@ -233,7 +254,7 @@ function RestaurantPage({ user }) {
 						<h3>Recommended Reviews</h3>
 					</div>
 					<ul className='review-card-container'>
-						<RecommendedReviews user={user}/>
+						<RecommendedReviews user={user} />
 					</ul>
 				</div>
 			</div>

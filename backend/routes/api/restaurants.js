@@ -14,6 +14,8 @@ const { Rating } = require('../../db/models');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+
 const router = express.Router();
 
 const validateCreateInfo = [
@@ -153,7 +155,7 @@ router.post(
 				limit: '50',
 				offset: '0',
 			};
-			sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+			// sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
 
 			try {
 				const resu = await sdk.v3_business_search(
@@ -229,12 +231,33 @@ router.get(
 			],
 		});
 
-		if (reviews) {
-			// console.log('=========Reviews ', reviews)
-			return res.json(reviews);
-		} else {
-			return res.json(restaurant);
-		}
+
+
+		const businessDetails = await sdk.v3_business_info({locale: 'en_US', business_id_or_alias: `${restaurant.yelpId}`})
+		const businessData = businessDetails.data;
+		const businessDataObj = {
+			id: restaurant.id,
+			yelpId: restaurant.yelpId,
+			name: restaurant.name,
+			imgSrc: restaurant.imgSrc,
+			isClaimed: businessData.is_claimed,
+			isClosed: businessData.is_closed,
+			phone: restaurant.phone,
+			displayPhone: restaurant.displayPhone,
+			categories: restaurant.categories,
+			rating: restaurant.rating,
+			location: restaurant.location,
+			coordinates: restaurant.coordinates,
+			photos: businessData.photos,
+			price: restaurant.price,
+			hours: businessData.hours,
+			transactions: businessData.transactions
+		};
+		if (reviews && businessDetails.status === 200) return res.json(businessDataObj)
+		if (reviews) return res.json(reviews);
+		res.json(restaurant);
+
+
 	})
 );
 
