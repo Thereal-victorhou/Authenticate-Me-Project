@@ -18,7 +18,14 @@ function RestaurantHours({ currentRestaurant }) {
   const renderHours = (openObj, day) => {
     const currentDay = openObj[day]
 
-    if (currentDay.length === 1) {
+    if (currentDay === undefined) {
+      return (
+        <div className='hour-container'>
+          <p>Closed</p>
+        </div>
+      )
+    }
+    if (currentDay?.length === 1) {
       const updatedTime = currentDay.join(' - ').replace(/,/ , ' - ')
       return (
         <div className='hour-container'>
@@ -27,7 +34,7 @@ function RestaurantHours({ currentRestaurant }) {
       )
     }
 
-    if (currentDay.length === 2) {
+    if (currentDay?.length === 2) {
       const updatedTime1 = currentDay[0].join(' - ').replace(/,/ , ' - ')
       const updatedTime2 = currentDay[1].join(' - ').replace(/,/ , ' - ')
 
