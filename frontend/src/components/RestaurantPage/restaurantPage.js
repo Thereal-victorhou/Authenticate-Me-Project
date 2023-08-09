@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import RecommendedReviews from './recommendedReviews';
+import RestaurantHours from './RestaurantHours';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { allRatings } from '../../store/ratings';
 import { starRatingBig } from '../Utils/DisplayStarRating';
+import { formatOperatingHours } from '../Utils/RestaurantHoursUtil'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
@@ -16,6 +18,7 @@ function RestaurantPage({ user }) {
 	const { id } = useParams();
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [avgRating, setAvgRating] = useState(0);
+
 	let avgNum;
 
 	// sessionRestaurants is an array
@@ -25,6 +28,7 @@ function RestaurantPage({ user }) {
 	const restaurantCurrent = currentRestaurant.find(
 		(restaurant) => restaurant.id === parseInt(id, 10)
 	);
+	console.log(restaurantCurrent)
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
 	// useEffect(() => {
@@ -224,24 +228,7 @@ function RestaurantPage({ user }) {
 						</div>
 						<div className='lh-right'>
 							<div className='lh-hours-container'>
-								<div id='day-column'>
-									<h5>Mon</h5>
-									<h5>Tue</h5>
-									<h5>Wed</h5>
-									<h5>Thu</h5>
-									<h5>Fri</h5>
-									<h5>Sat</h5>
-									<h5>Sun</h5>
-								</div>
-								<div id='hour-column'>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-									<p>11:00 AM - 8:30 PM</p>
-								</div>
+								<RestaurantHours  currentRestaurant={currentRestaurant} />
 							</div>
 							<div className='edit-info-container'>
 								{currentRestaurant && checkEdit()}

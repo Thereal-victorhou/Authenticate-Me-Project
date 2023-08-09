@@ -188,14 +188,16 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 }
 
 .location-and-hours {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	align-items: flex-start;
 	height: 30rem;
-	width: max(800px);
+	min-width: 800px;
 	border-bottom: 1px solid rgb(235, 235, 235);
 
 }
@@ -218,6 +220,7 @@
 .lh-container {
 	display: flex;
 	flex-direction: row;
+	justify-content: flex-start;
 	height: 100%;
 	width: 100%;
 }
@@ -320,8 +323,7 @@
 
 .lh-right {
 	display: flex;
-	flex-direction: column;
-	/* background-color: green; */
+	flex-direction: row;
 	width: 55%;
 	height: 100%;
 }
@@ -330,54 +332,77 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
+	justify-content: flex-start;
 	height: 100%;
 	width: 100%;
 }
-.lh-hours-container #day-column {
+
+.business-hours-container {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: flex-start;
 	align-items: flex-start;
-	height: 90%;
-	width: 12%;
-	margin-bottom: 0.25rem;
-	margin-left: 2rem;
+	/* width: 300px; */
+	min-height: 30px;
+	/* gap: 10px; */
+	/* z-index: 2; */
 }
 
-#day-column h5 {
-	margin-top: 0;
-	font-size: 16px;
-	margin-bottom: 1.59rem;
+.day-container {
+	width: 30px;
 }
-.lh-hours-container #hour-column {
+
+.day-container > p {
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 16px;
+}
+
+.hour-container {
+	width: 150px;
+	margin-left: 30px;
+	margin-right: 20px;
+}
+
+.hour-container {
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 16px;
+}
+
+.is-business-open {
 	display: flex;
-	/* background-color: orange; */
-	flex-direction: column;
-	height: 90%;
-	width: 70%;
-	margin-bottom: 0.25rem;
-	padding-top: 0;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 90px;
+	height: 100%;
 }
 
-#hour-column p {
-	margin-top: 0.1rem;
-	font-size: 16px;
-	margin-bottom: 1.56rem;
-	width: 50%;
+.is-business-open #open-now {
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 16px;
+	color: rgba(0,128,85,1);
 }
+
+.is-business-open #closed-now {
+	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-size: 16px;
+	color: rgba(224,7,7,1);
+}
+
+
 
 .edit-info-container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
+	width: 20%;
 	margin-bottom: 2rem;
+	/* background: rgb(132, 96, 30); */
 }
 .edit-link {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-left: 2rem;
 }
 .edit-link #pencil {
 	margin-right: 1rem;

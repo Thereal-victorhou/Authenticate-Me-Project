@@ -215,6 +215,47 @@ router.post(
 	})
 );
 
+// Convert Military Time to Standard Time
+const numberToDay = {
+  '0': 'Mon',
+  '1': 'Tue',
+  '2': 'Wed',
+  '3': 'Thu',
+  '4': 'Fri',
+  '5': 'Sat',
+  '6': 'Sun'
+}
+const formatOperatingHours = async (arr) => {
+
+  const dailyHours = {};
+
+  await arr.forEach(day => {
+
+    const dayWord = numberToDay[day.day];
+    const startTime = convertMilitaryToStandard(day.start);
+    const endTime = convertMilitaryToStandard(day.end);;
+
+    if (!(dayWord in dailyHours)) dailyHours[dayWord] = [[startTime, endTime]]
+    else dailyHours[dayWord].push([startTime, endTime])
+
+  })
+
+  return dailyHours
+
+}
+function convertMilitaryToStandard(time) {
+  // Ensure time is in 'HH:mm' format
+
+  const hour = time.slice(0, 2)
+  const minute = time.slice(2)
+
+  const modifier = +hour < 12 ? 'AM' : 'PM';
+  let standardHours = +hour % 12 || 12;
+
+  return `${standardHours}:${minute} ${modifier}`;
+}
+
+
 // GET one restaurant
 router.get(
 	'/:id',
@@ -231,10 +272,9 @@ router.get(
 			],
 		});
 
-
-
 		const businessDetails = await sdk.v3_business_info({locale: 'en_US', business_id_or_alias: `${restaurant.yelpId}`})
 		const businessData = businessDetails.data;
+		const adjustedHours = await formatOperatingHours(businessData.hours[0]?.open)
 		const businessDataObj = {
 			id: restaurant.id,
 			yelpId: restaurant.yelpId,
@@ -250,9 +290,10 @@ router.get(
 			coordinates: restaurant.coordinates,
 			photos: businessData.photos,
 			price: restaurant.price,
-			hours: businessData.hours,
+			hours: { hoursType: businessData.hours[0]?.hours_type, isOpenNow: businessData.hours[0]?.is_open_now, open: adjustedHours},
 			transactions: businessData.transactions
 		};
+		console.log(businessData.hours[0])
 		if (reviews && businessDetails.status === 200) return res.json(businessDataObj)
 		if (reviews) return res.json(reviews);
 		res.json(restaurant);
