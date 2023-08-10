@@ -28,7 +28,7 @@ function RestaurantPage({ user }) {
 	const restaurantCurrent = currentRestaurant.find(
 		(restaurant) => restaurant.id === parseInt(id, 10)
 	);
-	console.log(restaurantCurrent)
+
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
 	useEffect(() => {

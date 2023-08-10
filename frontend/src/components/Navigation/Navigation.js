@@ -34,10 +34,12 @@ function Navigation({ isLoaded }) {
 	const [isSelected, setIsSelected] = useState(false);
 	const [sessionToken, setSessionToken] = useState('');
 	const [selectInput, setSelectInput] = useState(false);
+	// const [pageType, setPageType] = useState(sessionStorage.getItem('pageType'));
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
 	const pageType = useSelector((state) => state.navigation?.currentPage);
+	const currentPage = sessionStorage.getItem('pageType')
 
 	const restaurantSearchInputLength = document.querySelector(
 		'.search-bar-restaurants-input'
@@ -85,9 +87,18 @@ function Navigation({ isLoaded }) {
 		await dispatch(oneRestaurant(res.id));
 		await dispatch(clearSearch());
 		setRestaurantSearchInput('');
+		sessionStorage.setItem('pageType', 'other');
 		dispatch(saveCurrentPage('other'));
 		history.push(`/restaurants/${res.id}`);
 	};
+
+
+	const handleAddRestaurantPage = async (e) => {
+		e.preventDefault();
+		sessionStorage.setItem('pageType', 'other');
+		await dispatch(saveCurrentPage('other'));
+		history.push(sessionUser ? '/add/restaurant' : '/login')
+	}
 
 	//Render restaurant search results
 	const restaurantSearchRender = (res, i) => {
@@ -138,6 +149,7 @@ function Navigation({ isLoaded }) {
 		);
 		console.log('search button handle ', selectedLocation)
 		setRestaurantSearchInput('');
+		sessionStorage.setItem('pageType', 'other')
 		dispatch(saveCurrentPage('other'));
 		history.push(
 			`/search?find_desc=${restaurantSearchInput}`
@@ -147,13 +159,19 @@ function Navigation({ isLoaded }) {
 	// Set Nav to Home Version
 	const handleNav = (e) => {
 		e.preventDefault();
+		sessionStorage.setItem('pageType', 'home')
+		console.log(sessionStorage.getItem('pageType'))
 		dispatch(saveCurrentPage('home'));
 		dispatch(clearSearch());
 	};
 
+
 	// Modifying style of NavBar based on current Page
 	useEffect(async () => {
-		if (pageType === undefined) dispatch(saveCurrentPage('home'));
+		if (pageType === undefined) {
+			dispatch(saveCurrentPage('home'))
+			sessionStorage.setItem('pageType', 'home')
+		}
 		if (pageType === 'home') {
 			await document
 				.querySelector('.background-slideshow')
@@ -264,64 +282,50 @@ function Navigation({ isLoaded }) {
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/food-healthy-restaurant-262918.jpg'
 						src={home1}
 						alt='slide1'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-eneida-nieves-905847.jpg'
 						src={home2}
 						alt='slide2'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-huy%CC%80nh-%C4%91a%CC%A3t-3262277.jpg'
 						src={home3}
 						alt='slide3'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-jep-gambardella-5083910.jpg'
 						src={home4}
 						alt='slide4'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-1126728.jpg'
 						src={home5}
 						alt='slide5'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-1137745.jpg'
 						src={home6}
 						alt='slide66'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-3147123.jpg'
 						src={home7}
 						alt='slide7'
-						// loading='lazy'
 					/>
 				</CCarouselItem>
 			</CCarousel>
@@ -380,7 +384,8 @@ function Navigation({ isLoaded }) {
 							exact
 							to={sessionUser ? '/add/restaurant' : '/login'}
 							className='add-restaurant-link'
-							id='add-restaurant-link'>
+							id='add-restaurant-link'
+							onClick={(e) => handleAddRestaurantPage(e)}>
 							Add a Restaurant
 						</NavLink>
 						{isLoaded && sessionLinks}

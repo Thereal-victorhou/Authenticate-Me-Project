@@ -11,7 +11,9 @@ const setPage = (currentPage) => {
 
 // Thunk
 export const saveCurrentPage = (page) => async (dispatch) => {
-	dispatch(setPage(page));
+	const currentPage = sessionStorage.getItem('pageType')
+	console.log(currentPage);
+	dispatch(setPage(currentPage));
 };
 
 // Reducer

@@ -104,17 +104,23 @@ const validateEditInfo = [
 router.get(
 	'/',
 	asyncHandler(async (req, res) => {
-		const restaurants = await Restaurant.findAll({ order: [['id', 'ASC']], limit: 8 });
+		const restaurants = await Restaurant.findAll({
+			order: [['id', 'ASC']],
+			limit: 8,
+		});
 		return res.json(restaurants);
 	})
 );
 
 // Get all restaurants based on searchInput
-router.post('/restaurant/search/results', asyncHandler( async (req, res) => {
-	const { searchInput, locationObj } = req.body;
-	// console.log('SEARCH INPUT............. ', searchInput);
-	// console.log('LOCATIONOBJ............. ', locationObj);
-}))
+router.post(
+	'/restaurant/search/results',
+	asyncHandler(async (req, res) => {
+		const { searchInput, locationObj } = req.body;
+		// console.log('SEARCH INPUT............. ', searchInput);
+		// console.log('LOCATIONOBJ............. ', locationObj);
+	})
+);
 
 // GET all restaurants based on location
 router.post(
@@ -131,7 +137,7 @@ router.post(
 				},
 			},
 			order: [['rating', 'DESC']],
-		}
+		};
 
 		// search database for restaurants based on location
 		// otherwise, fetch restaurant data and save to db if it doesn't aready exist
@@ -140,7 +146,6 @@ router.post(
 
 		if (localRestaurants.length > 0) return res.json('Already In Database');
 		else {
-
 			const newLocation = encodeURI(location).replace(/,/g, '%2C');
 			const searchObj = {
 				location: `${newLocation}`,
@@ -165,7 +170,7 @@ router.post(
 				);
 				const restaurantData = resu.data.businesses;
 				const restaurantArr = [];
-				await restaurantData.forEach( async (restaurant) => {
+				await restaurantData.forEach(async (restaurant) => {
 					const restaurantObj = {
 						yelpId: restaurant.id,
 						name: restaurant.name,
@@ -202,7 +207,7 @@ router.post(
 					const alreadyExist = await Restaurant.findOne({
 						where: {
 							name: { [Op.like]: restaurant.name },
-						}
+						},
 					});
 					if (!alreadyExist) await Restaurant.create(restaurantObj);
 				});
@@ -217,44 +222,39 @@ router.post(
 
 // Convert Military Time to Standard Time
 const numberToDay = {
-  '0': 'Mon',
-  '1': 'Tue',
-  '2': 'Wed',
-  '3': 'Thu',
-  '4': 'Fri',
-  '5': 'Sat',
-  '6': 'Sun'
-}
+	0: 'Mon',
+	1: 'Tue',
+	2: 'Wed',
+	3: 'Thu',
+	4: 'Fri',
+	5: 'Sat',
+	6: 'Sun',
+};
 const formatOperatingHours = async (arr) => {
+	const dailyHours = {};
 
-  const dailyHours = {};
+	await arr.forEach((day) => {
+		const dayWord = numberToDay[day.day];
+		const startTime = convertMilitaryToStandard(day.start);
+		const endTime = convertMilitaryToStandard(day.end);
 
-  await arr.forEach(day => {
+		if (!(dayWord in dailyHours)) dailyHours[dayWord] = [[startTime, endTime]];
+		else dailyHours[dayWord].push([startTime, endTime]);
+	});
 
-    const dayWord = numberToDay[day.day];
-    const startTime = convertMilitaryToStandard(day.start);
-    const endTime = convertMilitaryToStandard(day.end);;
-
-    if (!(dayWord in dailyHours)) dailyHours[dayWord] = [[startTime, endTime]]
-    else dailyHours[dayWord].push([startTime, endTime])
-
-  })
-
-  return dailyHours
-
-}
+	return dailyHours;
+};
 function convertMilitaryToStandard(time) {
-  // Ensure time is in 'HH:mm' format
+	// Ensure time is in 'HH:mm' format
 
-  const hour = time.slice(0, 2)
-  const minute = time.slice(2)
+	const hour = time.slice(0, 2);
+	const minute = time.slice(2);
 
-  const modifier = +hour < 12 ? 'AM' : 'PM';
-  let standardHours = +hour % 12 || 12;
+	const modifier = +hour < 12 ? 'AM' : 'PM';
+	let standardHours = +hour % 12 || 12;
 
-  return `${standardHours}:${minute} ${modifier}`;
+	return `${standardHours}:${minute} ${modifier}`;
 }
-
 
 // GET one restaurant
 router.get(
@@ -272,9 +272,14 @@ router.get(
 			],
 		});
 
-		const businessDetails = await sdk.v3_business_info({locale: 'en_US', business_id_or_alias: `${restaurant.yelpId}`})
+		const businessDetails = await sdk.v3_business_info({
+			locale: 'en_US',
+			business_id_or_alias: `${restaurant.yelpId}`,
+		});
 		const businessData = businessDetails.data;
-		const adjustedHours = await formatOperatingHours(businessData.hours[0]?.open)
+		const adjustedHours = await formatOperatingHours(
+			businessData.hours[0]?.open
+		);
 		const businessDataObj = {
 			id: restaurant.id,
 			yelpId: restaurant.yelpId,
@@ -290,15 +295,18 @@ router.get(
 			coordinates: restaurant.coordinates,
 			photos: businessData.photos,
 			price: restaurant.price,
-			hours: { hoursType: businessData.hours[0]?.hours_type, isOpenNow: businessData.hours[0]?.is_open_now, open: adjustedHours},
-			transactions: businessData.transactions
+			hours: {
+				hoursType: businessData.hours[0]?.hours_type,
+				isOpenNow: businessData.hours[0]?.is_open_now,
+				open: adjustedHours,
+			},
+			transactions: businessData.transactions,
 		};
-		console.log(businessData.hours[0])
-		if (reviews && businessDetails.status === 200) return res.json(businessDataObj)
+		console.log(businessData.hours[0]);
+		if (reviews && businessDetails.status === 200)
+			return res.json(businessDataObj);
 		if (reviews) return res.json(reviews);
 		res.json(restaurant);
-
-
 	})
 );
 
