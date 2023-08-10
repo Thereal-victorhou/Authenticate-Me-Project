@@ -47,37 +47,45 @@ function HomePage() {
 
 	return (
 		<div className='all-restaurants-container'>
-			<ul id='card-list'>
-				{sessionRestaurant &&
-					sessionRestaurant.map((restaurant) => {
-						return (
-							<li
-								className='restaurant-container'
-								key={restaurant.id}
-								onClick={(e) => {
-									handleNav(e);
-								}}>
-								<div className={'restaurant_container'}>
-									<img
-										className={'restaurant-photo'}
-										src={restaurant.imgSrc}
-										alt={'Restaurant Image'}></img>
-									<div className={'restaurant-info'}>
-										<NavLink
-											className='name-and-location-container'
-											onClick={(e) => dispatch(oneRestaurant(restaurant.id))}
-											to={`/restaurants/${restaurant.id}`}>
-											<h2 className='restaurant-name'>{restaurant.name}</h2>
-											<div className='restaurant-location-container'>
-												{restaurant.location}
-											</div>
-										</NavLink>
+			<div className='home-review-title'>
+				<h1>Your new review awaits</h1>
+			</div>
+			<div className='review-suggestions-container'>
+				<ul id='card-list'>
+					{sessionRestaurant &&
+						sessionRestaurant.map((restaurant) => {
+							return (
+								<li
+									className='restaurant-container'
+									key={restaurant.id}
+									onClick={(e) => {
+										handleNav(e);
+									}}>
+									<div className={'restaurant_container'}>
+										<img
+											className={'restaurant-photo'}
+											src={restaurant.imgSrc}
+											alt={'Restaurant Image'}></img>
+										<div className='restaurant-info'>
+											<NavLink
+												className='name-and-location-container'
+												onClick={(e) => dispatch(oneRestaurant(restaurant.id))}
+												to={`/restaurants/${restaurant.id}`}>
+												<h2 className='restaurant-name'>{restaurant.name}</h2>
+											</NavLink>
+												<div className='restaurant-recommendation-container'>
+													<p>Do you recommend this restaurant?</p>
+												</div>
+												<div>
+													
+												</div>
+										</div>
 									</div>
-								</div>
-							</li>
-						);
-					})}
-			</ul>
+								</li>
+							);
+						})}
+				</ul>
+			</div>
 		</div>
 	);
 }

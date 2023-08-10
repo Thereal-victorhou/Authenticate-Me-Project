@@ -5,53 +5,99 @@
     align-items: center;
     width: 100%;
     z-index: 0;
-    margin-top: 10%;
+    background: green;
+    padding-top: 45px;
+    height: 100%;
 }
 
-.restaurant_container {
+.home-review-title {
     display: flex;
-    height: fit-content;
-    width: 620px;
-    border: 2px solid #a1a1a1;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    position: relative;
-    margin: 0 auto;
-    margin-top: 20px;
-    background-color: white;
+    justify-content: center;
+    background: orange;
 }
 
-.restaurant-photo {
-    width: 10em;
-    height: 10em;
+.home-review-title > h1 {
+
 }
 
-.restaurant-info{
+.review-suggestions-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background: purple;
 }
 
 #card-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
     list-style: none;
+    width: 1100px;
+    background: rgb(18, 104, 184);
+    padding-top: 20px;
+    gap: 30px;
 
 }
+
+.restaurant_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 500px;
+    border: 2px solid #a1a1a1;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    margin: 0 auto;
+    /* margin-top: 20px; */
+    background-color: rgb(154, 154, 154);
+    border-color: #ebebeb;
+}
+
+.restaurant-photo {
+    width: 8em;
+    height: 80%;
+}
+
+.restaurant-info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 320px;
+    height: 80%;
+    background: pink;
+    padding-left: 20px;
+}
+
+
 
 .name-and-location-container {
-    width: 25em;
-}
-
-.restaurant-name-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 10em;
+    width: 100%;
+    height: 35%;
+    background: orange;
+    padding-top: 20px;
 }
 
 .restaurant-name{
-    margin-left: 1.25em;
+    color: #2d2e2f;
+    font-size: 20px;
+}
+
+/* .restaurant-name:hover {
+    font-style: underline;
+} */
+
+.restaurant-recommendation-container {
+    color: #2d2e2f;
+    font-size: 16px;
+    background: green;
+    height: 30px;
 }
