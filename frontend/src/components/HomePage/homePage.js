@@ -46,7 +46,7 @@ function HomePage() {
 	return (
 		<div className='all-restaurants-container'>
 			<div className='home-review-title'>
-				<h1>Your New Review Awaits</h1>
+				<h2>Your New Review Awaits</h2>
 			</div>
 			<div className='review-suggestions-container'>
 				<ul id='card-list'>
