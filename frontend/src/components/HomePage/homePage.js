@@ -3,16 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { allRestaurants, oneRestaurant } from '../../store/restaurant';
-import { saveCurrentPage } from '../../store/navigation';
+import { saveCurrentPage } from '../../store/navigation'
+import LiveStarRatingDisplay from '../LiveStarRatingDisplay/LiveStarRatingDisplay';
 
 function HomePage() {
 	const sessionRestaurant = useSelector((state) =>
 		Object.values(state.restaurant)
 	);
 	const dispatch = useDispatch();
-
-	const [lastNumber, setLastNumber] = useState(0);
-	const [randomArr, setRandomArr] = useState([]);
 
 	useEffect(() => {
 		dispatch(allRestaurants());
@@ -48,12 +46,12 @@ function HomePage() {
 	return (
 		<div className='all-restaurants-container'>
 			<div className='home-review-title'>
-				<h1>Your new review awaits</h1>
+				<h1>Your New Review Awaits</h1>
 			</div>
 			<div className='review-suggestions-container'>
 				<ul id='card-list'>
 					{sessionRestaurant &&
-						sessionRestaurant.map((restaurant) => {
+						sessionRestaurant.map((restaurant, i) => {
 							return (
 								<li
 									className='restaurant-container'
@@ -71,14 +69,12 @@ function HomePage() {
 												className='name-and-location-container'
 												onClick={(e) => dispatch(oneRestaurant(restaurant.id))}
 												to={`/restaurants/${restaurant.id}`}>
-												<h2 className='restaurant-name'>{restaurant.name}</h2>
+												<h2 className='restaurant-name'>{`${restaurant.name}`}</h2>
 											</NavLink>
 												<div className='restaurant-recommendation-container'>
 													<p>Do you recommend this restaurant?</p>
 												</div>
-												<div>
-													
-												</div>
+												<LiveStarRatingDisplay restaurant={restaurant} number={i}/>
 										</div>
 									</div>
 								</li>
