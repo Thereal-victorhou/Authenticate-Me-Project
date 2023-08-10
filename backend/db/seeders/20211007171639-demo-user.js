@@ -27,6 +27,16 @@ function getRandomDate() {
   return month + "/" + day + "/" + year;
 }
 
+// Generate 1 or 2 randomly
+function randomWholeNumberBetweenOneAndTwo() {
+  return Math.floor(Math.random() * 2) + 1;  // Math.random() generates a number between 0 (inclusive) and 1 (exclusive)
+}
+
+const mFObj = {
+  '1': 'male',
+  '2': 'female'
+}
+
 const generateUsers = (amount) => {
   const userArr = [];
 
@@ -42,10 +52,11 @@ const generateUsers = (amount) => {
 
   for (let i = 0; i < amount; i++) {
     const fakeBirthday = getRandomDate();
+    const oneTwo = randomWholeNumberBetweenOneAndTwo();
     const userObj = {
       email: `${chance.email({domain: 'example.com'})}`,
-      username: `${chance.first()} ${chance.last()}`,
-      imgSrc: `${chance.avatar({protocol: 'https', fileExtension: 'png'})}`,
+      username: `${chance.first({gender: `${mFObj[oneTwo]}`})} ${chance.last()}`,
+      imgSrc: `https://xsgames.co/randomusers/avatar.php?g=${mFObj[oneTwo]}`,
       zipCode: `${chance.zip()}`,
       birthday: `${fakeBirthday}`,
       hashedPassword: bcrypt.hashSync('password')
@@ -55,7 +66,7 @@ const generateUsers = (amount) => {
   return userArr;
 }
 
-const populate = [...generateUsers(5)]
+const populate = [...generateUsers(30)]
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

@@ -5,6 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
+function randomWholeNumberBetweenOneAndThirty() {
+  return Math.floor(Math.random() * 30) + 1;
+}
+
 const restaurantData = [
   {
     yelpId: 'PfR0MhfYFRM3Bpe_LCcfBg',
@@ -28,6 +32,7 @@ const restaurantData = [
     displayPhone: '(209) 464-7693',
     distance: 1995.899704150231,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -53,6 +58,7 @@ const restaurantData = [
     displayPhone: '(209) 851-3420',
     distance: 2717.8398775638107,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -78,6 +84,7 @@ const restaurantData = [
     displayPhone: '(209) 546-7555',
     distance: 1821.7219507534799,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -103,6 +110,7 @@ const restaurantData = [
     displayPhone: '(209) 323-4920',
     distance: 775.7476964759861,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -128,6 +136,7 @@ const restaurantData = [
     displayPhone: '(209) 227-7479',
     distance: 4662.488400829808,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -153,6 +162,7 @@ const restaurantData = [
     displayPhone: '(209) 851-8285',
     distance: 1601.2899476055975,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -178,6 +188,7 @@ const restaurantData = [
     displayPhone: '(209) 888-5772',
     distance: 5219.687819996594,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -203,6 +214,7 @@ const restaurantData = [
     displayPhone: '(209) 302-6825',
     distance: 5320.638956058316,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -228,6 +240,7 @@ const restaurantData = [
     displayPhone: '(209) 451-0788',
     distance: 1340.3148745958908,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -253,6 +266,7 @@ const restaurantData = [
     displayPhone: '(209) 594-0339',
     distance: 1441.7073644502104,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -278,6 +292,7 @@ const restaurantData = [
     displayPhone: '(209) 395-3818',
     distance: 5829.81828402889,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -303,6 +318,7 @@ const restaurantData = [
     displayPhone: '(209) 952-0164',
     distance: 3335.084019652289,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -328,6 +344,7 @@ const restaurantData = [
     displayPhone: '(209) 473-7300',
     distance: 5396.527739527972,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -353,6 +370,7 @@ const restaurantData = [
     displayPhone: '(209) 954-9729',
     distance: 12387.726375195918,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -378,6 +396,7 @@ const restaurantData = [
     displayPhone: '(209) 981-9040',
     distance: 1000.6325111265617,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -403,6 +422,7 @@ const restaurantData = [
     displayPhone: '(209) 910-0626',
     distance: 1299.1914925255794,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -428,6 +448,7 @@ const restaurantData = [
     displayPhone: '(209) 851-3903',
     distance: 3582.508499098286,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -453,6 +474,7 @@ const restaurantData = [
     displayPhone: '(209) 463-0360',
     distance: 623.152806617933,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -478,6 +500,7 @@ const restaurantData = [
     displayPhone: '(209) 466-2823',
     distance: 908.6588011769618,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -503,6 +526,7 @@ const restaurantData = [
     displayPhone: '(209) 462-6668',
     distance: 2936.177173207102,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -528,6 +552,7 @@ const restaurantData = [
     displayPhone: '(209) 473-2525',
     distance: 8250.2038539398,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -553,6 +578,7 @@ const restaurantData = [
     displayPhone: '(209) 234-2415',
     distance: 13181.77284936073,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -578,6 +604,7 @@ const restaurantData = [
     displayPhone: '(209) 474-6585',
     distance: 7359.303815826032,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -603,6 +630,7 @@ const restaurantData = [
     displayPhone: '(209) 477-2677',
     distance: 7084.51441218435,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -628,6 +656,7 @@ const restaurantData = [
     displayPhone: '(209) 955-0888',
     distance: 4389.818864537511,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -653,6 +682,7 @@ const restaurantData = [
     displayPhone: '(209) 477-5922',
     distance: 8383.545094567233,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -678,6 +708,7 @@ const restaurantData = [
     displayPhone: '(209) 951-2284',
     distance: 5721.018831934187,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -703,6 +734,7 @@ const restaurantData = [
     displayPhone: '(209) 547-0217',
     distance: 1131.2855271915082,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -728,6 +760,7 @@ const restaurantData = [
     displayPhone: '(209) 938-0939',
     distance: 4814.218990936012,
     region: [ '-121.30142211914062', '37.96242644994935' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -753,6 +786,7 @@ const restaurantData = [
     displayPhone: '(916) 333-3879',
     distance: 5418.652510026384,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -778,6 +812,7 @@ const restaurantData = [
     displayPhone: '(916) 274-4093',
     distance: 5221.711042570393,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -803,6 +838,7 @@ const restaurantData = [
     displayPhone: '(916) 217-4618',
     distance: 8845.657328688718,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -828,6 +864,7 @@ const restaurantData = [
     displayPhone: '(916) 234-6292',
     distance: 2489.031082116782,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -853,6 +890,7 @@ const restaurantData = [
     displayPhone: '(916) 678-6911',
     distance: 1417.083691547528,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -878,6 +916,7 @@ const restaurantData = [
     displayPhone: '(916) 594-7646',
     distance: 2135.9303007535036,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -903,6 +942,7 @@ const restaurantData = [
     displayPhone: '',
     distance: 2629.3141258617607,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -928,6 +968,7 @@ const restaurantData = [
     displayPhone: '(916) 489-1350',
     distance: 5511.960924213243,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -953,6 +994,7 @@ const restaurantData = [
     displayPhone: '(916) 872-0772',
     distance: 3820.562780494397,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -978,6 +1020,7 @@ const restaurantData = [
     displayPhone: '(916) 571-5424',
     distance: 13831.884916804842,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1003,6 +1046,7 @@ const restaurantData = [
     displayPhone: '(916) 399-9309',
     distance: 10065.521176695298,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1028,6 +1072,7 @@ const restaurantData = [
     displayPhone: '(916) 882-8182',
     distance: 3939.5042355763676,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1053,6 +1098,7 @@ const restaurantData = [
     displayPhone: '(916) 457-6646',
     distance: 1439.6894640706219,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1078,6 +1124,7 @@ const restaurantData = [
     displayPhone: '(916) 329-8752',
     distance: 10074.028256277888,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1103,6 +1150,7 @@ const restaurantData = [
     displayPhone: '(916) 999-0601',
     distance: 5182.085740545027,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1128,6 +1176,7 @@ const restaurantData = [
     displayPhone: '(916) 837-0085',
     distance: 5218.988134508189,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1153,6 +1202,7 @@ const restaurantData = [
     displayPhone: '(916) 619-8766',
     distance: 2551.0213768732187,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1178,6 +1228,7 @@ const restaurantData = [
     displayPhone: '(916) 374-2888',
     distance: 6670.017237286143,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1203,6 +1254,7 @@ const restaurantData = [
     displayPhone: '(916) 550-2600',
     distance: 5180.31563437798,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1228,6 +1280,7 @@ const restaurantData = [
     displayPhone: '(916) 272-2939',
     distance: 7369.182583256383,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1253,6 +1306,7 @@ const restaurantData = [
     displayPhone: '(916) 993-8961',
     distance: 4902.387517732179,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1278,6 +1332,7 @@ const restaurantData = [
     displayPhone: '(916) 848-0040',
     distance: 3254.441989124575,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1303,6 +1358,7 @@ const restaurantData = [
     displayPhone: '(916) 889-9678',
     distance: 10444.562937953473,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1328,6 +1384,7 @@ const restaurantData = [
     displayPhone: '(916) 456-4522',
     distance: 1189.8256255084023,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1353,6 +1410,7 @@ const restaurantData = [
     displayPhone: '(916) 476-3407',
     distance: 2925.9944221334404,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1378,6 +1436,7 @@ const restaurantData = [
     displayPhone: '(916) 376-7450',
     distance: 9008.803458625907,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1403,6 +1462,7 @@ const restaurantData = [
     displayPhone: '(916) 510-5651',
     distance: 3092.4188036655637,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1428,6 +1488,7 @@ const restaurantData = [
     displayPhone: '(916) 400-3075',
     distance: 1410.9697607701758,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1453,6 +1514,7 @@ const restaurantData = [
     displayPhone: '(916) 448-8768',
     distance: 1867.81462040843,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1478,6 +1540,7 @@ const restaurantData = [
     displayPhone: '(916) 329-8367',
     distance: 2382.206651480393,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1503,6 +1566,7 @@ const restaurantData = [
     displayPhone: '(916) 900-8425',
     distance: 6591.900479041417,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1528,6 +1592,7 @@ const restaurantData = [
     displayPhone: '(916) 391-9888',
     distance: 1651.6464170660192,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1553,6 +1618,7 @@ const restaurantData = [
     displayPhone: '(916) 387-6324',
     distance: 7240.524927598331,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1578,6 +1644,7 @@ const restaurantData = [
     displayPhone: '(916) 487-0101',
     distance: 6141.262311917331,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1603,6 +1670,7 @@ const restaurantData = [
     displayPhone: '(916) 538-6434',
     distance: 1716.1190654218917,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1628,6 +1696,7 @@ const restaurantData = [
     displayPhone: '(916) 737-7699',
     distance: 1931.276558510612,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1653,6 +1722,7 @@ const restaurantData = [
     displayPhone: '(916) 696-6373',
     distance: 8846.609945518006,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1678,6 +1748,7 @@ const restaurantData = [
     displayPhone: '(916) 661-6656',
     distance: 10476.93320853092,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1703,6 +1774,7 @@ const restaurantData = [
     displayPhone: '(916) 491-4008',
     distance: 2048.7554415231166,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1728,6 +1800,7 @@ const restaurantData = [
     displayPhone: '(916) 507-0600',
     distance: 6241.437401862257,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1753,6 +1826,7 @@ const restaurantData = [
     displayPhone: '(916) 515-8797',
     distance: 10571.081177572762,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1778,6 +1852,7 @@ const restaurantData = [
     displayPhone: '(916) 551-1559',
     distance: 974.8128070850994,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1803,6 +1878,7 @@ const restaurantData = [
     displayPhone: '(916) 383-9264',
     distance: 6338.929199857519,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1828,6 +1904,7 @@ const restaurantData = [
     displayPhone: '(916) 451-6842',
     distance: 2200.287994803301,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1853,6 +1930,7 @@ const restaurantData = [
     displayPhone: '(916) 485-0163',
     distance: 6662.146051210862,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1878,6 +1956,7 @@ const restaurantData = [
     displayPhone: '(916) 368-5400',
     distance: 2424.7732008487596,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1903,6 +1982,7 @@ const restaurantData = [
     displayPhone: '(916) 974-1515',
     distance: 5391.229572086222,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1928,6 +2008,7 @@ const restaurantData = [
     displayPhone: '(916) 476-6765',
     distance: 2131.2584044911314,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1953,6 +2034,7 @@ const restaurantData = [
     displayPhone: '(916) 898-2708',
     distance: 1026.7440824017274,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
@@ -1978,6 +2060,7 @@ const restaurantData = [
     displayPhone: '(916) 204-8726',
     distance: 1129.066260927997,
     region: [ '-121.46209716796875', '38.56087213146452' ],
+    userId: randomWholeNumberBetweenOneAndThirty(),
     createdAt: '2023-08-04T09:33:42.218Z',
     updatedAt: '2023-08-04T09:33:42.218Z'
   },
