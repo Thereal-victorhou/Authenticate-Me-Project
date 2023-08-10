@@ -16,14 +16,13 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { grey } from '@mui/material/colors';
 import './Navigation.css';
-import home1 from '../../images/HomeBackground/tabl-home-1.png'
-import home2 from '../../images/HomeBackground/tabl-home-2.png'
-import home3 from '../../images/HomeBackground/tabl-home-3.png'
-import home4 from '../../images/HomeBackground/tabl-home-4.png'
-import home5 from '../../images/HomeBackground/tabl-home-5.png'
-import home6 from '../../images/HomeBackground/tabl-home-6.png'
-import home7 from '../../images/HomeBackground/tabl-home-7.png'
-
+import home1 from '../../images/HomeBackground/tabl-home-1.png';
+import home2 from '../../images/HomeBackground/tabl-home-2.png';
+import home3 from '../../images/HomeBackground/tabl-home-3.png';
+import home4 from '../../images/HomeBackground/tabl-home-4.png';
+import home5 from '../../images/HomeBackground/tabl-home-5.png';
+import home6 from '../../images/HomeBackground/tabl-home-6.png';
+import home7 from '../../images/HomeBackground/tabl-home-7.png';
 
 function Navigation({ isLoaded }) {
 	const history = useHistory();
@@ -39,7 +38,6 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
 	const pageType = useSelector((state) => state.navigation?.currentPage);
-	const currentPage = sessionStorage.getItem('pageType')
 
 	const restaurantSearchInputLength = document.querySelector(
 		'.search-bar-restaurants-input'
@@ -61,12 +59,20 @@ function Navigation({ isLoaded }) {
 			<>
 				<div className='login-signup-container'>
 					<div className='login-container'>
-						<NavLink className='nav-links-login' id='nav-login' to='/login'>
+						<NavLink
+							className='nav-links-login'
+							id='nav-login'
+							to='/login'
+							onClick={(e) => handleLoginSignUp(e)}>
 							Log In
 						</NavLink>
 					</div>
 					<div className='signup-container'>
-						<NavLink className='nav-links-signup' id='nav-signup' to='/signup'>
+						<NavLink
+							className='nav-links-signup'
+							id='nav-signup'
+							to='/signup'
+							onClick={(e) => handleLoginSignUp(e)}>
 							Sign Up
 						</NavLink>
 					</div>
@@ -75,11 +81,28 @@ function Navigation({ isLoaded }) {
 		);
 	}
 
+	// Set and save page type
+	const handleLoginSignUp = async (e) => {
+		e.preventDefault();
+
+		sessionStorage.setItem('pageType', 'other');
+		await dispatch(saveCurrentPage('other'));
+
+		switch (e.target.className) {
+			case 'nav-links-login':
+				history.push('/login');
+				break;
+
+			case 'nav-links-signup':
+				history.push('/signup');
+				break;
+		}
+	};
+
 	// Save location, dispatch a search for near restaurants
 	const handleUpdateLocation = (locationObj) => {
 		dispatch(getNearByRestaurants(locationObj));
 		setSelectedLocation(locationObj);
-
 	};
 
 	const handleClick = async (e, res) => {
@@ -92,13 +115,12 @@ function Navigation({ isLoaded }) {
 		history.push(`/restaurants/${res.id}`);
 	};
 
-
 	const handleAddRestaurantPage = async (e) => {
 		e.preventDefault();
 		sessionStorage.setItem('pageType', 'other');
 		await dispatch(saveCurrentPage('other'));
-		history.push(sessionUser ? '/add/restaurant' : '/login')
-	}
+		history.push(sessionUser ? '/add/restaurant' : '/login');
+	};
 
 	//Render restaurant search results
 	const restaurantSearchRender = (res, i) => {
@@ -140,38 +162,35 @@ function Navigation({ isLoaded }) {
 	// Search for restaurants
 	const handleSearch = async (e) => {
 		e.preventDefault();
-		console.log(restaurantSearchInput)
+		console.log(restaurantSearchInput);
 		await dispatch(
 			getRestaurantResults({
 				searchInput: restaurantSearchInput,
 				locationObj: selectedLocation,
 			})
 		);
-		console.log('search button handle ', selectedLocation)
+		console.log('search button handle ', selectedLocation);
 		setRestaurantSearchInput('');
-		sessionStorage.setItem('pageType', 'other')
+		sessionStorage.setItem('pageType', 'other');
 		dispatch(saveCurrentPage('other'));
-		history.push(
-			`/search?find_desc=${restaurantSearchInput}`
-		);
+		history.push(`/search?find_desc=${restaurantSearchInput}`);
 	};
 
 	// Set Nav to Home Version
 	const handleNav = (e) => {
 		e.preventDefault();
-		sessionStorage.setItem('pageType', 'home')
-		console.log(sessionStorage.getItem('pageType'))
+		sessionStorage.setItem('pageType', 'home');
+		console.log(sessionStorage.getItem('pageType'));
 		dispatch(saveCurrentPage('home'));
 		dispatch(clearSearch());
 	};
 
-
 	// Modifying style of NavBar based on current Page
 	useEffect(async () => {
-		if (pageType === undefined) {
-			dispatch(saveCurrentPage('home'))
-			sessionStorage.setItem('pageType', 'home')
-		}
+		// if (pageType === undefined) {
+		// 	dispatch(saveCurrentPage('home'))
+		// 	sessionStorage.setItem('pageType', 'home')
+		// }
 		if (pageType === 'home') {
 			await document
 				.querySelector('.background-slideshow')
@@ -280,53 +299,25 @@ function Navigation({ isLoaded }) {
 		<div className='nav_container'>
 			<CCarousel transition='crossfade' className='background-slideshow'>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home1}
-						alt='slide1'
-					/>
+					<CImage className='d-block w-100' src={home1} alt='slide1' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home2}
-						alt='slide2'
-					/>
+					<CImage className='d-block w-100' src={home2} alt='slide2' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home3}
-						alt='slide3'
-					/>
+					<CImage className='d-block w-100' src={home3} alt='slide3' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home4}
-						alt='slide4'
-					/>
+					<CImage className='d-block w-100' src={home4} alt='slide4' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home5}
-						alt='slide5'
-					/>
+					<CImage className='d-block w-100' src={home5} alt='slide5' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home6}
-						alt='slide66'
-					/>
+					<CImage className='d-block w-100' src={home6} alt='slide66' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage
-						className='d-block w-100'
-						src={home7}
-						alt='slide7'
-					/>
+					<CImage className='d-block w-100' src={home7} alt='slide7' />
 				</CCarouselItem>
 			</CCarousel>
 			<div className='nav-gradient'>
@@ -374,7 +365,10 @@ function Navigation({ isLoaded }) {
 									to='/search'
 									className='search-btn'
 									onClick={(e) => handleSearch(e)}>
-									<SearchIcon className='search-mag' sx={{ color: grey[50], fontSize: 36, fontWeight: 'bold' }}/>
+									<SearchIcon
+										className='search-mag'
+										sx={{ color: grey[50], fontSize: 36, fontWeight: 'bold' }}
+									/>
 								</NavLink>
 							</div>
 						</div>
