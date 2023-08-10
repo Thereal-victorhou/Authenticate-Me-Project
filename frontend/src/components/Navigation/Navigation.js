@@ -16,6 +16,14 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { grey } from '@mui/material/colors';
 import './Navigation.css';
+import home1 from '../../images/HomeBackground/tabl-home-1.png'
+import home2 from '../../images/HomeBackground/tabl-home-2.png'
+import home3 from '../../images/HomeBackground/tabl-home-3.png'
+import home4 from '../../images/HomeBackground/tabl-home-4.png'
+import home5 from '../../images/HomeBackground/tabl-home-5.png'
+import home6 from '../../images/HomeBackground/tabl-home-6.png'
+import home7 from '../../images/HomeBackground/tabl-home-7.png'
+
 
 function Navigation({ isLoaded }) {
 	const history = useHistory();
@@ -256,50 +264,64 @@ function Navigation({ isLoaded }) {
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/oz2FzNb.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/food-healthy-restaurant-262918.jpg'
+						src={home1}
 						alt='slide1'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/F4mfUDw.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-eneida-nieves-905847.jpg'
+						src={home2}
 						alt='slide2'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/jdPt8zq.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-huy%CC%80nh-%C4%91a%CC%A3t-3262277.jpg'
+						src={home3}
 						alt='slide3'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/dT97Cun.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-jep-gambardella-5083910.jpg'
+						src={home4}
 						alt='slide4'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/zaGCAN2.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-1126728.jpg'
+						src={home5}
 						alt='slide5'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/CQqU3xT.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-1137745.jpg'
+						src={home6}
 						alt='slide66'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 				<CCarouselItem>
 					<CImage
 						className='d-block w-100'
-						src='https://imgur.com/X93eM2r.png'
+						// src='https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/pexels-lisa-fotios-3147123.jpg'
+						src={home7}
 						alt='slide7'
+						// loading='lazy'
 					/>
 				</CCarouselItem>
 			</CCarousel>

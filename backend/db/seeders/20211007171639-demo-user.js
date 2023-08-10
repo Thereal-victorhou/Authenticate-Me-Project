@@ -1,6 +1,5 @@
 'use strict';
 const Chance = require('chance');
-
 const chance = new Chance()
 
 let options = {};

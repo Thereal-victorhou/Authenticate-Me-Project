@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import Avatar from '@mui/material/Avatar';
+// import { randAvatar } from '@ngneat/falso';
 import './ProfileButton.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+
+  // const newAvatar = randAvatar();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -37,7 +40,9 @@ function ProfileButton({ user }) {
           <button className="avatar-button"onClick={openMenu}>
             {/* <i className="fas fa-user-circle" /> */}
             {/* Change Avatar to be dynamic based on user photos */}
+            {/* <Avatar src={()=> randAvatar()} /> */}
             <Avatar src="/broken-image.jpg" />
+            {/* <img src={`${}`}/> */}
           </button>
         </div>
         <div className="sub-profile-container-bottom">
