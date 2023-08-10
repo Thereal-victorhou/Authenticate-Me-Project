@@ -37,6 +37,42 @@ const mFObj = {
   '2': 'female'
 }
 
+const avatarFemaleObj = {
+  '1': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar1.png',
+  '2': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar10.png',
+  '3': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar10.png',
+  '4': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar12.png',
+  '5': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar13.png',
+  '6': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar14.png',
+  '7': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar15.png',
+  '8': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar2.png',
+  '9': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar3.png',
+  '10': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar4.png',
+  '11': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar5.png',
+  '12': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar6.png',
+  '13': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar7.png',
+  '14': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar8.png',
+  '15': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/femaleAvatar9.png',
+};
+
+const avatarMaleObj = {
+  '16': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar1.png',
+  '17': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar9.png',
+  '18': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar8.png',
+  '19': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar7.png',
+  '20': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar6.png',
+  '21': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar5.png',
+  '22': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar4.png',
+  '23': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar3.png',
+  '24': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar2.png',
+  '25': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar15.png',
+  '26': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar14.png',
+  '27': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar13.png',
+  '28': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar12.png',
+  '29': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar11.png',
+  '30': 'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/Random_Avatars/maleAvatar10.png',
+}
+
 const generateUsers = (amount) => {
   const userArr = [];
 
@@ -56,7 +92,7 @@ const generateUsers = (amount) => {
     const userObj = {
       email: `${chance.email({domain: 'example.com'})}`,
       username: `${chance.first({gender: `${mFObj[oneTwo]}`})} ${chance.last()}`,
-      imgSrc: `https://xsgames.co/randomusers/avatar.php?g=${mFObj[oneTwo]}`,
+      imgSrc: i < 16 ? `${avatarFemaleObj[i]}` : `${avatarMaleObj[i]}`,
       zipCode: `${chance.zip()}`,
       birthday: `${fakeBirthday}`,
       hashedPassword: bcrypt.hashSync('password')
