@@ -91,7 +91,7 @@ const generateUsers = (amount) => {
     const oneTwo = randomWholeNumberBetweenOneAndTwo();
     const userObj = {
       email: `${chance.email({domain: 'example.com'})}`,
-      username: `${chance.first({gender: `${mFObj[oneTwo]}`})} ${chance.last()}`,
+      username: i < 16 ? `${chance.first({gender: `female`})} ${chance.last()}` : `${chance.first({gender: `male`})} ${chance.last()}`,
       imgSrc: i < 16 ? `${avatarFemaleObj[i]}` : `${avatarMaleObj[i]}`,
       zipCode: `${chance.zip()}`,
       birthday: `${fakeBirthday}`,

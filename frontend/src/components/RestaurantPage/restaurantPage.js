@@ -31,9 +31,9 @@ function RestaurantPage({ user }) {
 	console.log(restaurantCurrent)
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
-	// useEffect(() => {
-	// 	window.scrollTo(0, 0);
-	// }, []);
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	useEffect(() => {
 		dispatch(oneRestaurant(parseInt(id, 10)));
