@@ -6,11 +6,13 @@ import { allRestaurants, oneRestaurant } from '../../store/restaurant';
 import { saveCurrentPage } from '../../store/navigation'
 import LiveStarRatingDisplay from '../LiveStarRatingDisplay/LiveStarRatingDisplay';
 
-function HomePage() {
+function HomePage({ user }) {
+
+	const dispatch = useDispatch();
+
 	const sessionRestaurant = useSelector((state) =>
 		Object.values(state.restaurant)
 	);
-	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(allRestaurants());
@@ -22,26 +24,9 @@ function HomePage() {
 		// dispatch(saveCurrentPage(currentPage))
 	};
 
-	// const getRandomNum = () => {
-	//     const x = Math.floor((Math.random() * 20) + 1);
-
-	//     if (x === lastNumber) {
-	//         return getRandomNum();
-	//     }
-	//     return x
-	// }
-
-	// const renderRandomRestaurants = () => {
-	//     let randomNumArr = []
-	//     for (let i = 0; i <= 5; i++) {
-	//         const number = getRandomNum();
-	//         randomNumArr.push(number)
-	//         setLastNumber(number)
-	//     }
-	//     setRandomArr(randomNumArr);
-	// }
-
-	// renderRandomRestaurants()
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	return (
 		<div className='all-restaurants-container'>
@@ -71,10 +56,10 @@ function HomePage() {
 												to={`/restaurants/${restaurant.id}`}>
 												<h2 className='restaurant-name'>{`${restaurant.name}`}</h2>
 											</NavLink>
-												<div className='restaurant-recommendation-container'>
-													<p>Do you recommend this restaurant?</p>
-												</div>
-												<LiveStarRatingDisplay restaurant={restaurant} number={i}/>
+											<div className='restaurant-recommendation-container'>
+												<p>Do you recommend this restaurant?</p>
+											</div>
+											<LiveStarRatingDisplay restaurant={restaurant} number={i} user={user}/>
 										</div>
 									</div>
 								</li>
