@@ -22,19 +22,23 @@ function HomePage({ user }) {
 		dispatch(allRestaurants());
 	}, [dispatch]);
 
-	const handleNavToReview = async (e, restaurant) => {
+	const handleNavReview = async (e, restaurant) => {
 		e.preventDefault();
-		await dispatch(saveCurrentPage('other'));
-    if (!user) return history.push('/login');
-		history.push(`/review/restaurant/${restaurant.id}`);
-	};
 
-	const handleNavToRestaurant = async (e, restaurant) => {
-		e.preventDefault();
 		await dispatch(saveCurrentPage('other'));
-		await dispatch(oneRestaurant(restaurant.id));
+		if (!user) return history.push('/login');
+		return history.push(`/review/restaurant/${restaurant.id}`);
+
+	}
+
+	const handleNavRestaurant = async(e, restaurant) => {
+		e.preventDefault()
+		e.stopPropagation();
+		dispatch(oneRestaurant(restaurant.id));
+		dispatch(saveCurrentPage('other'));
 		return history.push(`/restaurants/${restaurant.id}`);
-	};
+
+	}
 
 	return (
 		<div className='all-restaurants-container'>
@@ -50,20 +54,25 @@ function HomePage({ user }) {
 									<div
 										className={'restaurant_container'}
 										type='button'
+										// to={`/review/restaurant/${restaurant.id}`}
 										onClick={(e) => {
-											handleNavToReview(e, restaurant);
-										}}>
+											handleNavReview(e, restaurant);
+										}}
+										>
 										<img
 											className={'restaurant-photo'}
 											src={restaurant.imgSrc}
-											alt={'Restaurant Image'}></img>
+											alt={'Restaurant Image'}
+
+											></img>
 										<div className='restaurant-info'>
-											<NavLink
+											<div
 												className='name-and-location-container'
-												onClick={(e) => handleNavToRestaurant(e, restaurant)}
+												onClick={(e) => handleNavRestaurant(e, restaurant)}
+												type='button'
 												to={`/restaurants/${restaurant.id}`}>
 												<h2 className='restaurant-name'>{`${restaurant.name}`}</h2>
-											</NavLink>
+											</div>
 											<div className='restaurant-recommendation-container'>
 												<p>Do you recommend this restaurant?</p>
 											</div>

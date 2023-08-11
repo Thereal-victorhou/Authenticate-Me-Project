@@ -156,7 +156,7 @@
   text-align: center;
   border-radius: 5px;
   padding: 10px 10px;
-  transition: opacity .1s ease-in-out;
+  /* transition: opacity .1s ease-in-out; */
 	font-size: 12px;
 	font-weight: 600;
 	position: absolute;
@@ -199,7 +199,7 @@
   position:absolute;
 
   /* position tooltip correctly */
-  left: 34.5%;
+  left: 13px;
   /* margin-left: 10px; */
 
   /* vertically center */
@@ -209,7 +209,7 @@
   /* the arrow */
   border:8px solid rgb(50, 50, 50);
   border-color: rgb(50, 50, 50) transparent transparent transparent;
-  transition: opacity .1s ease-in-out;
+  /* transition: opacity .1s ease-in-out; */
   display:none;
 }
 

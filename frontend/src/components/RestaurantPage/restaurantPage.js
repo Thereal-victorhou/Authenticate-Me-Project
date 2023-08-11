@@ -31,9 +31,10 @@ function RestaurantPage({ user }) {
 
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	// useEffect(() => {
+	// 	window.scrollTo(0, 0);
+	// }, []);
 
 	useEffect(() => {
 		dispatch(oneRestaurant(parseInt(id, 10)));
