@@ -69,6 +69,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					type='radio'
 					name='star-container'
 					className={`star-container-${number}`}
+					data-hover='Not good'
 					id='s1'
 					onClick={(e) => handleStars(e, 1, number, restaurant)}
 					onMouseEnter={() => addStars(1, number)}>
@@ -77,6 +78,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					type='radio'
 					name='star-container'
 					className={`star-container-${number}`}
+					data-hover="Could've been better"
 					id='s2'
 					onClick={(e) => handleStars(e, 2, number, restaurant)}
 					onMouseEnter={() => addStars(2, number)}>
@@ -85,6 +87,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					type='radio'
 					name='star-container'
 					className={`star-container-${number}`}
+					data-hover='OK'
 					id='s3'
 					onClick={(e) => handleStars(e, 3, number, restaurant)}
 					onMouseEnter={() => addStars(3, number)}>
@@ -93,6 +96,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					type='radio'
 					name='star-container'
 					className={`star-container-${number}`}
+					data-hover='Good'
 					id='s4'
 					onClick={(e) => handleStars(e, 4, number, restaurant)}
 					onMouseEnter={() => addStars(4, number)}>
@@ -101,6 +105,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					type='radio'
 					name='star-container'
 					className={`star-container-${number}`}
+					data-hover='Great'
 					id='s5'
 					onClick={(e) => handleStars(e, 5, number, restaurant)}
 					onMouseEnter={() => addStars(5, number)}>

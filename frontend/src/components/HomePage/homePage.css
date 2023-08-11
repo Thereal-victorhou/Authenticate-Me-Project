@@ -135,4 +135,44 @@
 	width: 50px;
 	height: 42px;
 	border-radius: 6px;
+	position: relative;
+
+}
+
+.star-container-0:before,
+.star-container-1:before,
+.star-container-2:before,
+.star-container-3:before,
+.star-container-4:before,
+.star-container-5:before,
+.star-container-6:before,
+.star-container-7:before {
+	content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: rgb(50, 50, 50);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px 10px;
+  transition: opacity .1s ease-in-out;
+	font-size: 12px;
+	font-weight: 600;
+	position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 110%;
+}
+
+.star-container-0:hover:before,
+.star-container-1:hover:before,
+.star-container-2:hover:before,
+.star-container-3:hover:before,
+.star-container-4:hover:before,
+.star-container-5:hover:before,
+.star-container-6:hover:before,
+.star-container-7:hover:before {
+	opacity: 1;
+  visibility: visible;
 }
