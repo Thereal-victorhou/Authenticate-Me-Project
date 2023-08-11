@@ -1,5 +1,4 @@
 .location-search-container {
-	/* background-color: orange; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -62,6 +61,7 @@
 	padding-bottom: 20px;
 	width: 100%;
 	max-height: 600px;
+	min-height: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
 	/* z-index: -2; */
@@ -77,6 +77,7 @@
 
 .location-search-results-container.hide {
 	visibility: hidden;
+	height: 0;
 }
 
 .current-location-container {
@@ -85,7 +86,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	width: inherit;
-	height: 50px;
+	max-height: 50px;
 	padding-left: 7px;
 	/* background-color: orange; */
 }

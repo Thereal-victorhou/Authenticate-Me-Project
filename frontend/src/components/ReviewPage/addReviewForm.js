@@ -8,7 +8,7 @@ import { oneRestaurant } from '../../store/restaurant';
 function AddReviewForm({ user }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { id } = useParams();
+	const { id, selectedRating } = useParams();
 	const restaurantId = id;
 	const [body, setBody] = useState('');
 	const [rating, setRating] = useState(0);
@@ -16,6 +16,8 @@ function AddReviewForm({ user }) {
 	const [ratingPhrase, setRatingPhrase] = useState('Select your rating');
 
 	const userId = user.id;
+	console.log('id ', id)
+	console.log('selectedRating ', selectedRating)
 
 	const currentRestaurant = useSelector((state) => state.restaurant);
 
