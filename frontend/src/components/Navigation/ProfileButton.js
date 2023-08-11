@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import Avatar from '@mui/material/Avatar';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { grey } from '@mui/material/colors';
 import './ProfileButton.css';
 
 function ProfileButton({ user }) {
@@ -45,13 +47,18 @@ function ProfileButton({ user }) {
         </div>
         <div className="sub-profile-container-bottom">
           {showMenu && (
-            <ul className="profile-dropdown">
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-              </li>
-            </ul>
+            <div className="profile-dropdown">
+              <div className="profile-info">
+                <p>{user.username}</p>
+                <p>{user.email}</p>
+              </div>
+              <div className="profile-logout">
+                <button className='logout-button' type='button' onClick={logout}>
+                  <LogoutIcon sx={{ color: grey[800], fontSize: 24, fontWeight: 'bold' }}/>
+                  Log Out
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
