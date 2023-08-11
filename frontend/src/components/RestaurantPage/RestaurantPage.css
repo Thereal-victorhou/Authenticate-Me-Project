@@ -460,6 +460,7 @@
 .review-card-main {
 	display: flex;
 	flex-direction: row;
+	width: 100%;
 }
 
 .review-card-container {
@@ -495,7 +496,7 @@
 	align-items: flex-start;
 	justify-content: flex-start;
 	height: 30%;
-	width: 55%;
+	width: 100%;
 	gap: 15px;
 	/* z-index: 1; */
 }
@@ -553,13 +554,14 @@
 	/* z-index: 1; */
 }
 
-.review-card-container {
+.review-container {
 	display: flex;
 	flex-direction: column;
 	/* z-index: 1; */
+	width: 100%;
 }
 
-.review-card-container > h3 {
+.review-container > h3 {
 	font-size: 16px;
 	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 	color: #2D2E2F;
