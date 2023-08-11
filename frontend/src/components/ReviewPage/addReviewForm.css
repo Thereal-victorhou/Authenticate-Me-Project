@@ -1,7 +1,10 @@
 .review-container-main {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 130px;
+    padding-left: 140px;
     height: 100vh;
     width: 100vw;
 }
@@ -18,6 +21,7 @@
     /* max-width: 630px; */
     padding-left: 0;
     padding-bottom: 0;
+
 }
 
 .review-upper h1 {

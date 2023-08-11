@@ -34,7 +34,7 @@ function HomePage({ user }) {
 	const handleNavRestaurant = async(e, restaurant) => {
 		e.preventDefault()
 		e.stopPropagation();
-		dispatch(oneRestaurant(restaurant.id));
+		await dispatch(oneRestaurant(restaurant.id));
 		dispatch(saveCurrentPage('other'));
 		return history.push(`/restaurants/${restaurant.id}`);
 

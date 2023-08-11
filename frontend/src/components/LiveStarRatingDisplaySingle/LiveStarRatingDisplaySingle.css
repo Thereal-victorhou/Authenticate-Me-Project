@@ -1,0 +1,29 @@
+/* Live Stars */
+
+.stars-container-each {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 22%;
+	width: 206px;
+	/* background: purple; */
+}
+
+.star-rating {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	/* gap: 1px; */
+	width: 205px;
+	height: 42px;
+	/* background: orange; */
+}
+
+.star-container {
+	width: 50px;
+	height: 42px;
+	border-radius: 6px;
+	position: relative;
+
+}
