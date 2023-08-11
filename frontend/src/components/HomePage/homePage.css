@@ -161,8 +161,10 @@
 	font-weight: 600;
 	position: absolute;
   z-index: 1;
-  left: 0;
+  /* left: -50%; */
   bottom: 110%;
+
+
 }
 
 .star-container-0:hover:before,
@@ -172,7 +174,61 @@
 .star-container-4:hover:before,
 .star-container-5:hover:before,
 .star-container-6:hover:before,
-.star-container-7:hover:before {
+.star-container-7:hover:before,
+.star-container-0:hover:after,
+.star-container-1:hover:after,
+.star-container-2:hover:after,
+.star-container-3:hover:after,
+.star-container-4:hover:after,
+.star-container-5:hover:after,
+.star-container-6:hover:after,
+.star-container-7:hover:after {
 	opacity: 1;
   visibility: visible;
+}
+
+.star-container-0:after,
+.star-container-1:after,
+.star-container-2:after,
+.star-container-3:after,
+.star-container-4:after,
+.star-container-5:after,
+.star-container-6:after,
+.star-container-7:after {
+  content: "";
+  position:absolute;
+
+  /* position tooltip correctly */
+  left: 34.5%;
+  /* margin-left: 10px; */
+
+  /* vertically center */
+  bottom: 60%;
+  transform:translateY(-50%);
+
+  /* the arrow */
+  border:8px solid rgb(50, 50, 50);
+  border-color: rgb(50, 50, 50) transparent transparent transparent;
+  transition: opacity .1s ease-in-out;
+  display:none;
+}
+
+.star-container-0:hover:before,
+.star-container-1:hover:before,
+.star-container-2:hover:before,
+.star-container-3:hover:before,
+.star-container-4:hover:before,
+.star-container-5:hover:before,
+.star-container-6:hover:before,
+.star-container-7:hover:before,
+.star-container-0:hover:after,
+.star-container-1:hover:after,
+.star-container-2:hover:after,
+.star-container-3:hover:after,
+.star-container-4:hover:after,
+.star-container-5:hover:after,
+.star-container-6:hover:after,
+.star-container-7:hover:after
+{
+	display: block;
 }
