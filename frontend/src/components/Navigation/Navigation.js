@@ -58,22 +58,24 @@ function Navigation({ isLoaded }) {
 			<>
 				<div className='login-signup-container'>
 					<div className='login-container'>
-						<div
+						<NavLink
 							className='nav-links-login'
 							id='nav-login'
 							to='/login'
-							type='button'
-							onClick={(e) => handleLoginSignUp(e)}
+							// type='button'
+							// onClick={(e) => handleLoginSignUp(e)}
+							onClick={()=> dispatch(saveCurrentPage('other'))}
 							>
 							Log In
-						</div>
+						</NavLink>
 					</div>
 					<div className='signup-container'>
 						<NavLink
 							className='nav-links-signup'
 							id='nav-signup'
 							to='/signup'
-							onClick={(e) => handleLoginSignUp(e)}
+							// onClick={(e) => handleLoginSignUp(e)}
+							onClick={()=> dispatch(saveCurrentPage('other'))}
 							>
 							Sign Up
 						</NavLink>
@@ -84,21 +86,21 @@ function Navigation({ isLoaded }) {
 	};
 
 	// Set and save page type
-	const handleLoginSignUp = async (e) => {
-		e.preventDefault();
+	// const handleLoginSignUp = async (e) => {
+	// 	e.preventDefault();
 
 
-		switch (e.target.className) {
-			case 'nav-links-login':
-				await dispatch(saveCurrentPage('other'));
-				history.push('/login');
-				break;
+	// 	switch (e.target.className) {
+	// 		case 'nav-links-login':
+	// 			await dispatch(saveCurrentPage('other'));
+	// 			history.push('/login');
+	// 			break;
 
-			case 'nav-links-signup':
-				history.push('/signup');
-				break;
-		}
-	};
+	// 		case 'nav-links-signup':
+	// 			history.push('/signup');
+	// 			break;
+	// 	}
+	// };
 
 	// Save location, dispatch a search for near restaurants
 	const handleUpdateLocation = (locationObj) => {

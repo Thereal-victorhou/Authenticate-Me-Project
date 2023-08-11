@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { saveCurrentPage } from '../../store/navigation';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -10,9 +11,12 @@ function LoginFormPage() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
+  if (sessionUser) {
+    dispatch(saveCurrentPage('home'))
+    return (
+      <Redirect to="/" />
+    );
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +34,8 @@ function LoginFormPage() {
     const password = 'password';
     return dispatch(sessionActions.login({ credential: userName, password: password }))
   }
+
+
 
   return (
     <div className="login_form_container">
@@ -52,7 +58,7 @@ function LoginFormPage() {
 
               </div>
             </div>
-            <button className="demo_login" onClick={demoLogin}>
+            <button className="demo_login" type='button' onClick={demoLogin}>
               <h4>Continue with Demo User</h4>
             </button>
             <fieldset className="login_divider">
