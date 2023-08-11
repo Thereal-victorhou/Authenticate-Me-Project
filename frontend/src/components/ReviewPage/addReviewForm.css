@@ -17,15 +17,19 @@
     /* width: 100%; */
     /* padding-top: 24px; */
     /* padding-bottom: 36px; */
-    width: 630px;
+    min-width: 430px;
     /* max-width: 630px; */
     padding-left: 0;
     padding-bottom: 0;
+    /* background: orange; */
 
 }
 
 .review-upper h1 {
     color: rgb(45,46,47);
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 28px;
+    font-weight: 700;
 }
 
 .review-form{

@@ -1,7 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { oneRestaurant } from '../../store/restaurant';
+import React, { useState } from 'react';
 import './LiveStarRatingDisplaySingle.css';
 
 import bigZeroStar from '../../images/regular_0@2x.png';
@@ -28,13 +25,12 @@ const ratingPhraseObj = {
 };
 
 function LiveStarRatingDisplaySingle({ saveRating, selectedRating }) {
-	const dispatch = useDispatch();
-	const history = useHistory();
 
+	console.log('type ', selectedRating)
 	const [stars, setStars] = useState(
 		selectedRating ? starRatingObj[selectedRating] : bigZeroStar
 	);
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState(selectedRating ? Number(selectedRating) : 0);
 	const [ratingPhrase, setRatingPhrase] = useState(
 		selectedRating ? ratingPhraseObj[selectedRating] : 'Select your rating'
 	);
@@ -74,7 +70,7 @@ function LiveStarRatingDisplaySingle({ saveRating, selectedRating }) {
 	};
 
 	const handleStars = async (e, starVal) => {
-		e.preventDefault();
+		// e.preventDefault();
 		saveRating(starVal);
 
 		switch (starVal) {

@@ -12,7 +12,7 @@ function AddReviewForm({ user }) {
 	const { id, selectedRating } = useParams();
 	const restaurantId = id;
 	const [body, setBody] = useState('');
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState(selectedRating ? Number(selectedRating) : 0);
 	const [currentVal, setCurrentVal] = useState(0);
 	const [ratingPhrase, setRatingPhrase] = useState('Select your rating');
 
@@ -54,12 +54,18 @@ function AddReviewForm({ user }) {
 		};
 	};
 
+	const redirectToRestaurant = async (e) => {
+		e.preventDefault()
+		await dispatch(getAllRevs(restaurantId));
+		window.open(`/restaurants/${id}`, '_blank', 'noopener,noreferrer')
+	}
+
 	// live update for textbody
 	const updateBody = (e) => setBody(e.target.value);
 
 	return (
 		<div className='review-container-main'>
-			<div className='review-upper'>
+			<div className='review-upper' type='button' onClick={(e) => redirectToRestaurant(e)}>
 				<h1>
 					{currentRestaurant && Object.values(currentRestaurant)[0]?.name}
 				</h1>

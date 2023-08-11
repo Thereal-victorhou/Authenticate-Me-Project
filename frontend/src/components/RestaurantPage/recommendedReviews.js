@@ -44,7 +44,7 @@ function RecommendedReviews({ user }) {
                 </span>
                 <div id={`user-name`}>
                   <h4>{review.username}</h4>
-                  <h4>{review.updatedAt.slice(0,10)}</h4>
+                  <h4>{`${review.updatedAt.slice(5,10)}-${review.updatedAt.slice(0, 4)}`}</h4>
                 </div>
                 <div></div>
               </div>
