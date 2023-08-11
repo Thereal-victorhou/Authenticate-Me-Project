@@ -33,7 +33,6 @@ function Navigation({ isLoaded }) {
 	const [isSelected, setIsSelected] = useState(false);
 	const [sessionToken, setSessionToken] = useState('');
 	const [selectInput, setSelectInput] = useState(false);
-	// const [pageType, setPageType] = useState(sessionStorage.getItem('pageType'));
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const searchResult = useSelector((state) => state.search);
@@ -59,37 +58,39 @@ function Navigation({ isLoaded }) {
 			<>
 				<div className='login-signup-container'>
 					<div className='login-container'>
-						<NavLink
+						<div
 							className='nav-links-login'
 							id='nav-login'
 							to='/login'
-							onClick={(e) => handleLoginSignUp(e)}>
+							type='button'
+							onClick={(e) => handleLoginSignUp(e)}
+							>
 							Log In
-						</NavLink>
+						</div>
 					</div>
 					<div className='signup-container'>
 						<NavLink
 							className='nav-links-signup'
 							id='nav-signup'
 							to='/signup'
-							onClick={(e) => handleLoginSignUp(e)}>
+							onClick={(e) => handleLoginSignUp(e)}
+							>
 							Sign Up
 						</NavLink>
 					</div>
 				</div>
 			</>
 		);
-	}
+	};
 
 	// Set and save page type
 	const handleLoginSignUp = async (e) => {
 		e.preventDefault();
 
-		sessionStorage.setItem('pageType', 'other');
-		await dispatch(saveCurrentPage('other'));
 
 		switch (e.target.className) {
 			case 'nav-links-login':
+				await dispatch(saveCurrentPage('other'));
 				history.push('/login');
 				break;
 
@@ -110,14 +111,12 @@ function Navigation({ isLoaded }) {
 		await dispatch(oneRestaurant(res.id));
 		await dispatch(clearSearch());
 		setRestaurantSearchInput('');
-		sessionStorage.setItem('pageType', 'other');
 		dispatch(saveCurrentPage('other'));
 		history.push(`/restaurants/${res.id}`);
 	};
 
 	const handleAddRestaurantPage = async (e) => {
 		e.preventDefault();
-		sessionStorage.setItem('pageType', 'other');
 		await dispatch(saveCurrentPage('other'));
 		history.push(sessionUser ? '/add/restaurant' : '/login');
 	};
@@ -171,7 +170,6 @@ function Navigation({ isLoaded }) {
 		);
 		console.log('search button handle ', selectedLocation);
 		setRestaurantSearchInput('');
-		sessionStorage.setItem('pageType', 'other');
 		dispatch(saveCurrentPage('other'));
 		history.push(`/search?find_desc=${restaurantSearchInput}`);
 	};
@@ -179,18 +177,17 @@ function Navigation({ isLoaded }) {
 	// Set Nav to Home Version
 	const handleNav = (e) => {
 		e.preventDefault();
-		sessionStorage.setItem('pageType', 'home');
-		console.log(sessionStorage.getItem('pageType'));
 		dispatch(saveCurrentPage('home'));
 		dispatch(clearSearch());
 	};
 
 	// Modifying style of NavBar based on current Page
 	useEffect(async () => {
-		// if (pageType === undefined) {
-		// 	dispatch(saveCurrentPage('home'))
-		// 	sessionStorage.setItem('pageType', 'home')
-		// }
+		const amIHome = window.location.href;
+		// console.log('==========, ', amIHome.endsWith('/'))
+		if (pageType === undefined && amIHome.endsWith('/')) {
+			dispatch(saveCurrentPage('home'))
+		}
 		if (pageType === 'home') {
 			await document
 				.querySelector('.background-slideshow')

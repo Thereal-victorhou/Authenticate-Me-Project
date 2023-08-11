@@ -23,7 +23,7 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
   // Add setVal to current star
 	const addStars = (starVal) => {
 
-    resetStars()
+    resetStars();
 
     switch (starVal) {
       case 1:
@@ -52,7 +52,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
     if (!user) return history.push('/login');
     await dispatch(oneRestaurant(restaurant.id));
     history.push(`/review/restaurant/${restaurant.id}/${starVal}`)
-
   };
 
 	return (
@@ -73,7 +72,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					id='s1'
 					onClick={(e) => handleStars(e, 1, number, restaurant)}
 					onMouseEnter={() => addStars(1, number)}>
-					{/* <span className={`star-one${number} zero-star`}></span> */}
 				</div>
 				<div
 					type='radio'
@@ -82,7 +80,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					id='s2'
 					onClick={(e) => handleStars(e, 2, number, restaurant)}
 					onMouseEnter={() => addStars(2, number)}>
-					{/* <span className={`star-two${number} zero-star`}></span> */}
 				</div>
 				<div
 					type='radio'
@@ -91,7 +88,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					id='s3'
 					onClick={(e) => handleStars(e, 3, number, restaurant)}
 					onMouseEnter={() => addStars(3, number)}>
-					{/* <span className={`star-three${number} zero-star`}></span> */}
 				</div>
 				<div
 					type='radio'
@@ -100,7 +96,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					id='s4'
 					onClick={(e) => handleStars(e, 4, number, restaurant)}
 					onMouseEnter={() => addStars(4, number)}>
-					{/* <span className={`star-four${number} zero-star`}></span> */}
 				</div>
 				<div
 					type='radio'
@@ -109,7 +104,6 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
 					id='s5'
 					onClick={(e) => handleStars(e, 5, number, restaurant)}
 					onMouseEnter={() => addStars(5, number)}>
-					{/* <span className={`star-five${number} zero-star`}></span> */}
 				</div>
 			</div>
 			{/* <div className='rating-phrase-container'>

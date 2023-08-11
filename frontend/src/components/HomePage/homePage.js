@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { allRestaurants, oneRestaurant } from '../../store/restaurant';
-import { saveCurrentPage } from '../../store/navigation'
+import { saveCurrentPage } from '../../store/navigation';
 import LiveStarRatingDisplay from '../LiveStarRatingDisplay/LiveStarRatingDisplay';
 
 function HomePage({ user }) {
-
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const sessionRestaurant = useSelector((state) =>
 		Object.values(state.restaurant)
 	);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
 		dispatch(allRestaurants());
 	}, [dispatch]);
 
-	const handleNav = (e) => {
+	const handleNavToReview = async (e, restaurant) => {
 		e.preventDefault();
-		dispatch(saveCurrentPage('other'));
-		// dispatch(saveCurrentPage(currentPage))
+		await dispatch(saveCurrentPage('other'));
+    if (!user) return history.push('/login');
+		history.push(`/review/restaurant/${restaurant.id}`);
 	};
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+	const handleNavToRestaurant = async (e, restaurant) => {
+		e.preventDefault();
+		await dispatch(saveCurrentPage('other'));
+		await dispatch(oneRestaurant(restaurant.id));
+		return history.push(`/restaurants/${restaurant.id}`);
+	};
 
 	return (
 		<div className='all-restaurants-container'>
@@ -38,13 +46,13 @@ function HomePage({ user }) {
 					{sessionRestaurant &&
 						sessionRestaurant.map((restaurant, i) => {
 							return (
-								<li
-									className='restaurant-container'
-									key={restaurant.id}
-									onClick={(e) => {
-										handleNav(e);
-									}}>
-									<div className={'restaurant_container'}>
+								<li className='restaurant-container' key={restaurant.id}>
+									<div
+										className={'restaurant_container'}
+										type='button'
+										onClick={(e) => {
+											handleNavToReview(e, restaurant);
+										}}>
 										<img
 											className={'restaurant-photo'}
 											src={restaurant.imgSrc}
@@ -52,14 +60,18 @@ function HomePage({ user }) {
 										<div className='restaurant-info'>
 											<NavLink
 												className='name-and-location-container'
-												onClick={(e) => dispatch(oneRestaurant(restaurant.id))}
+												onClick={(e) => handleNavToRestaurant(e, restaurant)}
 												to={`/restaurants/${restaurant.id}`}>
 												<h2 className='restaurant-name'>{`${restaurant.name}`}</h2>
 											</NavLink>
 											<div className='restaurant-recommendation-container'>
 												<p>Do you recommend this restaurant?</p>
 											</div>
-											<LiveStarRatingDisplay restaurant={restaurant} number={i} user={user}/>
+											<LiveStarRatingDisplay
+												restaurant={restaurant}
+												number={i}
+												user={user}
+											/>
 										</div>
 									</div>
 								</li>
