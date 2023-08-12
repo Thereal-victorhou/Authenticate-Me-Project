@@ -301,12 +301,16 @@ router.get(
 				open: adjustedHours,
 			},
 			transactions: businessData.transactions,
+			userId: restaurant.userId,
 		};
-		console.log(businessData.hours[0]);
-		if (reviews && businessDetails.status === 200)
-			return res.json(businessDataObj);
-		if (reviews) return res.json(reviews);
-		res.json(restaurant);
+
+		try {
+			if (reviews && businessDetails.status === 200) return res.json(businessDataObj);
+			if (reviews) return res.json(reviews);
+			res.json(restaurant);
+		} catch (err) {
+			console.log("error ====== ", err.message)
+		}
 	})
 );
 

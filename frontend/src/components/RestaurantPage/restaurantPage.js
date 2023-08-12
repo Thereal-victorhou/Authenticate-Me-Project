@@ -11,6 +11,7 @@ import { formatOperatingHours } from '../Utils/RestaurantHoursUtil'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
+import { saveCurrentPage } from '../../store/navigation';
 
 function RestaurantPage({ user }) {
 	const history = useHistory();
@@ -64,17 +65,18 @@ function RestaurantPage({ user }) {
 	// Handle Button
 	const handleButton = async (e, reviewId) => {
 		e.preventDefault();
+		console.log(e.target.id)
+		await dispatch(saveCurrentPage('other'))
 
-		switch (e.target.getAttribute('id')) {
+		switch (e.target.id) {
 			case 'add-review':
-				if (user) {
+				if (!user) {
+					return history.push(`/login`);
+				}
 					await dispatch(oneRestaurant(id));
 					history.push(`/review/restaurant/${id}`);
 					break;
-				} else {
-					history.push(`/login`);
-					break;
-				}
+
 			case 'edit':
 				await dispatch(oneReview(reviewId));
 				history.push(`/edit/review/${reviewId}`);
@@ -96,6 +98,7 @@ function RestaurantPage({ user }) {
 	};
 
 	const checkEdit = () => {
+		// console.log(currentRestaurant)
 		if (currentRestaurant && currentRestaurant[0]?.userId === user?.id) {
 			return (
 				<>
@@ -154,7 +157,7 @@ function RestaurantPage({ user }) {
 							<div className='restaurant-price-divider'>●</div>
 							<div className='restaurant-sub-rating-divider'>
 								{currentRestaurant &&
-									currentRestaurant[0]?.categories.map((each) => (
+									currentRestaurant[0]?.categories?.map((each) => (
 										<h3 className='restaurant-categories'>{each}</h3>
 									))}
 							</div>
@@ -164,7 +167,7 @@ function RestaurantPage({ user }) {
 			</div>
 			<div className='restaurant-info-container'>
 				<div className='restaurant-upper-mid'>
-					<button
+					<div
 						className='review-button'
 						type='button'
 						id='add-review'
@@ -172,7 +175,7 @@ function RestaurantPage({ user }) {
 						onClick={handleButton}>
 						<StarOutlineIcon sx={{ fontSize: 30 }} />
 						Write a Review
-					</button>
+					</div>
 					<div className='phone-number-container'>
 						<span className='phone-number'>
 							<p>
