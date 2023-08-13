@@ -13,8 +13,6 @@ function AddReviewForm({ user }) {
 	const restaurantId = id;
 	const [body, setBody] = useState('');
 	const [rating, setRating] = useState(selectedRating ? Number(selectedRating) : 0);
-	const [currentVal, setCurrentVal] = useState(0);
-	const [ratingPhrase, setRatingPhrase] = useState('Select your rating');
 
 	const userId = user.id;
 	const currentRestaurant = useSelector((state) => state.restaurant);

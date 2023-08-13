@@ -65,27 +65,28 @@ function RestaurantPage({ user }) {
 	// Handle Button
 	const handleButton = async (e, reviewId) => {
 		e.preventDefault();
-		console.log(e.target.id)
-		await dispatch(saveCurrentPage('other'))
+
+
 
 		switch (e.target.id) {
 			case 'add-review':
 				if (!user) {
 					return history.push(`/login`);
 				}
-					await dispatch(oneRestaurant(id));
-					history.push(`/review/restaurant/${id}`);
-					break;
+				// console.log('id  ', id)
+				// await dispatch(oneRestaurant(Number(id)));
+				await dispatch(saveCurrentPage('other'))
+				return history.push(`/review/restaurant/${id}`);
 
 			case 'edit':
 				await dispatch(oneReview(reviewId));
 				history.push(`/edit/review/${reviewId}`);
-
 				break;
+
 			case 'delete':
 				// setCounter(prev => prev + 1)
 				dispatch(deleteOneReview(reviewId));
-				window.scrollTo(0, 0);
+				// window.scrollTo(0, 0);
 				break;
 		}
 	};
@@ -172,7 +173,7 @@ function RestaurantPage({ user }) {
 						type='button'
 						id='add-review'
 						value='reviewButton'
-						onClick={handleButton}>
+						onClick={(e) => handleButton(e)}>
 						<StarOutlineIcon sx={{ fontSize: 30 }} />
 						Write a Review
 					</div>
