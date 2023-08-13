@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { oneRestaurant } from '../../store/restaurant';
+import { saveRating } from '../../store/ratings';
 
 import bigZeroStar from '../../images/regular_0@2x.png';
 import bigOneStar from '../../images/regular_1@2x.png';
@@ -44,14 +45,13 @@ function LiveStarRatingDisplay({ restaurant, number, user}) {
     }
   };
 
-	const handleStars = async (e, starVal, position) => {
+	const handleStars = async (e, starVal, position, restaurant) => {
     e.preventDefault()
     //  console.log('starVal ===== ',starVal)
     // console.log('position ===== ',position)
     // console.log( '=================================')
     if (!user) return history.push('/login');
-    await dispatch(oneRestaurant(restaurant.id));
-    history.push(`/review/restaurant/${restaurant.id}/${starVal}`)
+    history.push(`/review/rating/${starVal}/restaurant/${restaurant.id}`)
   };
 
 	return (

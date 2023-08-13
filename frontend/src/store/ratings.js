@@ -1,36 +1,33 @@
-import { csrfFetch } from './csrf'
+import { csrfFetch } from './csrf';
 
 // Type definitions
-const GET_RATINGS = '/ratings/getRatings'
+const SAVE_RATING = '/ratings/saveRating';
 
 // Action
-const getRating = (ratings) => {
-    return {
-        type: GET_RATINGS,
-        ratings
-    }
-}
+const trackCurrentRating = (rating) => {
+	return {
+		type: SAVE_RATING,
+		rating,
+	};
+};
 
 // Thunk
-export const allRatings = (id) => async (dispatch) => {
-    const res = await fetch(`/api/ratings/restaurant/${id}`);
-    const ratingsData = await res.json();
-    dispatch(getRating(ratingsData));
-}
+export const saveRating = (rating) => async (dispatch) => {
+	dispatch(trackCurrentRating(rating));
+};
 
 // Reducer
 const ratingReducer = (state = {}, action) => {
-    let newState;
-    switch(action.type) {
-        case GET_RATINGS:
-            newState = {...state}
-            action.ratings.forEach(rating => {
-                newState[rating.id] = rating;
-            })
-            return newState;
-        default:
-            return state;
-    }
-}
+	let newState;
+	switch (action.type) {
+
+		case SAVE_RATING:
+			newState = { ...action };
+			return newState;
+
+		default:
+			return state;
+	}
+};
 
 export default ratingReducer;

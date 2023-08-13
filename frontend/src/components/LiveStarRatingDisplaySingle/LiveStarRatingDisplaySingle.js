@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import './LiveStarRatingDisplaySingle.css';
 
 import bigZeroStar from '../../images/regular_0@2x.png';
@@ -26,7 +27,6 @@ const ratingPhraseObj = {
 
 function LiveStarRatingDisplaySingle({ saveRating, selectedRating }) {
 
-	console.log('type ', selectedRating)
 	const [stars, setStars] = useState(
 		selectedRating ? starRatingObj[selectedRating] : bigZeroStar
 	);

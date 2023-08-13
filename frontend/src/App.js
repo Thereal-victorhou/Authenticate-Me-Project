@@ -55,9 +55,10 @@ function App() {
           <Route path="/review/restaurant/:id">
             <AddReviewForm user={user}/>
           </Route>
-          <Route path="/review/restaurant/:id/:selectedRating">
+          <Route path="/review/rating/:selectedRating/restaurant/:id">
             <AddReviewForm user={user}/>
           </Route>
+
           <Route path="/edit/review/:id">
             <EditReviewForm user={user}/>
           </Route>

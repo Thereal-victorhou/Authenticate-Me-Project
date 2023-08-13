@@ -9,13 +9,20 @@ import LiveStarRatingDisplaySingle from '../LiveStarRatingDisplaySingle/LiveStar
 function AddReviewForm({ user }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { id, selectedRating } = useParams();
+	const { selectedRating, id } = useParams();
+
+
 	const restaurantId = id;
+	const userId = user.id;
+
+	const currentRestaurant = useSelector((state) => state.restaurant);
+
 	const [body, setBody] = useState('');
 	const [rating, setRating] = useState(selectedRating ? Number(selectedRating) : 0);
+	const [currentVal, setCurrentVal] = useState(0);
+	const [ratingPhrase, setRatingPhrase] = useState('Select your rating');
 
-	const userId = user.id;
-	const currentRestaurant = useSelector((state) => state.restaurant);
+
 
 
 	useEffect(() => {
