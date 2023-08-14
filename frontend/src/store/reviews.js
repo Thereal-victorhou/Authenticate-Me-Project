@@ -135,10 +135,10 @@ const reviewReducer = (state = {}, action) => {
             newNew = Object.values(newState);
             const loca = newNew.indexOf(newNew.find(review => review.id === action.id))
             // console.log('values array of reviews ==== ', newNew)
-            // console.log('location of review id', loca)
+            console.log('location of review id', loca)
             // console.log('action id ===== ', action.id)
-            // console.log('newState[action.id] ======== ', newState)
-            delete newState[newNew]
+            console.log('newState ======== ', newNew)
+            delete newNew[loca]
             newState = { ...newNew }
             return newState;
         default:
