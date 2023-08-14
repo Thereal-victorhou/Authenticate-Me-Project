@@ -28,13 +28,8 @@ router.get(
 		const reviews = await Review.findAll({
 			where: { restaurantId: restaurantId},
 			order: [['rating', 'DESC']],
-			// include: [{
-			// 	model: User,
-			// 	require: true,
-			// 	where: { id: Review.id}
-			// }]
 		});
-		// res.json(reviews);
+
 		if (reviews) {
 			const reviewsAndUser = reviews.map( async (review) => {
 				const userId = review.userId;
@@ -43,7 +38,7 @@ router.get(
 				return {...review.dataValues, ...user.dataValues}
 			})
 			const results = await Promise.all(reviewsAndUser);
-			// console.log(results)
+
 			res.json(results);
 
 		} else {
@@ -90,9 +85,12 @@ router.delete(
 	'/review/:id',
 	asyncHandler(async (req, res) => {
 		const id = req.params.id;
-		const resDelete = await Review.destroy({ where: { id } });
-
-		res.json(resDelete);
+		try {
+			const deleted = await Review.destroy({ where: { id: id } });
+			res.json(deleted)
+		} catch(err) {
+			console.log('error in reviews backend api: ', err)
+		}
 	})
 );
 

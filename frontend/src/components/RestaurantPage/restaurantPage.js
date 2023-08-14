@@ -17,6 +17,7 @@ function RestaurantPage({ user }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { id } = useParams();
+
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [avgRating, setAvgRating] = useState(0);
 
@@ -66,8 +67,6 @@ function RestaurantPage({ user }) {
 	const handleButton = async (e, reviewId) => {
 		e.preventDefault();
 
-
-
 		switch (e.target.id) {
 			case 'add-review':
 				if (!user) {
@@ -85,7 +84,7 @@ function RestaurantPage({ user }) {
 
 			case 'delete':
 				// setCounter(prev => prev + 1)
-				dispatch(deleteOneReview(reviewId));
+				await dispatch(deleteOneReview(reviewId));
 				// window.scrollTo(0, 0);
 				break;
 		}
@@ -246,7 +245,7 @@ function RestaurantPage({ user }) {
 						<h3>Recommended Reviews</h3>
 					</div>
 					<ul className='review-card-container'>
-						<RecommendedReviews user={user} />
+						<RecommendedReviews user={user} restaurantId={id}/>
 					</ul>
 				</div>
 			</div>

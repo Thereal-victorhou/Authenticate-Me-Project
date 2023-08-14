@@ -96,12 +96,19 @@ export const editOldReview = (editReviewPayload) => async (dispatch) => {
 }
 
 export const deleteOneReview = (id) => async (dispatch) => {
+    // console.log('restaurantId ', restaurantId)
     const res = await csrfFetch(`/api/reviews/review/${id}`, {
         method: 'DELETE',
+        // headers: {'Content-Type': 'application/json'},
+        // body: JSON.stringify({
+        //     reviewId: id,
+        //     restaurantId: restaurantId
+        // })
     });
-    const deletedId = await res.json();
+    // await res.json();
     if (res.ok) {
         dispatch(deleteReview(id));
+        console.log(res)
         return res;
     }
 }
@@ -130,16 +137,20 @@ const reviewReducer = (state = {}, action) => {
         case EDIT_REVIEW:
             return action.editReviewPayload
         case DELETE_REVIEW:
+
+            // return {
+            //     ...state,
+            //     reviews: state.reviews?.filter(review => review.id !== action.id)
+            // }
             let newNew;
             newState = { ...state };
             newNew = Object.values(newState);
             const loca = newNew.indexOf(newNew.find(review => review.id === action.id))
-            // console.log('values array of reviews ==== ', newNew)
-            console.log('location of review id', loca)
-            // console.log('action id ===== ', action.id)
-            console.log('newState ======== ', newNew)
+            // console.log('newState ======== ', newNew)
             delete newNew[loca]
             newState = { ...newNew }
+            // newState = { ...newNew.filter(review => review.id !== action.id)}
+
             return newState;
         default:
             return state;

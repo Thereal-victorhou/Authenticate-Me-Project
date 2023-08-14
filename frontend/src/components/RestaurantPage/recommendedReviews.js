@@ -7,12 +7,16 @@ import FunctionalButtonModal from './FunctionalButtonModal';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
-function RecommendedReviews({ user }) {
+function RecommendedReviews({ user, restaurantId }) {
   const history = useHistory();
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
   const restaurantReviews = useSelector((state) => Object.values(state.review));
+
+  useEffect(() => {
+    dispatch(getAllRevs(restaurantId))
+  }, [])
 
   	// Handle Button
 	const handleButton = async (e, reviewId) => {
@@ -40,7 +44,7 @@ function RecommendedReviews({ user }) {
             <div className='review-card'>
               <div className='review-card-upper'>
                 <span id='user-avatar'>
-                  <img src={`${review.imgSrc}`} lazyLoading={true} alt='Profile Picture'/>
+                  <img src={`${review.imgSrc}`} lazyloading='true' alt='Profile Picture'/>
                 </span>
                 <div id={`user-name`}>
                   <h4>{review.username}</h4>
