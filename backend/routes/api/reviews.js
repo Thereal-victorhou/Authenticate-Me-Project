@@ -14,11 +14,16 @@ router.get(
 	'/:id',
 	asyncHandler(async (req, res) => {
 		const id = Number(req.params.id);
-		const review = await Review.findByPk(id, {
-			order: [['updatedAt', 'DESC']],
-		});
-		// console.log('review ====== ', review)
-		res.json(review);
+
+		try {
+			const review = await Review.findByPk(id, {
+				order: [['updatedAt', 'DESC']],
+			});
+			res.json(review);
+
+		} catch(err) {
+			console.log('Sequelize error: ', err)
+		}
 	})
 );
 

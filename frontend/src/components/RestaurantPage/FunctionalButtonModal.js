@@ -41,7 +41,7 @@ function FunctionalButtonModal ({ user, review }){
 			case 'edit':
 				await dispatch(oneReview(reviewId));
 				history.push(`/edit/review/${reviewId}`);
-
+      // console.log('current review ======= ', review)
 				break;
 			case 'delete':
 				// setCounter(prev => prev + 1)

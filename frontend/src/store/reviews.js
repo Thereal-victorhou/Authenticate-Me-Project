@@ -51,6 +51,7 @@ export const oneReview = (reviewId) => async (dispatch) => {
 
     const res = await fetch(`/api/reviews/${reviewId}`)
     const review = await res.json();
+    console.log('review ====== ', review)
     dispatch(getReview(review));
 }
 
@@ -120,7 +121,7 @@ const reviewReducer = (state = {}, action) => {
     switch(action.type) {
         case GET_REVIEW:
             return {
-                // [action.review.id]: action.review
+                [action.review.id]: action.review
             }
             case GET_ALL_REVIEWS:
             newState = {...action.reviews}
