@@ -40,8 +40,6 @@ function RestaurantPage({ user }) {
 
 	useEffect(() => {
 		dispatch(oneRestaurant(parseInt(id, 10)));
-		dispatch(getAllRevs(parseInt(id, 10)));
-		// dispatch(allRatings(id))
 	}, [dispatch, id]);
 
 	useEffect(() => {

@@ -13,11 +13,12 @@ const router = express.Router();
 router.get(
 	'/:id',
 	asyncHandler(async (req, res) => {
-		const id = req.params.id;
-		const reviews = await Review.findByPk(id, {
+		const id = Number(req.params.id);
+		const review = await Review.findByPk(id, {
 			order: [['updatedAt', 'DESC']],
 		});
-		res.json(reviews);
+		// console.log('review ====== ', review)
+		res.json(review);
 	})
 );
 
@@ -29,16 +30,29 @@ router.get(
 			where: { restaurantId: restaurantId},
 			order: [['rating', 'DESC']],
 		});
-
+		// console.log('reviews ======= ', {...reviews})
 		if (reviews) {
 			const reviewsAndUser = reviews.map( async (review) => {
 				const userId = review.userId;
 				const user = await User.findByPk(userId)
 
-				return {...review.dataValues, ...user.dataValues}
+				return {
+					// ...review.dataValues,
+					id: review.dataValues.id,
+					body: review.dataValues.body,
+					restaurantId: review.dataValues.restaurantId,
+					rating: review.dataValues.rating,
+					userId: user.dataValues.id,
+					username: user.dataValues.username,
+					zipCode: user.dataValues.zipCode,
+					imgSrc: user.dataValues.imgSrc,
+					createdAt: review.dataValues.createdAt,
+					updatedAt: review.dataValues.updatedAt,
+				}
 			})
-			const results = await Promise.all(reviewsAndUser);
 
+			const results = await Promise.all(reviewsAndUser);
+			// console.log('results ======= ', results)
 			res.json(results);
 
 		} else {
