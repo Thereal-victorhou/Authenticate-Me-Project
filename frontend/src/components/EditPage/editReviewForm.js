@@ -11,7 +11,7 @@ function EditReviewForm({ user }) {
 	const history = useHistory();
 	const { id } = useParams();
 
-	const singleReview = useSelector((state) => state?.review[`${id}`]);
+	const singleReview = useSelector((state) => state?.review[id]);
 	const restaurantId = singleReview?.restaurantId;
 	const currentRestaurant = useSelector((state) => state.restaurant);
 
@@ -24,10 +24,11 @@ function EditReviewForm({ user }) {
 		window.scrollTo(0, 0);
 	}, []);
 
-	useEffect(() => {
-		dispatch(oneReview(id));
-		dispatch(oneRestaurant(restaurantId));
-	}, [dispatch, id]);
+	useEffect(async () => {
+		await dispatch(oneReview(id));
+		await dispatch(oneRestaurant(restaurantId));
+
+	}, []);
 
 	useEffect(() => {
 		if (singleReview) {
@@ -35,7 +36,7 @@ function EditReviewForm({ user }) {
 			setBody(singleReview.body);
 			setRating(singleReview.rating);
 		}
-	}, [singleReview]);
+	}, [singleReview, dispatch]);
 
 	const saveRating = (val) => {
 		setRating(val)
@@ -65,11 +66,15 @@ function EditReviewForm({ user }) {
 		}
 	};
 
+	// const redirectToRestaurant = async (e) => {
+	// 	e.preventDefault()
+	// 	await dispatch(getAllRevs(restaurantId));
+	// 	window.open(`/restaurants/${singleReview.restaurantId}}`, '_blank', 'noopener,nopreferrer')
+	// };
+
+
 	// live update for textbody
 	const updateBody = (e) => setBody(e.target.value);
-
-
-
 
 	return (
 		<div className='review-container-main'>

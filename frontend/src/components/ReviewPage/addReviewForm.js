@@ -63,7 +63,7 @@ function AddReviewForm({ user }) {
 		e.preventDefault()
 		await dispatch(getAllRevs(restaurantId));
 		window.open(`/restaurants/${id}`, '_blank', 'noopener,noreferrer')
-	}
+	};
 
 	// live update for textbody
 	const updateBody = (e) => setBody(e.target.value);
