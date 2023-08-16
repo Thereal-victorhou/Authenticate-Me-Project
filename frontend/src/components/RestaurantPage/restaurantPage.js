@@ -205,7 +205,7 @@ function RestaurantPage({ user }) {
 					</div>
 					<div className='lh-container'>
 						<div className='lh-location-container'>
-							<div id='map' type='button' >
+							<div id='map' >
 								<img width="100%" height='100%' src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}`} alt={`Google map of ${restaurantCurrent?.name}`} />
 							</div>
 							<div id='address'>
@@ -237,9 +237,9 @@ function RestaurantPage({ user }) {
 									</div>
 								</div>
 								<div id='address-right'>
-									<button id='direction-button'>
+									<div id='direction-button' type='button' onClick={() => alert('Feature Coming Soon!')}>
 										<p>Get Direction</p>
-									</button>
+									</div>
 								</div>
 							</div>
 						</div>
