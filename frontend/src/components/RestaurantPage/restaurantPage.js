@@ -191,11 +191,13 @@ function RestaurantPage({ user }) {
 						<div className='lh-location-container'>
 							<div id='map'>
 								{/* <h2>*Map goes here*</h2> */}
-								<GoogleMapsSingle
+								{/* <GoogleMapsSingle
 									latitude={Number(restaurantCurrent?.coordinates[0])}
 									longitude={Number(restaurantCurrent?.coordinates[1])}
 									restaurant={restaurantCurrent?.name}
-								/>
+								/> */}
+								{/* <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=13&size=150x150&scale=2&maptype=roadmap&key=${process.env.GOOGLE_MAPS_API_KEY}`}/> */}
+								<img width="100%" height='100%' src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=AIzaSyAs3nzcDg87TMSaphB74_l4B4Ya_57zkvg&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}`} alt="Google map of Albany, NY" />
 							</div>
 							<div id='address'>
 								<div id='address-left'>
