@@ -550,13 +550,20 @@
 	gap: 30px;
 	height: 80%;
 	width: 85%;
+	/* background: rgb(96, 121, 96); */
 }
 
 .animated-bar-container {
 	display: flex;
 	justify-content: flex-start;
+	align-items: center;
 	height: 12px;
-	width: 100%;
+	width: 410px;
+	background: rgb(240,240,240);
+	border-radius: 20px;
+	border-left: 2px solid rgb(240,240,240);
+	border-right: 2px solid rgb(240,240,240);
+	/* overflow: hidden; */
 }
 
 /* .animated-bar-front {
@@ -567,22 +574,64 @@
 	border-bottom-left-radius: 50%;
 } */
 
-.animated-bar  {
+.animated-bar1, .animated-bar2, .animated-bar3, .animated-bar4, .animated-bar5  {
 	background: rgb(240,240,240);
 	height: 12px;
-	width: 410px;
+	max-width: 405px;
 	border-radius: 20px;
-	border: 2px solid #fff;
+	border: 2px solid rgb(240,240,240);
 	position: absolute;
-	/* top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%); */
 	overflow: hidden;
 }
 
-.animated-bar::after {
+.animated-bar1::after {
 	content: '';
-	background: linear-gradient(135deg, #fd0000, #1d00ff);
+	background: rgb(255,204,75);
+	border: 2px solid rgb(255,204,75);
+	height: 100%;
+	width: 0;
+	border-radius: 20px;
+	position: absolute;
+	animation: progress 2s linear forwards;
+}
+
+.animated-bar2::after {
+	content: '';
+	background: rgb(255,173,72);
+	border: 2px solid rgb(255,173,72);
+	width: 0;
+	height: 100%;
+	border-radius: 20px;
+	position: absolute;
+	animation: progress 2s linear forwards;
+}
+
+.animated-bar3::after {
+	content: '';
+	background: rgb(254,135,66);
+	border: 2px solid rgb(254,135,66);
+	width: 0;
+	height: 100%;
+	border-radius: 20px;
+	position: absolute;
+	animation: progress 2s linear forwards;
+}
+
+.animated-bar4::after {
+	content: '';
+	background: rgb(255,100,61);
+	border: 2px solid rgb(255,100,61);
+	width: 0;
+	height: 100%;
+	border-radius: 20px;
+	position: absolute;
+	animation: progress 2s linear forwards;
+}
+
+.animated-bar5::after {
+	content: '';
+	background: rgb(251,80,59);
+	border: 2px solid rgb(251,80,59);
 	width: 0;
 	height: 100%;
 	border-radius: 20px;
@@ -592,7 +641,7 @@
 
 @keyframes progress {
 	100%{
-			width: 90%;
+			width: 100%;
 	}
 }
 

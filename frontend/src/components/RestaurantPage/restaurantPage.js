@@ -32,7 +32,7 @@ function RestaurantPage({ user }) {
 
 	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	// document.body.scrollTop = document.documentElement.scrollTop = 0;
 	// useEffect(() => {
 	// 	window.scrollTo(0, 0);
 	// }, []);
