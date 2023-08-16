@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import RecommendedReviews from './recommendedReviews';
 import RestaurantHours from './RestaurantHours';
+import AnimatedRatingDisplay from './AnimatedRatingDisplay';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, deleteOneReview } from '../../store/reviews';
 import { saveCurrentPage } from '../../store/navigation';
@@ -256,6 +257,35 @@ function RestaurantPage({ user }) {
 				<div className='reviews_container'>
 					<div className='reviews-title'>
 						<h3>Recommended Reviews</h3>
+					</div>
+					<div className='reviews-display-container'>
+						<div className='rdc-left'>
+							<p id='overall-rating'>Overall Rating</p>
+							{currentRestaurant && starRatingBig(avgRating)}
+							<p id='amount-of-reviews'>{`${restaurantReviews.length} reviews`}</p>
+						</div>
+						<div className='rdc-right'>
+							<div className='right-labels'>
+								<div>
+									<p>5 stars</p>
+								</div>
+								<div>
+									<p>4 stars</p>
+								</div>
+								<div>
+									<p>3 stars</p>
+								</div>
+								<div>
+									<p>2 stars</p>
+								</div>
+								<div>
+									<p>1 star</p>
+								</div>
+							</div>
+							<div className='reviews-animated-bar-container'>
+								<AnimatedRatingDisplay reviews={restaurantReviews} />
+							</div>
+						</div>
 					</div>
 					<ul className='review-card-container'>
 						<RecommendedReviews user={user} restaurantId={id} />

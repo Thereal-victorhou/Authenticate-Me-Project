@@ -466,6 +466,145 @@
 	color: rgba(45,46,47,1);
 }
 
+.reviews-display-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 300px;
+	width: 800px;
+	padding: 0;
+	border-bottom: 1px solid rgb(235, 235, 235);
+	margin-bottom: 20px;
+}
+
+.rdc-left {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	height: 100%;
+	width: 40%;
+	/* background: rgb(176, 121, 176); */
+}
+
+.rdc-left #overall-rating {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0px;
+  line-height: 20px;
+  color: rgb(45, 46, 47);
+}
+
+.rdc-left #amount-of-reviews {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  line-height: 24px;
+	margin-top: 10px;
+}
+
+.rdc-right {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	width: 60%;
+}
+
+.right-labels {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	height: 80%;
+	width: 15%;
+	gap: 18px;
+}
+
+.right-labels > div {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	height: 24px;
+	width: 100%;
+}
+
+.right-labels > p {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0px;
+  /* line-height: 20px; */
+  color: rgb(45, 46, 47);
+	/* text-align: center; */
+
+}
+
+.reviews-animated-bar-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 30px;
+	height: 80%;
+	width: 85%;
+}
+
+.animated-bar-container {
+	display: flex;
+	justify-content: flex-start;
+	height: 12px;
+	width: 100%;
+}
+
+/* .animated-bar-front {
+	height: 100%;
+	width: 2%;
+	background: rgb(240,240,240);
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;
+} */
+
+.animated-bar  {
+	background: rgb(240,240,240);
+	height: 12px;
+	width: 410px;
+	border-radius: 20px;
+	border: 2px solid #fff;
+	position: absolute;
+	/* top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); */
+	overflow: hidden;
+}
+
+.animated-bar::after {
+	content: '';
+	background: linear-gradient(135deg, #fd0000, #1d00ff);
+	width: 0;
+	height: 100%;
+	border-radius: 20px;
+	position: absolute;
+	animation: progress 2s linear forwards;
+}
+
+@keyframes progress {
+	100%{
+			width: 90%;
+	}
+}
+
+/* .animated-bar-back {
+	height: 100%;
+	width: 2%;
+	background: rgb(240,240,240);
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+} */
+
+
 .review-card-main {
 	display: flex;
 	flex-direction: row;
