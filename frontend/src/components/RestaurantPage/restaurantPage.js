@@ -7,7 +7,6 @@ import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
 import { oneReview, deleteOneReview } from '../../store/reviews';
 import { saveCurrentPage } from '../../store/navigation';
 import { starRatingBig } from '../Utils/DisplayStarRating';
-import getBusinessAddress from '../Utils/ReverseGeocoding'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
@@ -114,14 +113,22 @@ function RestaurantPage({ user }) {
 		}
 	};
 
-	const sendToGoogleMaps = (latitude, longitude) => {
+	// Redirect to Google Maps until Mapping feature is complete
+	// const sendToGoogleMaps = (latitude, longitude) => {
+	// 	const latlng = { lat: latitude, lng: longitude };
+	// 	const geocoder = new window.google.maps.Geocoder();
 
-		const address = getBusinessAddress(latitude, longitude, process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
-		console.log(address)
-		const encodedAddress = encodeURIComponent(address);
-		const googleMapsSearchUrl = `https://www.google.com/maps/?q=${encodedAddress}`;
-		window.open(googleMapsSearchUrl, '_blank');
-	}
+	// 	geocoder.geocode({ location: latlng }).then((response) => {
+	// 		if (!response.results[0]) return;
+
+	// 		const address = response.results[0].formatted_address;
+	// 	const encodedAddress = encodeURIComponent();
+	// 	const googleMapsSearchUrl = `https://www.google.com/maps/?q=${encodedAddress}`;
+	// 	window.open(googleMapsSearchUrl);
+
+	// 	}).catch((e) => console.log('Geocoder failed due to: ' + e));
+
+	// }
 
 	return (
 		<div className='restaurant_page_container'>
@@ -198,7 +205,7 @@ function RestaurantPage({ user }) {
 					</div>
 					<div className='lh-container'>
 						<div className='lh-location-container'>
-							<div id='map' type='button' onClick={() => sendToGoogleMaps(restaurantCurrent?.coordinates[0], restaurantCurrent?.coordinates[1])}>
+							<div id='map' type='button' >
 								<img width="100%" height='100%' src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}`} alt={`Google map of ${restaurantCurrent?.name}`} />
 							</div>
 							<div id='address'>
