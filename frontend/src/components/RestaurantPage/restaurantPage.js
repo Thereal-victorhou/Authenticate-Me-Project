@@ -3,15 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory, NavLink } from 'react-router-dom';
 import RecommendedReviews from './recommendedReviews';
 import RestaurantHours from './RestaurantHours';
+import GoogleMapsSingle from '../Maps/GoogleMapsSingle';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
-import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
-import { allRatings } from '../../store/ratings';
+import { oneReview, deleteOneReview } from '../../store/reviews';
+import { saveCurrentPage } from '../../store/navigation';
 import { starRatingBig } from '../Utils/DisplayStarRating';
-import { formatOperatingHours } from '../Utils/RestaurantHoursUtil'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { blue } from '@mui/material/colors';
-import { saveCurrentPage } from '../../store/navigation';
 
 function RestaurantPage({ user }) {
 	const history = useHistory();
@@ -72,7 +71,7 @@ function RestaurantPage({ user }) {
 				}
 				// console.log('id  ', id)
 				// await dispatch(oneRestaurant(Number(id)));
-				await dispatch(saveCurrentPage('other'))
+				await dispatch(saveCurrentPage('other'));
 				return history.push(`/review/restaurant/${id}`);
 
 			case 'edit':
@@ -191,7 +190,12 @@ function RestaurantPage({ user }) {
 					<div className='lh-container'>
 						<div className='lh-location-container'>
 							<div id='map'>
-								<h2>*Map goes here*</h2>
+								{/* <h2>*Map goes here*</h2> */}
+								<GoogleMapsSingle
+									latitude={Number(restaurantCurrent?.coordinates[0])}
+									longitude={Number(restaurantCurrent?.coordinates[1])}
+									restaurant={restaurantCurrent?.name}
+								/>
 							</div>
 							<div id='address'>
 								<div id='address-left'>
@@ -230,7 +234,7 @@ function RestaurantPage({ user }) {
 						</div>
 						<div className='lh-right'>
 							<div className='lh-hours-container'>
-								<RestaurantHours  currentRestaurant={currentRestaurant} />
+								<RestaurantHours currentRestaurant={currentRestaurant} />
 							</div>
 							<div className='edit-info-container'>
 								{currentRestaurant && checkEdit()}
@@ -243,7 +247,7 @@ function RestaurantPage({ user }) {
 						<h3>Recommended Reviews</h3>
 					</div>
 					<ul className='review-card-container'>
-						<RecommendedReviews user={user} restaurantId={id}/>
+						<RecommendedReviews user={user} restaurantId={id} />
 					</ul>
 				</div>
 			</div>
