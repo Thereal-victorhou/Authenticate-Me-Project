@@ -563,6 +563,7 @@
 	border-radius: 20px;
 	border-left: 2px solid rgb(240,240,240);
 	border-right: 2px solid rgb(240,240,240);
+	padding: 0;
 	/* overflow: hidden; */
 }
 
@@ -582,6 +583,7 @@
 	border: 2px solid rgb(240,240,240);
 	position: absolute;
 	overflow: hidden;
+	padding: 0;
 }
 
 .animated-bar1::after {
