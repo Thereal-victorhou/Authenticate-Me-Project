@@ -572,7 +572,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: 2s linear;
+	transition: all 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -583,7 +583,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: 2s linear;
+	transition: all 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -594,7 +594,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: 2s linear;
+	transition: all 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -605,7 +605,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: 2s linear;
+	transition: all 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -616,7 +616,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: 2s linear;
+	transition: all 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -629,7 +629,7 @@
 	width: 0;
 	border-radius: 20px;
 	position: absolute;
-	animation: progress 2s linear forwards;
+	animation: progress linear forwards;
 	opacity: 0;
 }
 
@@ -641,7 +641,7 @@
 	width: 0;
 	border-radius: 20px;
 	position: absolute;
-	animation: progress 2s linear forwards;
+	animation: progress linear forwards;
 	opacity: 0;
 }
 
@@ -653,7 +653,7 @@
 	width: 0;
 	border-radius: 20px;
 	position: absolute;
-	animation: progress 2s linear forwards;
+	animation: progress linear forwards;
 	opacity: 0;
 }
 
@@ -665,7 +665,7 @@
 	width: 0;
 	border-radius: 20px;
 	position: absolute;
-	animation: progress 2s linear forwards;
+	animation: progress linear forwards;
 	opacity: 0;
 }
 
@@ -677,7 +677,7 @@
 	width: 0;
 	border-radius: 20px;
 	position: absolute;
-	animation: progress 2s linear forwards;
+	animation: progress linear forwards;
 	opacity: 0;
 }
 
