@@ -7,16 +7,12 @@ import FunctionalButtonModal from './FunctionalButtonModal';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
-function RecommendedReviews({ user, restaurantId }) {
+function RecommendedReviews({ user, restaurantId, restaurantReviews}) {
   const history = useHistory();
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
-  const restaurantReviews = useSelector((state) => Object.values(state.review));
 
-  useEffect(() => {
-    dispatch(getAllRevs(restaurantId))
-  }, [])
 
   	// Handle Button
 	const handleButton = async (e, reviewId) => {

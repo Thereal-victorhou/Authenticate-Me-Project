@@ -574,6 +574,7 @@
 	position: absolute;
 	transition: 2s linear;
 	width: 0;
+	opacity: 0;
 }
 #animated-bar2{
 	background: rgb(255, 173, 72);
@@ -584,6 +585,7 @@
 	position: absolute;
 	transition: 2s linear;
 	width: 0;
+	opacity: 0;
 }
 #animated-bar3{
 	background: rgb(254, 135, 66);
@@ -605,6 +607,7 @@
 	position: absolute;
 	transition: 2s linear;
 	width: 0;
+	opacity: 0;
 }
 #animated-bar5{
 	background: rgb(251, 80, 59);
@@ -615,6 +618,7 @@
 	position: absolute;
 	transition: 2s linear;
 	width: 0;
+	opacity: 0;
 }
 
 #animated-bar1::after {
@@ -626,6 +630,7 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+	opacity: 0;
 }
 
 #animated-bar2::after {
@@ -637,6 +642,7 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+	opacity: 0;
 }
 
 #animated-bar3::after {
@@ -648,6 +654,7 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+	opacity: 0;
 }
 
 #animated-bar4::after {
@@ -659,6 +666,7 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+	opacity: 0;
 }
 
 #animated-bar5::after {
@@ -670,6 +678,7 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+	opacity: 0;
 }
 
 @keyframes progress {

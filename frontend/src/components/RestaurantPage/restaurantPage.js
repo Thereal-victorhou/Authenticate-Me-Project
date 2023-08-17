@@ -5,7 +5,7 @@ import RecommendedReviews from './recommendedReviews';
 import RestaurantHours from './RestaurantHours';
 import AnimatedRatingDisplay from './AnimatedRatingDisplay';
 import { oneRestaurant, deleteRestaurant } from '../../store/restaurant';
-import { oneReview, deleteOneReview } from '../../store/reviews';
+import { oneReview, getAllRevs, deleteOneReview } from '../../store/reviews';
 import { saveCurrentPage } from '../../store/navigation';
 import { starRatingBig } from '../Utils/DisplayStarRating';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -21,6 +21,7 @@ function RestaurantPage({ user }) {
 	const [avgRating, setAvgRating] = useState(0);
 
 	let avgNum;
+	let restaurantReviews;
 
 	// sessionRestaurants is an array
 	const currentRestaurant = useSelector((state) =>
@@ -30,7 +31,6 @@ function RestaurantPage({ user }) {
 		(restaurant) => restaurant.id === parseInt(id, 10)
 	);
 
-	const restaurantReviews = useSelector((state) => Object.values(state.review));
 
 	// document.body.scrollTop = document.documentElement.scrollTop = 0;
 	useEffect(() => {
@@ -39,7 +39,12 @@ function RestaurantPage({ user }) {
 
 	useEffect(() => {
 		dispatch(oneRestaurant(parseInt(id, 10)));
+		dispatch(getAllRevs(id))
 	}, [dispatch, id]);
+
+	restaurantReviews = useSelector((state) => Object.values(state.review));
+	console.log(restaurantReviews)
+
 
 	useEffect(() => {
 		if (currentRestaurant && restaurantReviews) {
@@ -288,7 +293,7 @@ function RestaurantPage({ user }) {
 						</div>
 					</div>
 					<ul className='review-card-container'>
-						<RecommendedReviews user={user} restaurantId={id} />
+						<RecommendedReviews user={user} restaurantId={id} restaurantReviews={restaurantReviews}/>
 					</ul>
 				</div>
 			</div>
