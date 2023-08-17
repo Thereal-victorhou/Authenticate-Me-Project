@@ -16,14 +16,7 @@ export default function AnimatedRatingDisplay({ reviews }) {
 	const ratingsBarRef4 = useRef(null);
 	const ratingsBarRef5 = useRef(null);
 
-	const [rating1, setRating1] = useState(0);
-	const [rating2, setRating2] = useState(0);
-	const [rating3, setRating3] = useState(0);
-	const [rating4, setRating4] = useState(0);
-	const [rating5, setRating5] = useState(0);
-
-	const bars = document.querySelectorAll('.animated-bar');
-
+  // Use ratingObj to track how many reviews for each rating
 	reviews.forEach((review) => {
 		if (review.rating === 5) ratingObj['5'] += 1;
 		if (review.rating === 4) ratingObj['4'] += 1;
@@ -32,6 +25,7 @@ export default function AnimatedRatingDisplay({ reviews }) {
 		if (review.rating === 1) ratingObj['1'] += 1;
 	});
 
+  // Turn number of reviews into percentage
 	for (let rating in ratingObj) {
 		const amount = ratingObj[rating];
 		ratingObj[rating] = Math.floor((amount / reviews.length) * 100);
@@ -81,11 +75,13 @@ export default function AnimatedRatingDisplay({ reviews }) {
 
 	useEffect(() => {
 
-    window.addEventListener('scroll', () => {
-      const sectionPos = positionRef.current ? positionRef.current.getBoundingClientRect().top : null;
+    window.addEventListener('scroll', async () => {
+      // findPosition()
+      // const sectionPos = await positionRef.current.getBoundingClientRect().top;
+      const sectionPos = await positionRef.current ? positionRef.current.getBoundingClientRect().top : null;
       const screenPos = window.innerHeight;
-
-      if (sectionPos === null) return;
+      console.log(ratingObj)
+      if (sectionPos === null) return () => window.removeEventListener('scroll', () => showRatings());
 			if (sectionPos < screenPos) {
 				showRatings();
 			} else {

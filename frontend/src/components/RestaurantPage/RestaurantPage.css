@@ -550,8 +550,8 @@
 	width: 410px;
 	background: rgb(240, 240, 240);
 	border-radius: 20px;
-	border-left: 2px solid rgb(240, 240, 240);
-	border-right: 2px solid rgb(240, 240, 240);
+	border: 2px solid rgb(240, 240, 240);
+	/* border-right: 2px solid rgb(240, 240, 240); */
 	padding: 0;
 	overflow: hidden;
 }
@@ -564,18 +564,56 @@
 	border-bottom-left-radius: 50%;
 } */
 
-#animated-bar1,
-#animated-bar2,
-#animated-bar3,
-#animated-bar4,
-#animated-bar5 {
-	background: rgb(240, 240, 240);
+#animated-bar1 {
+	background: rgb(255, 204, 75);
+	border: 2px solid rgb(255, 204, 75);
 	height: 12px;
 	max-width: 405px;
 	border-radius: 20px;
-	border: 2px solid rgb(240, 240, 240);
 	position: absolute;
 	transition: 2s linear;
+	width: 0;
+}
+#animated-bar2{
+	background: rgb(255, 173, 72);
+	border: 2px solid rgb(255, 173, 72);
+	height: 12px;
+	max-width: 405px;
+	border-radius: 20px;
+	position: absolute;
+	transition: 2s linear;
+	width: 0;
+}
+#animated-bar3{
+	background: rgb(254, 135, 66);
+	border: 2px solid rgb(254, 135, 66);
+	height: 12px;
+	max-width: 405px;
+	border-radius: 20px;
+	position: absolute;
+	transition: 2s linear;
+	width: 0;
+	opacity: 0;
+}
+#animated-bar4{
+	background: rgb(255, 100, 61);
+	border: 2px solid rgb(255, 100, 61);
+	height: 12px;
+	max-width: 405px;
+	border-radius: 20px;
+	position: absolute;
+	transition: 2s linear;
+	width: 0;
+}
+#animated-bar5{
+	background: rgb(251, 80, 59);
+	border: 2px solid rgb(251, 80, 59);
+	height: 12px;
+	max-width: 405px;
+	border-radius: 20px;
+	position: absolute;
+	transition: 2s linear;
+	width: 0;
 }
 
 #animated-bar1::after {
