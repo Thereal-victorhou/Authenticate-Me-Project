@@ -272,10 +272,18 @@ router.get(
 			],
 		});
 
-		const businessDetails = await sdk.v3_business_info({
-			locale: 'en_US',
-			business_id_or_alias: `${restaurant.yelpId}`,
-		});
+		let businessDetails;
+
+		try {
+			businessDetails = await sdk.v3_business_info({
+				locale: 'en_US',
+				business_id_or_alias: `${restaurant.yelpId}`,
+			})
+		} catch(err) {
+			if (reviews) return res.json(reviews);
+			return res.json(restaurant)
+		}
+
 		const businessData = businessDetails.data;
 		const adjustedHours = await formatOperatingHours(
 			businessData.hours[0]?.open
@@ -304,13 +312,7 @@ router.get(
 			userId: restaurant.userId,
 		};
 
-		try {
-			if (reviews && businessDetails.status === 200) return res.json(businessDataObj);
-			if (reviews) return res.json(reviews);
-			res.json(restaurant);
-		} catch (err) {
-			console.log("error ====== ", err.message)
-		}
+		return res.json(businessDataObj);
 	})
 );
 
