@@ -564,7 +564,7 @@
 	border-left: 2px solid rgb(240,240,240);
 	border-right: 2px solid rgb(240,240,240);
 	padding: 0;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 /* .animated-bar-front {
@@ -575,18 +575,16 @@
 	border-bottom-left-radius: 50%;
 } */
 
-.animated-bar1, .animated-bar2, .animated-bar3, .animated-bar4, .animated-bar5  {
+#animated-bar1, #animated-bar2, #animated-bar3, #animated-bar4, #animated-bar5  {
 	background: rgb(240,240,240);
 	height: 12px;
 	max-width: 405px;
 	border-radius: 20px;
 	border: 2px solid rgb(240,240,240);
 	position: absolute;
-	overflow: hidden;
-	padding: 0;
 }
 
-.animated-bar1::after {
+#animated-bar1::after {
 	content: '';
 	background: rgb(255,204,75);
 	border: 2px solid rgb(255,204,75);
@@ -597,7 +595,7 @@
 	animation: progress 2s linear forwards;
 }
 
-.animated-bar2::after {
+#animated-bar2::after {
 	content: '';
 	background: rgb(255,173,72);
 	border: 2px solid rgb(255,173,72);
@@ -606,9 +604,10 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+
 }
 
-.animated-bar3::after {
+#animated-bar3::after {
 	content: '';
 	background: rgb(254,135,66);
 	border: 2px solid rgb(254,135,66);
@@ -619,7 +618,7 @@
 	animation: progress 2s linear forwards;
 }
 
-.animated-bar4::after {
+#animated-bar4::after {
 	content: '';
 	background: rgb(255,100,61);
 	border: 2px solid rgb(255,100,61);
@@ -628,9 +627,10 @@
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
+
 }
 
-.animated-bar5::after {
+#animated-bar5::after {
 	content: '';
 	background: rgb(251,80,59);
 	border: 2px solid rgb(251,80,59);

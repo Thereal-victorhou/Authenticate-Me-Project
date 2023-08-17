@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+
 
 export default function AnimatedRatingDisplay({ reviews }) {
-
-  const [rating1, setRating1] = useState(0)
-  const [rating2, setRating2] = useState(0)
-  const [rating3, setRating3] = useState(0)
-  const [rating4, setRating4] = useState(0)
-  const [rating5, setRating5] = useState(0)
 
   const ratingObj = {
     '1': 0,
@@ -15,6 +10,16 @@ export default function AnimatedRatingDisplay({ reviews }) {
     '4': 0,
     '5': 0,
   }
+
+  const positionRef = useRef();
+
+  const [rating1, setRating1] = useState(0)
+  const [rating2, setRating2] = useState(0)
+  const [rating3, setRating3] = useState(0)
+  const [rating4, setRating4] = useState(0)
+  const [rating5, setRating5] = useState(0)
+
+  const bars = document.querySelectorAll('.animated-bar');
 
   reviews.forEach(review => {
     if (review.rating === 5) ratingObj['5'] += 1;
@@ -29,43 +34,55 @@ export default function AnimatedRatingDisplay({ reviews }) {
     ratingObj[rating] = Math.floor((amount / reviews.length) * 100);
   }
 
+  const showRatings = () => {
+    console.log('inside show rating ', bars)
+    bars?.forEach(bar => {
+      const value = bar.value;
+      bar.style.opacity = 1;
+      bar.style.width = `${value}%`;
+      console.log('showRating ====== ', bar)
+    })
+
+  }
+
+  const hideRatings = () => {
+    console.log('inside hideRating', bars)
+    bars?.forEach(bar => {
+      bar.style.opacity = 0;
+      bar.style.width = 0;
+      console.log('hideRating ======= ', bar)
+    })
+  }
+
   useEffect(() => {
-    const handleScroll = () => {
-        if (window.scrollY > 700) {
+    window.addEventListener('scroll', () => {
+      const sectionPos = positionRef.current.getBoundingClientRect().top
+      const screenPos =  window.innerHeight;
 
-            setRating1(ratingObj['1']);
-            setRating2(ratingObj['2']);
-            setRating3(ratingObj['3']);
-            setRating4(ratingObj['4']);
-            setRating5(ratingObj['5']);
-            window.removeEventListener('scroll', handleScroll);
-        }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-        window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      if (sectionPos < screenPos) {
+        showRatings()
+      } else {
+        hideRatings()
+      }
+    })
+  }, [])
 
   return (
     <>
-      <div className='animated-bar-container'>
-        <div className='animated-bar5' style={{ width: `${rating5}%`}}></div>
+      <div className='animated-bar-container' ref={positionRef}>
+        <div className='animated-bar' id='animated-bar5' value={`${ratingObj['5']}%`}></div>
       </div>
       <div className='animated-bar-container'>
-        <div className='animated-bar4' style={{ width: `${rating4}%`}}></div>
+        <div className='animated-bar' id='animated-bar4' value={`${ratingObj['4']}%`}></div>
       </div>
       <div className='animated-bar-container'>
-        <div className='animated-bar3' style={{ width: `${rating3}%`}}></div>
+        <div className='animated-bar' id='animated-bar3' value={`${ratingObj['3']}%`}></div>
       </div>
       <div className='animated-bar-container'>
-        <div className='animated-bar2' style={{ width: `${rating2}%`}}></div>
+        <div className='animated-bar' id='animated-bar2' value={`${ratingObj['2']}%`}></div>
       </div>
       <div className='animated-bar-container'>
-        <div className='animated-bar1' style={{ width: `${rating1}%`}}></div>
+        <div className='animated-bar' id='animated-bar1' value={`${ratingObj['1']}%`}></div>
       </div>
     </>
   )
