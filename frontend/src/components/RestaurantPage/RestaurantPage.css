@@ -16,7 +16,6 @@
 	align-items: flex-end;
 	height: 32rem;
 	width: 100vw;
-
 }
 
 .restaurant-name-and-location-container {
@@ -27,8 +26,7 @@
 	width: 54rem;
 	height: 75%;
 	padding-bottom: 1.5rem;
-    padding-left: 1.5rem;
-
+	padding-left: 1.5rem;
 }
 
 .restaurant-name-container {
@@ -45,7 +43,6 @@
 	font-weight: 700;
 	font-family: Poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
 	width: 100%;
-
 }
 
 .restaurant-sub-rating-container {
@@ -68,7 +65,6 @@
 
 .circle-check {
 	color: rgb(51, 150, 255);
-
 }
 
 .claimed {
@@ -89,25 +85,25 @@
 }
 
 .restaurant-price-container {
-    font-size: 16px;
-    color: white;
-    font-weight: 600px;
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	color: white;
+	font-weight: 600px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .restaurant-categories {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 	font-size: 16px;
 	font-weight: 700px;
 	color: white;
 	font-family: Poppins, Helvetica Neue, Helvetica, Arial, sans-serif;
 	margin-top: 0.5rem;
-    width: auto;
-    margin-right: 10px;
-    padding-bottom: 3px;
-    height: 100%;
-    /* background: orange; */
+	width: auto;
+	margin-right: 10px;
+	padding-bottom: 3px;
+	height: 100%;
+	/* background: orange; */
 }
 
 .restaurant-info-container {
@@ -129,11 +125,11 @@
 }
 
 .review-button {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	justify-content: center;
+	align-items: center;
 	color: white;
 	background-color: rgb(223, 9, 6);
 	border: 1px solid rgb(223, 9, 6);
@@ -147,8 +143,8 @@
 	width: 10.5em;
 	height: 3em;
 	font-size: 16px;
-    font-weight: 500;
-	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif !important;
+	font-weight: 500;
+	font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 .review-button:hover {
 	background: rgb(236, 31, 31);
@@ -162,7 +158,6 @@
 	align-items: center;
 	height: 100%;
 	width: 400px;
-
 }
 
 .phone-number-container span {
@@ -173,15 +168,14 @@
 	width: 82%;
 	border-top: 1px solid rgb(235, 235, 235);
 	border-bottom: 1px solid rgb(235, 235, 235);
-    padding-top: 15px;
+	padding-top: 15px;
 }
 
 .phone-number-container p {
 	font-size: 16px;
 	font-weight: 700;
 	color: rgba(45, 46, 47, 1);
-  font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .restaurant-mid {
@@ -199,7 +193,6 @@
 	height: 30rem;
 	min-width: 800px;
 	border-bottom: 1px solid rgb(235, 235, 235);
-
 }
 
 .lh-title {
@@ -212,9 +205,9 @@
 
 .lh-title h4 {
 	color: #2d2e2f;
-	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
-    font-size: 20px;
-    font-weight: 700;
+	font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 700;
 }
 
 .lh-container {
@@ -280,8 +273,8 @@
 }
 
 #address-street > p {
-	color: rgba(2,122,151,1);
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	color: rgba(2, 122, 151, 1);
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	font-weight: 600;
 }
@@ -293,15 +286,14 @@
 	align-items: center;
 	/* height: 25px; */
 	gap: 3px;
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 }
 
 #address-others p {
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 }
-
 
 #address-right {
 	display: flex;
@@ -362,8 +354,8 @@
 }
 
 .day-container > p {
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 16px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }
 
 .hour-container {
@@ -373,8 +365,8 @@
 }
 
 .hour-container {
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 16px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
 }
 
 .is-business-open {
@@ -386,18 +378,16 @@
 }
 
 .is-business-open #open-now {
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 16px;
-	color: rgba(0,128,85,1);
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	color: rgba(0, 128, 85, 1);
 }
 
 .is-business-open #closed-now {
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 16px;
-	color: rgba(224,7,7,1);
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	color: rgba(224, 7, 7, 1);
 }
-
-
 
 .edit-info-container {
 	display: flex;
@@ -460,10 +450,10 @@
 }
 
 .reviews-title h3 {
-	font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-	color: rgba(45,46,47,1);
+	font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	color: rgba(45, 46, 47, 1);
 }
 
 .reviews-display-container {
@@ -488,20 +478,20 @@
 }
 
 .rdc-left #overall-rating {
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0px;
-  line-height: 20px;
-  color: rgb(45, 46, 47);
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0px;
+	line-height: 20px;
+	color: rgb(45, 46, 47);
 }
 
 .rdc-left #amount-of-reviews {
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  line-height: 24px;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	letter-spacing: 0px;
+	line-height: 24px;
 	margin-top: 10px;
 }
 
@@ -533,14 +523,13 @@
 }
 
 .right-labels > p {
-	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0px;
-  /* line-height: 20px; */
-  color: rgb(45, 46, 47);
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 0px;
+	/* line-height: 20px; */
+	color: rgb(45, 46, 47);
 	/* text-align: center; */
-
 }
 
 .reviews-animated-bar-container {
@@ -559,10 +548,10 @@
 	align-items: center;
 	height: 12px;
 	width: 410px;
-	background: rgb(240,240,240);
+	background: rgb(240, 240, 240);
 	border-radius: 20px;
-	border-left: 2px solid rgb(240,240,240);
-	border-right: 2px solid rgb(240,240,240);
+	border-left: 2px solid rgb(240, 240, 240);
+	border-right: 2px solid rgb(240, 240, 240);
 	padding: 0;
 	overflow: hidden;
 }
@@ -575,19 +564,24 @@
 	border-bottom-left-radius: 50%;
 } */
 
-#animated-bar1, #animated-bar2, #animated-bar3, #animated-bar4, #animated-bar5  {
-	background: rgb(240,240,240);
+#animated-bar1,
+#animated-bar2,
+#animated-bar3,
+#animated-bar4,
+#animated-bar5 {
+	background: rgb(240, 240, 240);
 	height: 12px;
 	max-width: 405px;
 	border-radius: 20px;
-	border: 2px solid rgb(240,240,240);
+	border: 2px solid rgb(240, 240, 240);
 	position: absolute;
+	transition: 2s linear;
 }
 
 #animated-bar1::after {
 	content: '';
-	background: rgb(255,204,75);
-	border: 2px solid rgb(255,204,75);
+	background: rgb(255, 204, 75);
+	border: 2px solid rgb(255, 204, 75);
 	height: 100%;
 	width: 0;
 	border-radius: 20px;
@@ -597,22 +591,21 @@
 
 #animated-bar2::after {
 	content: '';
-	background: rgb(255,173,72);
-	border: 2px solid rgb(255,173,72);
-	width: 0;
+	background: rgb(255, 173, 72);
+	border: 2px solid rgb(255, 173, 72);
 	height: 100%;
+	width: 0;
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
-
 }
 
 #animated-bar3::after {
 	content: '';
-	background: rgb(254,135,66);
-	border: 2px solid rgb(254,135,66);
-	width: 0;
+	background: rgb(254, 135, 66);
+	border: 2px solid rgb(254, 135, 66);
 	height: 100%;
+	width: 0;
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
@@ -620,30 +613,29 @@
 
 #animated-bar4::after {
 	content: '';
-	background: rgb(255,100,61);
-	border: 2px solid rgb(255,100,61);
-	width: 0;
+	background: rgb(255, 100, 61);
+	border: 2px solid rgb(255, 100, 61);
 	height: 100%;
+	width: 0;
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
-
 }
 
 #animated-bar5::after {
 	content: '';
-	background: rgb(251,80,59);
-	border: 2px solid rgb(251,80,59);
-	width: 0;
+	background: rgb(251, 80, 59);
+	border: 2px solid rgb(251, 80, 59);
 	height: 100%;
+	width: 0;
 	border-radius: 20px;
 	position: absolute;
 	animation: progress 2s linear forwards;
 }
 
 @keyframes progress {
-	100%{
-			width: 100%;
+	100% {
+		width: 100%;
 	}
 }
 
@@ -654,7 +646,6 @@
 	border-top-right-radius: 50%;
 	border-bottom-right-radius: 50%;
 } */
-
 
 .review-card-main {
 	display: flex;
@@ -711,7 +702,6 @@
 	padding: 0;
 	/* width: 4rem; */
 	/* z-index: 1; */
-
 }
 
 #user-avatar > img {
@@ -734,8 +724,8 @@
 
 #user-name > h4 {
 	font-size: 16px;
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-	color: #2D2E2F;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #2d2e2f;
 	font-weight: 600;
 }
 
@@ -762,8 +752,8 @@
 
 .review-container > h3 {
 	font-size: 16px;
-	font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
-	color: #2D2E2F;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	color: #2d2e2f;
 }
 
 .optional-buttons-container {
