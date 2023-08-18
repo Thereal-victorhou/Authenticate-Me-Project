@@ -92,7 +92,7 @@ function LoginFormPage() {
           </form>
         </div>
       <div className="login_right">
-        <img src="https://i.postimg.cc/7YD6SbSP/yelp-login-signup-picture.png"></img>
+        <img src="https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/yelp-login-signup-picture.png" alt='Login Picture' />
       </div>
     </div>
   );

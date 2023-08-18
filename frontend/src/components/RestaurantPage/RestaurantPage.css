@@ -572,7 +572,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: all 2s linear;
+	transition: 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -583,7 +583,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: all 2s linear;
+	transition: 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -594,7 +594,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: all 2s linear;
+	transition: 2s linear;
 	width: 0;
 	opacity: 0;
 }
@@ -605,7 +605,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: all 2s linear;
+	transition: 2s linear;
 	width: 0;
 }
 #animated-bar5{
@@ -615,7 +615,7 @@
 	max-width: 405px;
 	border-radius: 20px;
 	position: absolute;
-	transition: all 2s linear;
+	transition: 2s linear;
 	width: 0;
 }
 

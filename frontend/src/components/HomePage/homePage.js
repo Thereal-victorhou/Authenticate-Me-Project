@@ -18,13 +18,18 @@ function HomePage({ user }) {
 
 	const [visability, setVisability] = useState(false);
 
-	let container0, container1,container2, container3, container4, container5, container6, container7;
+	let container0,
+		container1,
+		container2,
+		container3,
+		container4,
+		container5,
+		container6,
+		container7;
 
 	const sessionRestaurant = useSelector((state) =>
 		Object.values(state.restaurant)
 	);
-
-
 
 	// Animate review cards on scroll
 	useEffect(() => {
@@ -63,7 +68,6 @@ function HomePage({ user }) {
 				if (sectionPos1 < screenPos) {
 					container0.classList.add('active');
 					container1.classList.add('active');
-
 				} else {
 					container0.classList.remove('active');
 					container0.classList.remove('active');
@@ -72,7 +76,6 @@ function HomePage({ user }) {
 				if (sectionPos2 < screenPos) {
 					container2.classList.add('active');
 					container3.classList.add('active');
-
 				} else {
 					container2.classList.remove('active');
 					container3.classList.remove('active');
@@ -81,7 +84,6 @@ function HomePage({ user }) {
 				if (sectionPos3 < screenPos) {
 					container4.classList.add('active');
 					container5.classList.add('active');
-
 				} else {
 					container4.classList.remove('active');
 					container5.classList.remove('active');
@@ -90,7 +92,6 @@ function HomePage({ user }) {
 				if (sectionPos4 < screenPos) {
 					container6.classList.add('active');
 					container7.classList.add('active');
-
 				} else {
 					container6.classList.remove('active');
 					container7.classList.remove('active');
@@ -103,42 +104,49 @@ function HomePage({ user }) {
 
 	// Display review cards be default if screen is big enough
 	useEffect(() => {
-
 		if (visability) {
-
 			const screenPos = window.innerHeight;
-			const topContainer = topContainerRef.current ? topContainerRef.current.getBoundingClientRect().top: null;
-			const section1 = container0 ? container0.getBoundingClientRect().top : null;
-			const section2 = container0 ? container0.getBoundingClientRect().top : null;
-			const section3 = container0 ? container0.getBoundingClientRect().top : null;
-			const section4 = container0 ? container0.getBoundingClientRect().top : null;
-			console.log(screenPos, topContainer)
+			const topContainer = topContainerRef.current
+				? topContainerRef.current.getBoundingClientRect().top
+				: null;
+			const section1 = container0
+				? container0.getBoundingClientRect().top
+				: null;
+			const section2 = container0
+				? container0.getBoundingClientRect().top
+				: null;
+			const section3 = container0
+				? container0.getBoundingClientRect().top
+				: null;
+			const section4 = container0
+				? container0.getBoundingClientRect().top
+				: null;
+			console.log(screenPos, topContainer);
 
 			if (section1 < screenPos) {
-				container0?.classList.add('active')
-				container1?.classList.add('active')
-				console.log('inside 1')
+				container0?.classList.add('active');
+				container1?.classList.add('active');
+				console.log('inside 1');
 			}
 
 			if (section2 < screenPos) {
-				container2?.classList.add('active')
-				container3?.classList.add('active')
-				console.log('inside 2')
+				container2?.classList.add('active');
+				container3?.classList.add('active');
+				console.log('inside 2');
 			}
 			if (section3 < screenPos) {
-				container4?.classList.add('active')
-				container5?.classList.add('active')
-				console.log('inside 3')
+				container4?.classList.add('active');
+				container5?.classList.add('active');
+				console.log('inside 3');
 			}
 
 			if (section4 < screenPos) {
-				container6?.classList.add('active')
-				container7?.classList.add('active')
-				console.log('inside 4')
+				container6?.classList.add('active');
+				container7?.classList.add('active');
+				console.log('inside 4');
 			}
 		}
-	})
-
+	});
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -150,7 +158,7 @@ function HomePage({ user }) {
 
 	const checkVis = (isVisable) => {
 		if (isVisable) setVisability(true);
-	}
+	};
 
 	const handleNavReview = async (e, restaurant) => {
 		e.preventDefault();
@@ -170,7 +178,7 @@ function HomePage({ user }) {
 
 	return (
 		<div className='all-restaurants-container' ref={topContainerRef}>
-			<VisibilitySensor onChange={checkVis}>
+			<VisibilitySensor onChange={checkVis} partialVisibility='top' offset={{ top: 10}}>
 				<div className='home-review-title'>
 					<h2>Your New Review Awaits</h2>
 				</div>
