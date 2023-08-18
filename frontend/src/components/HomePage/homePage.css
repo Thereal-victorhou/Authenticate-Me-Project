@@ -1,4 +1,3 @@
-
 .all-restaurants-container {
 	display: flex;
 	flex-direction: column;
@@ -40,6 +39,93 @@
 	gap: 30px;
 }
 
+/* Hide estraurant containers*/
+.restaurant-container0 {
+	opacity: 0;
+	transform: translateY(50%);
+  transition: transform 0.5s, opacity .5s ease-out;
+}
+.restaurant-container1 {
+	opacity: 0;
+	transform: translateY(80%);
+  transition: transform 1s, opacity .5s ease-out;
+}
+.restaurant-container2 {
+	opacity: 0;
+	transform: translateY(50%);
+  transition: transform 0.5s, opacity .5s ease-out;
+}
+.restaurant-container3 {
+	opacity: 0;
+	transform: translateY(80%);
+  transition: transform 1s, opacity .5s ease-out;
+}
+.restaurant-container4 {
+	opacity: 0;
+	transform: translateY(50%);
+  transition: transform 0.5s, opacity .5s ease-out;
+}
+.restaurant-container5 {
+	opacity: 0;
+	transform: translateY(80%);
+  transition: transform 1s, opacity .5s ease-out;
+}
+.restaurant-container6 {
+	opacity: 0;
+	transform: translateY(50%);
+  transition: transform 0.5s, opacity .5s ease-out;
+}
+.restaurant-container7 {
+	opacity: 0;
+	transform: translateY(80%);
+  transition: transform 1s, opacity .5s ease-out;
+}
+
+/* Start Animation*/
+.restaurant-container0.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container1.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container2.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container3.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container4.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container5.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container6.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+.restaurant-container7.active {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+/* @keyframes slideUp {
+	from {
+		transform: translateY(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+} */
+
 .restaurant_container {
 	display: flex;
 	justify-content: flex-start;
@@ -53,6 +139,7 @@
 	/* margin-top: 20px; */
 	border-color: #ebebeb;
 }
+
 
 .restaurant-photo {
 	width: 220px;
@@ -136,7 +223,6 @@
 	height: 42px;
 	border-radius: 6px;
 	position: relative;
-
 }
 
 .star-container-0:before,
@@ -148,23 +234,21 @@
 .star-container-6:before,
 .star-container-7:before {
 	content: attr(data-hover);
-  visibility: hidden;
-  opacity: 0;
-  width: max-content;
-  background-color: rgb(50, 50, 50);
-  color: #fff;
-  text-align: center;
-  border-radius: 5px;
-  padding: 10px 10px;
-  /* transition: opacity .1s ease-in-out; */
+	visibility: hidden;
+	opacity: 0;
+	width: max-content;
+	background-color: rgb(50, 50, 50);
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	padding: 10px 10px;
+	/* transition: opacity .1s ease-in-out; */
 	font-size: 12px;
 	font-weight: 600;
 	position: absolute;
-  z-index: 1;
-  /* left: -50%; */
-  bottom: 110%;
-
-
+	z-index: 1;
+	/* left: -50%; */
+	bottom: 110%;
 }
 
 .star-container-0:hover:before,
@@ -184,7 +268,7 @@
 .star-container-6:hover:after,
 .star-container-7:hover:after {
 	opacity: 1;
-  visibility: visible;
+	visibility: visible;
 }
 
 .star-container-0:after,
@@ -195,22 +279,22 @@
 .star-container-5:after,
 .star-container-6:after,
 .star-container-7:after {
-  content: "";
-  position:absolute;
+	content: '';
+	position: absolute;
 
-  /* position tooltip correctly */
-  left: 13px;
-  /* margin-left: 10px; */
+	/* position tooltip correctly */
+	left: 13px;
+	/* margin-left: 10px; */
 
-  /* vertically center */
-  bottom: 60%;
-  transform:translateY(-50%);
+	/* vertically center */
+	bottom: 60%;
+	transform: translateY(-50%);
 
-  /* the arrow */
-  border:8px solid rgb(50, 50, 50);
-  border-color: rgb(50, 50, 50) transparent transparent transparent;
-  /* transition: opacity .1s ease-in-out; */
-  display:none;
+	/* the arrow */
+	border: 8px solid rgb(50, 50, 50);
+	border-color: rgb(50, 50, 50) transparent transparent transparent;
+	/* transition: opacity .1s ease-in-out; */
+	display: none;
 }
 
 .star-container-0:hover:before,
@@ -228,7 +312,6 @@
 .star-container-4:hover:after,
 .star-container-5:hover:after,
 .star-container-6:hover:after,
-.star-container-7:hover:after
-{
+.star-container-7:hover:after {
 	display: block;
 }
