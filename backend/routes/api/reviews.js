@@ -50,6 +50,8 @@ router.get(
 					userId: user.dataValues.id,
 					username: user.dataValues.username,
 					zipCode: user.dataValues.zipCode,
+					city: user.dataValues.city,
+					state: user.dataValues.state,
 					imgSrc: user.dataValues.imgSrc,
 					createdAt: review.dataValues.createdAt,
 					updatedAt: review.dataValues.updatedAt,

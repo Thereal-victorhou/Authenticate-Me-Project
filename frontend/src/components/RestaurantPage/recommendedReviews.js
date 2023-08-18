@@ -44,12 +44,15 @@ function RecommendedReviews({ user, restaurantId, restaurantReviews}) {
                 </span>
                 <div id={`user-name`}>
                   <h4>{review.username}</h4>
-                  <h4>{`${review.updatedAt?.slice(5,10)}-${review.updatedAt?.slice(0, 4)}`}</h4>
+                  <p>{`${review.city}, ${review.state}`}</p>
                 </div>
                 <div></div>
               </div>
               <div className='review-card-lower'>
-                {starRatingSmall(review.rating)}
+                <div className='star-rating-date'>
+                  {starRatingSmall(review.rating)}
+                  <p>{`${review.updatedAt.slice(5, 10)}-${review.updatedAt.slice(0, 4)}`}</p>
+                </div>
                 <div className='review-container' id={`${review.id}-review-container`}>
                   <h3 id={`${review.id}-body`}>{review.body}</h3>
                 </div>
