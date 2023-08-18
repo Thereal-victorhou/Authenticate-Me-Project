@@ -121,29 +121,24 @@ function HomePage({ user }) {
 			const section4 = container0
 				? container0.getBoundingClientRect().top
 				: null;
-			console.log(screenPos, topContainer);
 
 			if (section1 < screenPos) {
 				container0?.classList.add('active');
 				container1?.classList.add('active');
-				console.log('inside 1');
 			}
 
 			if (section2 < screenPos) {
 				container2?.classList.add('active');
 				container3?.classList.add('active');
-				console.log('inside 2');
 			}
 			if (section3 < screenPos) {
 				container4?.classList.add('active');
 				container5?.classList.add('active');
-				console.log('inside 3');
 			}
 
 			if (section4 < screenPos) {
 				container6?.classList.add('active');
 				container7?.classList.add('active');
-				console.log('inside 4');
 			}
 		}
 	});

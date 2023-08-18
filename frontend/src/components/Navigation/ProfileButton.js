@@ -3,6 +3,10 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import Avatar from '@mui/material/Avatar';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import EastRoundedIcon from '@mui/icons-material/EastRounded';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { grey } from '@mui/material/colors';
 import './ProfileButton.css';
 
@@ -40,7 +44,7 @@ function ProfileButton({ user }) {
         <div className="sub-profile-container-top">
           <button className="avatar-button"onClick={openMenu}>
 
-            <Avatar src="/broken-image.jpg" />
+            <Avatar />
             {/* <Avatar src='https://xsgames.co/randomusers/avatar.php?g=male'/> */}
 
           </button>
@@ -50,11 +54,28 @@ function ProfileButton({ user }) {
             <div className="profile-dropdown">
               <div className="profile-info">
                 <p>{user.username}</p>
-                <p>{user.email}</p>
+              </div>
+              <div className='account-settings'>
+                <button className='account-settings-button' type='button' onClick={()=> alert('Feature coming soon!')}>
+                  {/* <SettingsRoundedIcon sx={{ color: grey[800], fontSize: 24, fontWeight: 'bold' }}/> */}
+                  <div>
+                    <SettingsOutlinedIcon className='settings-gear' sx={{ color: grey[800], fontSize: 24, fontWeight: 'bold' }}/>
+                  </div>
+                  Settings
+                </button>
               </div>
               <div className="profile-logout">
                 <button className='logout-button' type='button' onClick={logout}>
-                  <LogoutIcon sx={{ color: grey[800], fontSize: 24, fontWeight: 'bold' }}/>
+                  {/* <LogoutIcon sx={{ color: grey[800], fontSize: 24, fontWeight: 'bold' }}/> */}
+                  <div className='logout-icon-outter'>
+                    <div className='logout-top-wall'></div>
+                    <div className='logout-middle-container'>
+                      <div className='arrow-container'>
+                        <EastRoundedIcon className='logout-arrow' sx={{ color: grey[800], fontSize: '22px', fontWeight: 'bold' }}/>
+                      </div>
+                    </div>
+                    <div className='logout-bottom-wall'></div>
+                  </div>
                   Log Out
                 </button>
               </div>

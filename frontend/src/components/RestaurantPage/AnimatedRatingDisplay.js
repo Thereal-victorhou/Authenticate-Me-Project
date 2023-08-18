@@ -36,7 +36,7 @@ export default function AnimatedRatingDisplay({ reviews }) {
 			for (let rating in ratingObj) {
 				// Change values in ratingsObj to percentage
 				const amount = ratingObj[rating];
-				const percentage = Math.floor((amount / reviews.length) * 100);
+				const percentage = (amount / reviews.length) * 100;
 				ratingObj[rating] = percentage;
 				maxVal = percentage === 0 ? 0 : Math.max(maxVal, percentage); // Find and set max percentage
 			}
@@ -57,9 +57,9 @@ export default function AnimatedRatingDisplay({ reviews }) {
 				const durationForBar = ( val/maxVal ) * 2000
 				// console.log(ref.current.id, ' == duration == ', durationForBar, ' max === ', maxVal, ' val=== ', val)
 				ref.current.style.opacity = val === 0 ? 0 : '1';
-				ref.current.style.transitionDuration = `${
-					durationForBar === Infinity ? 0 : durationForBar
-				}ms`;
+				// ref.current.style.transitionDuration = `${
+				// 	durationForBar === Infinity ? 0 : durationForBar
+				// }ms`;
 				ref.current.style.width = `${val}%`;
 			});
 		};
@@ -90,7 +90,7 @@ export default function AnimatedRatingDisplay({ reviews }) {
 
 	return (
 		<>
-			<div className='animated-bar-container' ref={positionRef}>
+			<div className='animated-bar-container'>
 				<div
 					className='animated-bar'
 					id='animated-bar5'
@@ -118,7 +118,7 @@ export default function AnimatedRatingDisplay({ reviews }) {
 					data-value={rating2}
 					ref={ratingsBarRef2}></div>
 			</div>
-			<div className='animated-bar-container'>
+			<div className='animated-bar-container' ref={positionRef}>
 				<div
 					className='animated-bar'
 					id='animated-bar1'
