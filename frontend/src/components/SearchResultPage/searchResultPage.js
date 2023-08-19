@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { getSearchResults } from '../../store/searchResult';
+import { saveCurrentPage } from '../../store/navigation';
+import { formatCategory } from '../Utils/FormatCategories';
 
 import { starRatingResults } from '../Utils/DisplayStarRating';
 
-import { saveCurrentPage } from '../../store/navigation';
 
 const SearchResultPage = () => {
-	// const parsed = queryString.parse(params.location.search);
-	// const search = props.location.search;
-	// const params = new URLSearchParams(search);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -20,8 +18,6 @@ const SearchResultPage = () => {
 
 	const search = useLocation().search;
 	const find = new URLSearchParams(search).get('find_desc');
-	console.log('find ', find)
-	// const [searchRes, setSearchArr] = useState([]);
 
 
 	const getOneRestaurant = async (e, resId) => {
@@ -30,6 +26,7 @@ const SearchResultPage = () => {
 		dispatch(saveCurrentPage('other'));
 		history.push(`/restaurants/${resId}`);
 	};
+	
 
 	const isResults = () => {
 		if (searchRes.length) {
@@ -44,7 +41,7 @@ const SearchResultPage = () => {
 								<li
 									className='search-results-page-restaurant-container'
 									key={searchRes.indexOf(res)}>
-									<div className={'results-page-restaurant-container'}>
+									<div className={'results-page-restaurant-container'} type='button'>
 										<img
 											className={'results-restaurant-photo'}
 											src={res.imgSrc}
@@ -59,7 +56,8 @@ const SearchResultPage = () => {
 													<p>{res.rating}</p>
 												</div>
 												<div className='results-restaurant-categories-container'>
-													{res.categories.map(category => <div><p>{`${category}`}</p></div>)}
+													{res.categories.map(category => <div><p>{`${formatCategory(category)}`}</p></div>)}
+													<p>{res.price}</p>
 												</div>
 											</div>
 										</div>

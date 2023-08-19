@@ -10,7 +10,7 @@ import { saveCurrentPage } from '../../store/navigation';
 import { starRatingBig } from '../Utils/DisplayStarRating';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import RotateRightRoundedIcon from '@mui/icons-material/RotateRightRounded';
+import { formatCategory } from '../Utils/FormatCategories';
 
 function RestaurantPage({ user }) {
 	const history = useHistory();
@@ -177,7 +177,7 @@ function RestaurantPage({ user }) {
 							<div className='restaurant-sub-rating-divider'>
 								{currentRestaurant &&
 									currentRestaurant[0]?.categories?.map((each) => (
-										<h3 className='restaurant-categories'>{each}</h3>
+										<h3 className='restaurant-categories'>{formatCategory(each)}</h3>
 									))}
 							</div>
 						</div>
