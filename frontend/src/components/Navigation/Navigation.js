@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LocationSearchInput from './LocationSearchInput';
 import { liveRestaurantSearch, clearSearch } from '../../store/liveSearch';
+import { getSearchResults } from '../../store/searchResult';
 import {
 	oneRestaurant,
 	getNearByRestaurants,
@@ -152,26 +153,22 @@ function Navigation({ isLoaded }) {
 		}
 	};
 
-	// No Results
-	const noResult = () => {
-		return (
-			<div id='search-result'>
-				<p>No Results.</p>
-			</div>
-		);
-	};
 
 	// Search for restaurants
 	const handleSearch = async (e) => {
 		e.preventDefault();
-		console.log(restaurantSearchInput);
+
 		await dispatch(
 			getRestaurantResults({
 				searchInput: restaurantSearchInput,
 				locationObj: selectedLocation,
 			})
 		);
-		console.log('search button handle ', selectedLocation);
+		await dispatch(getSearchResults({
+			searchInput: restaurantSearchInput,
+			locationObj: selectedLocation,
+		}));
+		// console.log('search button handle ', selectedLocation);
 		setRestaurantSearchInput('');
 		dispatch(saveCurrentPage('other'));
 		history.push(`/search?find_desc=${restaurantSearchInput}`);

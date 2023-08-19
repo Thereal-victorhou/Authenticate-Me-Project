@@ -32,4 +32,30 @@ router.put(
 	})
 );
 
+router.put(
+	'/results',
+	asyncHandler(async (req, res) => {
+		const { searchInput, locationObj } = req.body;
+		const location = locationObj.location
+		if (location !== undefined) {
+			const localArr = location.replace(',', '').split(' ');
+
+			const searchObjLocation = {
+				where: {
+					name: { [Op.iLike]: `%${searchInput}%` },
+					location: { [Op.contains]: localArr },
+				},
+				limit: 10,
+			};
+
+			try {
+					const restaurants = await Restaurant.findAll(searchObjLocation);
+					res.json(restaurants);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	})
+);
+
 module.exports = router;

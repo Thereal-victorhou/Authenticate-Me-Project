@@ -5,6 +5,7 @@ import restaurant from './restaurant';
 import review from './reviews';
 import ratings from './ratings';
 import liveSearch from './liveSearch';
+import searchResults from './searchResult';
 import navigation from './navigation';
 import location from './location';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     review,
     ratings,
     liveSearch,
+    searchResults,
     navigation,
     location
 });

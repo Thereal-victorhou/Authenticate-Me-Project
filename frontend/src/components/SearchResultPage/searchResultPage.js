@@ -13,7 +13,7 @@ const SearchResultPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const searchRes = useSelector((state) => Object.values(state.search));
+	const searchRes = useSelector((state) => Object.values(state.searchResults));
 
 	const search = useLocation().search;
 	const find = new URLSearchParams(search).get('find');

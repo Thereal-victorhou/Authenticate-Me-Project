@@ -1,5 +1,4 @@
 import { csrfFetch } from './csrf';
-import axios, * as others from 'axios';
 
 // type
 const UPDATE_SEARCH = 'updatesearch/UPDATE_SEARCH';
@@ -45,7 +44,6 @@ const liveSearchReducer = (state = {}, action) => {
 	switch (action.type) {
 		case UPDATE_SEARCH:
 			newState = { ...action.res };
-			console.log('inside search reducer ', newState);
 			return newState;
 
 		case REMOVE_SEARCH:
