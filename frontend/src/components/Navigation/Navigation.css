@@ -342,6 +342,7 @@ a {
 
 .restaurant-search-results-container.hide {
 	visibility: hidden;
+	height: 0;
 }
 
 #search-result {

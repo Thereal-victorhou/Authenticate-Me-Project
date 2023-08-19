@@ -1,72 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
-import { oneRestaurant, getRestaurantResults } from '../../store/restaurant';
-import { liveRestaurantSearch, clearSearch } from '../../store/liveSearch';
+import { getSearchResults } from '../../store/searchResult';
+
+import { starRatingResults } from '../Utils/DisplayStarRating';
+
 import { saveCurrentPage } from '../../store/navigation';
 
 const SearchResultPage = () => {
 	// const parsed = queryString.parse(params.location.search);
 	// const search = props.location.search;
 	// const params = new URLSearchParams(search);
-	// const find = params.get('find');
+
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	const searchRes = useSelector((state) => Object.values(state.searchResults));
+	const location = useSelector((state) => state.location);
 
 	const search = useLocation().search;
-	const find = new URLSearchParams(search).get('find');
+	const find = new URLSearchParams(search).get('find_desc');
+	console.log('find ', find)
+	// const [searchRes, setSearchArr] = useState([]);
 
-	const [searchArr, setSearchArr] = useState([]);
-
-	useEffect(() => {
-		if (searchRes) setSearchArr(searchRes);
-		const searchResult = searchRes;
-		dispatch(clearSearch());
-		dispatch(
-			getRestaurantResults({
-				searchInput: find,
-				// locationObj: selectedLocation
-			})
-		);
-	}, [find]);
 
 	const getOneRestaurant = async (e, resId) => {
 		e.preventDefault();
 
-		await dispatch(oneRestaurant(resId));
-		await dispatch(clearSearch());
 		dispatch(saveCurrentPage('other'));
-
 		history.push(`/restaurants/${resId}`);
 	};
 
 	const isResults = () => {
-		if (searchArr.length) {
+		if (searchRes.length) {
 			return (
 				<>
-					<div>
-						<h2>{`Results for '${find}'`}:</h2>
+					<div className='results-page-title'>
+						<h2>{`Top ${searchRes.length} Best ${find} Near ${location?.location}`}:</h2>
 					</div>
-					<ul id='card-list'>
-						{searchArr.map((res) => {
+					<ul id='search-results-page-list'>
+						{searchRes.map((res, i) => {
 							return (
 								<li
-									className='restaurant-container'
-									key={searchArr.indexOf(res)}>
-									<div className={'restaurant_container'}>
+									className='search-results-page-restaurant-container'
+									key={searchRes.indexOf(res)}>
+									<div className={'results-page-restaurant-container'}>
 										<img
-											className={'restaurant-photo'}
+											className={'results-restaurant-photo'}
 											src={res.imgSrc}
 											alt={'Restaurant Image'}></img>
-										<div className={'restaurant-info'}>
+										<div className={'results-restaurant-info'}>
 											<div
-												className='name-and-location-container'
+												className='results-restaurant-info-container'
 												onClick={(e) => getOneRestaurant(e, res.id)}>
-												<h2 className='restaurant-name'>{res.name}</h2>
-												<div className='restaurant-location-container'>
-													{res.location}
+												<h2 className='results-restaurant-name'>{`${i+1}. ${res.name}`}</h2>
+												<div className='restaurant-ratings-container'>
+													{starRatingResults(res.rating)}
+													<p>{res.rating}</p>
+												</div>
+												<div className='results-restaurant-categories-container'>
+													{res.categories.map(category => <div><p>{`${category}`}</p></div>)}
 												</div>
 											</div>
 										</div>
@@ -87,7 +80,10 @@ const SearchResultPage = () => {
 	};
 
 	return (
-		<div className='all-restaurants-container'>{searchRes && isResults()}</div>
+		<div className='search-results-page-main'>
+			<div className='search-results-page-container'>{searchRes && isResults()}</div>
+			<div className='search-results-map'> *RESULTS MAP* </div>
+		</div>
 	);
 };
 

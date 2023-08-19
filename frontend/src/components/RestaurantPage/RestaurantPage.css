@@ -793,6 +793,10 @@
 	/* z-index: 1; */
 }
 
+.small-star-img {
+	height: 20px;
+}
+
 .star-rating-date {
 	display: flex;
 	flex-direction: row;
