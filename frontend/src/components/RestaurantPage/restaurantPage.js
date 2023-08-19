@@ -43,12 +43,10 @@ function RestaurantPage({ user }) {
 	}, [dispatch, id]);
 
 	restaurantReviews = useSelector((state) => Object.values(state.review));
-	console.log(restaurantReviews)
-
 
 	useEffect(() => {
 		if (currentRestaurant && restaurantReviews) {
-			let totalRatings = [];
+			const totalRatings = [];
 			restaurantReviews.map((each) =>
 				totalRatings.push(parseInt(each.rating, 10))
 			);
@@ -57,11 +55,12 @@ function RestaurantPage({ user }) {
 					(previousValue, currentValue) => previousValue + currentValue,
 					0
 				) / totalRatings.length;
+				const avgNum = Math.round(avg * 10) / 10;
+				console.log('average to the nearest 10th ==== ', avgNum)
+				const roundedAvg = Math.round(avg * 2) / 2;
 
-			avgNum = parseInt(Math.round(avg), 10);
-			if (typeof avgNum === 'number') {
-				setAvgRating(avgNum);
-			}
+			setAvgRating(roundedAvg);
+
 		}
 	}, [restaurantCurrent, restaurantReviews]);
 
