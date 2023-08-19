@@ -22,6 +22,8 @@ export const getSearchResults = (searchObj) => async (dispatch) => {
       body: JSON.stringify({ searchInput, locationObj }),
     })
     const results = await res.json()
+
+    console.log('results ', results)
     dispatch(getSearch(results))
 
   } catch(err) {

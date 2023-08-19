@@ -76,7 +76,7 @@
   flex-direction: column;
   justify-content: flex-start;
   height: 200px;
-  gap: 7px;
+  gap: 3px;
 }
 
 .results-restaurant-name {
@@ -92,6 +92,8 @@
   align-items: flex-start;
   gap: 10px;
   height: 30px;
+  margin-top: 3px;
+  margin-bottom: 0;
 }
 
 .big-star > img {
@@ -110,6 +112,7 @@
   color: rgba(45,46,47,1);
   text-align: left;
   margin-top: 3px;
+  margin-bottom: 0;
 }
 
 .results-restaurant-categories-container {
@@ -118,7 +121,9 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  height: 30px;
   gap: 10px;
+  /* background: orange; */
 }
 
 .results-restaurant-categories-container > div {

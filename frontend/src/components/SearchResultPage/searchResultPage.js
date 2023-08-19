@@ -26,7 +26,7 @@ const SearchResultPage = () => {
 		dispatch(saveCurrentPage('other'));
 		history.push(`/restaurants/${resId}`);
 	};
-	
+
 
 	const isResults = () => {
 		if (searchRes.length) {
