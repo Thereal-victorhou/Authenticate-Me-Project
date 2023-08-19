@@ -4,12 +4,13 @@ import { useLocation, useHistory, NavLink } from 'react-router-dom';
 import { getSearchResults } from '../../store/searchResult';
 import { saveCurrentPage } from '../../store/navigation';
 import { formatCategory } from '../Utils/FormatCategories';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMessage } from '@fortawesome/free-regular-svg-icons';
+
 
 import { starRatingResults } from '../Utils/DisplayStarRating';
 
-
 const SearchResultPage = () => {
-
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -19,7 +20,6 @@ const SearchResultPage = () => {
 	const search = useLocation().search;
 	const find = new URLSearchParams(search).get('find_desc');
 
-
 	const getOneRestaurant = async (e, resId) => {
 		e.preventDefault();
 
@@ -27,13 +27,15 @@ const SearchResultPage = () => {
 		history.push(`/restaurants/${resId}`);
 	};
 
-
 	const isResults = () => {
 		if (searchRes.length) {
 			return (
 				<>
 					<div className='results-page-title'>
-						<h2>{`Top ${searchRes.length} Best ${find} Near ${location?.location}`}:</h2>
+						<h2>
+							{`Top ${searchRes.length} Best ${find} Near ${location?.location}`}
+							:
+						</h2>
 					</div>
 					<ul id='search-results-page-list'>
 						{searchRes.map((res, i) => {
@@ -41,7 +43,9 @@ const SearchResultPage = () => {
 								<li
 									className='search-results-page-restaurant-container'
 									key={searchRes.indexOf(res)}>
-									<div className={'results-page-restaurant-container'} type='button'>
+									<div
+										className={'results-page-restaurant-container'}
+										type='button'>
 										<img
 											className={'results-restaurant-photo'}
 											src={res.imgSrc}
@@ -50,14 +54,33 @@ const SearchResultPage = () => {
 											<div
 												className='results-restaurant-info-container'
 												onClick={(e) => getOneRestaurant(e, res.id)}>
-												<h2 className='results-restaurant-name'>{`${i+1}. ${res.name}`}</h2>
+												<h2 className='results-restaurant-name'>{`${i + 1}. ${
+													res.name
+												}`}</h2>
 												<div className='restaurant-ratings-container'>
 													{starRatingResults(res.rating)}
 													<p>{res.rating}</p>
 												</div>
 												<div className='results-restaurant-categories-container'>
-													{res.categories.map(category => <div><p>{`${formatCategory(category)}`}</p></div>)}
+													{res.categories.map((category) => (
+														<div>
+															<p>{`${formatCategory(category)}`}</p>
+														</div>
+													))}
 													<p>{res.price}</p>
+												</div>
+												<div className='results-restaurant-review-container'>
+													<span>
+														{/* <ChatBubbleOutlineRoundedIcon sx={{
+														color: grey[800],
+														fontSize: '16px',
+														fontWeight: 'bold',
+													}}/> */}
+													<FontAwesomeIcon icon={faMessage} size="sm" style={{color: "#696969",}} />
+													</span>
+													<div className='results-review-body'>
+														<p>{`"${res.review.body}"`}</p>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -79,7 +102,9 @@ const SearchResultPage = () => {
 
 	return (
 		<div className='search-results-page-main'>
-			<div className='search-results-page-container'>{searchRes && isResults()}</div>
+			<div className='search-results-page-container'>
+				{searchRes && isResults()}
+			</div>
 			<div className='search-results-map'> *RESULTS MAP* </div>
 		</div>
 	);
