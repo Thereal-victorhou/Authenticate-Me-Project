@@ -10,7 +10,7 @@ import { saveCurrentPage } from '../../store/navigation';
 import { starRatingBig } from '../Utils/DisplayStarRating';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import { blue } from '@mui/material/colors';
+import RotateRightRoundedIcon from '@mui/icons-material/RotateRightRounded';
 
 function RestaurantPage({ user }) {
 	const history = useHistory();

@@ -3,7 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LocationSearchInput from './LocationSearchInput';
-import { liveRestaurantSearch, clearSearch } from '../../store/search';
+import { liveRestaurantSearch, clearSearch } from '../../store/liveSearch';
 import {
 	oneRestaurant,
 	getNearByRestaurants,
@@ -35,7 +35,8 @@ function Navigation({ isLoaded }) {
 	const [selectInput, setSelectInput] = useState(false);
 
 	const sessionUser = useSelector((state) => state.session.user);
-	const searchResult = useSelector((state) => state.search);
+	const searchResult = useSelector((state) => state.liveSearch);
+
 	const pageType = useSelector((state) => state.navigation?.currentPage);
 
 	const restaurantSearchInputLength = document.querySelector(

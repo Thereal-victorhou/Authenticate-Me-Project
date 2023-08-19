@@ -10,9 +10,7 @@ router.put(
 	'/',
 	asyncHandler(async (req, res) => {
 		const { searchInput, locationObj } = req.body;
-		console.log(locationObj)
 		const location = locationObj.location
-		console.log(location)
 		if (location !== undefined) {
 			const localArr = location.replace(',', '').split(' ');
 
@@ -26,7 +24,6 @@ router.put(
 
 			try {
 					const restaurants = await Restaurant.findAll(searchObjLocation);
-
 					res.json(restaurants);
 			} catch (err) {
 				console.log(err);

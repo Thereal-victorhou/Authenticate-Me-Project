@@ -4,7 +4,7 @@ import session from './session';
 import restaurant from './restaurant';
 import review from './reviews';
 import ratings from './ratings';
-import search from './search';
+import liveSearch from './liveSearch';
 import navigation from './navigation';
 import location from './location';
 
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     restaurant,
     review,
     ratings,
-    search,
+    liveSearch,
     navigation,
     location
 });
