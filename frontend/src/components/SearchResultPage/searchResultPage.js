@@ -69,6 +69,9 @@ const SearchResultPage = () => {
 													))}
 													<p>{res.price}</p>
 												</div>
+												<div className='results-restaurant-location'>
+													<p>{res.location[0]}</p>
+												</div>
 												<div className='results-restaurant-review-container'>
 													<span>
 														{/* <ChatBubbleOutlineRoundedIcon sx={{
