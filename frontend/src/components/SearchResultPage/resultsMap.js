@@ -1,38 +1,58 @@
 import React from 'react';
 
-function ResultsMap() {
-
+function ResultsMap({ searchResults, location }) {
 	// Initialize and add the map
-let map;
+	let map;
+	async function initMap() {
+		// The location of Uluru
+		const center = { lat: location.lat, lng: location.lng };
+		// Request needed libraries.
+		//@ts-ignore
+		const { Map } = await window.google.maps.importLibrary('maps');
+		const { AdvancedMarkerElement, PinElement } =
+			await window.google.maps.importLibrary('marker');
 
-async function initMap() {
-  // The location of Uluru
-  const position = { lat: -25.344, lng: 131.031 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await window.google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await window.google.maps.importLibrary("marker");
+    const bounds = new window.google.maps.LatLngBounds();
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 4,
-    center: position,
-    mapId: "DEMO_MAP_ID",
-  });
+		// The map, centered at selected location
+		map = new Map(document.getElementById('map'), {
+			zoom: 12,
+			center: center,
+			mapId: 'ff8dbb61c8194218',
+		});
 
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: "Uluru",
-  });
-}
+		const restaurantLocations = [];
+		if (searchResults)
+			searchResults.forEach((res, i) => {
 
-initMap();
+				restaurantLocations.push({
+					coordinates: { lat: Number(res.coordinates[0]), lng: Number(res.coordinates[1]) },
+					title: `${res.location[0]}`,
+				});
+			});
 
-  return (
-    <div className='search-results-map'id='map'></div>
-  )
+
+    const addMarkers = (locationObj) => {
+      const marker = new AdvancedMarkerElement({
+        map: map,
+        position: locationObj.coordinates,
+        title: locationObj.title,
+      });
+
+      bounds.extend(marker.position)
+    }
+
+    for (let i = 0; i < restaurantLocations.length; i++) {
+      addMarkers(restaurantLocations[i])
+    }
+
+    map.fitBounds(bounds);
+
+	}
+
+	initMap();
+
+	return <div className='search-results-map' id='map'></div>;
 }
 
 export default ResultsMap;

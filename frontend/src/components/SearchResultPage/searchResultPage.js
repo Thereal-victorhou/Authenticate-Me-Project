@@ -116,7 +116,7 @@ const SearchResultPage = () => {
 				{searchRes && isResults()}
 			</div>
 			<div className='search-results-map-container'>
-				<ResultsMap />
+				<ResultsMap searchResults={searchRes} location={location}/>
 			</div>
 		</div>
 	);
