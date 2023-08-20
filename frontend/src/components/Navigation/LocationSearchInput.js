@@ -152,64 +152,68 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 		}
 	}, [pageType]);
 
-	return (
-		<>
-			<PlacesAutocomplete
-				value={address}
-				onChange={setAddress}
-				onSelect={(e) => handleSelect(e)}
-				onError={onError}
-				searchOptions={searchOptions(address)}>
-				{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-					<div className='location-search-container'>
-						<input
-							name='location-input'
-							{...getInputProps({
-								placeholder: 'address, city, state or zip',
-								className: 'search-bar-location',
-							})}
-						/>
-						{/* <div className='search-bar-location-placeholder'>{firstOption}</div> */}
-						<div className='location-search-results-container'>
-							<div
-								className='current-location-container'
-								onClick={(e) => handleCurrentLocation(e)}>
-								<PlaceOutlinedIcon
-									id='location-icon'
-									sx={{
-										color: '#038aff',
-									}}
-								/>
-								<p>Current Location</p>
-							</div>
-							{/* {loading && <div>Loading...</div>} */}
-							{validateSuggestions(suggestions).map((suggestion) => {
-								const className = suggestion.active
-									? 'suggession-item--active'
-									: 'suggestion-item';
-								const key = suggestion.description;
+		return (
+			<>
+				<PlacesAutocomplete
+					value={address}
+					onChange={setAddress}
+					onSelect={(e) => handleSelect(e)}
+					onError={onError}
+					searchOptions={searchOptions(address)}>
+					{({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+						<div className='location-search-container'>
+							<input
+								name='location-input'
+								{...getInputProps({
+									placeholder: 'address, city, state or zip',
+									className: 'search-bar-location',
+								})}
+							/>
+							{/* <div className='search-bar-location-placeholder'>{firstOption}</div> */}
+							<div className='location-search-results-container'>
+								<div
+									className='current-location-container'
+									onClick={(e) => handleCurrentLocation(e)}>
+									<PlaceOutlinedIcon
+										id='location-icon'
+										sx={{
+											color: '#038aff',
+										}}
+									/>
+									<p>Current Location</p>
+								</div>
+								{/* {loading && <div>Loading...</div>} */}
+								{validateSuggestions(suggestions).map((suggestion) => {
+									const className = suggestion.active
+										? 'suggession-item--active'
+										: 'suggestion-item';
+									const key = suggestion.description;
 
-								return (
-									<div
-										{...getSuggestionItemProps(suggestion, { className, key })}
-										name='location-suggestion'
-										className='location-suggestions'
-										value={suggestion.description}>
-										<span>
-											{
-												handleSuggestionDescriptionBasedOnType(suggestion)
-													.description
-											}
-										</span>
-									</div>
-								);
-							})}
+									return (
+										<div
+											{...getSuggestionItemProps(suggestion, { className, key })}
+											name='location-suggestion'
+											className='location-suggestions'
+											value={suggestion.description}>
+											<span>
+												{
+													handleSuggestionDescriptionBasedOnType(suggestion)
+														.description
+												}
+											</span>
+										</div>
+									);
+								})}
+							</div>
 						</div>
-					</div>
-				)}
-			</PlacesAutocomplete>
-		</>
-	);
+					)}
+					</PlacesAutocomplete>
+			</>
+		)
+
+
+
+
 }
 
 export default LocationSearchInput;

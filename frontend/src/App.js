@@ -13,11 +13,9 @@ import AddRestaurantPage from "./components/AddRestaurant";
 import EditRestaurantPage from './components/EditRestaurant'
 import SearchResultPage from './components/SearchResultPage'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { fab } from '@fortawesome/free-brands-svg-icons'
-// import { faSquareStar } from '@fontawesome/free-solid-svg-icons'
+import { Loader } from '@googlemaps/js-api-loader';
 
-// library.add(fab, faSquareStar)
+
 
 
 function App() {
@@ -28,6 +26,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
 
   return isLoaded && (
     <>

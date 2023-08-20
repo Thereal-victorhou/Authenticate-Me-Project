@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory, NavLink } from 'react-router-dom';
+import ResultsMap from './resultsMap';
 import { getSearchResults } from '../../store/searchResult';
 import { saveCurrentPage } from '../../store/navigation';
 import { formatCategory } from '../Utils/FormatCategories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 
 
 import { starRatingResults } from '../Utils/DisplayStarRating';
@@ -79,7 +82,11 @@ const SearchResultPage = () => {
 														fontSize: '16px',
 														fontWeight: 'bold',
 													}}/> */}
-													<FontAwesomeIcon icon={faMessage} size="sm" style={{color: "#696969",}} />
+														<FontAwesomeIcon
+															icon={faMessage}
+															size='sm'
+															style={{ color: '#696969' }}
+														/>
 													</span>
 													<div className='results-review-body'>
 														<p>{`"${res.review.body}"`}</p>
@@ -108,7 +115,9 @@ const SearchResultPage = () => {
 			<div className='search-results-page-container'>
 				{searchRes && isResults()}
 			</div>
-			<div className='search-results-map'> *RESULTS MAP* </div>
+			<div className='search-results-map-container'>
+				<ResultsMap />
+			</div>
 		</div>
 	);
 };

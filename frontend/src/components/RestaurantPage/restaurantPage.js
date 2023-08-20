@@ -11,6 +11,9 @@ import { starRatingBig } from '../Utils/DisplayStarRating';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { formatCategory } from '../Utils/FormatCategories';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 
 function RestaurantPage({ user }) {
 	const history = useHistory();
@@ -211,7 +214,16 @@ function RestaurantPage({ user }) {
 					<div className='lh-container'>
 						<div className='lh-location-container'>
 							<div id='map' >
-								<img width="100%" height='100%' src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}`} alt={`Google map of ${restaurantCurrent?.name}`} />
+								{ `https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}` ? (
+									<img width="100%" height='100%' src={`https://maps.googleapis.com/maps/api/staticmap?center=${restaurantCurrent?.coordinates[0]},${restaurantCurrent?.coordinates[1]}&zoom=15&scale=1&size=300x150&maptype=roadmap&format=png&map_id=ff8dbb61c8194218&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&markers=size:mid%7Ccolor:0xe12210%7Clabel:*%7C${restaurantCurrent?.coordinates[0]}%2C${restaurantCurrent?.coordinates[1]}`} alt={`Google map of ${restaurantCurrent?.name}`} />
+								) : (
+								<FontAwesomeIcon
+									icon={faCircleNotch}
+									spin
+									size='2xl'
+									style={{ color: '#c7c7c7' }}
+								/>
+								)}
 							</div>
 							<div id='address'>
 								<div id='address-left'>
