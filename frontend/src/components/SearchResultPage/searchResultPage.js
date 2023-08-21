@@ -8,9 +8,6 @@ import { formatCategory } from '../Utils/FormatCategories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-
-
-
 import { starRatingResults } from '../Utils/DisplayStarRating';
 
 const SearchResultPage = () => {
