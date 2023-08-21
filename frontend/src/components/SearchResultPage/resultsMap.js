@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { infoRating } from '../Utils/DisplayStarRating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
 function ResultsMap({ searchResults, location }) {
+
 
 	let map;
 
@@ -55,17 +59,16 @@ function ResultsMap({ searchResults, location }) {
       });
       // // Listen for clicks on markers to show info window
       marker.addListener('click', () => {
-
         toggleHighlight(marker)
         // window.google.maps.event.removeListener(clickListener);
       });
 
-      // marker.addListener('mouseover', ({ domEvent, latLng }) => {
-      //   const {target} = domEvent;
+      marker.addListener('mouseenter', ({ domEvent, latLng }) => {
+        const {target} = domEvent;
 
-      //   console.log('inside hover ==== ', target)
-      //   // window.google.maps.event.removeListener(hoverListener);
-      // })
+        console.log('inside hover ==== ', target)
+        // window.google.maps.event.removeListener(hoverListener);
+      })
 
       bounds.extend(marker.position)
     }
@@ -81,7 +84,7 @@ function ResultsMap({ searchResults, location }) {
         console.log('remove highlight')
       } else {
         markerView.content.classList.add("highlight");
-        markerView.zIndex = 1;
+        markerView.zIndex = 10;
         console.log('add highlight')
       }
     }
@@ -90,7 +93,7 @@ function ResultsMap({ searchResults, location }) {
     function buildContent(restaurant, i) {
       const content = document.createElement("div");
 
-      // content.classList.add("results-restaurant-icon-group");
+      content.classList.add("property");
       content.innerHTML = `
         <div class='result-icon icon-${i+1}' type='button'>
           <p>${i+1}<p>
@@ -113,7 +116,20 @@ function ResultsMap({ searchResults, location }) {
 
 	initMap();
 
-	return <div className='search-results-map' id='map'></div>;
+
+
+  if (!searchResults.length) return (
+
+    <>
+      <div id='results-map-loading'>
+        <FontAwesomeIcon icon={faCircleNotch} spin size="2xl" style={{color: "#8c8c8c",}} />
+      </div>
+    </>
+  )
+
+  return <div className='search-results-map' id='map'></div>;
+
+
 }
 
 export default ResultsMap;

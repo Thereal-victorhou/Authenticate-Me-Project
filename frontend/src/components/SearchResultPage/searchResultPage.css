@@ -16,15 +16,16 @@
   justify-content: flex-start;
   align-items: flex-start;
   min-width: 600px;
-  width: 70%;
+  width: 65%;
   height: 100vh;
-  /* z-index: 1; */
+  z-index: 0;
   padding-top: 30px;
   margin-right: 310px;
   padding-left: 0;
   padding-right: 0;
   gap: 30px;
   background: white;
+  position: relative;
   /* position: sticky; */
 }
 
@@ -51,13 +52,13 @@
   align-items: flex-start;
   list-style: none;
   /* padding-left: 0; */
-  width: 100%;
+  width: 90%;
   background: white;
 }
 
 .search-results-page-restaurant-container {
   border-bottom: 1px solid rgb(235,235,235);
-
+  width: 100%;
 }
 
 .search-results-page-restaurant-container:hover {
@@ -70,7 +71,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 720px;
+  width: 100%;
   height: 260px;
   padding: 30px;
   border-radius: 5px;
@@ -209,7 +210,7 @@
 
 
 
-
+/* Map Styling */
 .search-results-map-container {
   display: flex;
   justify-content: flex-end;
@@ -217,7 +218,7 @@
   min-width: 30%;
   height: 100%;
   /* background: rgb(220, 220, 220); */
-  /* z-index: -1; */
+  z-index: 0;
   right: 0;
   position: fixed;
   /* box-shadow: inset 5px 0px 1.5em rgba(0, 0, 0, 0.388); */
@@ -228,7 +229,44 @@
   height: 90%;
   /* background: rgb(220, 220, 220); */
   right: 0;
+  z-index: 0;
+
 }
+
+/*
+ * Property styles in unhighlighted state.
+ */
+.property {
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  color: #263238;
+  display: flex;
+  /* font-size: 14px; */
+  /* gap: 15px; */
+  /* height: 30px; */
+  justify-content: center;
+  padding: 3px;
+  position: relative;
+  position: relative;
+  transition: all 0.3s ease-out;
+  /* width: 30px; */
+}
+
+.property::after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid #FFFFFF;
+  content: "";
+  height: 0;
+  left: 50%;
+  position: absolute;
+  top: 95%;
+  transform: translate(-50%, 0);
+  transition: all 0.3s ease-out;
+  width: 0;
+}
+
 
 .result-icon {
   display: flex;
@@ -238,13 +276,12 @@
   width: 25px;
   border-radius: 50%;
   background: rgb(244,57,57);
-  border: 2px solid white;
+  /* border: 2px solid white; */
   color: white;
   font-size: 14px;
   font-weight: 700;
   line-height: 10px;
-  position: relative;
-  z-index: 0;
+  /* position: relative; */
 }
 
 .result-icon:hover {
@@ -253,17 +290,31 @@
   color: rgb(244, 57, 57);
 }
 
+/* .result-icon:hover .highlight {
+  background: white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgb(244, 57, 57);
+  color: rgb(244, 57, 57);
+} */
+
 .result-icon > p {
   margin-top: 15px;
 }
 
+/* Change icon color when user hovers over results card*/
+.search-results-page-restaurant-container:hover + .result-icon {
+  background: white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgb(244, 57, 57);
+  color: white;
+}
+
+
 /* .result-icon:hover + .result-restaurant-map-info-card {
   display: flex;
 } */
-
-.highlight {
-  display: flex;
-}
 
 .result-restaurant-map-info-card {
   display: none;
@@ -274,21 +325,19 @@
   background: white;
   position: absolute;
   padding: 15px;
-
+  bottom: 50%;
   border-radius: 5px;
-  /* position: relative; */
   gap: 10px;
+  z-index: 5;
 }
 
 .result-restaurant-map-info-img {
-  display: none;
   height: 70%;
   width: 99%;
   border-radius: 5px;
 }
 
 .result-restaurant-map-info-card h2 {
-  display: none;
   font-size: 18px;
   font-weight: 700;
   line-height: 16px;
@@ -298,21 +347,55 @@
 }
 
 .results-restaurant-map-info-rating {
-  display: none;
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-
   height: 22px;
 
 }
 
 .results-restaurant-map-info-rating p {
-  display: none;
   font-size: 14px;
   font-weight: 500;
   font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
   line-height: 16px;
   color: rgba(45,46,47,1);
   margin-top: 15px;
+}
+
+.property.highlight {
+  background-color: rgb(244, 57, 57);
+  /* border-radius: 8px; */
+  /* height: 80px; */
+  /* padding: 8px 15px; */
+  /* width: auto; */
+}
+
+.property.highlight .result-icon {
+  background: white;
+  color: red;
+}
+
+.property.highlight::after {
+  background: white;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgb(244, 57, 57);
+  color: rgb(244, 57, 57);
+}
+
+.property.highlight .result-restaurant-map-info-card {
+  display: flex;
+  bottom: 120%;
+  right:10%;
+}
+
+#results-map-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(189,189,189);
+  height: 100%;
+  width: 100%;
 }
