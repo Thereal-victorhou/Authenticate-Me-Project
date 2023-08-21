@@ -185,3 +185,57 @@ export const starRatingResults = (num) => {
         );
     }
   };
+
+	export const infoRating = {
+
+		1: `<div className='-info-big-star' id='one'>
+					<img src="${bigOneStar}" style='height: 20px' id='one' alt='one star' />
+				</div>`,
+
+
+		1.5:
+				`<div className='-info-big-star' id='one-half-star'>
+					<img src="${bigOneHalfStar}" style='height: 20px' alt='one and a half star' />
+				</div>`,
+
+		2:
+			`<div className='-info-big-star' id='two-star'>
+				<img src="${bigTwoStar}" style='height: 20px' alt='two star' />
+			</div>`,
+
+
+		2.5:
+				`<div className='-info-big-star' id='two-half-star'>
+					<img src="${bigTwoHalfStar}" style='height: 20px' alt='two and a half star' />
+				</div>`,
+
+		3:
+			`<div className='-info-big-star' id='three-star'>
+				<img src="${bigThreeStar}" style='height: 20px' alt='three star' />
+			</div>`,
+
+		3.5:
+				`<div className='-info-big-star' id='three-half-star'>
+					<img src="${bigThreeHalfStar}" style='height: 20px' alt='three and a half star' />
+				</div>`,
+
+		4:
+			`<div className='-info-big-star' id='four-star'>
+				<img src="${bigFourStar}" style='height: 20px' alt='four star' />
+			</div>`,
+
+		4.5:
+				`<div className='-info-big-star' id='four-half-star'>
+					<img src="${bigFourHalfStar}" style='height: 20px' alt='four and a half star' />
+				</div>`,
+
+		5:
+			`<div className='-info-big-star' id='five-star'>
+				<img src="${bigFiveStar}" style='height: 20px' alt='five star' />
+			</div>`,
+
+		0:
+			`<div className='-info-big-star' id='zero-star'>
+				<img src="${bigZeroStar}" style='height: 20px' alt='zero star' />
+			</div>`,
+	}
