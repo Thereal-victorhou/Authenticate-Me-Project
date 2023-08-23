@@ -134,11 +134,13 @@ function ResultsMap({ searchResults, location }) {
 			// infoBox.style.left = pixelOffset.x + 'px';
 
       // Position the infoBox to the left of the target
-      infoBox.style.top = (rect.top + window.scrollY) + 'px';
-      infoBox.style.left = (rect.left - infoBox.offsetWidth) + 'px';
+      // infoBox.style.top = (rect.top + window.scrollY) + 'px';
+      // infoBox.style.left = (rect.left - infoBox.offsetWidth) + 'px';
+      console.log('style right ===', (rect.right - infoBox.offsetWidth) -500)
 
-			infoBox.style.display = 'block';
-			infoBox.style.right = '90%';
+			infoBox.style.display = 'flex';
+      infoBox.style.top = (window.scrollY + rect.bottom - 90) + 'px';
+			infoBox.style.left = (rect.left - infoBox.offsetWidth) - 970 + 'px';
 			infoBox.innerHTML = `
         <div class="result-restaurant-map-info-card-overlay" type='button'>
           <img class='result-restaurant-map-info-img-overlay' src='${
