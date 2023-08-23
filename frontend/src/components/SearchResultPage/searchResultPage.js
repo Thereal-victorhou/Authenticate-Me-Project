@@ -112,7 +112,9 @@ const SearchResultPage = () => {
 				{searchRes && isResults()}
 			</div>
 			<div className='search-results-map-container'>
-				<ResultsMap searchResults={searchRes} location={location}/>
+				<div>
+					<ResultsMap searchResults={searchRes} location={location}/>
+				</div>
 			</div>
 		</div>
 	);

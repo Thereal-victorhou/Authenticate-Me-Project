@@ -33,6 +33,10 @@
   width: 100%;
   height: 100%;
   padding-left: 40px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;  /* Number of lines you want to display */
+  overflow: hidden;
 }
 
 .results-page-title > h2 {
@@ -178,16 +182,17 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 65px;
-  /* background: orange; */
+  max-height: 30%;
+  min-height:20%;
   gap: 10px;
-  margin-top: 10px;
+  /* margin-top: 5px; */
 }
 
 .results-review-body {
   /* background: pink; */
   /* width: 300px; */
   height: 100%;
+
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;  /* Number of lines you want to display */
@@ -223,10 +228,15 @@
   position: fixed;
   /* box-shadow: inset 5px 0px 1.5em rgba(0, 0, 0, 0.388); */
 }
+.search-results-map-container > div {
+
+  width: 100%;
+  height: 90%;
+}
 
 .search-results-map {
   width: 100%;
-  height: 90%;
+  height: 100%;
   /* background: rgb(220, 220, 220); */
   right: 0;
   z-index: 0;
@@ -281,40 +291,60 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 10px;
-  /* position: relative; */
+  position: relative;
 }
 
-.result-icon:hover {
+/* .result-icon:hover {
   background: white;
   border: 2px solid rgb(244, 57, 57);
   color: rgb(244, 57, 57);
-}
+} */
 
-/* .result-icon:hover .highlight {
+.result-icon:hover .highlight {
   background: white;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 7px solid rgb(244, 57, 57);
   color: rgb(244, 57, 57);
-} */
+}
 
 .result-icon > p {
   margin-top: 15px;
 }
 
-/* Change icon color when user hovers over results card*/
-.search-results-page-restaurant-container:hover + .result-icon {
+
+#infoBox {
+  position: absolute;
+  background: #ffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 15px 7px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 5;
+  width: 270px;
+  /* height: 270px; */
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  /* height: 220px;
+  width: 250px; */
+}
+
+.result-restaurant-map-info-card-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 270px;
+  min-width: 270px;
   background: white;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 7px solid rgb(244, 57, 57);
-  color: white;
+  /* position: absolute; */
+  padding: 15px;
+  bottom: 50%;
+  border-radius: 5px;
+  gap: 10px;
+  z-index: 5;
 }
 
 
-/* .result-icon:hover + .result-restaurant-map-info-card {
-  display: flex;
-} */
 
 .result-restaurant-map-info-card {
   display: none;
@@ -331,10 +361,25 @@
   z-index: 5;
 }
 
+.result-restaurant-map-info-img-overlay {
+  height: 70%;
+  width: 99%;
+  border-radius: 5px;
+}
+
 .result-restaurant-map-info-img {
   height: 70%;
   width: 99%;
   border-radius: 5px;
+}
+
+.result-restaurant-map-info-card-overlay h2 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 16px;
+  color: rgba(45,46,47,1);
+  font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+  margin-bottom: 0;
 }
 
 .result-restaurant-map-info-card h2 {
@@ -346,13 +391,29 @@
   margin-bottom: 0;
 }
 
+.results-restaurant-map-info-rating-overlay {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  height: 22px;
+}
+
 .results-restaurant-map-info-rating {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
   height: 22px;
+}
 
+.results-restaurant-map-info-rating-overlay p {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+  line-height: 16px;
+  color: rgba(45,46,47,1);
+  margin-top: 15px;
 }
 
 .results-restaurant-map-info-rating p {
