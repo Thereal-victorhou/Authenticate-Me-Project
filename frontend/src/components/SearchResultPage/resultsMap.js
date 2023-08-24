@@ -21,6 +21,7 @@ function ResultsMap({ searchResults, location }) {
 	const resultLocationRefs = useRef({});
 	const iconRefs = useRef({});
 	const infoBoxRef = useRef(null);
+	const phantomBoxRef = useRef(null); // For invisible box to cover both infoBox and icon
 
   const [mapLoaded, setMapLoaded] = useState(false);
 	const [currentIdx, setCurrentIdx] = useState(null);
@@ -53,9 +54,8 @@ function ResultsMap({ searchResults, location }) {
 
 	// Show/Hide infoBox depending on current idx
 	// Adjust position of infoBox depending of position of marker
-	// Dynamically style icon
 	useEffect(() => {
-		const icon = iconRefs.current[currentIdx];
+		const phantomBox = phantomBoxRef.current;
 		const infoDiv = infoBoxRef.current;
 		const currentIcon = resultLocationRefs.current[currentIdx];
 		const currentLocation = currentIcon
@@ -63,8 +63,9 @@ function ResultsMap({ searchResults, location }) {
 			: 'null';
 		const windowWidth = window.innerWidth;
 
-		// if (currentIdx === null && infoDiv !== null) return (infoDiv.style.opacity = 0);
-		if (currentIdx === null && infoDiv !== null) return (infoDiv.style.display = 'none');
+		// Hide both phantomBox and infoDiv
+		if (!currentIdx && phantomBox) phantomBox.style.display = 'none';
+		if (currentIdx === null && infoDiv) return infoDiv.style.display = 'none';
 
 
 		// Flip infoBox location depending of height of marker within map
@@ -75,17 +76,24 @@ function ResultsMap({ searchResults, location }) {
 			}
 			infoDiv.style.top = currentLocation.bottom - 80 + 'px';
 			infoDiv.style.right = windowWidth - currentLocation.right - 50 + 'px';
-			infoDiv.style.display = 'flex';
+			phantomBox.style.top = -25 + 'px';
+			phantomBox.style.right = 0 + 'px';
+
+			infoDiv.style.display = 'flex';						// Show both infoDiv and phantomBox
+			phantomBox.style.display = 'flex';
 		}
 		if (currentLocation.top > 300 && currentLocation.right < 1100) {
 			if (infoDiv.classList.contains('infoBoxFlipped')) {
 				infoDiv.classList.remove('infoBoxFlipped');
 				infoDiv.classList.add('infoBox');
 			}
-			infoDiv.style.top = currentLocation.top - 370 + 'px';
+			infoDiv.style.top = currentLocation.top - 365 + 'px';
 			infoDiv.style.right = windowWidth - currentLocation.right - 50 + 'px';
-			infoDiv.style.display = 'flex';
-			// infoDiv.style.opacity = 1;
+			phantomBox.style.top = 0 + 'px';
+			phantomBox.style.right = 0 + 'px';
+
+			infoDiv.style.display = 'flex';					// Show both infoDiv and phantomBox
+			phantomBox.style.display = 'flex';
 		}
 	}, [currentIdx]);
 
@@ -95,7 +103,7 @@ function ResultsMap({ searchResults, location }) {
   };
 
 	// Set current idx
-	const highlight = (restaurant, i) => {
+	const highlight = (i) => {
 		setCurrentIdx(i);
 	};
 
@@ -119,20 +127,25 @@ function ResultsMap({ searchResults, location }) {
 		if (currentIdx !== null) {
 			return (
 				<div
-					className='result-restaurant-map-info-card-overlay'
-					type='button'
-					onClick={(e) => sendToRestaurant(restaurantLocations[i].restaurant)}>
-					<img
-						className='result-restaurant-map-info-img-overlay'
-						src={restaurantLocation.restaurant?.imgSrc}
-						alt='Restaurant Image'
-					/>
-					<h2>{restaurantLocation.restaurant?.name}</h2>
-					<div className='results-restaurant-map-info-rating-overlay'>
-						{starRating}
-						<p>{restaurantLocation.restaurant.rating}</p>
+						className='result-restaurant-map-info-card-overlay'
+						type='button'
+						onClick={(e) => sendToRestaurant(restaurantLocations[i].restaurant)}>
+						<img
+							className='result-restaurant-map-info-img-overlay'
+							src={restaurantLocation.restaurant?.imgSrc}
+							alt='Restaurant Image'
+						/>
+						<h2>{restaurantLocation.restaurant?.name}</h2>
+						<div className='results-restaurant-map-info-rating-overlay'>
+							<div className='phantom-result-container'
+								ref={phantomBoxRef}
+								onMouseOver={() => highlight(i)}
+								onMouseOut={() => hide()}>
+							</div>
+							{starRating}
+							<p>{restaurantLocation.restaurant.rating}</p>
+						</div>
 					</div>
-				</div>
 			);
 		}
 	};
@@ -152,8 +165,8 @@ function ResultsMap({ searchResults, location }) {
 				onLoad={(overlay) => overlayRefs.current.push(overlay)}>
 				<div
 					className={`result-location-container-${i}`}
-					onMouseOver={() => highlight(locationObj, i)}
-					onMouseOut={() => hide()}
+					onMouseOver={() => highlight(i)}
+					// onMouseOut={() => hide()}
 					ref={(el) => addToLocationRefs(el, i)}
           onClick={e=> sendToRestaurant(locationObj.restaurant)}>
 					<div
@@ -184,25 +197,17 @@ function ResultsMap({ searchResults, location }) {
 
 	return (
 		<>
-      {searchResults.length && location ? (
-        <>
-          <div className='infoBox' ref={infoBoxRef}>
-            {renderInfoBox(currentIdx)}
-          </div>
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            zoom={11}
-            options={mapOptions}
-            onLoad={(map) => mapRef.current = map}>
-            {restaurantLocations.length &&
-              restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
-          </GoogleMap>
-        </>
-      ) : (
-        <div id='results-map-loading'>
-          <FontAwesomeIcon icon={faCircleNotch} spin size='2xl' style={{color: "#787878",}} />
-        </div>
-      )}
+			<div className='infoBox' ref={infoBoxRef}>
+				{renderInfoBox(currentIdx)}
+			</div>
+			<GoogleMap
+				mapContainerStyle={containerStyle}
+				zoom={11}
+				options={mapOptions}
+				onLoad={(map) => mapRef.current = map}>
+				{restaurantLocations.length &&
+					restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
+			</GoogleMap>
 		</>
 	);
 }

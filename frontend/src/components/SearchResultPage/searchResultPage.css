@@ -244,39 +244,7 @@
 
 }
 
-/*
- * Property styles in unhighlighted state.
- */
-.property {
-  align-items: center;
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  color: #263238;
-  display: flex;
-  /* font-size: 14px; */
-  /* gap: 15px; */
-  /* height: 30px; */
-  justify-content: center;
-  padding: 3px;
-  position: relative;
-  position: relative;
-  transition: all 0.3s ease-out;
-  /* width: 30px; */
-}
 
-.property::after {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid #FFFFFF;
-  content: "";
-  height: 0;
-  left: 50%;
-  position: absolute;
-  top: 99%;
-  transform: translate(-50%, 0);
-  transition: all 0.3s ease-out;
-  width: 0;
-}
 
 
 .result-icon {
@@ -377,6 +345,36 @@
   transform: translate(-50%, 0);
   transition: 0.8 all ease-in-out;
   width: 0;
+  z-index: 5;
+}
+
+.phantom-result-container {
+  position: absolute;
+  background: #fda5004c;
+  border-radius: 5px;
+  display: block;
+  z-index: 6;
+  width: 270px;
+  height: 280px;
+  display: none;
+}
+
+.phantom-result-container::after {
+  display: block;
+  border-left: 13px solid #ffbf00ee;
+  border-right: 13px solid #ffbf00ee;
+  border-top: 13px solid #ffbf00ee;
+  border-bottom: 13px solid #ffbf00ee;
+  border-radius: 50%;
+  content: "";
+  height: 0;
+  right: 0%;
+  position: absolute;
+  top: 99%;
+  transform: translate(-40%, -10%);
+  transition: 0.8 all ease-in-out;
+  width: 0;
+  z-index: 5;
 }
 
 .infoBoxFlipped {
@@ -412,12 +410,12 @@
   height: 270px;
   min-width: 270px;
   background: white;
-  /* position: absolute; */
+  /* position: relative; */
   padding: 15px;
   bottom: 50%;
   border-radius: 5px;
   gap: 10px;
-  z-index: 5;
+  /* z-index: 5; */
 }
 
 .result-restaurant-map-info-img-overlay {
