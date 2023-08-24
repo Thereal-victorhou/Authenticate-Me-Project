@@ -13,7 +13,7 @@ import AddRestaurantPage from "./components/AddRestaurant";
 import EditRestaurantPage from './components/EditRestaurant'
 import SearchResultPage from './components/SearchResultPage'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Loader } from '@googlemaps/js-api-loader';
+import { LoadScript } from "@react-google-maps/api";
 
 
 
@@ -30,45 +30,51 @@ function App() {
 
   return isLoaded && (
     <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <HomePage user={user}/>
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/restaurants/:id">
-            <RestaurantPage user={user}/>
-          </Route>
-          <Route path='/add/restaurant'>
-            <AddRestaurantPage user={user}/>
-          </Route>
-          <Route path='/edit/restaurant/:id'>
-            <EditRestaurantPage user={user}/>
-          </Route>
-          <Route path="/review/restaurant/:id">
-            <AddReviewForm user={user}/>
-          </Route>
-          <Route path="/review/rating/:selectedRating/restaurant/:id">
-            <AddReviewForm user={user}/>
-          </Route>
+      <LoadScript
+        googleMapsApiKey={'AIzaSyAV_Av8kiFRXTUMoummUh8tOAbg4zJZ2tY'}
+        libraries={['places']}
+      >
 
-          <Route path="/edit/review/:id">
-            <EditReviewForm user={user}/>
-          </Route>
-          <Route path="/search">
-            <SearchResultPage />
-          </Route>
-          {/* <Route>
-            <h2>Page Not Found</h2>
-          </Route> */}
-        </Switch>
-      )}
+        <Navigation isLoaded={isLoaded} />
+        {isLoaded && (
+          <Switch>
+            <Route exact path="/">
+              <HomePage user={user}/>
+            </Route>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/restaurants/:id">
+              <RestaurantPage user={user}/>
+            </Route>
+            <Route path='/add/restaurant'>
+              <AddRestaurantPage user={user}/>
+            </Route>
+            <Route path='/edit/restaurant/:id'>
+              <EditRestaurantPage user={user}/>
+            </Route>
+            <Route path="/review/restaurant/:id">
+              <AddReviewForm user={user}/>
+            </Route>
+            <Route path="/review/rating/:selectedRating/restaurant/:id">
+              <AddReviewForm user={user}/>
+            </Route>
+
+            <Route path="/edit/review/:id">
+              <EditReviewForm user={user}/>
+            </Route>
+            <Route path="/search">
+              <SearchResultPage />
+            </Route>
+            {/* <Route>
+              <h2>Page Not Found</h2>
+            </Route> */}
+          </Switch>
+        )}
+      </LoadScript>
     </>
   );
 }
