@@ -11,8 +11,15 @@ const containerStyle = {
 };
 
 function ResultsMap({ searchResults, location }) {
-	// Create array of locations
+
+  const mapRef = useRef(null);
+  const overlayRefs = useRef([]);
+  const resultLocationRefs = useRef({});
+  const infoBoxRef = useRef(null);
+  const [currentIdx, setCurrentIdx] = useState(null);
 	const restaurantLocations = [];
+
+	// Create array of locations
 	if (searchResults)
 		searchResults.forEach((res) => {
 			restaurantLocations.push({
@@ -24,15 +31,6 @@ function ResultsMap({ searchResults, location }) {
 				restaurant: res,
 			});
 		});
-
-  const mapContainerRef = useRef(null);
-	const mapRef = useRef(null);
-	const overlayRefs = useRef([]);
-  const resultLocationRefs = useRef({});
-  const infoBoxRef = useRef(null);
-  const [currentIdx, setCurrentIdx] = useState(null);
-
-
 
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
@@ -52,23 +50,32 @@ function ResultsMap({ searchResults, location }) {
     const currentIcon = resultLocationRefs.current[currentIdx];
     const currentLocation = currentIcon ? currentIcon.getBoundingClientRect() : 'null';
     const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-    console.log('window height ==== ', windowHeight);
-    console.log('top === ', currentLocation.top)
-    console.log('right ==== ', currentLocation.right)
     if (currentIdx === null) return infoDiv.style.display = 'none';
+    // Flip infoBox location depending of height of marker within map
     if (currentLocation.top < 300 && currentLocation.right < 1100) {
+      if (infoDiv.classList.contains('infoBox')) {
+        infoDiv.classList.remove('infoBox')
+        infoDiv.classList.add('infoBoxFlipped')
+      }
       infoDiv.style.top = currentLocation.bottom - 80 + 'px';
       infoDiv.style.right = (windowWidth - currentLocation.right - 50) + 'px';
       infoDiv.style.display = 'flex';
     }
     if (currentLocation.top > 300 && currentLocation.right < 1100) {
+      if (infoDiv.classList.contains('infoBoxFlipped')) {
+        infoDiv.classList.remove('infoBoxFlipped')
+        infoDiv.classList.add('infoBox')
+      }
       infoDiv.style.top = currentLocation.top - 370 + 'px';
       infoDiv.style.right = (windowWidth - currentLocation.right - 50) + 'px';
       infoDiv.style.display = 'flex';
     }
 
   }, [currentIdx])
+
+  const sendToRestaurant = () => {
+
+  }
 
   // Set current idx
 	const highlight = (restaurant, i) => {
@@ -149,20 +156,18 @@ function ResultsMap({ searchResults, location }) {
 
 	return (
     <>
-	 		<div id='infoBox' ref={infoBoxRef}>
+	 		<div className='infoBox' ref={infoBoxRef}>
         {renderInfoBox(currentIdx)}
       </div>
-      <div style={{ height: '100%', width: '100%' }} ref={mapContainerRef}>
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          // center={center}
-          zoom={11}
-          options={mapOptions}
-          onLoad={(map) => (mapRef.current = map)}>
-          {restaurantLocations.length &&
-            restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
-        </GoogleMap>
-      </div>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        // center={center}
+        zoom={11}
+        options={mapOptions}
+        onLoad={(map) => (mapRef.current = map)}>
+        {restaurantLocations.length &&
+          restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
+      </GoogleMap>
     </>
 	);
 
