@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { GoogleMap, OverlayView } from '@react-google-maps/api';
-import { infoRating } from '../Utils/DisplayStarRating';
+import { starRatingResults } from '../Utils/DisplayStarRating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,17 +25,16 @@ function ResultsMap({ searchResults, location }) {
 			});
 		});
 
+  const mapContainerRef = useRef(null);
 	const mapRef = useRef(null);
 	const overlayRefs = useRef([]);
+  const resultLocationRefs = useRef({});
   const infoBoxRef = useRef(null);
   const [currentIdx, setCurrentIdx] = useState(null);
 
-	const center = {
-		lat: location.lat,
-		lng: location.lng,
-	};
 
-	// Ensure that all overlays are visable within the map's viewport
+
+	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
 		if (mapRef.current) {
 			const bounds = new window.google.maps.LatLngBounds();
@@ -44,20 +43,68 @@ function ResultsMap({ searchResults, location }) {
 			});
 			mapRef.current.fitBounds(bounds);
 		}
-	}, [mapRef, restaurantLocations, overlayRefs]);
+	}, [mapRef, restaurantLocations]);
 
-  // Show info window
+  // Show/Hide infoBox depending on current idx
+  // Adjust position of infoBox depending of position of marker
+  useEffect(() => {
+    const infoDiv = infoBoxRef.current;
+    const currentIcon = resultLocationRefs.current[currentIdx];
+    const currentLocation = currentIcon ? currentIcon.getBoundingClientRect() : 'null';
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    console.log('window height ==== ', windowHeight);
+    console.log('top === ', currentLocation.top)
+    console.log('right ==== ', currentLocation.right)
+    if (currentIdx === null) return infoDiv.style.display = 'none';
+    if (currentLocation.top < 300 && currentLocation.right < 1100) {
+      infoDiv.style.top = currentLocation.bottom - 80 + 'px';
+      infoDiv.style.right = (windowWidth - currentLocation.right - 50) + 'px';
+      infoDiv.style.display = 'flex';
+    }
+    if (currentLocation.top > 300 && currentLocation.right < 1100) {
+      infoDiv.style.top = currentLocation.top - 370 + 'px';
+      infoDiv.style.right = (windowWidth - currentLocation.right - 50) + 'px';
+      infoDiv.style.display = 'flex';
+    }
+
+  }, [currentIdx])
+
+  // Set current idx
 	const highlight = (restaurant, i) => {
-
+    setCurrentIdx(i)
 	};
 
-  // Hide info window
-	const hide = (restaurant, i) => {
-
+  // Set current idx to null
+	const hide = () => {
+    setCurrentIdx(null);
   };
 
-  // Render box
+  // Dynamically fill resultLocationRefs
+  const addToLocationRefs = (el, id) => {
+    resultLocationRefs.current[id] = el;
+  }
 
+  // Render InfoBox
+  const renderInfoBox = (i) => {
+    const restaurantLocation = restaurantLocations[i];
+    const starRating = starRatingResults(restaurantLocation?.restaurant?.rating)
+    console.log(restaurantLocation)
+    if (currentIdx !== null) {
+      return (
+        <div className="result-restaurant-map-info-card-overlay" type='button'>
+          <img className='result-restaurant-map-info-img-overlay' src={restaurantLocation.restaurant?.imgSrc} alt='Restaurant Image'/>
+          <h2>{restaurantLocation.restaurant?.name}</h2>
+            <div className='results-restaurant-map-info-rating-overlay'>
+            {starRating}
+            <p>{restaurantLocation.restaurant.rating}</p>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  // Create advance marker for map
 	const AdvancedMarkerElement = (restaurant, i) => {
 		const overlayViewPosition = {
 			lat: restaurant.coordinates.lat,
@@ -68,10 +115,14 @@ function ResultsMap({ searchResults, location }) {
 			<OverlayView
 				position={overlayViewPosition}
 				mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-				key={`overlay-${i}`}>
+				key={`overlay-${i}`}
+        onLoad={(overlay) => overlayRefs.current.push(overlay)}
+        >
 				<div
+          className={`result-location-container-${i}`}
 					onMouseOver={() => highlight(restaurant, i)}
-					onMouseOut={() => hide(restaurant, i)}
+					onMouseOut={() => hide()}
+          ref={el => addToLocationRefs(el, i)}
 				>
 					<div className={`result-icon icon-${i + 1}`} type='button'>
 						<p>{i + 1}</p>
@@ -83,6 +134,7 @@ function ResultsMap({ searchResults, location }) {
 
 	const mapOptions = {
 		disableDefaultUI: true,
+    mapId: 'ff8dbb61c8194218',
 		draggable: true,
 		scrollwheel: true,
 		zoomControl: true,
@@ -97,19 +149,20 @@ function ResultsMap({ searchResults, location }) {
 
 	return (
     <>
-	 		<div id='infoBox' className='hidden' ref={infoBoxRef}>
-
+	 		<div id='infoBox' ref={infoBoxRef}>
+        {renderInfoBox(currentIdx)}
       </div>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        // center={center}
-        zoom={11}
-        mapId='ff8dbb61c8194218'
-        options={mapOptions}
-        onLoad={(map) => (mapRef.current = map)}>
-        {restaurantLocations.length &&
-          restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
-      </GoogleMap>
+      <div style={{ height: '100%', width: '100%' }} ref={mapContainerRef}>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          // center={center}
+          zoom={11}
+          options={mapOptions}
+          onLoad={(map) => (mapRef.current = map)}>
+          {restaurantLocations.length &&
+            restaurantLocations.map((res, i) => AdvancedMarkerElement(res, i))}
+        </GoogleMap>
+      </div>
     </>
 	);
 

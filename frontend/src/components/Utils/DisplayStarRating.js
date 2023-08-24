@@ -122,6 +122,7 @@ export const starRatingSmall = (num) => {
 
 // translate ratings from number to star for search results
 export const starRatingResults = (num) => {
+	console.log('num num === ', num)
 	switch (num) {
     case 1:
       return (

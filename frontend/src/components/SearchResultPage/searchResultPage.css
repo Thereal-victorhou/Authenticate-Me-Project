@@ -378,7 +378,7 @@
 
 
 .result-restaurant-map-info-card {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   height: 270px;
