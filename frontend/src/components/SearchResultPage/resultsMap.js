@@ -57,37 +57,55 @@ function ResultsMap({ searchResults, location }) {
 	useEffect(() => {
 		const phantomBox = phantomBoxRef.current;
 		const infoDiv = infoBoxRef.current;
-		const currentIcon = resultLocationRefs.current[currentIdx];
-		const currentLocation = currentIcon
-			? currentIcon.getBoundingClientRect()
+		const currentLoc = resultLocationRefs.current;
+		const currentLocation = currentLoc[currentIdx]
+			? currentLoc[currentIdx].getBoundingClientRect()
 			: 'null';
 		const windowWidth = window.innerWidth;
 
 		// Hide both phantomBox and infoDiv
 		if (!currentIdx && phantomBox) phantomBox.style.display = 'none';
-		if (currentIdx === null && infoDiv) return infoDiv.style.display = 'none';
+		if (!currentIdx && infoDiv) return infoDiv.style.display = 'none';
 
 
-		// Flip infoBox location depending of height of marker within map
-		if (currentLocation.top < 300 && currentLocation.right < 1100) {
+		// If there's not enough space above the marker for info Box,
+		// show below infoBox and phantomBox BELOW marker
+		if (currentLocation.top < 380) {
+			console.log('inside flipped')
 			if (infoDiv.classList.contains('infoBox')) {
 				infoDiv.classList.remove('infoBox');
 				infoDiv.classList.add('infoBoxFlipped');
 			}
-			infoDiv.style.top = currentLocation.bottom - 80 + 'px';
+
+			if (phantomBox.classList.contains('phantom-result-container')) {
+				phantomBox.classList.remove('phantom-result-container');
+				phantomBox.classList.add('phantom-result-container-flipped')
+			}
+
+			infoDiv.style.top = currentLocation.bottom - 69 + 'px';
 			infoDiv.style.right = windowWidth - currentLocation.right - 50 + 'px';
-			phantomBox.style.top = -25 + 'px';
+			phantomBox.style.top = -5 + 'px';
 			phantomBox.style.right = 0 + 'px';
 
 			infoDiv.style.display = 'flex';						// Show both infoDiv and phantomBox
 			phantomBox.style.display = 'flex';
 		}
-		if (currentLocation.top > 300 && currentLocation.right < 1100) {
+
+		// If there's enough space above the marker for info Box,
+		// show infoBox and phantomBox ABOVE marker
+		if (currentLocation.top > 380) {
+			console.log('inside upright')
 			if (infoDiv.classList.contains('infoBoxFlipped')) {
 				infoDiv.classList.remove('infoBoxFlipped');
 				infoDiv.classList.add('infoBox');
 			}
-			infoDiv.style.top = currentLocation.top - 365 + 'px';
+
+			if (phantomBox.classList.contains('phantom-result-container-flipped')) {
+				phantomBox.classList.remove('phantom-result-container');
+				phantomBox.classList.add('phantom-result-container')
+			}
+
+			infoDiv.style.top = currentLocation.top - 378 + 'px';
 			infoDiv.style.right = windowWidth - currentLocation.right - 50 + 'px';
 			phantomBox.style.top = 0 + 'px';
 			phantomBox.style.right = 0 + 'px';
@@ -105,6 +123,7 @@ function ResultsMap({ searchResults, location }) {
 	// Set current idx
 	const highlight = (i) => {
 		setCurrentIdx(i);
+		console.log('current idx === ', i)
 	};
 
 	// Set current idx to null
@@ -114,7 +133,7 @@ function ResultsMap({ searchResults, location }) {
 
 	// Dynamically fill resultLocationRefs
 	const addToLocationRefs = (el, id) => {
-		resultLocationRefs.current[id] = el;
+		if (resultLocationRefs.current) resultLocationRefs.current[id] = el;
 	};
 
 	// Render InfoBox
@@ -164,9 +183,8 @@ function ResultsMap({ searchResults, location }) {
 				key={`overlay-${i}`}
 				onLoad={(overlay) => overlayRefs.current.push(overlay)}>
 				<div
-					className={`result-location-container-${i}`}
+					className={`result-location-container-${i + 1}`}
 					onMouseOver={() => highlight(i)}
-					// onMouseOut={() => hide()}
 					ref={(el) => addToLocationRefs(el, i)}
           onClick={e=> sendToRestaurant(locationObj.restaurant)}>
 					<div
