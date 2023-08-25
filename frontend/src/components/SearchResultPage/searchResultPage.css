@@ -268,11 +268,13 @@
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #FFFFFF;
+  /* border-top-right-radius: 5%;
+  border-top-left-radius: 5%; */
   content: "";
   height: 0;
   left: 50%;
   position: absolute;
-  top: 99%;
+  top: 100%;
   transform: translate(-50%, 0);
   transition: 0.3 all ease-in-out;
   width: 0;
@@ -309,14 +311,12 @@
   width: 0;
 }
 
-/* .result-icon:hover {
-  background: white;
-  border: 2px solid rgb(244, 57, 57);
-  color: rgb(244, 57, 57);
-} */
-
 
 .result-icon > p {
+  margin-top: 15px;
+}
+
+.result-icon-selected > p {
   margin-top: 15px;
 }
 

@@ -10,9 +10,11 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 const containerStyle = {
 	width: '100%',
 	height: '100%',
+	backgroundColor: '#D3D3D3',
 };
 
 function ResultsMap({ searchResults, location }) {
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -23,9 +25,7 @@ function ResultsMap({ searchResults, location }) {
 	const infoBoxRef = useRef(null);
 	const phantomBoxRef = useRef(null); // For invisible box to cover both infoBox and icon
 
-  const [mapLoaded, setMapLoaded] = useState(false);
 	const [currentIdx, setCurrentIdx] = useState(null);
-
 
 	const restaurantLocations = [];
 	// Create array of locations
@@ -41,6 +41,7 @@ function ResultsMap({ searchResults, location }) {
 			});
 		});
 
+	console.log('restaurant locations == ',restaurantLocations)
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
 		if (mapRef.current) {
@@ -52,10 +53,14 @@ function ResultsMap({ searchResults, location }) {
 		}
 	}, [mapRef, restaurantLocations]);
 
+
 	// Show/Hide infoBox depending on current idx
 	// Adjust position of infoBox depending of position of marker
 	useEffect(() => {
+
 		const phantomBox = phantomBoxRef.current;
+		const icons = iconRefs.current;
+		const currentIcon = icons ? icons[currentIdx] : null;
 		const infoDiv = infoBoxRef.current;
 		const currentLoc = resultLocationRefs.current;
 		const currentLocation = currentLoc[currentIdx]
@@ -63,9 +68,29 @@ function ResultsMap({ searchResults, location }) {
 			: 'null';
 		const windowWidth = window.innerWidth;
 
+		const firstItem = document.querySelector('result-location-container-0');
+
 		// Hide both phantomBox and infoDiv
 		if (!currentIdx && phantomBox) phantomBox.style.display = 'none';
 		if (!currentIdx && infoDiv) return infoDiv.style.display = 'none';
+
+		console.log('first element ', firstItem)
+
+		console.log('current idx ====  ', currentIdx)
+
+		console.log('inside useEffect')
+		if (currentLoc) console.log('current location refs', currentLoc)
+		// Change colorscheme based on icon selection
+		// if (currentIcon) {
+		// 	if (currentIdx === null || currentIdx === undefined) {
+		// 		currentIcon?.classList.remove('result-icon-selected');
+		// 		currentIcon?.classList.add('result-icon');
+		// 	} else {
+		// 		currentIcon.classList.remove('result-icon')
+		// 		currentIcon.classList.add('result-icon-selected')
+		// 	}
+		// }
+
 
 
 		// If there's not enough space above the marker for info Box,
@@ -123,7 +148,6 @@ function ResultsMap({ searchResults, location }) {
 	// Set current idx
 	const highlight = (i) => {
 		setCurrentIdx(i);
-		console.log('current idx === ', i)
 	};
 
 	// Set current idx to null
@@ -131,10 +155,6 @@ function ResultsMap({ searchResults, location }) {
 		setCurrentIdx(null);
 	};
 
-	// Dynamically fill resultLocationRefs
-	const addToLocationRefs = (el, id) => {
-		if (resultLocationRefs.current) resultLocationRefs.current[id] = el;
-	};
 
 	// Render InfoBox
 	const renderInfoBox = (i) => {
@@ -183,12 +203,18 @@ function ResultsMap({ searchResults, location }) {
 				key={`overlay-${i}`}
 				onLoad={(overlay) => overlayRefs.current.push(overlay)}>
 				<div
-					className={`result-location-container-${i + 1}`}
+					className={`result-location-container-${i}`}
+					key={`result-location-container-key-${i}`}
 					onMouseOver={() => highlight(i)}
-					ref={(el) => addToLocationRefs(el, i)}
+					ref={(el) => {
+						console.log('initial location ref setting ', i)
+						resultLocationRefs.current[i] = el
+						console.log('initial element recall ===  ',resultLocationRefs.current[i])
+					}}
           onClick={e=> sendToRestaurant(locationObj.restaurant)}>
 					<div
-						className={`result-icon icon-${i + 1}`}
+						className={`result-icon `}
+						key={`result-icon-key-${i}`}
 						type='button'
 						ref={(el) => (iconRefs.current[i] = el)}>
 						<p>{i + 1}</p>
