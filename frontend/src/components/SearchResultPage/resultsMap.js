@@ -13,7 +13,7 @@ const containerStyle = {
 	backgroundColor: '#D3D3D3',
 };
 
-function ResultsMap({ searchResults, location }) {
+function ResultsMap({ restaurantLocations, location }) {
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,20 +27,6 @@ function ResultsMap({ searchResults, location }) {
 
 	const [currentIdx, setCurrentIdx] = useState(null);
 
-	const restaurantLocations = [];
-	// Create array of locations
-	if (searchResults)
-		searchResults.forEach((res) => {
-			restaurantLocations.push({
-				coordinates: {
-					lat: Number(res.coordinates[0]),
-					lng: Number(res.coordinates[1]),
-				},
-				title: `${res.name}`,
-				restaurant: res,
-			});
-		});
-
 	console.log('restaurant locations == ',restaurantLocations)
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
@@ -52,7 +38,6 @@ function ResultsMap({ searchResults, location }) {
 			mapRef.current.fitBounds(bounds);
 		}
 	}, [mapRef, restaurantLocations]);
-
 
 	// Show/Hide infoBox depending on current idx
 	// Adjust position of infoBox depending of position of marker
@@ -68,18 +53,11 @@ function ResultsMap({ searchResults, location }) {
 			: 'null';
 		const windowWidth = window.innerWidth;
 
-		const firstItem = document.querySelector('result-location-container-0');
-
 		// Hide both phantomBox and infoDiv
 		if (!currentIdx && phantomBox) phantomBox.style.display = 'none';
-		if (!currentIdx && infoDiv) return infoDiv.style.display = 'none';
+		if (!currentIdx && infoDiv) infoDiv.style.display = 'none';
 
-		console.log('first element ', firstItem)
 
-		console.log('current idx ====  ', currentIdx)
-
-		console.log('inside useEffect')
-		if (currentLoc) console.log('current location refs', currentLoc)
 		// Change colorscheme based on icon selection
 		// if (currentIcon) {
 		// 	if (currentIdx === null || currentIdx === undefined) {
@@ -90,7 +68,6 @@ function ResultsMap({ searchResults, location }) {
 		// 		currentIcon.classList.add('result-icon-selected')
 		// 	}
 		// }
-
 
 
 		// If there's not enough space above the marker for info Box,
@@ -147,6 +124,7 @@ function ResultsMap({ searchResults, location }) {
 
 	// Set current idx
 	const highlight = (i) => {
+		console.log('highlight current idx ', i)
 		setCurrentIdx(i);
 	};
 
@@ -206,11 +184,7 @@ function ResultsMap({ searchResults, location }) {
 					className={`result-location-container-${i}`}
 					key={`result-location-container-key-${i}`}
 					onMouseOver={() => highlight(i)}
-					ref={(el) => {
-						console.log('initial location ref setting ', i)
-						resultLocationRefs.current[i] = el
-						console.log('initial element recall ===  ',resultLocationRefs.current[i])
-					}}
+					ref={(el) => resultLocationRefs.current[i] = el}
           onClick={e=> sendToRestaurant(locationObj.restaurant)}>
 					<div
 						className={`result-icon `}

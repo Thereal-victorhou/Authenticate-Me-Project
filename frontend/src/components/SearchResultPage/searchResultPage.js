@@ -19,6 +19,21 @@ const SearchResultPage = () => {
 	const search = useLocation().search;
 	const find = new URLSearchParams(search).get('find_desc');
 
+
+	const restaurantLocations = [];
+	// Create array of locations
+	if (searchRes)
+		searchRes.forEach((res) => {
+			restaurantLocations.push({
+				coordinates: {
+					lat: Number(res.coordinates[0]),
+					lng: Number(res.coordinates[1]),
+				},
+				title: `${res.name}`,
+				restaurant: res,
+			});
+		});
+
 	const getOneRestaurant = async (e, resId) => {
 		e.preventDefault();
 
@@ -113,7 +128,7 @@ const SearchResultPage = () => {
 			</div>
 			<div className='search-results-map-container'>
 				<div>
-					<ResultsMap searchResults={searchRes} location={location}/>
+					<ResultsMap restaurantLocations={restaurantLocations} location={location}/>
 				</div>
 			</div>
 		</div>
