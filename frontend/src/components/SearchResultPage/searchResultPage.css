@@ -1,12 +1,12 @@
 .search-results-page-main {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 20px;
+  justify-content: flex-start;
+  /* gap: 10px; */
   height: 100vh;
   width: 100vw;
   padding-top: 90px;
-  background: white;
+  background: rgb(255, 255, 255);
   z-index: -2;
 }
 
@@ -16,16 +16,18 @@
   justify-content: flex-start;
   align-items: flex-start;
   min-width: 600px;
-  width: 65%;
+  width: 70.3%;
   height: 100vh;
   z-index: 0;
   padding-top: 30px;
-  margin-right: 310px;
+  /* margin-right: 310px; */
+  margin-right: 0;
   padding-left: 0;
   padding-right: 0;
   gap: 30px;
   background: white;
   position: relative;
+  /* box-shadow: 0 0 20px .5rem rgba(0, 0, 0, 0.3) */
   /* position: sticky; */
 }
 
@@ -213,6 +215,14 @@
   word-break: break-word;
 }
 
+.results-not-found {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 35px;
+  gap: 30px;
+}
+
 
 
 /* Map Styling */
@@ -221,27 +231,29 @@
   justify-content: flex-end;
   align-items: flex-start;
   min-width: 30%;
-  height: 100%;
-  /* background: rgb(220, 220, 220); */
-  z-index: 0;
+  max-width: 50%;
+  height: 91.5vh;
+  min-height: 500px;
+  /* background: rgb(220, 173, 173); */
   right: 0;
   position: fixed;
   overflow-x: visible;
+  z-index: 0;
   /* box-shadow: inset 5px 0px 1.5em rgba(0, 0, 0, 0.388); */
 }
 .search-results-map-container > div {
-
   width: 100%;
-  height: 90%;
+  height: 91.5vh;
+  min-height: 500px;
+  z-index: 0;
 }
 
 .search-results-map {
   width: 100%;
-  height: 100%;
-  /* background: rgb(220, 220, 220); */
+  min-height: 500px;
+  background-color: lightgrey !important;
   right: 0;
   z-index: 0;
-
 }
 
 
@@ -263,6 +275,7 @@
   line-height: 10px;
   position: relative;
   box-shadow: 0 0 7px 2px rgba(0,0,0,0.2);
+  z-index: 4;
 }
 .result-icon::after {
   border-left: 5px solid transparent;
@@ -278,6 +291,8 @@
   transform: translate(-50%, 0);
   transition: 0.3 all ease-in-out;
   width: 0;
+  z-index: 4;
+
 }
 
 .result-icon-selected {
@@ -296,6 +311,8 @@
   line-height: 10px;
   position: relative;
   box-shadow: 0 0 7px 2px rgba(0,0,0,0.2);
+  z-index: 4;
+
 }
 .result-icon-selected::after {
   border-left: 5px solid transparent;
@@ -309,6 +326,8 @@
   transform: translate(-50%, 0);
   transition: 0.3 all ease-in-out;
   width: 0;
+  z-index: 4;
+
 }
 
 
@@ -336,7 +355,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 15px 7px rgba(0, 0, 0, 0.1);
   display: none;
-  z-index: 5;
+  z-index: 9;
   width: 270px;
   min-height: 260px;
   justify-content: center;
@@ -355,14 +374,14 @@
   transform: translate(-50%, 0);
   transition: 0.8 all ease-in-out;
   width: 0;
-  z-index: 5;
+  z-index: 9;
 }
 
 .phantom-result-container {
   position: absolute;
   background: transparent;
   border-radius: 5px;
-  z-index: 6;
+  z-index: 10;
   width: 270px;
   height: 275px;
   display: none;
@@ -372,7 +391,7 @@
   position: absolute;
   background: transparent;
   border-radius: 5px;
-  z-index: 6;
+  z-index: 10;
   width: 270px;
   height: 275px;
   display: none;
@@ -394,7 +413,7 @@
   transform: translate(-33%, -26%);
   transition: 0.8 all ease-in-out;
   width: 0;
-  z-index: 5;
+  z-index: 10;
 }
 
 .phantom-result-container-flipped:after {
@@ -413,7 +432,7 @@
   transform: translate(-27%, 25%);
   transition: 0.8 all ease-in-out;
   width: 0;
-  z-index: 5;
+  z-index: 10;
 }
 
 .infoBoxFlipped {
@@ -422,7 +441,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 15px 7px rgba(0, 0, 0, 0.1);
   display: none;
-  z-index: 5;
+  z-index: 9;
   width: 270px;
   min-height: 260px;
   justify-content: center;
@@ -440,6 +459,7 @@
   transform: translate(-50%, 0);
   transition: 0.8 all ease-in-out;
   width: 0;
+  z-index: 9;
 }
 
 .result-restaurant-map-info-card-overlay {

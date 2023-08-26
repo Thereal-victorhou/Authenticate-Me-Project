@@ -114,8 +114,13 @@ const SearchResultPage = () => {
 			);
 		} else {
 			return (
-				<div>
+				<div className='results-not-found'>
 					<h2>{`Could not find results for ${find}`}</h2>
+					<div className='no-results-suggestions'>
+						<h5>Suggestions for in improving your results:</h5>
+						<li>Try a different location</li>
+						<li>Check the spelling or try alternate spellings</li>
+					</div>
 				</div>
 			);
 		}

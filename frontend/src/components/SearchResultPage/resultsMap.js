@@ -15,6 +15,11 @@ const containerStyle = {
 
 function ResultsMap({ restaurantLocations, location }) {
 
+	const central = {
+		lat: location.lat,
+		lng: location.lng,
+	}
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -30,9 +35,15 @@ function ResultsMap({ restaurantLocations, location }) {
 	// Track selected icon
 	const [selectedIcon, setSelectedIcon] = useState(null);
 
+	const [center, setCenter] = useState(central)
+
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
 		if (mapRef.current) {
+
+			if (!restaurantLocations) return setCenter(central);
+			setCenter(null)
+			
 			const bounds = new window.google.maps.LatLngBounds();
 			restaurantLocations.forEach((res) => {
 				bounds.extend(res.coordinates);
@@ -216,6 +227,11 @@ function ResultsMap({ restaurantLocations, location }) {
 		},
 	};
 
+	// const center = {
+	// 	lat: location.lat,
+	// 	lng: location.lng
+	// }
+
 	return (
 		<>
 			<div className='infoBox' ref={infoBoxRef}>
@@ -224,6 +240,7 @@ function ResultsMap({ restaurantLocations, location }) {
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				zoom={11}
+				center={center}
 				options={mapOptions}
 				onLoad={(map) => mapRef.current = map}>
 				{restaurantLocations.length &&

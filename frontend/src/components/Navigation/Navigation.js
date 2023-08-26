@@ -169,7 +169,7 @@ function Navigation({ isLoaded }) {
 			locationObj: selectedLocation,
 		}));
 		// console.log('search button handle ', selectedLocation);
-		setRestaurantSearchInput('');
+		// setRestaurantSearchInput('');
 		dispatch(saveCurrentPage('other'));
 		history.push(`/search?find_desc=${restaurantSearchInput}`);
 	};
