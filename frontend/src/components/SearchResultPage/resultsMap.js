@@ -25,9 +25,11 @@ function ResultsMap({ restaurantLocations, location }) {
 	const infoBoxRef = useRef(null);
 	const phantomBoxRef = useRef(null); // For invisible box to cover both infoBox and icon
 
+	// Used show which icon is hovered over
 	const [currentIdx, setCurrentIdx] = useState(null);
+	// Track selected icon
+	const [selectedIcon, setSelectedIcon] = useState(null);
 
-	console.log('restaurant locations == ',restaurantLocations)
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
 		if (mapRef.current) {
@@ -44,8 +46,7 @@ function ResultsMap({ restaurantLocations, location }) {
 	useEffect(() => {
 
 		const phantomBox = phantomBoxRef.current;
-		const icons = iconRefs.current;
-		const currentIcon = icons ? icons[currentIdx] : null;
+		const currentIcon = iconRefs.current ? iconRefs.current[selectedIcon] : null;
 		const infoDiv = infoBoxRef.current;
 		const currentLoc = resultLocationRefs.current;
 		const currentLocation = currentLoc[currentIdx]
@@ -54,20 +55,21 @@ function ResultsMap({ restaurantLocations, location }) {
 		const windowWidth = window.innerWidth;
 
 		// Hide both phantomBox and infoDiv
-		if (!currentIdx && phantomBox) phantomBox.style.display = 'none';
-		if (!currentIdx && infoDiv) infoDiv.style.display = 'none';
-
+		if (!currentIdx) {
+			if (phantomBox) phantomBox.style.display = 'none';
+			if (infoDiv) infoDiv.style.display = 'none';
+		}
 
 		// Change colorscheme based on icon selection
-		// if (currentIcon) {
-		// 	if (currentIdx === null || currentIdx === undefined) {
-		// 		currentIcon?.classList.remove('result-icon-selected');
-		// 		currentIcon?.classList.add('result-icon');
-		// 	} else {
-		// 		currentIcon.classList.remove('result-icon')
-		// 		currentIcon.classList.add('result-icon-selected')
-		// 	}
-		// }
+		if (currentIcon) {
+			if (!currentIdx && currentIcon.classList.contains('result-icon-selected')) {
+				currentIcon.classList.remove('result-icon-selected');
+				currentIcon.classList.add('result-icon');
+			} else {
+				currentIcon.classList.remove('result-icon')
+				currentIcon.classList.add('result-icon-selected')
+			}
+		}
 
 
 		// If there's not enough space above the marker for info Box,
@@ -117,6 +119,7 @@ function ResultsMap({ restaurantLocations, location }) {
 		}
 	}, [currentIdx]);
 
+
 	const sendToRestaurant = (restaurant) => {
     dispatch(saveCurrentPage('other'));
 		history.push(`/restaurants/${restaurant.id}`);
@@ -124,8 +127,8 @@ function ResultsMap({ restaurantLocations, location }) {
 
 	// Set current idx
 	const highlight = (i) => {
-		console.log('highlight current idx ', i)
 		setCurrentIdx(i);
+		setSelectedIcon(i)
 	};
 
 	// Set current idx to null
