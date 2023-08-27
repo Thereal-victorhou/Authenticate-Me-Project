@@ -337,6 +337,7 @@
 
 .result-icon-selected > p {
   margin-top: 15px;
+  transition: .5s all ease-out;
 }
 
 .fadeout {
@@ -345,7 +346,6 @@
 
 .fadeout::after {
   opacity: 0;
-  transition: .2s all ease-out;
 }
 
 

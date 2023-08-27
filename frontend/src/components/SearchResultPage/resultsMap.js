@@ -34,8 +34,33 @@ function ResultsMap({ restaurantLocations, location }) {
 	const [currentIdx, setCurrentIdx] = useState(null);
 	// Track selected icon
 	const [selectedIcon, setSelectedIcon] = useState(null);
-
+	// initialize the map's center to location coordinates first -> then change to null once
+	// restaurant locations appear.
 	const [center, setCenter] = useState(central)
+
+	const [isVisible, setIsVisible] = useState(true);
+  const [opacityClass, setOpacityClass] = useState('fade');
+
+  const handleToggleVisibility = () => {
+    if (isVisible) {
+      // First, fade out
+      setOpacityClass('fade-out');
+
+      // After transition ends, adjust visibility
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 500); // Match this with the transition duration in the CSS
+    } else {
+      setIsVisible(true);
+      setOpacityClass('fade');
+    }
+  };
+
+  useEffect(() => {
+    if (isVisible) {
+      setOpacityClass('fade');
+    }
+  }, [isVisible]);
 
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
@@ -43,7 +68,7 @@ function ResultsMap({ restaurantLocations, location }) {
 
 			if (!restaurantLocations) return setCenter(central);
 			setCenter(null)
-			
+
 			const bounds = new window.google.maps.LatLngBounds();
 			restaurantLocations.forEach((res) => {
 				bounds.extend(res.coordinates);
