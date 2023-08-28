@@ -38,29 +38,7 @@ function ResultsMap({ restaurantLocations, location }) {
 	// restaurant locations appear.
 	const [center, setCenter] = useState(central)
 
-	const [isVisible, setIsVisible] = useState(true);
-  const [opacityClass, setOpacityClass] = useState('fade');
-
-  const handleToggleVisibility = () => {
-    if (isVisible) {
-      // First, fade out
-      setOpacityClass('fade-out');
-
-      // After transition ends, adjust visibility
-      setTimeout(() => {
-        setIsVisible(false);
-      }, 500); // Match this with the transition duration in the CSS
-    } else {
-      setIsVisible(true);
-      setOpacityClass('fade');
-    }
-  };
-
-  useEffect(() => {
-    if (isVisible) {
-      setOpacityClass('fade');
-    }
-  }, [isVisible]);
+	const [opacityClass, setOpacityClass] = useState('fade');
 
 	// Ensure that all markers are visable within the map's viewport
 	useEffect(() => {
@@ -127,6 +105,8 @@ function ResultsMap({ restaurantLocations, location }) {
 			phantomBox.style.top = -5 + 'px';
 			phantomBox.style.right = 0 + 'px';
 
+			setOpacityClass('fade')
+
 			infoDiv.style.display = 'flex';						// Show both infoDiv and phantomBox
 			phantomBox.style.display = 'flex';
 		}
@@ -149,6 +129,8 @@ function ResultsMap({ restaurantLocations, location }) {
 			infoDiv.style.right = windowWidth - currentLocation.right - 50 + 'px';
 			phantomBox.style.top = 0 + 'px';
 			phantomBox.style.right = 0 + 'px';
+
+			setOpacityClass('fade')
 
 			infoDiv.style.display = 'flex';					// Show both infoDiv and phantomBox
 			phantomBox.style.display = 'flex';

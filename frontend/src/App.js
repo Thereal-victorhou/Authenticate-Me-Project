@@ -12,6 +12,7 @@ import EditReviewForm from "./components/EditPage";
 import AddRestaurantPage from "./components/AddRestaurant";
 import EditRestaurantPage from './components/EditRestaurant'
 import SearchResultPage from './components/SearchResultPage'
+import SettingsPage from "./components/Settings/SettingsPage";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { LoadScript } from "@react-google-maps/api";
 
@@ -46,6 +47,9 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignupFormPage />
+            </Route>
+            <Route path='/settings'>
+              <SettingsPage />
             </Route>
             <Route path="/restaurants/:id">
               <RestaurantPage user={user}/>

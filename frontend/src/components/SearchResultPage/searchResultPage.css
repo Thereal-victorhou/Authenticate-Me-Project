@@ -337,14 +337,14 @@
 
 .result-icon-selected > p {
   margin-top: 15px;
-  transition: .5s all ease-out;
 }
 
-.fadeout {
+.fade {
+  transition: opacity 0.5s linear ;
   opacity: 1;
 }
 
-.fadeout::after {
+.fade-out {
   opacity: 0;
 }
 
