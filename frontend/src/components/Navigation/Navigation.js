@@ -17,13 +17,7 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { grey } from '@mui/material/colors';
 import './Navigation.css';
-import home1 from '../../images/HomeBackground/tabl-home-1.png';
-import home2 from '../../images/HomeBackground/tabl-home-2.png';
-import home3 from '../../images/HomeBackground/tabl-home-3.png';
-import home4 from '../../images/HomeBackground/tabl-home-4.png';
-import home5 from '../../images/HomeBackground/tabl-home-5.png';
-import home6 from '../../images/HomeBackground/tabl-home-6.png';
-import home7 from '../../images/HomeBackground/tabl-home-7.png';
+
 
 function Navigation({ isLoaded }) {
 	const history = useHistory();
@@ -296,25 +290,25 @@ function Navigation({ isLoaded }) {
 		<div className='nav_container'>
 			<CCarousel transition='crossfade' className='background-slideshow'>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home1} alt='slide1' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-1.png'} alt='slide1' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home2} alt='slide2' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-2.png'} alt='slide2' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home3} alt='slide3' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-3.png'} alt='slide3' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home4} alt='slide4' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-4.png'} alt='slide4' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home5} alt='slide5' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-5.png'} alt='slide5' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home6} alt='slide66' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-6.png'} alt='slide66' />
 				</CCarouselItem>
 				<CCarouselItem>
-					<CImage className='d-block w-100' src={home7} alt='slide7' />
+					<CImage className='d-block w-100' src={'https://porfoliopicturesbucket.s3.us-west-1.amazonaws.com/tabl-home-backgrounds/tabl-home-7.png'} alt='slide7' />
 				</CCarouselItem>
 			</CCarousel>
 			<div className='nav-gradient'>
