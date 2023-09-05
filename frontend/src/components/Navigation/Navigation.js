@@ -11,6 +11,7 @@ import {
 	getRestaurantResults,
 } from '../../store/restaurant';
 import { saveCurrentPage } from '../../store/navigation';
+import { saveLocation } from '../../store/location';
 import { v4 as uuidv4 } from 'uuid';
 import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import '@coreui/coreui/dist/css/coreui.min.css';
@@ -81,22 +82,6 @@ function Navigation({ isLoaded }) {
 		);
 	};
 
-	// Set and save page type
-	// const handleLoginSignUp = async (e) => {
-	// 	e.preventDefault();
-
-
-	// 	switch (e.target.className) {
-	// 		case 'nav-links-login':
-	// 			await dispatch(saveCurrentPage('other'));
-	// 			history.push('/login');
-	// 			break;
-
-	// 		case 'nav-links-signup':
-	// 			history.push('/signup');
-	// 			break;
-	// 	}
-	// };
 
 	// Save location, dispatch a search for near restaurants
 	const handleUpdateLocation = (locationObj) => {
@@ -152,21 +137,50 @@ function Navigation({ isLoaded }) {
 	const handleSearch = async (e) => {
 		e.preventDefault();
 
-		await dispatch(
-			getRestaurantResults({
+		// If there is no selected location, set default location to Sacramento, CA, USA
+		if (JSON.stringify(selectedLocation) === '{}') {
+			let defaultLocation = {
+				location: 'Sacramento, CA',
+				lat: 38.5815719,
+				lng: -121.4943996,
+			}
+
+			await dispatch(saveLocation(defaultLocation))
+			await dispatch(
+				getRestaurantResults({
+					searchInput: restaurantSearchInput,
+					locationObj: defaultLocation,
+				})
+			);
+			await dispatch(getSearchResults({
+				searchInput: restaurantSearchInput,
+				locationObj: defaultLocation,
+			}));
+
+		// Otherwise, change search as usual
+		} else {
+			await dispatch(
+				getRestaurantResults({
+					searchInput: restaurantSearchInput,
+					locationObj: selectedLocation,
+				})
+			);
+			await dispatch(getSearchResults({
 				searchInput: restaurantSearchInput,
 				locationObj: selectedLocation,
-			})
-		);
-		await dispatch(getSearchResults({
-			searchInput: restaurantSearchInput,
-			locationObj: selectedLocation,
-		}));
-		// console.log('search button handle ', selectedLocation);
-		// setRestaurantSearchInput('');
+			}));
+		}
+
 		dispatch(saveCurrentPage('other'));
 		history.push(`/search?find_desc=${restaurantSearchInput}`);
 	};
+
+	const handleEnterKeyDown = (e) => {
+		if (e.key === 'enter') {
+			console.log('key === ' ,e.key)
+			handleSearch(e)
+		}
+	}
 
 	// Set Nav to Home Version
 	const handleNav = (e) => {

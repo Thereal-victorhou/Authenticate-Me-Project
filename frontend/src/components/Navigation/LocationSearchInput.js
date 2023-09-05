@@ -48,35 +48,39 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 
 	// Set and Save Location
 	const handleSelect = async (value) => {
-		let removeCountry = value.replace(/USA/, '')
+		console.log('value ', value)
 
-		const lastIndex = removeCountry.lastIndexOf(',');
-		if (lastIndex > -1) {
-			removeCountry = removeCountry.substring(0, lastIndex)
-		}
+			let removeCountry = value.replace(/USA/, '')
 
-		setAddress(removeCountry);
-		setLocation(removeCountry);
+			const lastIndex = removeCountry.lastIndexOf(',');
+			if (lastIndex > -1) {
+				removeCountry = removeCountry.substring(0, lastIndex)
+			}
 
-    try {
-      const result = await geocodeByAddress(value);
-      const ll = await getLatLng(result[0]);
-      /* TODO: Create error handling for before calling handleUpdateLocation */
-      const locationObj = { location: removeCountry, ...ll};
-      dispatch(saveLocation(locationObj));
-      handleUpdateLocation(locationObj);
-      setCoordinates(ll);
+			setAddress(removeCountry);
+			setLocation(removeCountry);
 
-    } catch(err) {
-      console.log(`Error: ${err.message}`)
-    }
+			try {
+				const result = await geocodeByAddress(value);
+				const ll = await getLatLng(result[0]);
 
+				/* TODO: Create error handling for before calling handleUpdateLocation */
+				const locationObj = { location: removeCountry, ...ll};
+				dispatch(saveLocation(locationObj));
+				handleUpdateLocation(locationObj);
+				setCoordinates(ll);
+
+			} catch(err) {
+				console.log(`Error: ${err.message}`)
+			}
 	};
 
 	// Get User Location -> Set User Location
 	const handleCurrentLocation = async (e) => {
-		if (e) e.preventDefault();
+		// TODO: Create function to get user location
+		return alert('Feature in Development! Please enter your location and select from the drop down.');
 
+		if (e) e.preventDefault();
 		// Find an alternate way of getting user location
 		const response = await fetch('http://ip-api.com/json', {
 			method: 'GET',
