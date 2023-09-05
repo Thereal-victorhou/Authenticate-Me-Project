@@ -63,7 +63,7 @@ function LocationSearchInput({ inputSelection, sessionToken, handleUpdateLocatio
 			try {
 				const result = await geocodeByAddress(value);
 				const ll = await getLatLng(result[0]);
-
+				console.log('ll === ', ll)
 				/* TODO: Create error handling for before calling handleUpdateLocation */
 				const locationObj = { location: removeCountry, ...ll};
 				dispatch(saveLocation(locationObj));

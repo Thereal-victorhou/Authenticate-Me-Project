@@ -13,6 +13,7 @@ const { User } = require('../../db/models');
 const { Rating } = require('../../db/models');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { generateReviews } = require('../../utils/generateReviews')
 
 sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
 
@@ -160,7 +161,7 @@ router.post(
 				limit: '50',
 				offset: '0',
 			};
-			// sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
+
 
 			try {
 				const resu = await sdk.v3_business_search(
@@ -169,7 +170,7 @@ router.post(
 						: searchObj
 				);
 				const restaurantData = resu.data.businesses;
-				const restaurantArr = [];
+
 				await restaurantData.forEach(async (restaurant) => {
 					const restaurantObj = {
 						yelpId: restaurant.id,
@@ -209,7 +210,20 @@ router.post(
 							name: { [Op.like]: restaurant.name },
 						},
 					});
-					if (!alreadyExist) await Restaurant.create(restaurantObj);
+
+					if (!alreadyExist) {
+						await Restaurant.create(restaurantObj);
+						// Create Reviews for each restaurant
+						const reviews = await generateReviews(restaurant.rating)
+						await reviews.forEach(async (review) => {
+							await Review.create({
+								body: review.body,
+								userId: review.userId,
+								restaurantId: review.restaurantId,
+								rating: review.rating
+							})
+						})
+					}
 				});
 
 				return res.json('Sucessfully Added New Restaurants');
@@ -219,6 +233,8 @@ router.post(
 		}
 	})
 );
+
+
 
 // Convert Military Time to Standard Time
 const numberToDay = {

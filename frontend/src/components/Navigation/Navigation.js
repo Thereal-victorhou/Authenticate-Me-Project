@@ -175,13 +175,6 @@ function Navigation({ isLoaded }) {
 		history.push(`/search?find_desc=${restaurantSearchInput}`);
 	};
 
-	const handleEnterKeyDown = (e) => {
-		if (e.key === 'enter') {
-			console.log('key === ' ,e.key)
-			handleSearch(e)
-		}
-	}
-
 	// Set Nav to Home Version
 	const handleNav = (e) => {
 		e.preventDefault();

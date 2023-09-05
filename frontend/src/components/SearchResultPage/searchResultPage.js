@@ -87,21 +87,20 @@ const SearchResultPage = () => {
 													<p>{res.location[0]}</p>
 												</div>
 												<div className='results-restaurant-review-container'>
-													<span>
-														{/* <ChatBubbleOutlineRoundedIcon sx={{
-														color: grey[800],
-														fontSize: '16px',
-														fontWeight: 'bold',
-													}}/> */}
-														<FontAwesomeIcon
-															icon={faMessage}
-															size='sm'
-															style={{ color: '#696969' }}
-														/>
-													</span>
-													<div className='results-review-body'>
-														<p>{`"${res.review.body}"`}</p>
-													</div>
+													{res.review !== undefined ?
+													<>
+														<span>
+															<FontAwesomeIcon
+																icon={faMessage}
+																size='sm'
+																style={{ color: '#696969' }}
+															/>
+														</span>
+														<div className='results-review-body'>
+															<p>{`"${res.review.body}"`}</p>
+														</div>
+													</>
+													: ''}
 												</div>
 											</div>
 										</div>
