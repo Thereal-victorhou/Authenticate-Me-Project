@@ -203,6 +203,7 @@ router.post(
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					};
+
 					// restaurantArr.push(restaurantObj);
 					// Check if restaurant already exists in database
 					const alreadyExist = await Restaurant.findOne({
@@ -213,8 +214,15 @@ router.post(
 
 					if (!alreadyExist) {
 						await Restaurant.create(restaurantObj);
+						console.log(`\n\n\n Added new restaurant ${restaurant.name} \n\n\n`)
 						// Create Reviews for each restaurant
-						const reviews = await generateReviews(restaurant.rating)
+						const currentRestaurant = await Restaurant.findOne({
+							where: {
+								name: { [Op.like]: restaurant.name },
+							},
+						})
+						const reviews = await generateReviews(restaurant.rating, currentRestaurant.id)
+						console.log(`\n\n\n Start generating reviews \n\n\n`)
 						await reviews.forEach(async (review) => {
 							await Review.create({
 								body: review.body,
@@ -222,11 +230,13 @@ router.post(
 								restaurantId: review.restaurantId,
 								rating: review.rating
 							})
+							console.log(`\n\n\n Created New Review ${review.restaurantId} \n\n\n`)
 						})
+						console.log(`\n\n\n\n\n Finished generating reviews \n\n\n\n`)
 					}
 				});
 
-				return res.json('Sucessfully Added New Restaurants');
+				return res.json('Sucessfully Added New Restaurants and Reviews');
 			} catch (err) {
 				return res.json(err);
 			}

@@ -36,6 +36,11 @@ const reviewBody = {
   ],
 }
 
+
+
+
+
+
 function getRandomNum(min, max) {
   const raw = Math.random() * (max - min) + min;
   return Math.floor(raw);
@@ -101,31 +106,29 @@ function generateArrayWithDistinctValues(target, failedStarts = []) {
 // console.log(generateArrayWithDistinctValues(3.6));
 
 
-const generateReviews = async (target) => {
+const generateReviews = async (target, currentRestaurantId) => {
   const reviews = [];
 
-  for (let i = 0; i < 10; i++) {
-    const currentRating = target;
-    // generate random number of reviews per restaurant
-    console.log(currentRating, ' currentRating' )
-    const amountOfReviews = generateArrayWithDistinctValues(currentRating);
+  const currentRating = target;
+  // generate random number of reviews per restaurant
+  const amountOfReviews = generateArrayWithDistinctValues(currentRating);
 
-    for (let j = 0; j < amountOfReviews.length; j++) {
-      const randomRating = amountOfReviews[j];
-      const randomNum = getRandomNum(0, 5)
+  for (let j = 0; j < amountOfReviews.length; j++) {
+    const randomRating = amountOfReviews[j];
+    const randomNum = getRandomNum(0, 5)
 
-      const newReview = {
-        body: reviewBody[randomRating][randomNum],
-        userId: getRandomNum(1, 30),
-        restaurantId: i + 1,
-        rating: randomRating,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
-
-      reviews.push(newReview)
+    const newReview = {
+      body: reviewBody[randomRating][randomNum],
+      userId: getRandomNum(1, 30),
+      restaurantId: currentRestaurantId,
+      rating: randomRating,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }
+
+    reviews.push(newReview)
   }
+
   return reviews;
 }
 
