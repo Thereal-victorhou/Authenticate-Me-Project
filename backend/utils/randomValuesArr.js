@@ -406,3 +406,5 @@ const randomValuesObj = {
     [4, 5, 5, 5, 5, 5, 5, 5, 5, 5]
   ],
 }
+
+module.exports = { randomValuesObj };

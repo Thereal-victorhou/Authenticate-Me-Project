@@ -13,7 +13,7 @@ const { User } = require('../../db/models');
 const { Rating } = require('../../db/models');
 const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { generateReviews } = require('../../utils/generateReviews')
+const { generateReviews } = require('../../utils/generateReviews');
 
 sdk.auth(`Bearer ${process.env.YELP_FUSION_API_KEY}`);
 
@@ -162,7 +162,6 @@ router.post(
 				offset: '0',
 			};
 
-
 			try {
 				const resu = await sdk.v3_business_search(
 					latitude && longitude
@@ -214,25 +213,32 @@ router.post(
 
 					if (!alreadyExist) {
 						await Restaurant.create(restaurantObj);
-						console.log(`\n\n\n Added new restaurant ${restaurant.name} \n\n\n`)
+						console.log(
+							`\n\n\n Added new restaurant ${restaurant.name} \n\n\n`
+						);
 						// Create Reviews for each restaurant
 						const currentRestaurant = await Restaurant.findOne({
 							where: {
 								name: { [Op.like]: restaurant.name },
 							},
-						})
-						const reviews = await generateReviews(restaurant.rating, currentRestaurant.id)
-						console.log(`\n\n\n Start generating reviews \n\n\n`)
+						});
+						const reviews = await generateReviews(
+							restaurant.rating,
+							currentRestaurant.id
+						);
+						console.log(`\n\n\n Start generating reviews \n\n\n`);
 						await reviews.forEach(async (review) => {
 							await Review.create({
 								body: review.body,
 								userId: review.userId,
 								restaurantId: review.restaurantId,
-								rating: review.rating
-							})
-							console.log(`\n\n\n Created New Review ${review.restaurantId} \n\n\n`)
-						})
-						console.log(`\n\n\n\n\n Finished generating reviews \n\n\n\n`)
+								rating: review.rating,
+							});
+							console.log(
+								`\n\n\n Created New Review ${review.restaurantId} \n\n\n`
+							);
+						});
+						console.log(`\n\n\n\n\n Finished generating reviews \n\n\n\n`);
 					}
 				});
 
@@ -243,8 +249,6 @@ router.post(
 		}
 	})
 );
-
-
 
 // Convert Military Time to Standard Time
 const numberToDay = {
@@ -304,10 +308,10 @@ router.get(
 			businessDetails = await sdk.v3_business_info({
 				locale: 'en_US',
 				business_id_or_alias: `${restaurant.yelpId}`,
-			})
-		} catch(err) {
+			});
+		} catch (err) {
 			if (reviews) return res.json(reviews);
-			return res.json(restaurant)
+			return res.json(restaurant);
 		}
 
 		const businessData = businessDetails.data;
